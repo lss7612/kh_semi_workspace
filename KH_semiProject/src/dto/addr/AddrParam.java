@@ -6,6 +6,8 @@ public class AddrParam {
 	private String search = null;
 	private String searchCondition = "All";
 	private boolean isASC = true;
+	
+	
 	@Override
 	public String toString() {
 		return "AddrParam [arrayCondition=" + arrayCondition + ", search=" + search + ", searchCondition="

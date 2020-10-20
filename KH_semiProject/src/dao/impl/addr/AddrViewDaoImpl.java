@@ -12,18 +12,26 @@ import dto.addr.AddrParam;
 import dto.addr.AddrView;
 
 public class AddrViewDaoImpl implements AddrViewDao{
-
+	
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	
 	@Override
 	public List<AddrView> viewUser(Connection conn, AddrParam addrParam) {
 		
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		
 
 		List<AddrView> result = new ArrayList<AddrView>();
 		
 		String sql = "";
-		sql += "SELECT * FROM tb_user";
-		sql += " 1=1";
+		sql += "SELECT * FROM ";
+		sql += " (SELECT * FROM tb_user u";
+		sql += " LEFT OUTER JOIN tb_dept d";
+		sql += " ON u.detp_no = d.dept_no) j1";
+		sql += " LEFT OUTER JOIN tb_position t";
+		sql += " ON j1.position_no = t.position_no";
+		
+		
 		if(addrParam.getArrayCondition().equals("userid")) {
 			sql += " ORDER BY user_id";
 		} else if(addrParam.getArrayCondition().equals("username")) {
@@ -33,6 +41,7 @@ public class AddrViewDaoImpl implements AddrViewDao{
 		} else if(addrParam.getArrayCondition().equals("position")) {
 			sql += " ORDER BY position_no";
 		}
+		
 		if(addrParam.isASC()) {
 			sql += " ASC";
 		} else {
@@ -40,17 +49,21 @@ public class AddrViewDaoImpl implements AddrViewDao{
 		}
 		
 		try {
+			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
+			System.out.println(rs.next());
 			
 			while(rs.next()) {
 				AddrView e = new AddrView();
 				
 				e.setCellphone_no(rs.getString("cellphone_no"));
-				e.setDept_no(rs.getInt("deptno"));//고쳐야함
-				e.setPosition_no(rs.getInt("position_no"));
+				e.setDept_name(rs.getString("dept_name"));
+				e.setPosition_name(rs.getString("position_name"));
 				e.setUser_id(rs.getString("user_id"));
 				e.setUser_name(rs.getString("user_name"));
+				
+				result.add(e);
 				
 			}
 		} catch (SQLException e) {

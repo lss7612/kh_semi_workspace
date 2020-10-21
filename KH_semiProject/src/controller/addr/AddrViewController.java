@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.Paging;
 import dto.addr.AddrParam;
 import dto.addr.AddrView;
 import service.face.addr.AddrViewService;
@@ -23,14 +24,18 @@ public class AddrViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		System.out.println("get");
+//		System.out.println("get");
+		
+		Paging paging = addrViewService.getPaging(req); 
+		
+		
 		AddrParam addrParam = new AddrParam();
-		List<AddrView> list = addrViewService.viewUser(addrParam);
+		List<AddrView> list = addrViewService.viewUserAddr(addrParam, paging);
 		
 //		for(int i=0;i<list.size();i++) {
 //			System.out.println(list.get(i));
 //		}
-		
+		req.setAttribute("paging", paging);
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/WEB-INF/views/addrViews/view.jsp").forward(req, resp);
 		

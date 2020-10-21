@@ -32,7 +32,7 @@ table, th, td {
 	<th><button class="ASC">이름</button></th>
 	<th><button class="ASC">부서</button></th>
 	<th><button class="ASC">직급</button></th>
-	<th><button class="ASC">휴대전화</button></th>
+	<th>휴대전화</th>
 </tr>
 <% for (int i = 0; i < list.size(); i++) { %>
 <tr>
@@ -44,6 +44,8 @@ table, th, td {
 </tr>
 <%} %>
 </table>
+
+<jsp:include page="/WEB-INF/views/common/paging.jsp" />
 
 </div>
 

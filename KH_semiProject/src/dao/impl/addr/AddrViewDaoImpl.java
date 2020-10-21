@@ -59,8 +59,8 @@ public class AddrViewDaoImpl implements AddrViewDao{
 			ps.setInt(1, paging.getStartNo());
 			ps.setInt(2, paging.getEndNo());
 			
-			System.out.println(paging.getStartNo());
-			System.out.println(paging.getEndNo());
+//			System.out.println(paging.getStartNo());
+//			System.out.println(paging.getEndNo());
 			
 			rs = ps.executeQuery();
 			

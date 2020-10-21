@@ -2,8 +2,10 @@ package dto.addr;
 
 public class AddrParam {
 
-	private String arrayCondition = "userid";
+	//arrayCondition은 userid, username, dept, position 4가지가 들어갈 수 있다.
+	private String arrayCondition = "username";
 	private String search = null;
+	//serachCondition = userid, username, dept, position
 	private String searchCondition = "All";
 	private boolean isASC = true;
 	

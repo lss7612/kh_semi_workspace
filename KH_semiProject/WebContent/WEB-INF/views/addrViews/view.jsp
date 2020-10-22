@@ -1,53 +1,48 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="dto.addr.AddrView"%>
-<%@page import="dto.addr.AddrParam"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%> <%@page import="dto.addr.AddrView"%> <%@page
+import="dto.addr.AddrParam"%> <%@page import="java.util.List"%> <%@ page language="java"
+contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <% List<AddrView> list = (List<AddrView>) request.getAttribute("list"); %>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>주소록</title>
+    <html>
+      <head>
+        <meta charset="UTF-8" />
+        <title>주소록</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
+        <script type="text/javascript">
+          window.onload = function () {
+            ajaxToServer();
+          };
+          function ajaxToServer() {
+            sendRequest('POST', "/WEB-INF/views/addrViews/view_ok.jsp", "", ajaxFromServer);
+          }
+          function ajaxFromServer() {
+            if (httpRequest.readyState == 4) {
+              //응답 완료
+              if (httpRequest.status == 200) {
+                //정상 응답
+                console.log('정상응답');
 
-<script type="text/javascript">
+                console.log(httpRequest.responseText); //응답 데이터 확인
 
-</script>
+                //div#resu에 응답받은 내용을 채우기
+                refresh.innerHTML = httpRequest.responseText;
+              } else {
+                console.log('AJAX요청/응답 에러');
+              }
+            }
+          }
+        </script>
 
-<style type="text/css">
-table, th, td {
-	border:1px solid #ccc;
-}
-</style>
-</head>
-<body>
-
-
-<div id="refresh">
-
-<table>
-<tr>
-	<th><button class="ASC">아이디</button></th>
-	<th><button class="ASC">이름</button></th>
-	<th><button class="ASC">부서</button></th>
-	<th><button class="ASC">직급</button></th>
-	<th>휴대전화</th>
-</tr>
-<% for (int i = 0; i < list.size(); i++) { %>
-<tr>
-	<td><%=list.get(i).getUser_id()%></td>
-	<td><%=list.get(i).getUser_name() %></td>
-	<td><%=list.get(i).getDept_name() %></td>
-	<td><%=list.get(i).getPosition_name() %></td>
-	<td><%=list.get(i).getCellphone_no() %></td>
-</tr>
-<%} %>
-</table>
-
-<jsp:include page="/WEB-INF/views/common/paging.jsp" />
-
-</div>
-
-</body>
-</html>
+        <style type="text/css">
+          table,
+          th,
+          td {
+            border: 1px solid #ccc;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="refresh"></div>
+      </body>
+    </html> 

@@ -19,7 +19,7 @@
               <td><%=list.get(i).getPosition_name() %></td>
               <td><%=list.get(i).getCellphone_no() %></td>
             </tr>
-            <%} %>
+            <% } %>
           </table>
 
-          <jsp:include page="/WEB-INF/views/common/paging.jsp" />
+          <jsp:include page="/views/common/paging.jsp" />

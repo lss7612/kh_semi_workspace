@@ -10,11 +10,12 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
         <script type="text/javascript">
+        
           window.onload = function () {
             ajaxToServer();
           };
           function ajaxToServer() {
-            sendRequest('POST', "/WEB-INF/views/addrViews/view_ok.jsp", "", ajaxFromServer);
+            sendRequest('POST', "/address/view", "", ajaxFromServer);
           }
           function ajaxFromServer() {
             if (httpRequest.readyState == 4) {
@@ -25,12 +26,16 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
                 console.log(httpRequest.responseText); //응답 데이터 확인
 
-                //div#resu에 응답받은 내용을 채우기
+                //div#refresh에 응답받은 내용을 채우기
                 refresh.innerHTML = httpRequest.responseText;
               } else {
                 console.log('AJAX요청/응답 에러');
               }
             }
+          }
+          
+          function isASC(){
+        	  
           }
         </script>
 

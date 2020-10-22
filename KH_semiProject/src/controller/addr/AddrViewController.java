@@ -26,18 +26,17 @@ public class AddrViewController extends HttpServlet {
 
 //		System.out.println("get");
 		
-//		Paging paging = addrViewService.getPaging(req); 
-//		req.setAttribute("paging", paging);
-//		
-//		
-//		AddrParam addrParam = new AddrParam();
-//		List<AddrView> list = addrViewService.viewUserAddr(addrParam, paging);
-//		System.out.println(list);
+		Paging paging = addrViewService.getPaging(req); 
+		req.setAttribute("paging", paging);
+		
+		
+		AddrParam addrParam = new AddrParam();
+		List<AddrView> list = addrViewService.viewUserAddr(addrParam, paging);
 ////		for(int i=0;i<list.size();i++) {
 ////			System.out.println(list.get(i));
 ////		}
 //
-//		req.setAttribute("list", list);
+		req.setAttribute("list", list);
 		req.getRequestDispatcher("/views/addrViews/view.jsp").forward(req, resp);
 		
 	}
@@ -50,13 +49,24 @@ public class AddrViewController extends HttpServlet {
 		
 		
 		AddrParam addrParam = new AddrParam();
+		addrParam.setArrayCondition(req.getParameter("arrayCondition"));
+		if(req.getParameter("isASC").equals("ASC")) {
+			addrParam.setASC(true);
+		} else {
+			addrParam.setASC(false);
+		}
+		System.out.println(req.getParameter("arrayCondition"));
+		System.out.println("asc" + req.getParameter("isASC"));
+		
 		List<AddrView> list = addrViewService.viewUserAddr(addrParam, paging);
-//		for(int i=0;i<list.size();i++) {
-//			System.out.println(list.get(i));
-//		}
+		
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+		
 
 		req.setAttribute("list", list);
-		req.getRequestDispatcher("/views/addrViews/view_ok.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/addrViews/view.jsp").forward(req, resp);
 
 	}
 

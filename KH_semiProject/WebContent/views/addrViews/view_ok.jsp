@@ -6,8 +6,8 @@
          <table>
             <tr>
               <th><button name="isASC" class="ASC" onclick="isASC()">아이디</button></th>
-              <th><button name="isASC" class="" onclick="isASC()">이름</button></th>
-              <th><button name="isASC" class="" onclick="isASC()">부서</button></th>
+              <th><button name="isASC" class="ASC" onclick="isASC()">이름</button></th>
+              <th><button name="isASC" class="ASC" onclick="isASC()">부서</button></th>
               <th><button name="isASC" class="" onclick="isASC()">직급</button></th>
               <th>휴대전화</th>
             </tr>

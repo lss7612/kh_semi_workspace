@@ -87,59 +87,76 @@ public class Paging {
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
 	}
-	
-	public int getCurPage() {
+
+	public final int getCurPage() {
 		return curPage;
 	}
-	public void setCurPage(int curPage) {
+
+	public final void setCurPage(int curPage) {
 		this.curPage = curPage;
 	}
-	public int getTotalCount() {
+
+	public final int getTotalCount() {
 		return totalCount;
 	}
-	public void setTotalCount(int totalCount) {
+
+	public final void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
-	public int getListCount() {
+
+	public final int getListCount() {
 		return listCount;
 	}
-	public void setListCount(int listCount) {
+
+	public final void setListCount(int listCount) {
 		this.listCount = listCount;
 	}
-	public int getTotalPage() {
+
+	public final int getTotalPage() {
 		return totalPage;
 	}
-	public void setTotalPage(int totalPage) {
+
+	public final void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-	public int getPageCount() {
+
+	public final int getPageCount() {
 		return pageCount;
 	}
-	public void setPageCount(int pageCount) {
+
+	public final void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
-	public int getStartPage() {
+
+	public final int getStartPage() {
 		return startPage;
 	}
-	public void setStartPage(int startPage) {
+
+	public final void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
-	public int getEndPage() {
+
+	public final int getEndPage() {
 		return endPage;
 	}
-	public void setEndPage(int endPage) {
+
+	public final void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
-	public int getStartNo() {
+
+	public final int getStartNo() {
 		return startNo;
 	}
-	public void setStartNo(int startNo) {
+
+	public final void setStartNo(int startNo) {
 		this.startNo = startNo;
 	}
-	public int getEndNo() {
+
+	public final int getEndNo() {
 		return endNo;
 	}
-	public void setEndNo(int endNo) {
+
+	public final void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
 	

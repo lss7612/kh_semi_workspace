@@ -26,41 +26,42 @@ public class AddrViewDaoImpl implements AddrViewDao{
 		List<AddrView> result = new ArrayList<AddrView>();
 		
 		String sql = "";
-		sql += "SELECT * FROM (SELECT rownum rnum, j2.* FROM";
+		sql += "SELECT * FROM (SELECT rownum rnum, j2.* FROM ";
 		sql += " (SELECT * FROM ";
-		sql += " (SELECT * FROM tb_user u";
-		sql += " LEFT OUTER JOIN tb_dept d";
-		sql += " ON u.detp_no = d.dept_no) j1";
-		sql += " LEFT OUTER JOIN tb_position t";
-		sql += " ON j1.position_no = t.position_no) j2)";
-		sql += " WHERE rnum BETWEEN ? and ?";
-
-		
-		if(addrParam.getArrayCondition().equals("userid")) {
-			sql += " ORDER BY user_id";
-		} else if(addrParam.getArrayCondition().equals("username")) {
-			sql += " ORDER BY user_name";
-		} else if(addrParam.getArrayCondition().equals("dept")) {
-			sql += " ORDER BY detp_no";
-		} else if(addrParam.getArrayCondition().equals("position")) {
-			sql += " ORDER BY position_no";
-		}
-		
-		if(addrParam.isASC()) {
-			sql += " ASC";
-		} else {
-			sql += " DESC";
-		}
+		sql += " (SELECT * FROM tb_user u ";
+		sql += " LEFT OUTER JOIN tb_dept d ";
+		sql += " ON u.detp_no = d.dept_no) j1 ";
+		sql += " LEFT OUTER JOIN tb_position t ";
+		sql += " ON j1.position_no = t.position_no ";
+		sql += " ORDER BY ? , ?) j2) ";
+		sql += " WHERE rnum BETWEEN ? and ? ";
 		
 		try {
-			
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, paging.getStartNo());
-			ps.setInt(2, paging.getEndNo());
+			String arrCon = addrParam.getArrayCondition();
+			Boolean isASC = addrParam.isASC();
 			
-//			System.out.println(paging.getStartNo());
-//			System.out.println(paging.getEndNo());
+			if(arrCon.equals("userid")) {
+				ps.setString(1, " user_id");
+			} else if(arrCon.equals("username")) {
+				ps.setString(1, " user_name");
+			} else if(arrCon.equals("dept")) {
+				ps.setString(1, " dept_no");
+			} else if(arrCon.equals("position")) {
+				ps.setString(1, " position_no");
+			} else{
+				ps.setString(1, " user_id");
+			}
+			if(isASC) {
+				ps.setString(2, " ASC");
+			} else if(!isASC) {
+				ps.setString(2, " DESC");
+			} else {
+				ps.setString(2, " ASC");
+			}
+			ps.setInt(3, paging.getStartNo());
+			ps.setInt(4, paging.getEndNo());
 			
 			rs = ps.executeQuery();
 			
@@ -74,7 +75,7 @@ public class AddrViewDaoImpl implements AddrViewDao{
 				e.setUser_name(rs.getString("user_name"));
 				
 				result.add(e);
-				
+				System.out.println(e);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

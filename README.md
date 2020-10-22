@@ -16,7 +16,8 @@ https://backlog.com/git-tutorial/kr/
 
 오늘의 빡이 내일의 빡을 대신합니
 트북 샷건치면 고장 생각보다 안 됩니다.
-장나긴 하니 살살 치시면 됩니다.## remote, local
+장나긴 하니 살살 치시면 됩니다.
+## remote, local
 
 remote 와 local을 항상 확인해 주세요
 

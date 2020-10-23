@@ -20,12 +20,20 @@ public class AddrViewDaoImpl implements AddrViewDao{
 	
 	@Override
 	public List<AddrView> viewUserAddr(Connection conn, AddrParam addrParam, Paging paging) {
-		
-		
 
 		List<AddrView> result = new ArrayList<AddrView>();
 		
-		String sql = "";
+		String arrCon = addrParam.getArrayCondition();
+		Boolean isASC = addrParam.isASC();
+		
+		String asc =" ASC";
+		String desc =" DESC";
+		String userid = " user_id";
+		String username = " user_name";
+		String dept =" dept_no";
+		String position = " position_no";
+		String sql ="";
+		
 		sql += "SELECT * FROM (SELECT rownum rnum, j2.* FROM ";
 		sql += " (SELECT * FROM ";
 		sql += " (SELECT * FROM tb_user u ";
@@ -33,49 +41,47 @@ public class AddrViewDaoImpl implements AddrViewDao{
 		sql += " ON u.detp_no = d.dept_no) j1 ";
 		sql += " LEFT OUTER JOIN tb_position t ";
 		sql += " ON j1.position_no = t.position_no ";
-		sql += " ORDER BY ? , ?) j2) ";
+		sql += " ORDER BY ";
+		if(arrCon.equals("userid")) {
+			sql += userid;
+		} else if(arrCon.equals("username")) {
+			sql += username;
+		} else if(arrCon.equals("dept")) {
+			sql += dept;
+		} else if(arrCon.equals("position")) {
+			sql += position;
+		}
+		if(isASC) {
+			sql += asc;
+		} else if(!isASC) {
+			sql += desc;
+		} else {
+			
+		}
+		sql += ") j2)";
 		sql += " WHERE rnum BETWEEN ? and ? ";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			String arrCon = addrParam.getArrayCondition();
-			Boolean isASC = addrParam.isASC();
-			
-			if(arrCon.equals("userid")) {
-				ps.setString(1, " user_id");
-			} else if(arrCon.equals("username")) {
-				ps.setString(1, " user_name");
-			} else if(arrCon.equals("dept")) {
-				ps.setString(1, " dept_no");
-			} else if(arrCon.equals("position")) {
-				ps.setString(1, " position_no");
-			} else{
-				ps.setString(1, " user_id");
-			}
-			if(isASC) {
-				ps.setString(2, " ASC");
-			} else if(!isASC) {
-				ps.setString(2, " DESC");
-			} else {
-				ps.setString(2, " ASC");
-			}
-			ps.setInt(3, paging.getStartNo());
-			ps.setInt(4, paging.getEndNo());
+			ps.setInt(1, paging.getStartNo());
+			ps.setInt(2, paging.getEndNo());
 			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				AddrView e = new AddrView();
 				
+				e.setUser_no(rs.getInt("user_no"));
 				e.setCellphone_no(rs.getString("cellphone_no"));
 				e.setDept_name(rs.getString("dept_name"));
 				e.setPosition_name(rs.getString("position_name"));
 				e.setUser_id(rs.getString("user_id"));
 				e.setUser_name(rs.getString("user_name"));
 				
-				result.add(e);
 				System.out.println(e);
+				
+				result.add(e);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

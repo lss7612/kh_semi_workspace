@@ -74,7 +74,7 @@ ul.pagination li.active a {
 	
 	<!-- 마지막 페이지로 가기 -->
 	<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-	<li><a href="/board/list?curPage=<%=paging.getTotalPage() %>">&rarr;</a></li>
+	<li><a href="/address/view?curPage=<%=paging.getTotalPage() %>">&rarr;</a></li>
 	<%	} %>
 </ul>
 </div>

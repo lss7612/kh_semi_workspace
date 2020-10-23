@@ -16,6 +16,7 @@
 
 </head>
 <body>
+<div class="container">
 <header>
 	<div>
 		<ul class="navi">
@@ -39,7 +40,17 @@
 	</div>
 
 </header>
+  <nav>NAV
 
+  
+  
+  
+  
+  </nav>
+  <main>MAIN</main>
+
+  <footer>FOOTER</footer>
+</div>
 
 </body>
 </html>

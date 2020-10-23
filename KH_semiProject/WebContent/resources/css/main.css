@@ -1,4 +1,16 @@
 @charset "UTF-8";
+/* test */
+.container{
+  display: grid;
+  grid-template-rows: 1fr 15fr 1fr;
+  grid-template-columns: 2fr 5fr 3fr;
+  grid-template-areas: 
+    "header header header"
+    "nav main main"
+    "footer footer footer";
+  grid-gap: .75em;
+}
+
 
 .absolute{
 	position: absolute;
@@ -123,11 +135,33 @@
 }
 
 
-#content{
-	height: 400px;
-	background:#CCC;
+/* #content{ */
+/* 	height: 400px; */
+/* 	background:#CCC; */
+/* } */
+/* #foot{ */
+/* 	text-align: center; */
+/* 	background: skyblue */
+/* } */
+
+header{
+    grid-area: header;
+    background-color: #fff;
 }
-#foot{
-	text-align: center;
-	background: skyblue
+nav{
+    grid-area: nav;
+    background-color: tomato;
+}
+main{
+    grid-area: main;
+    background-color: lightblue;
+
+}
+/* aside{ */
+/*     grid-area: aside; */
+/*     background-color: orange; */
+/* } */
+footer{
+    grid-area: footer;
+    background-color: lightgreen;
 }

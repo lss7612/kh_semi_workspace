@@ -71,14 +71,14 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
           function postArrayCondition(isASC, arrayCondition) {
             var params = 'arrayCondition=' + arrayCondition + '&isASC=' + isASC;
-            sendRequest('POST', '/address/view', params, getArrayCondition);
+            sendRequest('POST', '/address/view/array', params, getArrayCondition);
           }
           
           function getArrayCondition() {
             if (httpRequest.readyState == 4) {
               if (httpRequest.status == 200) {
                 console.log('정상응답');
-                
+                list.innerHTML = httpRequest.reponseText
               } else {
                 console.log('AJAX요청/응답 에러');
               }
@@ -116,24 +116,22 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               </form>
             </div>
             <hr>
-              <div id="list">
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>사번</th>
-                  <th><button name="userid" class="ASC">아이디</button></th>
-                  <th><button name="username" class="ASC">이름</button></th>
-                  <th><button name="dept" class="ASC">부서</button></th>
-                  <th><button name="position" class="ASC">직급</button></th>
-                  <th>휴대전화</th>
-                </tr>
-              </thead>
+            <div id="list">
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th><button name="userid" class="ASC">아이디</button></th>
+                    <th><button name="username" class="ASC">이름</button></th>
+                    <th><button name="dept" class="ASC">부서</button></th>
+                    <th><button name="position" class="ASC">직급</button></th>
+                    <th>휴대전화</th>
+                  </tr>
+                </thead>
                 <% for (int i = 0; i < list.size(); i++) { %>
                 <tbody>
                   <tr>
                     <td><input type="checkbox" name="" id=""></td>
-                    <td><%=list.get(i).getUser_no()%></td>
                     <td><%=list.get(i).getUser_id()%></td>
                     <td><%=list.get(i).getUser_name() %></td>
                     <td><%=list.get(i).getDept_name() %></td>

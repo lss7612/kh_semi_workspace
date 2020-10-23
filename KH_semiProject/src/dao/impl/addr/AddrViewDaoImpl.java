@@ -20,61 +20,68 @@ public class AddrViewDaoImpl implements AddrViewDao{
 	
 	@Override
 	public List<AddrView> viewUserAddr(Connection conn, AddrParam addrParam, Paging paging) {
-		
-		
 
 		List<AddrView> result = new ArrayList<AddrView>();
 		
-		String sql = "";
-		sql += "SELECT * FROM (SELECT rownum rnum, j2.* FROM";
+		String arrCon = addrParam.getArrayCondition();
+		Boolean isASC = addrParam.isASC();
+		
+		String asc =" ASC";
+		String desc =" DESC";
+		String userid = " user_id";
+		String username = " user_name";
+		String dept =" dept_no";
+		String position = " position_no";
+		String sql ="";
+		
+		sql += "SELECT * FROM (SELECT rownum rnum, j2.* FROM ";
 		sql += " (SELECT * FROM ";
-		sql += " (SELECT * FROM tb_user u";
-		sql += " LEFT OUTER JOIN tb_dept d";
-		sql += " ON u.detp_no = d.dept_no) j1";
-		sql += " LEFT OUTER JOIN tb_position t";
-		sql += " ON j1.position_no = t.position_no) j2)";
-		sql += " WHERE rnum BETWEEN ? and ?";
-
-		
-		if(addrParam.getArrayCondition().equals("userid")) {
-			sql += " ORDER BY user_id";
-		} else if(addrParam.getArrayCondition().equals("username")) {
-			sql += " ORDER BY user_name";
-		} else if(addrParam.getArrayCondition().equals("dept")) {
-			sql += " ORDER BY detp_no";
-		} else if(addrParam.getArrayCondition().equals("position")) {
-			sql += " ORDER BY position_no";
+		sql += " (SELECT * FROM tb_user u ";
+		sql += " LEFT OUTER JOIN tb_dept d ";
+		sql += " ON u.detp_no = d.dept_no) j1 ";
+		sql += " LEFT OUTER JOIN tb_position t ";
+		sql += " ON j1.position_no = t.position_no ";
+		sql += " ORDER BY ";
+		if(arrCon.equals("userid")) {
+			sql += userid;
+		} else if(arrCon.equals("username")) {
+			sql += username;
+		} else if(arrCon.equals("dept")) {
+			sql += dept;
+		} else if(arrCon.equals("position")) {
+			sql += position;
 		}
-		
-		if(addrParam.isASC()) {
-			sql += " ASC";
+		if(isASC) {
+			sql += asc;
+		} else if(!isASC) {
+			sql += desc;
 		} else {
-			sql += " DESC";
+			
 		}
+		sql += ") j2)";
+		sql += " WHERE rnum BETWEEN ? and ? ";
 		
 		try {
-			
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, paging.getStartNo());
 			ps.setInt(2, paging.getEndNo());
-			
-//			System.out.println(paging.getStartNo());
-//			System.out.println(paging.getEndNo());
 			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				AddrView e = new AddrView();
 				
+				e.setUser_no(rs.getInt("user_no"));
 				e.setCellphone_no(rs.getString("cellphone_no"));
 				e.setDept_name(rs.getString("dept_name"));
 				e.setPosition_name(rs.getString("position_name"));
 				e.setUser_id(rs.getString("user_id"));
 				e.setUser_name(rs.getString("user_name"));
 				
-				result.add(e);
+				System.out.println(e);
 				
+				result.add(e);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

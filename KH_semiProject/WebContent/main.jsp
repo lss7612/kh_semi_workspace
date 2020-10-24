@@ -9,14 +9,48 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
  <script type="text/javascript">
  
- $('document').ready(function(){
+ $('document').ready(function() {
+		
+		$('.submenu').children().css("display", "none")
+		
+
+		$('a').click(function() {
+			$('main').load($(this).attr('href'))
+
+			var Name = $(this).attr('name');
+			//탑바 메뉴 클릭시 compareName 함수 호출
+			compareName(Name);
+
+			return false
+
+		})
 	
-	 $('a').click(function(){
-		 $('main').load($(this).attr('href'))
-		 return false
-	 })
-	 
- })
+	})
+
+	
+//화면 왼쪽영역에 어떤 메뉴를 표출할지 비교하는 함수
+//평소에는 display none, main.css 확인....
+//
+
+	function compareName(Name) {
+		
+		$('.submenu').children().css("display", "none")
+		
+		//클릭한 메뉴의 name속성이 rufwo일 때 appr id를 갖는 태그를 display한다 
+		if (Name == "rufwo") {
+
+			$('#appr').css("display", "block")
+		//클릭한 메뉴의 name속성이 message일 때 mes id를 갖는 태그를 display한다
+		} else if (Name == "message") {
+
+			$('#mes').css("display", "block")
+		} else if (Name == "address") {
+			
+			$('#address').css("display","block")
+		//클릭한 메뉴의 name속성이 address일 때 address id를 갖는 태그를 dispay한다.
+		}
+
+	}
  
  </script>
  

@@ -10,7 +10,8 @@
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 	$('document').ready(function() {
-
+		$('main').load("/MainController")
+		
 		$('a').click(function() {
 			$('main').load($(this).attr('href'))
 

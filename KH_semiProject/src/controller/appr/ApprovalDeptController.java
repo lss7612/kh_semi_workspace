@@ -1,4 +1,4 @@
-package common;
+package controller.appr;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class SubmenuController
  */
 @WebServlet("/menu/deptApproval")
-public class SubmenuController extends HttpServlet {
+public class ApprovalDeptController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override

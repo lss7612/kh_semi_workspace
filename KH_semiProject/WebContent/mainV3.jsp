@@ -49,13 +49,13 @@
 
 		</header>
 
+
 		<nav>
 			<div class="submenu">
-				<div id="appr">
+				<div id="profile">
 					<ul>
-						<li><a href="/menu/approval" name="rufwo">전체결재함</a></li>
-						<li><a href="/menu/deptApproval" name="rufwo">부서결재함</a></li>
-						<li><a href="/menu/approvalWrite" name="rufwo">결재 작성하기</a></li>
+						<li>프로필 공간입니다</li>
+						<li>등등</li>
 					</ul>
 				</div>
 			</div>
@@ -63,7 +63,7 @@
 
 		</nav>
 		<main>
-		부서결재함입니다
+		내용없음
 		
 		
 		</main>

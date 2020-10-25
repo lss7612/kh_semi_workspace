@@ -93,9 +93,10 @@
 					<li><a href="#">커뮤니티</a></li>
 					<li><a href="/menu/approval" name="rufwo">전자결재</a>
 						<ul>
+							
 							<li><a href="/menu/approval" name="rufwo">전체결재함</a></li>
 							<li><a href="/menu/deptApproval" name="rufwo">부서결재함</a></li>
-
+							<li><a href="/menu/writeApproval" name="rufwo">결재 작성하기</a></li>
 						</ul></li>
 
 				</ul>
@@ -120,6 +121,7 @@
 					<ul>
 						<li><a href="/menu/approval" name="rufwo">전체결재함</a></li>
 						<li><a href="/menu/deptApproval" name="rufwo">부서결재함</a></li>
+						<li><a href="/menu/writeApproval" name="rufwo">결재 작성하기</a></li>
 					</ul>
 				</div>
 

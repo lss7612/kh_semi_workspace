@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/menu/approval")
-public class ApprovalViewController extends HttpServlet {
+public class ApprovalEntireController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    	   req.getRequestDispatcher("/WEB-INF/views/appovalViews/approveMain.jsp").forward(req, resp);
+    	   req.getRequestDispatcher("/WEB-INF/views/appovalViews/approveEntire.jsp").forward(req, resp);
     	   
     }
 

@@ -13,18 +13,26 @@
 
 /* appr : 결재 서브메뉴 id*/
 /* mes : 쪽지 서브메뉴 id*/
-#appr{
-	display:none;
-}
-#mes{
-	display:none;
-}
+
+/* 20201026 수정*/
+/* #appr{ */
+/* 	display:none; */
+/* } */
+/* #mes{ */
+/* 	display:none; */
+/* } */
 
 
 .submenu >div> ul{
 	list-style-type:none;
 }
 
+
+.submenu >div> ul> li > a:hover{
+	color: #000;
+	border: 1px solid black;
+	background :#fff;
+}
 
 
 .absolute{
@@ -141,6 +149,7 @@
 /* a링크 파란색이랑 밑줄 없애버림.. */
 a:link {text-decoration: none; color: skyblue;}
 a:visited {text-decoration: none; color: skyblue;}
+
 
 .navi > li > ul > li > a:hover{
 

@@ -114,6 +114,7 @@
 						<ul>
 							<li><a href="/menu/approval" name="rufwo">전체결재함</a></li>
 							<li><a href="/menu/deptApproval" name="rufwo">부서결재함</a></li>
+							<li><a href="/WEB-INF/views/appovalViews/approveWrite.jsp" name="rufwo">결재 작성하기</a></li>
 
 						</ul></li>
 
@@ -139,6 +140,7 @@
 					<ul>
 						<li><a href="/menu/approval" name="rufwo">전체결재함</a></li>
 						<li><a href="/menu/deptApproval" name="rufwo">부서결재함</a></li>
+						<li><a href="/menu/approvalWrite" name="rufwo">결재 작성하기</a></li>
 					</ul>
 				</div>
 

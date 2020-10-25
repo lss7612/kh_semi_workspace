@@ -9,14 +9,48 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
  <script type="text/javascript">
  
- $('document').ready(function(){
+ $('document').ready(function() {
+		
+		$('.submenu').children().css("display", "none")
+		
+
+		$('a').click(function() {
+			$('main').load($(this).attr('href'))
+
+			var Name = $(this).attr('name');
+			//탑바 메뉴 클릭시 compareName 함수 호출
+			compareName(Name);
+
+			return false
+
+		})
 	
-	 $('a').click(function(){
-		 $('main').load($(this).attr('href'))
-		 return false
-	 })
-	 
- })
+	})
+
+	
+//화면 왼쪽영역에 어떤 메뉴를 표출할지 비교하는 함수
+//평소에는 display none, main.css 확인....
+//
+
+	function compareName(Name) {
+		
+		$('.submenu').children().css("display", "none")
+		
+		//클릭한 메뉴의 name속성이 rufwo일 때 appr id를 갖는 태그를 display한다 
+		if (Name == "rufwo") {
+
+			$('#appr').css("display", "block")
+		//클릭한 메뉴의 name속성이 message일 때 mes id를 갖는 태그를 display한다
+		} else if (Name == "message") {
+
+			$('#mes').css("display", "block")
+		} else if (Name == "address") {
+			
+			$('#address').css("display","block")
+		//클릭한 메뉴의 name속성이 address일 때 address id를 갖는 태그를 dispay한다.
+		}
+
+	}
  
  </script>
  
@@ -35,42 +69,83 @@
 
 </head>
 <body>
-<div class="container">
-<header>
-	<div>
-		<ul class="navi">
-			<li><a href="#">home버튼</a></li>
-			<li>
-				<a href="#">쪽지</a>
-				<ul>
-					<li><a href="#">받은쪽지함</a></li>
-					<li><a href="#">보낸쪽지함</a></li>
-					<li><a href="/note/send">쪽지쓰기</a></li>
+	<div class="container">
+		<header>
+			<div>
+				<ul class="navi">
+					<li><a href="#">home버튼</a></li>
+					<li><a href="/note/send" name="message">쪽지</a>
+						<ul>
+						<!--name 임시로 message로 넣었습니다 -->
+						<!-- url 추가해주세요 -->
+							<li><a href="/note/send" name="message">받은쪽지함</a></li>
+							<li><a href="/note/send" name="message">보낸쪽지함</a></li>
+							<li><a href="/note/send" name="message">쪽지쓰기</a></li>
+						</ul></li>
+					<li>
+					<a href="/address/view" name = "address">주소록</a>
+						<ul>
+							<li><a href="/address/view">사원 목록</a></li>
+							<li><a href="/address/mine">내 주소록</a></li>
+						</ul>
+					</li>
+					<li><a href="#">공지사항</a></li>
+					<li><a href="#">커뮤니티</a></li>
+					<li><a href="/menu/approval" name="rufwo">전자결재</a>
+						<ul>
+							<li><a href="/menu/approval" name="rufwo">전체결재함</a></li>
+							<li><a href="/menu/deptApproval" name="rufwo">부서결재함</a></li>
+
+						</ul></li>
+
 				</ul>
-			</li>
-			<li><a href="/address/view"">주소록</a></li>
-			<li><a href="#">공지사항</a></li>
-			<li><a href="#">커뮤니티</a></li>
-			<li><a href="#">전자결재</a></li>
+			</div>
+			<div>
+				<button>채팅</button>
+				<button>다크모드</button>
+			</div>
 
-		</ul>
+		</header>
+
+<!-- NAV -->
+<!-- 화면 왼쪽의 서브메뉴 영역 -->
+<!--  name속성 각메뉴별로 똑같이 입력 필수!!!-->
+<!--  top바의 메뉴 그대로 복사해서 가져오면 됨  -->
+<!--  div id는 중복안되게!!!! -->
+		<nav>
+
+		
+			<div class="submenu">
+				<div id="appr">
+					<ul>
+						<li><a href="/menu/approval" name="rufwo">전체결재함</a></li>
+						<li><a href="/menu/deptApproval" name="rufwo">부서결재함</a></li>
+					</ul>
+				</div>
+
+
+				<div id="mes">
+					<ul>
+						<li><a href="/note/send" name="message">받은쪽지함</a></li>
+						<li><a href="/note/send" name="message">보낸쪽지함</a></li>
+						<li><a href="/note/send" name="message">쪽지쓰기</a></li>
+					</ul>
+				</div>
+				
+				<div id="address">
+					<ul>
+						<li><a href="/address/view">사원 목록</a></li>
+						<li><a href="/address/mine">내 주소록</a></li>
+					</ul>
+				</div>
+			</div>
+
+
+		</nav>
+		<main>MAIN</main>
+
+		<footer>FOOTER</footer>
 	</div>
-	<div><button>채팅</button>
-		 <button>다크모드</button>
-	</div>
-
-</header>
-  <nav>NAV
-
-  
-  
-  
-  
-  </nav>
-  <main>MAIN</main>
-
-  <footer>FOOTER</footer>
-</div>
 
 </body>
 </html>

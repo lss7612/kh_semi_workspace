@@ -9,9 +9,19 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
+
+	
+
 	$('document').ready(function() {
+
 		$('main').load("/MainController")
 		
+
+		$('main').load("/MainController")
+		$('.submenu').children().css("display", "none")
+		
+
+
 		$('a').click(function() {
 			$('main').load($(this).attr('href'))
 
@@ -22,7 +32,7 @@
 			return false
 
 		})
-
+	
 	})
 
 	
@@ -42,6 +52,10 @@
 		} else if (Name == "message") {
 
 			$('#mes').css("display", "block")
+		} else if (Name == "address") {
+			
+			$('#address').css("display","block")
+		//클릭한 메뉴의 name속성이 address일 때 address id를 갖는 태그를 dispay한다.
 		}
 
 	}
@@ -67,6 +81,10 @@
 <!-- ********* main.css에  #사이드메뉴id { display:none;} 설정 꼭 해야합니다************ -->
 <!-- 고칠 부분 있으실 경우 수정하세여!!! -->
 
+<!-- 20201025 이상성 -->
+<!-- CSS에서 display:none;을 할 필요 없이 제이쿼리로 온로드시 모든 사이드메뉴를 안보이게 설정하였습니다.17번째 줄 참고 -->
+<!-- 주소록도 같은 상진씨가 해놓은 형식으로 추가하였습니다. -->
+
 
 </head>
 <body>
@@ -83,7 +101,13 @@
 							<li><a href="/note/send" name="message">보낸쪽지함</a></li>
 							<li><a href="/note/send" name="message">쪽지쓰기</a></li>
 						</ul></li>
-					<li><a href="/address/view">주소록</a></li>
+					<li>
+					<a href="/address/view" name = "address">주소록</a>
+						<ul>
+							<li><a href="/address/view">사원 목록</a></li>
+							<li><a href="/address/mine">내 주소록</a></li>
+						</ul>
+					</li>
 					<li><a href="#">공지사항</a></li>
 					<li><a href="#">커뮤니티</a></li>
 					<li><a href="/menu/approval" name="rufwo">전자결재</a>
@@ -124,6 +148,13 @@
 						<li><a href="/note/send" name="message">받은쪽지함</a></li>
 						<li><a href="/note/send" name="message">보낸쪽지함</a></li>
 						<li><a href="/note/send" name="message">쪽지쓰기</a></li>
+					</ul>
+				</div>
+				
+				<div id="address">
+					<ul>
+						<li><a href="/address/view">사원 목록</a></li>
+						<li><a href="/address/mine">내 주소록</a></li>
 					</ul>
 				</div>
 			</div>

@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-첫메인 페이지..
+	<nav>
+			<div class="submenu">
+				<div id="profile">
+					<ul>
+						<li>프로필 공간입니다</li>
+						<li>등등</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 </body>
 </html>

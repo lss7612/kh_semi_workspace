@@ -19,7 +19,7 @@ public class ApprovalWriteController extends HttpServlet {
 
 
 		
-		req.getRequestDispatcher("/WEB-INF/views/appovalViews/approveWrite.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/appovalViews/approveWrite.jsp").forward(req, resp);
 	}
 
 

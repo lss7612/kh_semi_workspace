@@ -13,9 +13,14 @@
 	
 
 	$('document').ready(function() {
+
+		$('main').load("/MainController")
 		
+
+		$('main').load("/MainController")
 		$('.submenu').children().css("display", "none")
 		
+
 
 		$('a').click(function() {
 			$('main').load($(this).attr('href'))

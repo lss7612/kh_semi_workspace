@@ -10,13 +10,14 @@
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	
 </head>
+
 <body>
 	 
 	<div class="container">
-		<jsp:include page="/views/common/header.jsp"></jsp:include>
+		<jsp:include page="/views/common/topMenu.jsp"></jsp:include>
 		<!-- header랑 footer는 공용으로 쓰면 되고
 		nav는 메뉴별로 하나씩 두면 될 것 같습니다 -->
-		<jsp:include page="/views/common/navMain.jsp"></jsp:include>
+		<jsp:include page="/views/common/sideMenu.jsp"></jsp:include>
 
 	
 		<main>

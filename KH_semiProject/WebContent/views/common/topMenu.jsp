@@ -26,11 +26,13 @@
 					</li>
 					<li><a href="#">공지사항</a></li>
 					<li><a href="#">커뮤니티</a></li>
-					<li><a href="/menu/approval" name="rufwo">전자결재</a>
+					<li><a href="/approval/approvalmy" name="rufwo">전자결재</a>
 						<ul>
-							<li><a href="/menu/approval" name="rufwo">전체결재함</a></li>
-							<li><a href="/menu/deptApproval" name="rufwo">부서결재함</a></li>
-							<li><a href="/menu/approvalWrite" name="rufwo">결재 작성하기</a></li>
+						<li><a href="/approval/approvalWrite" name="rufwo">결재 작성</a></li>
+						<li><a href="/approval/approvalmy" name="rufwo">기안함</a></li>
+						<li><a href="/approval/DoApproval" name="rufwo">결재함</a></li>
+						<li><a href="/approval/deptApproval" name="rufwo">부서결재함</a></li>
+							
 
 						</ul></li>
 

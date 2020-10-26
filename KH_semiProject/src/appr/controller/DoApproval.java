@@ -1,4 +1,4 @@
-package controller.appr;
+package appr.controller;
 
 import java.io.IOException;
 
@@ -9,14 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SubmenuController
+ * Servlet implementation class DoApproval
  */
-@WebServlet("/menu/deptApproval")
-public class ApprovalDeptController extends HttpServlet {
+@WebServlet("/approval/DoApproval")
+public class DoApproval extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 req.getRequestDispatcher("/views/appovalViews/approveDept.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/appovalViews/approveDo.jsp").forward(req, resp);
+			
+
 		}
 }

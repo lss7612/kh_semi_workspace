@@ -8,19 +8,19 @@
     "header header header"
     "nav main main"
     "footer footer footer";
-  grid-gap: .75em;
+/*   grid-gap: .75em; */
 }
 
 /* appr : 결재 서브메뉴 id*/
 /* mes : 쪽지 서브메뉴 id*/
 
 /* 20201026 수정*/
-/* #appr{ */
-/* 	display:none; */
-/* } */
-/* #mes{ */
-/* 	display:none; */
-/* } */
+#appr{
+	display:none;
+}
+#mes{
+	display:none;
+}
 
 
 .submenu >div> ul{
@@ -173,14 +173,16 @@ a:visited {text-decoration: none; color: skyblue;}
 header{
     grid-area: header;
     background-color: #fff;
+    border-bottom: 1px solid #ccc;
 }
 nav{
+	border-right : 1px solid #ccc;
     grid-area: nav;
-    background-color: tomato;
+
 }
 main{
     grid-area: main;
-    background-color: lightblue;
+
 
 }
 /* aside{ */
@@ -188,6 +190,7 @@ main{
 /*     background-color: orange; */
 /* } */
 footer{
+	border-top : 1px solid #ccc;
     grid-area: footer;
-    background-color: lightgreen;
+
 }

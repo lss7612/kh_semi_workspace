@@ -38,10 +38,11 @@ public class AddrViewDaoImpl implements AddrViewDao{
 		sql += " (SELECT * FROM ";
 		sql += " (SELECT * FROM tb_user u ";
 		sql += " LEFT OUTER JOIN tb_dept d ";
-		sql += " ON u.detp_no = d.dept_no) j1 ";
+		sql += " ON u.dept_no = d.dept_no) j1 ";
 		sql += " LEFT OUTER JOIN tb_position t ";
 		sql += " ON j1.position_no = t.position_no ";
 		sql += " ORDER BY ";
+		
 		if(arrCon.equals("userid")) {
 			sql += userid;
 		} else if(arrCon.equals("username")) {

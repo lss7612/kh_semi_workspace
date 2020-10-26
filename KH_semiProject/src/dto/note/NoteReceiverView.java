@@ -6,34 +6,37 @@ public class NoteReceiverView {
 	
 	private String dept_name;
 	private String user_name;
+	private int user_no;
 	private List<Integer> addressBook;
-	
 	@Override
 	public String toString() {
-		return "NoteRecieverView [dept_name=" + dept_name + ", user_name=" + user_name + ", addressBook=" + addressBook
-				+ "]";
+		return "NoteReceiverView [dept_name=" + dept_name + ", user_name=" + user_name + ", user_no=" + user_no
+				+ ", addressBook=" + addressBook + "]";
 	}
-	public final String getDept_name() {
+	public String getDept_name() {
 		return dept_name;
 	}
-	public final void setDept_name(String dept_name) {
+	public void setDept_name(String dept_name) {
 		this.dept_name = dept_name;
 	}
-	public final String getUser_name() {
+	public String getUser_name() {
 		return user_name;
 	}
-	public final void setUser_name(String user_name) {
+	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
-	public final List<Integer> getAddressBook() {
+	public int getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
+	public List<Integer> getAddressBook() {
 		return addressBook;
 	}
-	public final void setAddressBook(List<Integer> addressBook) {
+	public void setAddressBook(List<Integer> addressBook) {
 		this.addressBook = addressBook;
 	}
 	
 	
-	
-	
-
 }

@@ -23,7 +23,7 @@ public class AddrViewController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		Paging paging = addrViewService.getPaging(req); 
 		req.setAttribute("paging", paging);
 		
@@ -81,4 +81,6 @@ public class AddrViewController extends HttpServlet {
 
 	}
 
+	
+	
 }

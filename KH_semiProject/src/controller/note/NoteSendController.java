@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.note.NoteCreateData;
 import dto.note.NoteReceiverView;
 import service.face.note.NoteService;
 import service.impl.note.NoteServiceImpl;
@@ -34,12 +35,29 @@ public class NoteSendController extends HttpServlet {
 		
 		req.setAttribute("manUser", manUser);
 		req.setAttribute("accUser", accUser);
-		req.setAttribute("hRUser", hrUser);
+		req.setAttribute("hrUser", hrUser);
 		req.setAttribute("devUser", devUser);
 		req.setAttribute("salesUser", salesUser);
 		
 		
 		req.getRequestDispatcher("/views/noteViews/send.jsp").forward(req, resp);
+	
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			
+		//NoteCreateData DTO 객체에 값 채우기
+		NoteCreateData params = noteService.getNCDparams(req);	
+		System.out.println(params);
+		
+		//
+		int result = noteService.insertNote(params);
+		if(result > 0) {
+			
+		} if(result == 0) {
+			
+		}
 	
 	}
 	

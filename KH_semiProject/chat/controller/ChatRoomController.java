@@ -23,6 +23,7 @@ public class ChatRoomController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println(" > > >/chat/room [GET] 완료 < < <");
 		
+		System.out.println(req.getParameter("selectUserNo"));
 		if(req.getParameter("selectUserNo") == null) {
 			System.out.println("선택된 회원이 없습니다");
 			return;
@@ -41,7 +42,7 @@ public class ChatRoomController extends HttpServlet {
 		//회원정보를 가져오지 못하면 종료
 		if(user1_info == null) {
 			System.out.println("정보가 들어가지 않았습니다.");
-			return;
+			req.getRequestDispatcher("/views/chat/chatSelect.jsp");
 		}
 		System.out.println(" > > > 채팅 상대 정보 출력 < < <");
 		System.out.println("user1_info "+user1_info);
@@ -50,19 +51,9 @@ public class ChatRoomController extends HttpServlet {
 		//System.out.println("생성 자 : "+user0_no);
 		//System.out.println("초대 받은 자 : "+user1_no);
 		
-		//초대받은 인원 수 세기
-		int[] userList = {user0_no, user1_no};
-		int count = 0;
-		
-		for(int i=0;i<userList.length;i++) {
-			count++;
-		}
-		
-		//선택한 회원으로 대화방 생성하기
-		userChatService.createRoom(user0_no, user1_no, count);
 		
 		req.setAttribute("opponentInfo", user1_info);
-		req.getRequestDispatcher("/WEB-INF/views/chat/chat.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/chat/chat.jsp").forward(req, resp);
 		
 	}
 }

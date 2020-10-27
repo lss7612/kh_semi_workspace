@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
     <%@ page errorPage ="./errorPage.jsp" %>
     <% ChatUserInfo user = (ChatUserInfo) session.getAttribute("userinfo"); %>
-    <% ChatUserInfo opponentUser = (ChatUserInfo) request.getAttribute("opponentInfo"); %>
+    <% ChatUserInfo opponentUser = (ChatUserInfo) request.getAttribute("user1_info"); %>
     <% String userIp = (String) session.getAttribute("userIp"); %>
 <!DOCTYPE html>
 <html>
@@ -12,12 +12,9 @@
 <title><%=opponentUser.getUser_name() %>님과 대화</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style type="text/css">
-@import url(../css/custom.css)
 
 </style>
 <style type="text/css">
-
-#chatContent { word-break:break-all;}
 
 </style>
 </head>
@@ -29,7 +26,7 @@
 			<div class="portlet portlet-default">
 				<div class="portlet-heading">
 					<div class="portlet-title">
-						<h4><i class="fa fa-circle text-green"></i>실시간 채팅창</h4>
+						<h4><i class="fa fa-circle text-green"></i><%=opponentUser.getUser_name() %>님과 대화</h4>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -85,16 +82,18 @@
     // WebSocket 서버와 접속이 되면 호출되는 함수
     webSocket.onopen = function(message) {
 	    // 콘솔 텍스트에 메시지를 출력한다.
-	    $('#chatlist').append('<div class="row">'+ 
-				"<%=opponentUser.getUser_name() %>님과 대화가 시작되었습니다.\n" +
+	    $('#chatlist').append('<div class="row">'+ '<strong>'
+	    		+"<%=opponentUser.getUser_name() %>"+'</strong>'
+	    		+"님과 대화가 시작되었습니다.\n" +
 				'</div>' +'<hr>');
    	};
    
     // WebSocket 서버와 접속이 끊기면 호출되는 함수
     webSocket.onclose = function(message) {
 		// 콘솔 텍스트에 메시지를 출력한다.
-		$('#chatlist').append('<div class="row">'+ 
-				"<%=opponentUser.getUser_name() %>님과 대화가 종료되었습니다." 
+		$('#chatlist').append('<div class="row">'+ '<strong>'
+				+"<%=opponentUser.getUser_name() %>"+'</strong>'
+				+"님과 대화가 종료되었습니다." 
 				+'</div>'+'<hr>');
    	};
    

@@ -58,10 +58,13 @@ public class UserChatServiceImpl implements UserChatService{
 	}
 	
 	@Override
-	public void createRoom(int user0_no, int user1_no, int count) {
+	public int createRoom(int user0_no, int user1_no, int count) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		//1. 채팅방을 개설
+		//1. 채팅방을 개설하여 방번호를 받는다.
+		int chatting_no = 0;
+		chatting_no = userChatDao.selectRoom(conn);
+		
 		int result = 0;
 		result = userChatDao.makeRoom(conn, count);
 		//2. 생성된 방 번호를 확인하여 방에 인원 삽입
@@ -74,7 +77,23 @@ public class UserChatServiceImpl implements UserChatService{
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
+		
+		return chatting_no;
 	}
 	
-	
+	@Override
+	public int searchRoom(int user0_no, int user1_no) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//회원0과 회원1의 1대1대화방이 있는지 조회한다.
+		int result = userChatDao.searchChatNo(conn, user0_no, user1_no);
+		
+		if (result !=0 ) {
+			//방번호를 반환
+			return result;
+		}
+		//방이 없으면 0을 반환
+		return 0;
+	}
 }

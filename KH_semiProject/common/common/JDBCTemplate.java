@@ -13,8 +13,8 @@ public class JDBCTemplate {
 	
 	//DB ?ó∞Í≤? ?†ïÎ≥?
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USERNAME = "scott";
-	private static final String PASSWORD = "tiger";
+	private static final String USERNAME = "hr2";
+	private static final String PASSWORD = "1234";
 	
 	//DB?ó∞Í≤? Í∞ùÏ≤¥
 	private static Connection conn = null;

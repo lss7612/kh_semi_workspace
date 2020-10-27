@@ -16,18 +16,18 @@
 </head>
 <body>
 	<%
-		String userID = null;
-		if (session.getAttribute("userID") != null) {
-			userID = (String) session.getAttribute("userID");
+		String user_id = null;
+		if (session.getAttribute("user_id") != null) {
+			user_id = (String) session.getAttribute("user_id");
 		}
-		if (userID == null) {
+		if (user_id == null) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('로그인을 하세요.')");
 			script.println("location.href='login.jsp'");
 			script.println("</script>");
 		} else {
-			if (bbs.getArticle_title() == null || bbs.getArticle_title() == null) {
+			if (bbs.getArticle_title() == null || bbs.getArticle_content() == null) {
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('입력이 안 된 사항이 있습니다.')");

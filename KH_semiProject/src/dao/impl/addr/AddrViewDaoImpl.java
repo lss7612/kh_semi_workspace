@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.JDBCTemplete;
+import common.JDBCTemplate;
 import common.Paging;
 import dao.face.addr.AddrViewDao;
 import dto.addr.AddrParam;
@@ -113,8 +113,8 @@ public class AddrViewDaoImpl implements AddrViewDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplete.close(rs);
-			JDBCTemplete.close(ps);
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		

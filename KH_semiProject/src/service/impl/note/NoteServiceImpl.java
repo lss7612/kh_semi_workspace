@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import common.JDBCTemplete;
+import common.JDBCTemplate;
 import dao.face.addr.AddrViewDao;
 import dao.face.note.NoteDao;
 import dao.impl.addr.AddrViewDaoImpl;
@@ -26,7 +26,7 @@ public class NoteServiceImpl implements NoteService{
 	public List<NoteReceiverView> getManUser() {
 		
 		List<NoteReceiverView> result = null;
-		conn = JDBCTemplete.getConnection();
+		conn = JDBCTemplate.getConnection();
 		
 		result = noteDao.getManUser(conn);
 		
@@ -37,7 +37,7 @@ public class NoteServiceImpl implements NoteService{
 	public List<NoteReceiverView> getAccUser() {
 		
 		List<NoteReceiverView> result = null;
-		conn = JDBCTemplete.getConnection();
+		conn = JDBCTemplate.getConnection();
 		
 		result = noteDao.getAccUser(conn);
 		
@@ -48,7 +48,7 @@ public class NoteServiceImpl implements NoteService{
 	public List<NoteReceiverView> getHrUser() {
 		
 		List<NoteReceiverView> result = null;
-		conn = JDBCTemplete.getConnection();
+		conn = JDBCTemplate.getConnection();
 		
 		result = noteDao.getHrUser(conn);
 		return result;
@@ -58,7 +58,7 @@ public class NoteServiceImpl implements NoteService{
 	public List<NoteReceiverView> getDevUser() {
 		
 		List<NoteReceiverView> result = null;
-		conn = JDBCTemplete.getConnection();
+		conn = JDBCTemplate.getConnection();
 		
 		result = noteDao.getDevUser(conn);
 		return result;
@@ -68,7 +68,7 @@ public class NoteServiceImpl implements NoteService{
 	public List<NoteReceiverView> getSalesUser() {
 		
 		List<NoteReceiverView> result = null;
-		conn = JDBCTemplete.getConnection();
+		conn = JDBCTemplate.getConnection();
 		
 		result = noteDao.getSalesUser(conn);
 		return result;
@@ -78,7 +78,7 @@ public class NoteServiceImpl implements NoteService{
 	public NoteCreateData getNCDparams(HttpServletRequest req) {
 
 		NoteCreateData result = new NoteCreateData();
-		conn =JDBCTemplete.getConnection();
+		conn =JDBCTemplate.getConnection();
 		
 		
 		int nextval = noteDao.getNextval(conn);
@@ -121,7 +121,7 @@ public class NoteServiceImpl implements NoteService{
 
 		int result = 0;
 		
-		conn = JDBCTemplete.getConnection();
+		conn = JDBCTemplate.getConnection();
 		int result1 = noteDao.insertNote(params, conn);
 		
 		int result2 = noteDao.insertSendNote(params,conn);
@@ -132,9 +132,9 @@ public class NoteServiceImpl implements NoteService{
 		
 		if(result1 > 0 && result2 > 0 && result3 >0) {
 			result=1;
-			JDBCTemplete.commit(conn);
+			JDBCTemplate.commit(conn);
 		} else {
-			JDBCTemplete.rollback(conn);
+			JDBCTemplate.rollback(conn);
 			System.out.println("insertNote가 제대로 실행되지 않았습니다.");
 		}
 		
@@ -147,7 +147,7 @@ public class NoteServiceImpl implements NoteService{
 
 		List<NoteList> result = null;
 		
-		conn=JDBCTemplete.getConnection();
+		conn=JDBCTemplate.getConnection();
 		result = noteDao.getReceivedList(conn, req);
 		
 		return result;
@@ -159,7 +159,7 @@ public class NoteServiceImpl implements NoteService{
 
 		List<NoteList> result = null;
 		
-		conn=JDBCTemplete.getConnection();
+		conn=JDBCTemplate.getConnection();
 		result = noteDao.getSendList(conn, req);
 		
 		return result;

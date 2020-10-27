@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.face.SchdlDao;
-import dto.Schdl;
+import dao.face.sh.SchdlDao;
+import dto.sh.Schdl;
+
 
 
 public class SchdlDaoImpl implements SchdlDao {
@@ -16,10 +17,10 @@ public class SchdlDaoImpl implements SchdlDao {
 	@Override
 	public List<Schdl> seletAll(Connection conn) {
 	
-		System.out.println("�뒪耳�以� �떎�삤 �쟾泥� �샇異�");
+		System.out.println("SchdlDaoImpl �۵�");
 
 	
-		PreparedStatement ps = null;  //sql �닔�뻾 媛앹껜
+		PreparedStatement ps = null;  
 		ResultSet rs = null;
 	
 		//SQL �옉�꽦
@@ -27,16 +28,14 @@ public class SchdlDaoImpl implements SchdlDao {
 		sql += "SELECT * FROM TB_SCHEDULE";
 		sql += " ORDER BY SCHDL_NO";
 	
-		//議고쉶 寃곌낵 ���옣 由ъ뒪�듃 媛앹껜	
 		List<Schdl> SchdlList = new ArrayList<>();
 		
 		try {
-			ps = conn.prepareStatement(sql); // sql �닔�뻾 媛앹껜 �깮�꽦
+			ps = conn.prepareStatement(sql); 
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				
-				//�깉濡쒖슫 鍮꾩뼱�엳�뒗 schdl 媛앹껜 �깮寃�
 				Schdl schdl = new Schdl();
 				
 				schdl.setSchdl_no(rs.getInt("schdl_no"));
@@ -50,7 +49,6 @@ public class SchdlDaoImpl implements SchdlDao {
 				schdl.setTable_no(rs.getInt("table_no"));
 
 				
-				//議고쉶 寃곌낵 �떞湲�
 				SchdlList.add(schdl);
 
 			}
@@ -62,7 +60,6 @@ public class SchdlDaoImpl implements SchdlDao {
 		}
 		
 		
-		//議고쉶 寃곌낵 諛섑솚
 		return SchdlList;
 		
 		

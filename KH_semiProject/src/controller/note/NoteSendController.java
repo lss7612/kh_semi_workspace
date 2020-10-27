@@ -26,7 +26,7 @@ public class NoteSendController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//ºÎ¼­º° »ç¿øÀ» ¿É¼ÇÀ¸·Î µ¹·ÁÁÖ±â À§ÇÑ ¸®½ºÆ®
+		//ï¿½Î¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 		List<NoteReceiverView> manUser = noteService.getManUser();
 		List<NoteReceiverView> accUser = noteService.getAccUser();
 		List<NoteReceiverView> hrUser = noteService.getHrUser();
@@ -47,7 +47,7 @@ public class NoteSendController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
-		//NoteCreateData DTO °´Ã¼¿¡ °ª Ã¤¿ì±â
+		//NoteCreateData DTO ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½
 		NoteCreateData params = noteService.getNCDparams(req);	
 		System.out.println(params);
 		

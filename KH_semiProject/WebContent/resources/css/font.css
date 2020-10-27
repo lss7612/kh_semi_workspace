@@ -1,0 +1,153 @@
+@charset "EUC-KR";
+/* À¥ÆùÆ® */
+
+/* NotoKR-Black */
+@font-face {
+    font-family: 'notokr-black';
+    src: url('../font/NotoKR-Black/notokr-black.eot');
+    src: url('../font/NotoKR-Black/notokr-black.eot?#iefix') format('embedded-opentype'),
+         url('../font/NotoKR-Black/notokr-black.woff2') format('woff2'),
+         url('../font/NotoKR-Black/notokr-black.woff') format('woff'),
+         url('../font/NotoKR-Black/notokr-black.ttf') format('truetype'),
+         url('../font/NotoKR-Black/notokr-black.svg#notokr-black') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* NotoKR-Bold */
+@font-face {
+    font-family: 'notokr-bold';
+    src: url('../font/NotoKR-Bold/notokr-bold.eot');
+    src: url('../font/NotoKR-Bold/notokr-bold.eot?#iefix') format('embedded-opentype'),
+         url('../font/NotoKR-Bold/notokr-bold.woff2') format('woff2'),
+         url('../font/NotoKR-Bold/notokr-bold.woff') format('woff'),
+         url('../font/NotoKR-Bold/notokr-bold.ttf') format('truetype'),
+         url('../font/NotoKR-Bold/notokr-bold.svg#notokr-bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* NotoKR-DemiLight */
+@font-face {
+    font-family: 'notokr-demilight';
+    src: url('../font/NotoKR-DemiLight/notokr-demilight.eot');
+    src: url('../font/NotoKR-DemiLight/notokr-demilight.eot?#iefix') format('embedded-opentype'),
+         url('../font/NotoKR-DemiLight/notokr-demilight.woff2') format('woff2'),
+         url('../font/NotoKR-DemiLight/notokr-demilight.woff') format('woff'),
+         url('../font/NotoKR-DemiLight/notokr-demilight.ttf') format('truetype'),
+         url('../font/NotoKR-DemiLight/notokr-demilight.svg#notokr-demilight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* NotoKR-Light */
+@font-face {
+    font-family: 'notokr-light';
+    src: url('../font/NotoKR-Light/notokr-light.eot');
+    src: url('../font/NotoKR-Light/notokr-light.eot?#iefix') format('embedded-opentype'),
+         url('../font/NotoKR-Light/notokr-light.woff2') format('woff2'),
+         url('../font/NotoKR-Light/notokr-light.woff') format('woff'),
+         url('../font/NotoKR-Light/notokr-light.ttf') format('truetype'),
+         url('../font/NotoKR-Light/notokr-light.svg#notokr-light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* NotoKR-Medium */
+@font-face {
+    font-family: 'notokr-medium';
+    src: url('../font/NotoKR-Medium/notokr-medium.eot');
+    src: url('../font/NotoKR-Medium/notokr-medium.eot?#iefix') format('embedded-opentype'),
+         url('../font/NotoKR-Medium/notokr-medium.woff2') format('woff2'),
+         url('../font/NotoKR-Medium/notokr-medium.woff') format('woff'),
+         url('../font/NotoKR-Medium/notokr-medium.ttf') format('truetype'),
+         url('../font/NotoKR-Medium/notokr-medium.svg#notokr-medium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* NotoKR-Regular */
+@font-face {
+    font-family: 'notokr-regular';
+    src: url('../font/NotoKR-Regular/notokr-regular.eot');
+    src: url('../font/NotoKR-Regular/notokr-regular.eot?#iefix') format('embedded-opentype'),
+         url('../font/NotoKR-Regular/notokr-regular.woff2') format('woff2'),
+         url('../font/NotoKR-Regular/notokr-regular.woff') format('woff'),
+         url('../font/NotoKR-Regular/notokr-regular.ttf') format('truetype'),
+         url('../font/NotoKR-Regular/notokr-regular.svg#notokr-regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* NotoKR-Thin */
+@font-face {
+    font-family: 'notokr-thin';
+    src: url('../font/NotoKR-Thin/notokr-thin.eot');
+    src: url('../font/NotoKR-Thin/notokr-thin.eot?#iefix') format('embedded-opentype'),
+         url('../font/NotoKR-Thin/notokr-thin.woff2') format('woff2'),
+         url('../font/NotoKR-Thin/notokr-thin.woff') format('woff'),
+         url('../font/NotoKR-Thin/notokr-thin.ttf') format('truetype'),
+         url('../font/NotoKR-Thin/notokr-thin.svg#notokr-thin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+/* nanum-myeongjo-regular - korean */
+@font-face {
+  font-family: 'Nanum Myeongjo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../font/nanum-myeongjo/nanum-myeongjo-v6-korean-regular.eot'); /* IE9 Compat Modes */
+  src: local('NanumMyeongjo'),
+       url('../font/nanum-myeongjo/nanum-myeongjo-v6-korean-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../font/nanum-myeongjo/nanum-myeongjo-v6-korean-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../font/nanum-myeongjo/nanum-myeongjo-v6-korean-regular.woff') format('woff'), /* Modern Browsers */
+       url('../font/nanum-myeongjo/nanum-myeongjo-v6-korean-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../font/nanum-myeongjo/nanum-myeongjo-v6-korean-regular.svg#NanumMyeongjo') format('svg'); /* Legacy iOS */
+}
+
+
+/* NotoSansCJKkr */
+@font-face {
+    font-family: 'NotoSansCJKkr-Medium';
+    src: url('../font/NotoSansCJKkr-hinted/NotoSansCJKkr-Medium.otf.eot');
+    src: url('../font/NotoSansCJKkr-hinted/NotoSansCJKkr-Medium.woff') format('woff'),
+         url('../font/NotoSansCJKkr-hinted/NotoSansCJKkr-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/* MalgunGothic */
+@font-face {
+    font-family: "¸¼Àº °íµñ";
+    src: url('../font/MalgunGothic/MalgunGothic.eot');
+    src: url('../font/MalgunGothic/MalgunGothic.TTF.woff') format('woff'),
+         url('../font/MalgunGothic/MalgunGothic.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+
+
+
+

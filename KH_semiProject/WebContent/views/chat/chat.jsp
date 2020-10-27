@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
     <%@ page errorPage ="./errorPage.jsp" %>
     <% ChatUserInfo user = (ChatUserInfo) session.getAttribute("userinfo"); %>
-    <% ChatUserInfo opponentUser = (ChatUserInfo) request.getAttribute("opponentInfo"); %>
+    <% ChatUserInfo opponentUser = (ChatUserInfo) request.getAttribute("user1_info"); %>
     <% String userIp = (String) session.getAttribute("userIp"); %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,10 @@
 <title><%=opponentUser.getUser_name() %>님과 대화</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style type="text/css">
-@import url(../css/custom.css)
+
+</style>
+<style type="text/css">
+
 </style>
 </head>
 <body>
@@ -23,7 +26,7 @@
 			<div class="portlet portlet-default">
 				<div class="portlet-heading">
 					<div class="portlet-title">
-						<h4><i class="fa fa-circle text-green"></i>실시간 채팅창</h4>
+						<h4><i class="fa fa-circle text-green"></i><%=opponentUser.getUser_name() %>님과 대화</h4>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -34,11 +37,13 @@
 					<div class="portlet-footer">
 						<div class="row" style="height:90px;">
 							<div class="form-group col-xs-10">
-								<textarea id="chatContent" style="height : 80px;"  class="form-control" onKeyDown="pressEnter()" placeholder="메시지를 입력하세요." maxlength="100"></textarea>
+								<textarea id="chatContent" style="height : 80px;"  class="form-control" 
+									onKeyDown="pressEnter()" maxlength="100"></textarea>
 							</div>
 							<div class="form-group col-xs-2">
 								<!--<button type="button" class="btn btn-default pull-right" onclick="submitFunction();" onclick="sendMessage()">전송</button> -->
-								<button type="button" class="btn btn-default pull-right" onclick="sendMessage()">전송</button>
+								<button type="button" class="btn btn-default pull-right" 
+								onclick="sendMessage()">전송</button>
 								<input id="disconnBtn" value="나가기" type="button" />
 								<div class="clear-fix"></div>
 							</div>
@@ -77,19 +82,19 @@
     // WebSocket 서버와 접속이 되면 호출되는 함수
     webSocket.onopen = function(message) {
 	    // 콘솔 텍스트에 메시지를 출력한다.
-	    $('#chatlist').append('<div class="row">'+ 
-				"<%=opponentUser.getUser_name() %>님과 대화가 시작되었습니다.\n" +
-				'</div>');
-<%-- 		messageTextArea.value += "<%=opponentUser.getUser_name() %>님과 대화가 시작되었습니다.\n"; --%>
+	    $('#chatlist').append('<div class="row">'+ '<strong>'
+	    		+"<%=opponentUser.getUser_name() %>"+'</strong>'
+	    		+"님과 대화가 시작되었습니다.\n" +
+				'</div>' +'<hr>');
    	};
    
     // WebSocket 서버와 접속이 끊기면 호출되는 함수
     webSocket.onclose = function(message) {
 		// 콘솔 텍스트에 메시지를 출력한다.
-		$('#chatlist').append('<div class="row">'+ 
-				"<%=opponentUser.getUser_name() %>님과 대화가 종료되었습니다." 
-				+'</div>');
-<%-- 		messageTextArea.value += "<%=opponentUser.getUser_name() %>님과 대화가 종료되었습니다.\n"; --%>
+		$('#chatlist').append('<div class="row">'+ '<strong>'
+				+"<%=opponentUser.getUser_name() %>"+'</strong>'
+				+"님과 대화가 종료되었습니다." 
+				+'</div>'+'<hr>');
    	};
    
     // WebSocket 서버와 통신 중에 에러가 발생하면 요청되는 함수
@@ -112,6 +117,7 @@
     	if(event.keyCode == 13){
     		sendMessage();
     	}
+      	document.getElementByID("chatList").value="";
     }
     
     // Send 버튼을 누르면 호출되는 함수
@@ -125,6 +131,10 @@
       	// 송신 메시지를 작성하는 텍스트 박스 오브젝트를 취득
       	var message = $('#chatContent').val();
 		//var message = document.getElementById("textMessage");
+		
+		if ( message == ""){
+			return false;
+		}
 		
 		console.log(message);
       	// 콘솔 텍스트에 메시지를 출력한다.
@@ -140,7 +150,14 @@
 	<%--webSocket.send("{{" + '<%=user.getUser_name()%> / <%=user.getDept_name()%> / <%=user.getPosition_name()%>\n' + "}}" + message.value); --%>
       // 송신 메시지를 작성한 텍스트 박스를 초기화한다.
 		$('#chatContent').val('');
-		$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
+      
+      	var inp = document.getElementByID("chatList");
+      	for (var i=0; i<inp.length; i++){
+      		inp[i].value="";
+      	}
+      	//포커스 설정
+      	document.getElementById("chatContent").focus();
+		//$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
     }
     
     // Disconnect 버튼을 누르면 호출되는 함수

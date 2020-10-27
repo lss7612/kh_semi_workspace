@@ -10,6 +10,7 @@ import java.util.List;
 import common.JDBCTemplate;
 import dao.face.UserChatDao;
 import dto.Chat;
+import dto.ChatRoomSearch;
 import dto.ChatUserInfo;
 import dto.ChatUserList;
 
@@ -294,5 +295,58 @@ public class UserChatDaoImpl implements UserChatDao{
 		} finally {
 			JDBCTemplate.close(ps);
 		}
+	}
+	
+	@Override
+	public int searchChatNo(Connection conn, int user0_no, int user1_no) {
+
+		System.out.println("쿼리 수행");
+		String sql = "";
+		sql += "select c.chatting_no, c.user_total, u.user_no from (tb_chattinguser u";
+		sql += " inner join tb_chatting c";
+		sql += " on u.chatting_no = c.chatting_no)";
+		sql += " where c.user_total =2";
+		sql += " and u.chatting_no in (";
+		sql += " select c.chatting_no from tb_chatting c";
+		sql += " inner join tb_chattinguser u";
+		sql += " on u.chatting_no = c.chatting_no";
+		sql += " where u.user_no = ?)";
+		sql += " and u.chatting_no in (";
+		sql += " select c.chatting_no from tb_chatting c";
+		sql += " inner join tb_chattinguser u";
+		sql += " on u.chatting_no = c.chatting_no";
+		sql += " where u.user_no = ?)";
+		sql += " order by c.chatting_no asc";
+		
+		System.out.println("쿼리 수행 완료");
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, user0_no);
+			ps.setInt(2, user1_no);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ChatRoomSearch search = new ChatRoomSearch();
+				
+				search.setChatting_no(rs.getInt("chatting_no"));
+				search.setUser_total( rs.getInt("user_total"));
+				search.setUser_no( rs.getInt("user_no"));
+				
+				result = search.getChatting_no();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("두 회원의 채팅방 번호는 : "+result);
+		return result;
 	}
 }

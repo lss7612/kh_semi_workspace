@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ÀÏÁ¶ ±×·ì¿þ¾î °ü¸®ÀÚ ·Î±×ÀÎ</title>
+  <title>ì¼ì¡° ê·¸ë£¹ì›¨ì–´ ê´€ë¦¬ìž ë¡œê·¸ì¸</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,16 +32,16 @@
 
       <form action="../../index3.html" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="¾ÆÀÌµð">
+          <input type="email" class="form-control" placeholder="ì•„ì´ë””">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-          <div style="margin:5px 0px;"> @ÀÏÁ¶.kr </div> 
+          <div style="margin:5px 0px;"> @ì¼ì¡°.kr </div> 
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="ºñ¹Ð¹øÈ£">
+          <input type="password" class="form-control" placeholder="ë¹„ë°€ë²ˆí˜¸">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -59,7 +59,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">·Î±×ÀÎ</button>
+            <button type="submit" class="btn btn-primary btn-block">ë¡œê·¸ì¸</button>
           </div>
           <!-- /.col -->
         </div>

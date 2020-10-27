@@ -6,23 +6,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class JDBCTemplete {
-	//OJDBC ë“œë¼ì´ë²„
+public class JDBCTemplate {
+	//OJDBC ?“œ?¼?´ë²?
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	
 	
-	//DB ì—°ê²° ì •ë³´
+	//DB ?—°ê²? ? •ë³?
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USERNAME = "hr2";
 	private static final String PASSWORD = "1234";
 	
-	//DBì—°ê²° ê°ì²´
+	//DB?—°ê²? ê°ì²´
 	private static Connection conn = null;
 	
-	//private ìƒì„±ì
-	private JDBCTemplete() {}
+	//private ?ƒ?„±?
+	private JDBCTemplate() {}
 	
-	//Connection ê°ì²´ ë°˜í™˜ - ì‹±ê¸€í†¤ ì ìš©
+	//Connection ê°ì²´ ë°˜í™˜ - ?‹±ê¸??†¤ ? ?š©
 	public static Connection getConnection() {
 		
 		if(conn == null) {
@@ -30,7 +30,7 @@ public class JDBCTemplete {
 			try {
 				Class.forName(DRIVER);
 				conn=DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				//Auto Commit ì„¤ì • ë„ê¸°
+				//Auto Commit ?„¤? • ?„ê¸?
 				conn.setAutoCommit(false);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block

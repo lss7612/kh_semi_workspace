@@ -1,5 +1,5 @@
-@charset "EUC-KR";
-/* À¥ÆùÆ® */
+@charset "UTF-8";
+/* ì›¹í°íŠ¸ */
 
 /* NotoKR-Black */
 @font-face {
@@ -136,7 +136,7 @@
 
 /* MalgunGothic */
 @font-face {
-    font-family: "¸¼Àº °íµñ";
+    font-family: "ë§‘ì€ ê³ ë”•";
     src: url('../font/MalgunGothic/MalgunGothic.eot');
     src: url('../font/MalgunGothic/MalgunGothic.TTF.woff') format('woff'),
          url('../font/MalgunGothic/MalgunGothic.TTF') format('truetype');

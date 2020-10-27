@@ -7,15 +7,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
-<title>login</title>
+<title>Rodin login</title>
 </head>
 <body>
-	<%-- 로그인 된 사람 로그인 정보를 담기 --%>
 	<%
-	String user_id = null;
-	if(session.getAttribute("user_id") != null){
-		user_id = (String) session.getAttribute("user_id");
-	}
+		String user_id = null;
+		if (session.getAttribute("user_id") != null) {
+			user_id = (String) session.getAttribute("user_id");
+		}
 	%>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
@@ -33,10 +32,11 @@
 				<li><a href="main.jsp">메인</a></li>
 				<li class="active"><a href="bbs.jsp">게시판</a></li>
 			</ul>
-
-			<% 
+			
+				<%
 				//로그인이 되어 있지 않다면 
-				if (user_id == null) { %>
+				if (user_id == null) {
+			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					role="button" aria-haspopup="true" data-toggle="dropdown"
@@ -46,7 +46,9 @@
 						<li><a href="join.jsp">회원가입</a></li>
 					</ul></li>
 			</ul>
-			<% } else { %>
+			<%
+				} else {
+			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					role="button" aria-haspopup="true" data-toggle="dropdown"
@@ -58,8 +60,35 @@
 			<% } %>
 		</div>
 	</nav>
-
-
+	<div class="container">
+		<div class="row">
+			<form method="post" action="writeAction.jsp">
+				<!-- 홀수와 짝수로 색상이 변경됨 -->
+				<table class="table table-striped"
+					style="text-align: center; border: 1px solid #dddddd">
+					<!-- thead : 테이블의 제목부분 각각의 속성들을 알려주는 역할을 합니다. -->
+					<thead>
+						<tr>
+							<th colspan="2"
+								style="background-color: #eeeeee; text-align: center;">게시판
+								글쓰기 양식</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" class="form-control"
+								placeholder="글 제목" name="bbsTitle" maxlength="50"></td>
+						</tr>
+						<tr>
+							<td><textarea class="form-control" placeholder="글 내용"
+									name="bbsContent" maxlength="2048" style="height: 350px;"></textarea></td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+			</form>
+		</div>
+	</div>
 	<script src="https://code.jquery.com/jquery-1.11.3.js"
 		integrity="sha256-IGWuzKD7mwVnNY01LtXxq3L84Tm/RJtNCYBfXZw3Je0="
 		crossorigin="anonymous"></script>

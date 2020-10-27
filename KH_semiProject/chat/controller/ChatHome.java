@@ -26,7 +26,7 @@ public class ChatHome extends HttpServlet {
 		System.out.println(session.getAttribute("userinfo"));
 	
 
-		req.getRequestDispatcher("/WEB-INF/views/chat/chatHome.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/chat/chatHome.jsp").forward(req, resp);
 	}
 	
 

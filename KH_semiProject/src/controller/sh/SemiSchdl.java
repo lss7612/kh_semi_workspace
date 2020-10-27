@@ -37,7 +37,7 @@ public class SemiSchdl extends HttpServlet {
 		
 		req.setAttribute("list", SchdlList);
 
-		req.getRequestDispatcher("/WEB-INF/views/sh/schdl.jsp")
+		req.getRequestDispatcher("/views/sh/schdl.jsp")
 			.forward(req, resp);
 		
 	}

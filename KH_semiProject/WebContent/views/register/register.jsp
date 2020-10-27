@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ÀÏÁ¶ ±×·ì¿þ¾î È¸¿ø°¡ÀÔ</title>
+  <title>ì¼ì¡° ê·¸ë£¹ì›¨ì–´ íšŒì›ê°€ìž…</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,18 +30,18 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="#·Î±×ÀÎÆäÀÌÁö" method="post">
+      <form action="#ë¡œê·¸ì¸íŽ˜ì´ì§€" method="post">
       <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="¾ÆÀÌµð">
+          <input type="email" class="form-control" placeholder="ì•„ì´ë””">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-          <div style="margin:5px 0px;"> @ÀÏÁ¶.kr </div> 
+          <div style="margin:5px 0px;"> @ì¼ì¡°.kr </div> 
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="ºñ¹Ð¹øÈ£">
+          <input type="password" class="form-control" placeholder="ë¹„ë°€ë²ˆí˜¸">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="ºñ¹Ð¹øÈ£ È®ÀÎ">
+          <input type="password" class="form-control" placeholder="ë¹„ë°€ë²ˆí˜¸ í™•ì¸">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -57,7 +57,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="ÀÌ¸§">
+          <input type="text" class="form-control" placeholder="ì´ë¦„">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -65,7 +65,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="ÁÖ¹Îµî·Ï¹øÈ£">
+          <input type="text" class="form-control" placeholder="ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="far fa-address-card"></span>
@@ -73,7 +73,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input  type="text"  class="form-control" placeholder="ÇÚµåÆù¹øÈ£">
+          <input  type="text"  class="form-control" placeholder="í•¸ë“œí°ë²ˆí˜¸">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-mobile-alt"></span>
@@ -81,20 +81,20 @@
           </div>
         </div>
          <div class="input-group mb-3">
-          <input  type="text"  class="form-control" placeholder="¿ìÆí¹øÈ£">
+          <input  type="text"  class="form-control" placeholder="ìš°íŽ¸ë²ˆí˜¸">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-map-marker-alt"></span>
             </div>
           </div>
           <div class="col-4">
-           <button type="button" class="btn btn-primary btn-block">ÁÖ¼Ò°Ë»ö</button>
+           <button type="button" class="btn btn-primary btn-block">ì£¼ì†Œê²€ìƒ‰</button>
            </div>
            
         </div>
         
         <div class="input-group mb-3">
-          <input  type="text"  class="form-control" placeholder="ÁÖ¼Ò"> 
+          <input  type="text"  class="form-control" placeholder="ì£¼ì†Œ"> 
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-map-marker-alt"></span>
@@ -103,7 +103,7 @@
         </div>
         
         <div class="input-group mb-3">
-          <input  type="text"  class="form-control" placeholder="»ó¼¼ÁÖ¼Ò">  
+          <input  type="text"  class="form-control" placeholder="ìƒì„¸ì£¼ì†Œ">  
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-map-marker-alt"></span>
@@ -113,10 +113,10 @@
         
         <div class="input-group mb-3">
          <div class="text-center">
-          ÇÁ·ÎÇÊ¿¡ º¸¿©Áú »çÁø°ú ¹®±¸¸¦ Àû¾îÁÖ¼¼¿ä.
-                  <img class="profile-user-img img-fluid img-circle" src="/resources/dist/img/user4-128x128.jpg" alt="»ç¿ëÀÚ ÇÁ·ÎÇÊ »çÁø">
+          í”„ë¡œí•„ì— ë³´ì—¬ì§ˆ ì‚¬ì§„ê³¼ ë¬¸êµ¬ë¥¼ ì ì–´ì£¼ì„¸ìš”.
+                  <img class="profile-user-img img-fluid img-circle" src="/resources/dist/img/user4-128x128.jpg" alt="ì‚¬ìš©ìž í”„ë¡œí•„ ì‚¬ì§„">
             </div>
-              <input  type="text"  class="form-control" placeholder="50ÀÚ ÀÌ³»·Î Àû¾îÁÖ¼¼¿ä">
+              <input  type="text"  class="form-control" placeholder="50ìž ì´ë‚´ë¡œ ì ì–´ì£¼ì„¸ìš”">
                    <div class="input-group-append">
             <div class="input-group-text">
               <span class="far fa-file-alt"></span>
@@ -129,13 +129,13 @@
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
               <label for="agreeTerms">
-               °³ÀÎÁ¤º¸ ÀÌ¿ë¾à°ü¿¡ <br><a href="#">µ¿ÀÇÇÕ´Ï´Ù</a>
+               ê°œì¸ì •ë³´ ì´ìš©ì•½ê´€ì— <br><a href="#">ë™ì˜í•©ë‹ˆë‹¤</a>
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">°¡ÀÔÇÏ±â</button>
+            <button type="submit" class="btn btn-primary btn-block">ê°€ìž…í•˜ê¸°</button>
           </div>
           <!-- /.col -->
         </div>

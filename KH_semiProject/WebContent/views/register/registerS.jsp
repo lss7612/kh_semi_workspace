@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ÀÏÁ¶ ±×·ì¿þ¾î È¸¿ø°¡ÀÔ</title>
+  <title>ì¼ì¡° ê·¸ë£¹ì›¨ì–´ íšŒì›ê°€ìž…</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -31,12 +31,12 @@
   
     
     	
-    	<h1>È¸¿ø°¡ÀÔÀÌ ¿Ï·á µÇ¾ú½À´Ï´Ù.</h1>
+    	<h1>íšŒì›ê°€ìž…ì´ ì™„ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤.</h1>
     	
-    	<h3>°ü¸®ÀÚ ½ÂÀÎÀ» ±â´Ù·ÁÁÖ¼¼¿ä.</h3>
-    	<h4>°¡ÀÔ ´çÀÏ ~ 1ÀÏ ¼Ò¿ä µË´Ï´Ù.</h4>
+    	<h3>ê´€ë¦¬ìž ìŠ¹ì¸ì„ ê¸°ë‹¤ë ¤ì£¼ì„¸ìš”.</h3>
+    	<h4>ê°€ìž… ë‹¹ì¼ ~ 1ì¼ ì†Œìš” ë©ë‹ˆë‹¤.</h4>
     	<br>
-    	 <button type="button" class="btn btn-block btn-primary"  onclick="location.href='#·Î±×ÀÎÆäÀÌÁö'">·Î±×ÀÎ È­¸éÀ¸·Î ÀÌµ¿</button>
+    	 <button type="button" class="btn btn-block btn-primary"  onclick="location.href='#ë¡œê·¸ì¸íŽ˜ì´ì§€'">ë¡œê·¸ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™</button>
     	
     	
     	

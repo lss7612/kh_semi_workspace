@@ -17,13 +17,12 @@ public class SchdlDaoImpl implements SchdlDao {
 	@Override
 	public List<Schdl> seletAll(Connection conn) {
 	
-		System.out.println("SchdlDaoImpl ÀÛµ¿");
+		System.out.println("SchdlDaoImpl get");
 
 	
 		PreparedStatement ps = null;  
 		ResultSet rs = null;
 	
-		//SQL ï¿½ì˜‰ï¿½ê½¦
 		String sql = "";
 		sql += "SELECT * FROM TB_SCHEDULE";
 		sql += " ORDER BY SCHDL_NO";

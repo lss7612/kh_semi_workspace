@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import common.JDBCTemplete;
+import common.JDBCTemplate;
 import common.Paging;
 import dao.face.addr.AddrViewDao;
 import dao.impl.addr.AddrViewDaoImpl;
@@ -23,7 +23,7 @@ public class AddrViewServiceImpl implements AddrViewService{
 		
 		List<AddrView> result = new ArrayList<>();
 		
-		Connection conn = JDBCTemplete.getConnection();
+		Connection conn = JDBCTemplate.getConnection();
 		result = addrViewDao.viewUserAddr(conn, addrParam, paging);
 		
 		return result;
@@ -44,7 +44,7 @@ public class AddrViewServiceImpl implements AddrViewService{
 		if(param!=null && !"".equals(param)) {
 			curPage = Integer.parseInt(param);
 		}
-		Connection conn = JDBCTemplete.getConnection();
+		Connection conn = JDBCTemplate.getConnection();
 		int totalCount = addrViewDao.selectCntAll(conn);
 		
 		int listCount = 15; //페이지당 볼 수 있는 최대 User 수

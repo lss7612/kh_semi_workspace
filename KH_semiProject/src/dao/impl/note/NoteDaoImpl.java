@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import common.JDBCTemplete;
+import common.JDBCTemplate;
 import dao.face.note.NoteDao;
 import dto.note.NoteCreateData;
 import dto.note.NoteList;
@@ -52,8 +52,8 @@ public class NoteDaoImpl implements NoteDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JDBCTemplete.close(rs);
-			JDBCTemplete.close(ps);
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 			
 		}
 		
@@ -93,8 +93,8 @@ public class NoteDaoImpl implements NoteDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JDBCTemplete.close(rs);
-			JDBCTemplete.close(ps);
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 			
 		}
 		
@@ -134,8 +134,8 @@ public class NoteDaoImpl implements NoteDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JDBCTemplete.close(rs);
-			JDBCTemplete.close(ps);
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 			
 		}
 		
@@ -175,8 +175,8 @@ public class NoteDaoImpl implements NoteDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JDBCTemplete.close(rs);
-			JDBCTemplete.close(ps);
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 			
 		}
 		
@@ -216,8 +216,8 @@ public class NoteDaoImpl implements NoteDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JDBCTemplete.close(rs);
-			JDBCTemplete.close(ps);
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 			
 		}
 		
@@ -273,7 +273,7 @@ public class NoteDaoImpl implements NoteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplete.close(ps);
+			JDBCTemplate.close(ps);
 		}		
 		
 		return result;
@@ -300,7 +300,7 @@ public class NoteDaoImpl implements NoteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplete.close(ps);
+			JDBCTemplate.close(ps);
 		}		
 		
 		
@@ -333,7 +333,7 @@ public class NoteDaoImpl implements NoteDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
-				JDBCTemplete.close(ps);
+				JDBCTemplate.close(ps);
 			}		
 			
 		}
@@ -390,8 +390,8 @@ public class NoteDaoImpl implements NoteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally{
-			JDBCTemplete.close(rs);
-			JDBCTemplete.close(ps);
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		

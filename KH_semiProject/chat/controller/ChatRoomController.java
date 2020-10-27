@@ -62,7 +62,7 @@ public class ChatRoomController extends HttpServlet {
 		userChatService.createRoom(user0_no, user1_no, count);
 		
 		req.setAttribute("opponentInfo", user1_info);
-		req.getRequestDispatcher("/WEB-INF/views/chat.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/chat/chat.jsp").forward(req, resp);
 		
 	}
 }

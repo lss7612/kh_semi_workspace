@@ -34,7 +34,7 @@ public class ChatStartController extends HttpServlet {
 		List<ChatUserList> userList = userChatService.userList(user_no);
 		
 		req.setAttribute("userList", userList);
-		req.getRequestDispatcher("/WEB-INF/views/chatSelect.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/chat/chatSelect.jsp").forward(req, resp);
 		
 	}
 }

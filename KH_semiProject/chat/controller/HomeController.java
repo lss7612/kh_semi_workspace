@@ -47,6 +47,7 @@ public class HomeController extends HttpServlet {
 		req.setAttribute("user", user);
 		req.setAttribute("userIp", userIp);
 		req.getRequestDispatcher("/views/chat/home.jsp").forward(req, resp);
+		
 	}
 	
 	public static String getRemoteAddr(HttpServletRequest request) {

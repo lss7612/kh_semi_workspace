@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dto.Chat;
 import dto.ChatUserInfo;
 import dto.ChatUserList;
 import service.face.UserChatService;
@@ -81,6 +82,14 @@ public class ChatStartController extends HttpServlet {
 	
 		chatting_no = userChatService.searchRoom(user0_no, user1_no);
 		
+		//대화 기록 가져오기
+		System.out.println("대화기록 가져오기");
+		System.out.println("대화방 번호는 "+chatting_no+"입니다.");
+		List<Chat> list = userChatService.getChatList(user0_no, user1_no, chatting_no);
+		for(Chat c : list) {
+			System.out.println(c);
+		}
+		
 		if( chatting_no == 0) {
 			System.out.println("과거 회원간 대화가 존재하지 않습니다.");
 			//선택한 회원으로 대화방 생성하기
@@ -88,15 +97,15 @@ public class ChatStartController extends HttpServlet {
 			req.setAttribute("chatting_no", chatting_no);
 			req.setAttribute("user1_info", user1_info);
 			//req.getRequestDispatcher("/chat/room").forward(req, resp);
-			req.getRequestDispatcher("/views/chat/chat.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/chat/chatRoom.jsp").forward(req, resp);
 		} else {
 			System.out.println("기존에 회원간 대화 내용이 존재합니다.");
-			System.out.println("두 회원의 채팅방 번호는 : "+chatting_no+"입니다.");
+			System.out.println("두 회원의 최근 채팅방 번호는 : "+chatting_no+"입니다.");
 			// 기존 대화방 정보로 대화 진행.
 			req.setAttribute("chatting_no", chatting_no);
 			req.setAttribute("user1_info", user1_info);
 			//req.getRequestDispatcher("/chat/room").forward(req, resp);
-			req.getRequestDispatcher("/views/chat/chat.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/chat/chatRoom.jsp").forward(req, resp);
 		}
 	}
 }

@@ -187,6 +187,42 @@ public class UserChatDaoImpl implements UserChatDao{
 	}
 	
 	@Override
+	public List<Chat> getUserChatList(Connection conn, int chatting_no) {
+		String sql ="";
+		sql += "select * from tb_chattingcontent";
+		sql += " where chatting_no = ?";
+		sql += " order by msg_no asc";
+		
+		List<Chat> list = new ArrayList<>();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, chatting_no);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Chat chat = new Chat();
+				chat.setChatting_no( rs.getInt("chatting_no"));
+				chat.setMsg_no( rs.getInt("msg_no"));
+				chat.setUser_no( rs.getInt("user_no"));
+				chat.setMsg_content( rs.getString("msg_content"));
+				chat.setRevision_date( rs.getDate("revision_date"));
+				chat.setUser_ip( rs.getString("user_ip"));
+				
+				list.add(chat);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		return list;
+	}
+	
+	@Override
 	public List<ChatUserList> getUserList(Connection conn, int user_no) {
 		
 		String sql ="";
@@ -216,7 +252,6 @@ public class UserChatDaoImpl implements UserChatDao{
 				cul.setExtension_no( rs.getString("extenstion_no"));
 				
 				list.add(cul);
-				System.out.println(cul);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -300,7 +335,6 @@ public class UserChatDaoImpl implements UserChatDao{
 	@Override
 	public int searchChatNo(Connection conn, int user0_no, int user1_no) {
 
-		System.out.println("쿼리 수행");
 		String sql = "";
 		sql += "select c.chatting_no, c.user_total, u.user_no from (tb_chattinguser u";
 		sql += " inner join tb_chatting c";
@@ -318,7 +352,6 @@ public class UserChatDaoImpl implements UserChatDao{
 		sql += " where u.user_no = ?)";
 		sql += " order by c.chatting_no asc";
 		
-		System.out.println("쿼리 수행 완료");
 		int result = 0;
 		
 		try {

@@ -1,6 +1,7 @@
 package service.impl;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import common.JDBCTemplate;
@@ -95,5 +96,13 @@ public class UserChatServiceImpl implements UserChatService{
 		}
 		//방이 없으면 0을 반환
 		return 0;
+	}
+	
+	@Override
+	public List<Chat> getChatList(int user0_no, int user1_no, int chatting_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		List<Chat> chatList = new ArrayList<>();
+		chatList = userChatDao.getUserChatList(conn, chatting_no);
+		return chatList;
 	}
 }

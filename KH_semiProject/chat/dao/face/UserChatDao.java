@@ -81,6 +81,15 @@ public interface UserChatDao {
 	 */
 	public int searchChatNo(Connection conn, int user0_no, int user1_no);
 
+	/**
+	 * 채팅방의 대화를 가져온다.
+	 * @param conn - db연결객체
+	 * @param chatting_no - 방번호
+	 * @return - 대화 목록
+	 */
+	public List<Chat> getUserChatList(Connection conn, int chatting_no);
+
+
 
 
 	

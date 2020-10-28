@@ -1,9 +1,11 @@
+<%@page import="socket.BroadSocket2"%>
 <%@page import="dto.ChatUserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page errorPage ="./errorPage.jsp" %>
     <% ChatUserInfo user = (ChatUserInfo) session.getAttribute("userinfo"); %>
     <% ChatUserInfo opponentUser = (ChatUserInfo) request.getAttribute("user1_info"); %>
+    <% int chatting_no = (int)request.getAttribute("chatting_no"); %>
     <% String userIp = (String) session.getAttribute("userIp"); %>
 <!DOCTYPE html>
 <html>
@@ -15,6 +17,15 @@
 
 </style>
 <style type="text/css">
+#chatContent{
+	height : 300x;
+	width : 1000px;
+	border : 1px solid;
+	font-size : 14px;
+	border-radius : 4px;
+	padding : 8px;
+	resize : none;
+}
 
 </style>
 </head>
@@ -76,9 +87,6 @@
     // WebSocket 오브젝트 생성 (자동으로 접속 시작한다. - onopen 함수 호출)
     webSocket = new WebSocket("ws://localhost:8088/broadsocket");
     
-    // 콘솔 텍스트 에리어 오브젝트
-    var messageTextArea = document.getElementById("chatlist");
-    
     // WebSocket 서버와 접속이 되면 호출되는 함수
     webSocket.onopen = function(message) {
 	    // 콘솔 텍스트에 메시지를 출력한다.
@@ -113,11 +121,20 @@
 	  
 
     //입력창에서 Enter를 누르면 호출되는 함수
+    //	enter : 전송
+    //	shift + enter : 줄바꿈
     function pressEnter(){
     	if(event.keyCode == 13){
-    		sendMessage();
+    		if( !event.shiftkey){
+	    		if( $('#chatContent').val !=""){
+	    		sendMessage();
+	  			//$('#chatContent').vla("");
+	  			//$('#chatContent').blur();
+	  			$('#chatContent').empty();
+	    		}
+    		}
     	}
-      	document.getElementByID("chatList").value="";
+      	//document.getElementByID("chatList").value="";
     }
     
     // Send 버튼을 누르면 호출되는 함수
@@ -136,28 +153,29 @@
 			return false;
 		}
 		
-		console.log(message);
+		//console.log(message);
+		
       	// 콘솔 텍스트에 메시지를 출력한다.
-      	$('#chatlist').append("<div class='row userinfo'>" 
-			+ userName + userDeptName + userPositionName + "</div>"); 
+      	$('#chatlist').append("<div class='row userinfo'><strong>" 
+			+ userName + userDeptName + userPositionName + "</strong></div>"); 
 		$('#chatlist').append("<div class='row message'>"
-			+ message + "</div>"+"<hr>");
+			+ message + "</div><hr>");
 		// messageTextArea.value += userName + userDeptName + userPositionName +"\n" 
 			//+ message.value + "\n";
       
-      // WebSocket 서버에 메시지를 전송(형식 「{{유저명}}메시지」)
-      webSocket.send("{{"+ userNo + userName + userDeptName + userPositionName +"}}"+ message);
-	<%--webSocket.send("{{" + '<%=user.getUser_name()%> / <%=user.getDept_name()%> / <%=user.getPosition_name()%>\n' + "}}" + message.value); --%>
-      // 송신 메시지를 작성한 텍스트 박스를 초기화한다.
-		$('#chatContent').val('');
-      
-      	var inp = document.getElementByID("chatList");
-      	for (var i=0; i<inp.length; i++){
-      		inp[i].value="";
-      	}
+		// WebSocket 서버에 메시지를 전송(형식 「{{유저명}}메시지」)
+		webSocket.send("{{"+ userNo + userName + userDeptName + userPositionName +"}}"+ message);
+
+		//메시지를 작성전송 하고 텍스트 박스를 초기화한다.
+		$('#chatContent').val("");
+		if( $('#chatContent').val()=="\n"){
+			console.log("개행문자가 들어가있습니다.");
+		}
+		console.log($('#chatContent').val());
+		$('#chtContent').blur();
       	//포커스 설정
-      	document.getElementById("chatContent").focus();
-		//$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
+      	//document.getElementById("chatContent").focus();
+		$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
     }
     
     // Disconnect 버튼을 누르면 호출되는 함수

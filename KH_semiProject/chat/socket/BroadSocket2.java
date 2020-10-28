@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,9 +27,12 @@ import service.face.UserChatService;
 import service.impl.UserChatServiceImpl;
 
 //handshake 설정하기 위한 클래스를 지정
-@ServerEndpoint(value = "/broadsocket", configurator = HttpSessionConfigurator.class)
-public class BroadSocket {
+@ServerEndpoint(value = "/broadsocket2", configurator = HttpSessionConfigurator.class)
+public class BroadSocket2 {
 
+	int chat_no;
+	
+	
 	//채팅에 관련된 유저정보를 담을 객체 생성
 	ChatUserInfo userinfo = new ChatUserInfo();
 	//service처리할 객체 생성
@@ -35,9 +40,42 @@ public class BroadSocket {
 	
 	public String getParam(HttpServletRequest req) {
 		String chatno = req.getParameter("chatting_no");
+		System.out.println(chatno);
 		return chatno;
 	}
-		
+	
+	//searchUser 함수의 filter 표현식을 위한 인터페이스
+	private interface SearchExpression{
+		//람다식을 위한 함수
+		boolean expression(User user);
+	}
+	//서버와 유저간의 접속을 Key로 구분
+	private class User{
+		Session session;
+		String key;
+	}
+	//유저와 서버간의 접속 리스트
+	private static List<User> sessionUsers = Collections.synchronizedList(new ArrayList<>());
+	
+	//Session으로 접속 리시트에서 User 클래스를 탐색
+	private static User getUser(Session session) {
+		return searchUser(x -> x.session == session);
+	}
+	
+	//key로 접속 리스트에서 User클래스를 탐색
+	private static User getUser(String key) {
+		return searchUser(x -> x.key.equals(key));
+	}
+	//접속 리스트 탐색 함수
+	private static User searchUser(SearchExpression func) {
+		Optional<User> op = sessionUsers.parallelStream().filter(x -> func.expression(x)).findFirst();
+		//결과가 있으면
+		if( op.isPresent()) {
+			return op.get();
+		}
+		return null;
+	}
+	
 	//세션 객체와 웹소켓을 저장
 	private Map<Session, EndpointConfig> configs = Collections.synchronizedMap(new HashMap<>());
 	
@@ -45,7 +83,7 @@ public class BroadSocket {
 	int user_no=0;
 	
 	//접속된 클라이언트 Session 관리 리스트
-	private static List<Session> sessionUsers  = Collections.synchronizedList(new ArrayList<>());
+	//private static List<Session> sessionUsers  = Collections.synchronizedList(new ArrayList<>());
 	
 	//메시지에서 유저명을 위한 정규식
 	private static Pattern pattern = Pattern.compile("^\\{\\{.*?\\}\\}");
@@ -55,7 +93,6 @@ public class BroadSocket {
 	//브라우저가 접속하면 요청되는 함수
 	@OnOpen
 	public void handleOpen(Session userSession, EndpointConfig config) {
-		
 		//클라이언트가 접속하면 WebSocket세션을 저장
 		sessionUsers.add(userSession);
 		
@@ -128,8 +165,8 @@ public class BroadSocket {
 				return;
 			}
 			try {
-				session.getBasicRemote().sendText("<div class='row'><strong>"+username +"</strong>님의 메시지 </div>"
-					+"<div class='row'>"+message+"</div><hr>");
+				session.getBasicRemote().sendText("<div class='row'>"+username +"님의 메시지 </div>"
+					+"<div class='row'>"+message+"</div>");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

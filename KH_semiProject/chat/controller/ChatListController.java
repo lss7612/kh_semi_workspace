@@ -39,7 +39,7 @@ public class ChatListController extends HttpServlet {
 		List<Chat> chatList = userChatService.userChatList(user_no);		
 	
 		req.setAttribute("chatList", chatList);
-		req.getRequestDispatcher("/WEB-INF/views/chat/chatList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/chat/chatList.jsp").forward(req, resp);
 		
 		
 	}

@@ -72,6 +72,15 @@ public interface UserChatDao {
 	 */
 	public void joinRoom(Connection conn, int user_no, int roomNo);
 
+	/**
+	 * db에 접속하여 두 회원이 1대1 대화방 이력이 있는지 검색한다.
+	 * @param conn - db연결 객체
+	 * @param user0_no - 대화 생성자
+	 * @param user1_no - 대화 초대자
+	 * @return - 대화 방
+	 */
+	public int searchChatNo(Connection conn, int user0_no, int user1_no);
+
 
 
 	

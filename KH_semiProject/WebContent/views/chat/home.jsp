@@ -9,21 +9,7 @@
 <meta charset="UTF-8">
 <title>메인화면</title>
 <style type="text/css">
-#chatDiv{
-	position : fixed;
-	bottom : 0px;
-	right : 0px;
-	max-width : 100%;
-	background: #ccc;
-}
-#chatBtn{
-	height : 40px;
-	width : 200px;
-	right : 0px;
-}
-#test{
-	background : #ccc;
-}
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">

@@ -346,7 +346,7 @@ public class UserChatDaoImpl implements UserChatDao{
 			JDBCTemplate.close(ps);
 		}
 		
-		System.out.println("두 회원의 채팅방 번호는 : "+result);
+		
 		return result;
 	}
 }

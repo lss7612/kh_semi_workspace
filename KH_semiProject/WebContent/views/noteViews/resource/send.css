@@ -1,0 +1,38 @@
+.whole_wrapper, form {
+	
+	width:900px;
+	
+}
+
+
+textarea, #title {
+	resize: none;
+	width: 700px;
+}
+textarea {
+	height: 350px;
+}
+
+span {
+	background-color: antiquewhite;
+	margin: 5px;
+	padding: 0px 5px;
+}
+
+#receiver>input {
+	width: 23px;
+}
+
+label, button, #add {
+	
+	cursor: pointer;
+	
+}
+
+form {
+	
+	padding: 5px 10px;
+	margin: 5px 10px;
+	
+}
+

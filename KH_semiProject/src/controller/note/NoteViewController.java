@@ -9,33 +9,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import common.Paging;
 import dto.note.NoteList;
-import dto.note.NotePaging;
 import service.face.note.NoteService;
 import service.impl.note.NoteServiceImpl;
 
 /**
- * Servlet implementation class SendNoteController
+ * Servlet implementation class NoteViewController
  */
-@WebServlet("/note/sent")
-public class SendNoteController extends HttpServlet {
+@WebServlet("/note/view")
+public class NoteViewController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	
 	NoteService noteService = new NoteServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		NotePaging paging = noteService.getSendPaging(req);
-		req.setAttribute("paging", paging);
+		
+		int note_no = Integer.parseInt(req.getParameter("note_no"));
+		System.out.println(note_no);
+		
+		NoteList noteList = noteService.getNoteView(note_no);
+		System.out.println(noteList);
+		req.setAttribute("noteList", noteList);
 		
 		
-		List<NoteList> list = noteService.getSendList(req, paging);
-		req.setAttribute("list", list);
-		System.out.println(list);
-		
-		req.getRequestDispatcher("/views/noteViews/sendList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/noteViews/noteView.jsp").forward(req, resp);
 	
 	}
-	
+
 }

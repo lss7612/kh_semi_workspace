@@ -7,22 +7,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JDBCTemplate {
-	//OJDBC ?“œ?¼?´ë²?
+	//OJDBC ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	
 	
-	//DB ?—°ê²? ? •ë³?
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USERNAME = "hr2";
-	private static final String PASSWORD = "1234";
+	//DB ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ï¿½?
+	private static final String URL = "jdbc:oracle:thin:@124.52.130.133:1521:xe";
+	private static final String USERNAME = "scott";
+	private static final String PASSWORD = "tiger";
 	
-	//DB?—°ê²? ê°ì²´
+	//DB?ï¿½ï¿½ï¿½? ê°ì²´
 	private static Connection conn = null;
 	
-	//private ?ƒ?„±?
+	//private ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
 	private JDBCTemplate() {}
 	
-	//Connection ê°ì²´ ë°˜í™˜ - ?‹±ê¸??†¤ ? ?š©
+	//Connection ê°ì²´ ë°˜í™˜ - ?ï¿½ï¿½ï¿½??ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
 	public static Connection getConnection() {
 		
 		if(conn == null) {
@@ -30,7 +30,7 @@ public class JDBCTemplate {
 			try {
 				Class.forName(DRIVER);
 				conn=DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				//Auto Commit ?„¤? • ?„ê¸?
+				//Auto Commit ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½?
 				conn.setAutoCommit(false);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block

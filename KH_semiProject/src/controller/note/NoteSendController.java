@@ -26,12 +26,15 @@ public class NoteSendController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//�μ��� ����� �ɼ����� �����ֱ� ���� ����Ʈ
 		List<NoteReceiverView> manUser = noteService.getManUser();
 		List<NoteReceiverView> accUser = noteService.getAccUser();
 		List<NoteReceiverView> hrUser = noteService.getHrUser();
 		List<NoteReceiverView> devUser = noteService.getDevUser();
 		List<NoteReceiverView> salesUser = noteService.getSalesUser();
+		
+		if(req.getAttribute("msg")!=null) {
+			req.setAttribute("msg", req.getAttribute("msg"));
+		}
 		
 		req.setAttribute("manUser", manUser);
 		req.setAttribute("accUser", accUser);
@@ -47,14 +50,13 @@ public class NoteSendController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
-		//NoteCreateData DTO ��ü�� �� ä���
 		NoteCreateData params = noteService.getNCDparams(req);	
 		System.out.println(params);
 		
 		//
 		int result = noteService.insertNote(params);
 		if(result > 0) {
-			
+			resp.sendRedirect("/note/sent");
 		} if(result == 0) {
 			
 		}

@@ -11,11 +11,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-fileupload-1.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.8.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cos.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.8.6.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ojdbc6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

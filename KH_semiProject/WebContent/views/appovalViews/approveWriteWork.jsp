@@ -20,6 +20,12 @@ h3 {
 	right: 50px;
 }
 
+#canvas3 {
+	position: absolute;
+	right: 150px;
+}
+
+
 #can {
 	position: relative;
 	padding-left: 0;
@@ -73,14 +79,16 @@ th{
 		var context = canvas.getContext('2d');
 		var canvas2 = document.getElementById("canvas2");
 		var context2 = canvas2.getContext('2d');
+		var canvas3 = document.getElementById("canvas3");
+		var context3 = canvas3.getContext('2d');
 
 		console.log(context)
 		context.beginPath();
 		context.moveTo(0, 0);
 		context.lineTo(70, 70);
 		context.stroke();
-		context.moveTo(50, 0);
-		context.lineTo(0, 50);
+		context.moveTo(70, 0);
+		context.lineTo(0, 70);
 		context.stroke();
 
 		context2.beginPath();
@@ -90,6 +98,14 @@ th{
 		context2.moveTo(70, 0);
 		context2.lineTo(0, 70);
 		context2.stroke();
+		
+		context3.beginPath();
+		context3.moveTo(0, 0);
+		context3.lineTo(70, 70);
+		context3.stroke();
+		context3.moveTo(70, 0);
+		context3.lineTo(0, 70);
+		context3.stroke();
 	}
 </script>
 <script type="text/javascript"
@@ -123,9 +139,12 @@ th{
 					<canvas id="canvas1" width="70" height="70"
 						style="border: 1px solid #000;"></canvas>
 					<button id="c">btn</button>
-					<canvas id="canvas2" width="70" height="70"
-						style="border: 1px solid #000;"></canvas>
+					<canvas id="canvas2" width="70" height="70"						
+					style="border: 1px solid #000;"></canvas>
+					<canvas id="canvas3" width="70" height="70"						
+					style="border: 1px solid #000;"></canvas>
 					<button id="c2">btn</button>
+					
 					<button id="c3" type="button" value="button">결재권자 추가</button>
 					
 				</div>

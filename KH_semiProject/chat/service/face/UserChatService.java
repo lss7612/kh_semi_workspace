@@ -67,6 +67,20 @@ public interface UserChatService {
 	 */
 	public List<Chat> getChatList(int user0_no, int user1_no, int chatting_no);
 
+	/**
+	 * 전달받은 메세지를 채팅창에 입력한다.
+	 * @param chatting_no - 방번호
+	 * @param user0_no - 메세지 보낸 유저번호
+	 * @param chatContent - 내용
+	 */
+	public void insertMsg(int chatting_no, int user0_no, String chatContent, String user_ip);
+
+	/**
+	 * 채팅방의 최신 메시지 번호를 가져온다.
+	 * @param chatting_no - 방번호
+	 * @return - 메시지 번호
+	 */
+	public int getLeastMsgNum(int chatting_no);
 
 
 	

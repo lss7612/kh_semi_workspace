@@ -145,15 +145,15 @@
 		var userDeptName = " <%=user.getDept_name()%> /";
 		var userPositionName= " <%=user.getPosition_name() %>";
 		var userNo = "<%=user.getUser_no() %>";
-      	// 송신 메시지를 작성하는 텍스트 박스 오브젝트를 취득
+      	// 송신 메시지를 저장한다.
       	var message = $('#chatContent').val();
-		//var message = document.getElementById("textMessage");
 		
+      	//입력되 내용이 없으면 함수 중단
 		if ( message == ""){
 			return false;
 		}
 		
-		//console.log(message);
+		console.log(message);
 		
       	// 콘솔 텍스트에 메시지를 출력한다.
       	$('#chatlist').append("<div class='row userinfo'><strong>" 

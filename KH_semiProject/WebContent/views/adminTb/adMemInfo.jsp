@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 
-<jsp:include page="/views/common/headerKKH.jsp" />
+<jsp:include page="/views/common/adHeaderKKH.jsp" />
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -175,4 +175,4 @@
    </div><!-- //Content Wrapper. Contains page content -->
     
     
-    <jsp:include page="/views/common/footerKKH.jsp" />
+    <jsp:include page="/views/common/adFooterKKH.jsp" />

@@ -30,18 +30,22 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="#로그인페이지" method="post">
+      <form action="/register/register" method="post" >
       <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="아이디">
+          <input type="text" class="form-control" placeholder="아이디"  id="user_id" name="user_id"> 
+          <div class="check_font" id="id_check"></div>  
+          <div>       
+            </div>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
           <div style="margin:5px 0px;"> @일조.kr </div> 
+          
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="비밀번호">
+          <input type="password" class="form-control" placeholder="비밀번호" id="user_pw" name="user_pw">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -49,7 +53,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="비밀번호 확인">
+          <input type="password" class="form-control" id="user_pw2" name="user_pw2" placeholder="비밀번호 확인">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -57,7 +61,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="이름">
+          <input type="text" class="form-control" name="user_name" placeholder="이름" >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -65,7 +69,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="주민등록번호">
+          <input type="text" class="form-control" name="identify" placeholder="주민등록번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="far fa-address-card"></span>
@@ -73,28 +77,30 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input  type="text"  class="form-control" placeholder="핸드폰번호">
+          <input  type="text"  class="form-control" name="cellphone_no" placeholder="핸드폰번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-mobile-alt"></span>
             </div>
           </div>
         </div>
+        
+        <div>
          <div class="input-group mb-3">
-          <input  type="text"  class="form-control" placeholder="우편번호">
+          <input  type="text"  id="sample6_postcode" class="form-control" name="user_addr" placeholder="우편번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-map-marker-alt"></span>
             </div>
           </div>
           <div class="col-4">
-           <button type="button" class="btn btn-primary btn-block">주소검색</button>
+           <button type="button" onclick="sample6_execDaumPostcode()" class="btn btn-primary btn-block">주소검색</button>
            </div>
            
         </div>
         
         <div class="input-group mb-3">
-          <input  type="text"  class="form-control" placeholder="주소"> 
+          <input  type="text" id="sample6_address"  class="form-control" name="user_addr2" placeholder="주소"> 
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-map-marker-alt"></span>
@@ -103,12 +109,13 @@
         </div>
         
         <div class="input-group mb-3">
-          <input  type="text"  class="form-control" placeholder="상세주소">  
+          <input  type="text" id="sample6_address2" class="form-control" name="user_addr3" placeholder="상세주소">  
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-map-marker-alt"></span>
             </div>
           </div>     
+        </div>
         </div>
         
         <div class="input-group mb-3">
@@ -116,7 +123,7 @@
           프로필에 보여질 사진과 문구를 적어주세요.
                   <img class="profile-user-img img-fluid img-circle" src="/resources/dist/img/user4-128x128.jpg" alt="사용자 프로필 사진">
             </div>
-              <input  type="text"  class="form-control" placeholder="50자 이내로 적어주세요">
+              <input  type="text"  class="form-control" name="user_notice" placeholder="20자 이내로 적어주세요">
                    <div class="input-group-append">
             <div class="input-group-text">
               <span class="far fa-file-alt"></span>
@@ -160,6 +167,90 @@
   </div><!-- /.card -->
 </div>
 <!-- /.register-box -->
+
+
+
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script>
+        function sample6_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var fullAddr = ''; // 최종 주소 변수
+                    var extraAddr = ''; // 조합형 주소 변수
+
+                    // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                        fullAddr = data.roadAddress;
+
+                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                        fullAddr = data.jibunAddress;
+                    }
+
+                    // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                    if (data.userSelectedType === 'R') {
+                        //법정동명이 있을 경우 추가한다.
+                        if (data.bname !== '') {
+                            extraAddr += data.bname;
+                        }
+                        // 건물명이 있을 경우 추가한다.
+                        if (data.buildingName !== '') {
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+                        // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                        fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')' : '');
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                    document.getElementById('sample6_address').value = fullAddr;
+
+                    // 커서를 상세주소 필드로 이동한다.
+                    document.getElementById('sample6_address2').focus();
+                }
+            }).open();
+        }
+        
+        
+        
+        $(function(){
+            $("#user_id").keyup(function() {
+               var clientId = $('#user_id').val();
+               if(clientId==''||clientId.length<4){
+                  $("#id_check").css("display","none");
+               }
+               if(clientId.trim().length>3){
+                  $.ajax({
+                     url : "${pageContext.request.contextPath}/user/idCheck?cId=" + user_id,
+                     //cId=파라미터값으로 input에 name값이다.
+                     type : 'get',
+                     datatype : 'html',
+                     success : function(data) {
+                                 if (data == 1) {
+                                    // 1 : 아이디가 중복되는 문구
+                                    $("#id_check").text("사용중인 아이디입니다.");
+                                    $("#id_check").css({"color":"red","display":"block"});
+                                 } else {
+                                    if(data == 0){
+                                       // 0 : 아이디 길이 / 문자열 검사
+                                       $("#id_check").text("사용가능한 아이디입니다.");
+                                       $("#id_check").css({"color":"green","display":"block"});
+                                    } 
+                                 }
+                              }, error : function() {
+                                    console.log("실패");
+                              }
+                     });
+                  }
+               });
+            }); 
+        
+        
+      </script>
+
 
 <!-- jQuery -->
 <script src="/resources/plugins/jquery/jquery.min.js"></script>

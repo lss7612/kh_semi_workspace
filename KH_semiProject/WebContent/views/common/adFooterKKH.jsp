@@ -3,7 +3,7 @@
     
   <footer class="main-footer">
   	
-  	<a href="#"> 개인정보 처리방침</a>
+  	<a href="javascript Void(0);"> 관리자모드</a>
   
     <strong>Copyright &copy; 2020 <a href="http://adminlte.io">Workjo</a>.</strong>
     All rights reserved.

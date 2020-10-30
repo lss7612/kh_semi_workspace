@@ -30,9 +30,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="../../index3.html" method="post">
+      <form action="/Login/login" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="아이디">
+          <input type="text" class="form-control" placeholder="아이디" id="user_id" name="user_id">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -41,7 +41,7 @@
           <div style="margin:5px 0px;"> @일조.kr </div> 
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="비밀번호">
+          <input type="password" class="form-control" placeholder="비밀번호"  id="user_pw" name="user_pw">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -59,7 +59,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">로그인</button>
+            <button type="submit" class="btn btn-primary btn-block" onclick="location.herf='views/login/loginStest'"/>로그인</button>
           </div>
           <!-- /.col -->
         </div>
@@ -92,10 +92,10 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="/resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="/resources/dist/js/adminlte.min.js"></script>
 </body>
 </html>

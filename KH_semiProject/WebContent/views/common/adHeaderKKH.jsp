@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>일조 그룹웨어</title>
+  <title>일조 그룹웨어 관리자</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -43,23 +43,19 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">주소록</a>
+        <a href="index3.html" class="nav-link">회원관리</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">쪽지</a>
-      </li>
-      
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">전자결재</a>
+        <a href="#" class="nav-link">스케줄</a>
       </li>
       
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">공지사항</a>
-      </li>  
+        <a href="#" class="nav-link">게시판관리</a>
+      </li>
       
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">커뮤니티</a>
-      </li>    
+        <a href="#" class="nav-link">로그</a>
+      </li>     
       
     </ul>
 
@@ -190,44 +186,7 @@
            <!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
-                <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle"
-                       src="/resources/dist/img/user4-128x128.jpg"
-                       alt="User profile picture">
-                </div>
-
-                <h3 class="profile-username text-center">Nina Mcintire</h3>
-
-                <p class="text-muted text-center"><span>개발팀</span> 대리</p>
-
-                <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
-                    <b>핸드폰번호</b> <a class="float-right">01012345678</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>내선번호</b> <a class="float-right">456</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>상태표시</b> <!-- select -->
-                     <div class="col-sm-10">
-                      <!-- select -->
-                      <div class="form-group float-right selright">
-                        <select class="form-control">
-                          <option>온라인</option>
-                          <option>부재중</option>
-                          <option>휴가중</option>
-                        </select>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <b>한 마디</b> <a class="float-right Tbreak">개같노ㅇㅇㅇㅇㅇㅇ 사장나와 사장나와 사장나와</a>
-                  </li>
-                </ul>
-				
-			
-				 <a href="#" class="btn btn-primary btn-block"  data-toggle="modal" data-target="#modal-sm"><b>한 마디 수정</b></a>
-				 <a href="#" class="btn btn-primary btn-block"><b>회원정보수정</b></a>
+                
                 <a href="로그인페이지" class="btn btn-secondary btn-block"><b>로그아웃</b></a>
               </div>
               <!-- /.card-body -->

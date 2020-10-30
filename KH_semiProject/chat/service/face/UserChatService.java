@@ -48,7 +48,15 @@ public interface UserChatService {
 	 * @param user1_no - 초대받은 회원
 	 * @param count - 방 인원
 	 */
-	public void createRoom(int user0_no, int user1_no, int count);
+	public int createRoom(int user0_no, int user1_no, int count);
+
+	/**
+	 * 대화 선택시 기존에 1대1 대화방이 있는지 검색한다.
+	 * @param user0_no 대화생성자
+	 * @param user1_no 대화 초대자
+	 * @return chatting_no반환
+	 */
+	public int searchRoom(int user0_no, int user1_no);
 
 
 

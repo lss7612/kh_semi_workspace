@@ -4783,6 +4783,8 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 0 solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  width:100%;
+  margin:5px;
 }
 
 .card > hr {
@@ -4845,7 +4847,7 @@ input[type="button"].btn-block {
 
 .card-footer {
   padding: 0.75rem 1.25rem;
-  background-color: rgba(0, 0, 0, 0.03);
+/*   background-color: rgba(0, 0, 0, 0.03); */
   border-top: 0 solid rgba(0, 0, 0, 0.125);
 }
 
@@ -11819,7 +11821,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .user-panel img {
   height: auto;
-  width: 2.1rem;
+  width:5rem;
 }
 
 .user-panel .info {
@@ -11877,7 +11879,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 .nav-sidebar > .nav-item {
-  margin-bottom: 0;
+  margin-bottom: 40px;
 }
 
 .nav-sidebar > .nav-item .nav-icon {
@@ -12047,7 +12049,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 [class*='sidebar-dark-'] .user-panel a:hover {
-  color: #ffffff;
+  color: #343a40;
 }
 
 [class*='sidebar-dark-'] .user-panel .status {
@@ -12861,7 +12863,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   .sidebar-mini.sidebar-collapse .content-wrapper,
   .sidebar-mini.sidebar-collapse .main-footer,
   .sidebar-mini.sidebar-collapse .main-header {
-    margin-left: 4.6rem !important;
+    margin-left: 0 !important;
   }
   .sidebar-mini.sidebar-collapse .nav-sidebar .nav-header {
     display: none;
@@ -12905,7 +12907,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   }
   .sidebar-mini.sidebar-collapse .main-sidebar, .sidebar-mini.sidebar-collapse .main-sidebar::before {
     margin-left: 0;
-    width: 4.6rem;
+    width: 0;
   }
   .sidebar-mini.sidebar-collapse .main-sidebar .user-panel .image {
     float: none;
@@ -12990,7 +12992,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   .sidebar-mini-md.sidebar-collapse .content-wrapper,
   .sidebar-mini-md.sidebar-collapse .main-footer,
   .sidebar-mini-md.sidebar-collapse .main-header {
-    margin-left: 4.6rem !important;
+    margin-left: 0 !important;
   }
   .sidebar-mini-md.sidebar-collapse .nav-sidebar .nav-header {
     display: none;
@@ -13034,7 +13036,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   }
   .sidebar-mini-md.sidebar-collapse .main-sidebar, .sidebar-mini-md.sidebar-collapse .main-sidebar::before {
     margin-left: 0;
-    width: 4.6rem;
+    width: 0;
   }
   .sidebar-mini-md.sidebar-collapse .main-sidebar .user-panel .image {
     float: none;

@@ -1,4 +1,4 @@
-package controller.note;
+package controller.note.common;
 
 import java.io.IOException;
 import java.util.List;
@@ -58,7 +58,9 @@ public class NoteSendController extends HttpServlet {
 		if(result > 0) {
 			resp.sendRedirect("/note/sent");
 		} if(result == 0) {
-			
+			String msg = "오류로 인해 쪽지가 보내지지 않았습니다.";
+			req.setAttribute("msg", msg);
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 		}
 	
 	}

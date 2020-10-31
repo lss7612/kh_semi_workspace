@@ -46,8 +46,10 @@
 .content_article {
 
 	padding : 15px 0px;
-	
+	margin : 10px;
+	white-space:pre;
 	height : 350px;
+	overflow : outo;
 
 }
 
@@ -66,3 +68,22 @@
 	padding : 1px 3px;
 
 } 
+
+.buttons > span {
+	border : 1px solid black;
+	padding : 1px 3px;
+	
+}
+
+.cursor {
+	cursor:pointer;
+}
+
+.cursor:hover{
+	position: relative;
+	color:pink;
+	border:1px solid pink;
+	bottom:3px;
+}
+
+

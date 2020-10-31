@@ -1,6 +1,7 @@
-package controller.note;
+package controller.note.delete;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,31 +10,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import service.face.note.NoteDeleteService;
 import service.face.note.NoteService;
+import service.impl.note.NoteDeleteServiceImpl;
 import service.impl.note.NoteServiceImpl;
 
 /**
  * Servlet implementation class NoteDeleteController
  */
-@WebServlet("/NoteDeleteController")
+@WebServlet("/note/receivednotedelete")
 public class ReceivedNoteDeleteController extends HttpServlet {
 	
-	NoteService noteService = new NoteServiceImpl();
+	NoteDeleteService noteDeleteService = new NoteDeleteServiceImpl(); 
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		HttpSession session = req.getSession();
+		System.out.println("get"+req.getParameter("note_no0"));
 		
-		int user_no = Integer.parseInt((String)session.getAttribute("user_no"));
-		int note_no = Integer.parseInt((String)req.getParameter("note_no"));
+		List<Integer> note_nos = noteDeleteService.getNoteNos(req);
 		
-		int result = noteService.deleteReceivedNote( req, user_no, note_no );
+		int user_no = 12;//이부분 세션에서 받아와야함
+		
+		int result = noteDeleteService.deleteReceivedNote(note_nos, user_no);
 		
 		if(result > 0) {
-			//받은쪽지함으로 리다이렉트
+			resp.sendRedirect("/note/received");
 		} else {
-			//에러페이지로 이동
+			String msg = "삭제가 정상적으로 처리되지 않았습니다.";
+			req.setAttribute("mag", msg);
 		}
 	
 	}

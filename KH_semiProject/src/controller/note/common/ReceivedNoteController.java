@@ -1,4 +1,4 @@
-package controller.note;
+package controller.note.common;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ReceivedNoteController extends HttpServlet {
 	NoteService noteService = new NoteServiceImpl();
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { 
 	
 		Paging paging = noteService.getReceivedPaging(req);
 		req.setAttribute("paging", paging);

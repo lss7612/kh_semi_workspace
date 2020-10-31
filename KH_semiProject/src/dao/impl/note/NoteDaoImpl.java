@@ -33,12 +33,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 1";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
+			ps.setInt(1, 1);
 			rs= ps.executeQuery();
 			while(rs.next()) {
 				NoteReceiverView e = new NoteReceiverView();
@@ -74,12 +74,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 2";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
+			ps.setInt(1, 2);
 			rs= ps.executeQuery();
 			while(rs.next()) {
 				NoteReceiverView e = new NoteReceiverView();
@@ -115,12 +115,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 3";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
+			ps.setInt(1, 3);
 			rs= ps.executeQuery();
 			while(rs.next()) {
 				NoteReceiverView e = new NoteReceiverView();
@@ -156,11 +156,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 4";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 4);
 			
 			rs= ps.executeQuery();
 			while(rs.next()) {
@@ -197,11 +198,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 5";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 5);
 			
 			rs= ps.executeQuery();
 			while(rs.next()) {
@@ -246,6 +248,9 @@ public class NoteDaoImpl implements NoteDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		
@@ -259,7 +264,7 @@ public class NoteDaoImpl implements NoteDao {
 		
 		String sql = "";
 		sql += "INSERT INTO tb_note (user_no,note_title,note_article,send_date,table_no,user_ip, note_no)";
-		sql += " VALUES(?,?,?,TO_DATE(sysdate,'yy/mm/dd hh24:mi:ss'),?,?,?)";
+		sql += " VALUES(?,?,?,sysdate,?,?,?)";
 		try {
 			
 			ps = conn.prepareStatement(sql);
@@ -349,7 +354,7 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	@Override
-	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req, Paging paging) {
+	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req, Paging paging) {  
 		
 		
 		
@@ -362,16 +367,16 @@ public class NoteDaoImpl implements NoteDao {
 		sql += " SELECT r.user_no receiver_no, u.user_name receiver_name, isDelete, note_no FROM tb_receivednote r";
 		sql += " INNER JOIN tb_user u";
 		sql += " ON r.user_no = u.user_no";
-		sql += " WHERE r.user_no = 12"; //이부분을 세션의 유저넘버값을 받아와야한다.
-		sql += " AND isDelete = 0) j1"; 
+		sql += " WHERE r.user_no = ?"; //이부분을 세션의 유저넘버값을 받아와야한다.
+		sql += " AND isDelete = ?) j1"; 
 		sql += " INNER JOIN tb_note n";
-		sql += " ON j1.note_no = n.note_no)j2";
+		sql += " ON j1.note_no = n.note_no";//)j2";
+		sql += " ORDER BY send_date DESC) j2";
 		sql += " INNER JOIN ";
 		sql += " (SELECT s.note_no, s.user_no sender_no, u.user_name sender_name FROM tb_sendnote s";
 		sql += " INNER JOIN tb_user u";
 		sql += " ON s.user_no = u.user_no) j3";
 		sql += " ON j2.note_no= j3.note_no";
-		sql += " ORDER BY send_date DESC";
 		sql += ") j4)";
 		sql += " WHERE rnum BETWEEN ? and ?";
 		
@@ -379,8 +384,10 @@ public class NoteDaoImpl implements NoteDao {
 		try {
 			ps=conn.prepareStatement(sql);
 			
-			ps.setInt(1, paging.getStartNo());
-			ps.setInt(2, paging.getEndNo());
+			ps.setInt(1, 12);
+			ps.setInt(2, 0);
+			ps.setInt(3, paging.getStartNo());
+			ps.setInt(4, paging.getEndNo());
 			
 			rs=ps.executeQuery();
 			
@@ -432,16 +439,19 @@ public class NoteDaoImpl implements NoteDao {
 		sql += " FROM tb_sendnote S";
 		sql += " INNER JOIN tb_note N";
 		sql += " 	ON S.note_no = N.note_no";
-		sql += " 	WHERE s.user_no = 1";  //이부분을 세션의 유저넘버값을 받아와야한다.
-		sql += " ORDER BY send_date DESC, note_no) t1";
+		sql += " 	WHERE s.user_no = ?";  //이부분을 세션의 유저넘버값을 받아와야한다.
+		sql += " 	AND isDelete = ?"; //) t1";
+		sql += "	 ORDER BY send_date DESC) t1";
 		sql += " INNER JOIN tb_user u";
 		sql += "     ON t1.receiver_no = u.user_no";
 		sql += " ) t2 WHERE t2.rnum BETWEEN ? AND ?";
 		
 			try {
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1, paging.getStartNo());
-				ps.setInt(2, paging.getEndNo());
+				ps.setInt(1, 1);
+				ps.setInt(2, 0);
+				ps.setInt(3, paging.getStartNo());
+				ps.setInt(4, paging.getEndNo());
 				rs = ps.executeQuery();
 				
 				while(rs.next()) {
@@ -484,8 +494,8 @@ public class NoteDaoImpl implements NoteDao {
 		sql += " SELECT r.user_no receiver_no, u.user_name receiver_name, isDelete, note_no FROM tb_receivednote r";
 		sql += " INNER JOIN tb_user u";
 		sql += " ON r.user_no = u.user_no";
-		sql += " WHERE r.user_no = 12"; //이부분을 세션의 유저넘버값을 받아와야한다.
-		sql += " AND isDelete = 0) j1"; 
+		sql += " WHERE r.user_no = ?"; //이부분을 세션의 유저넘버값을 받아와야한다.
+		sql += " AND isDelete = ?) j1"; 
 		sql += " INNER JOIN tb_note n";
 		sql += " ON j1.note_no = n.note_no)j2";
 		sql += " INNER JOIN ";
@@ -498,6 +508,8 @@ public class NoteDaoImpl implements NoteDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 12);
+			ps.setInt(2, 0);
 			rs= ps.executeQuery();
 			while(rs.next()) {
 				totalCnt=rs.getInt(1);
@@ -531,7 +543,8 @@ public class NoteDaoImpl implements NoteDao {
 		sql += " (SELECT  s.note_no, s.user_no sender_no, u.user_name sender_name,s.isDelete FROM tb_sendnote s";
 		sql += " INNER JOIN tb_user u";
 		sql += " ON s.user_no = u.user_no";
-		sql += " WHERE s.user_no = 1)j1"; //이부분을 세션의 유저넘버값을 받아와야한다.
+		sql += " WHERE s.user_no = ?"; //이부분을 세션의 유저넘버값을 받아와야한다.
+		sql += " AND s.isdelete=?)j1";
 		sql += " INNER JOIN tb_note n";
 		sql += " ON j1.note_no = n.note_no) j2";
 		sql += " INNER JOIN";
@@ -544,6 +557,8 @@ public class NoteDaoImpl implements NoteDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 1);
+			ps.setInt(2, 0);
 			rs= ps.executeQuery();
 			while(rs.next()) {
 				totalAllCnt=rs.getInt(1);
@@ -564,7 +579,7 @@ public class NoteDaoImpl implements NoteDao {
 		sql += " (SELECT  s.note_no, s.user_no sender_no, u.user_name sender_name,s.isDelete FROM tb_sendnote s";
 		sql += " INNER JOIN tb_user u";
 		sql += " ON s.user_no = u.user_no";
-		sql += " WHERE s.user_no = 1)j1"; //이부분을 세션의 유저넘버값을 받아와야한다.
+		sql += " WHERE s.user_no = ?)j1"; //이부분을 세션의 유저넘버값을 받아와야한다.
 		sql += " INNER JOIN tb_note n";
 		sql += " ON j1.note_no = n.note_no) j2";
 		sql += " INNER JOIN";
@@ -576,6 +591,7 @@ public class NoteDaoImpl implements NoteDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 1);
 			rs = ps.executeQuery();
 				
 			int n1 = 0;
@@ -603,6 +619,9 @@ public class NoteDaoImpl implements NoteDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		//System.out.println(totalCnt);
@@ -618,18 +637,21 @@ public class NoteDaoImpl implements NoteDao {
 		int result = 0;
 		
 		String sql = "";
-		sql += "UPDATE tb_receivednote SET isdelete = 1";
+		sql += "UPDATE tb_receivednote SET isdelete = ?";
 		sql += " WHERE user_no= ?";
 		sql += " AND note_no = ?;";
 	
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, user_no);
-			ps.setInt(2, note_no);
+			ps.setInt(1, 1);
+			ps.setInt(2, user_no);
+			ps.setInt(3, note_no);
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
 		}
 		
 		return result;
@@ -672,6 +694,9 @@ public class NoteDaoImpl implements NoteDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		
@@ -719,6 +744,9 @@ public class NoteDaoImpl implements NoteDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		

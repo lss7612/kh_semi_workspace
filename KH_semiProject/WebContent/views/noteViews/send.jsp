@@ -134,5 +134,6 @@
 		</table>
 	</form>
 	</div>
+	<jsp:include page="/views/noteViews/buttons.jsp" />
 </body>
 </html>

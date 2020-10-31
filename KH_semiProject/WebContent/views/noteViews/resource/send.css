@@ -14,9 +14,6 @@ textarea {
 }
 
 span {
-	background-color: antiquewhite;
-	margin: 5px;
-	padding: 0px 5px;
 }
 
 #receiver>input {
@@ -24,8 +21,20 @@ span {
 }
 
 label, button, #add {
-	
 	cursor: pointer;
+	
+}
+#add{
+	border : 1px solid grey;
+	border-radius: 5px;
+	padding : 1px 3px;
+}
+#add:hover{
+	
+	position: relative;
+	color:pink;
+	border:1px solid pink;
+	bottom:3px;
 	
 }
 
@@ -35,4 +44,5 @@ form {
 	margin: 5px 10px;
 	
 }
+
 

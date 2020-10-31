@@ -7,16 +7,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import common.JDBCTemplate;
-import dao.face.note.NoteDeleteDao;
-import dao.impl.note.NoteDeleteDaoImpl;
-import service.face.note.NoteDeleteService;
+import dao.face.note.NoteRestoreDao;
+import dao.impl.note.NoteRestoreDaoImpl;
+import service.face.note.NoteRestoreService;
 
-public class NoteDeleteServiceImpl implements NoteDeleteService{
-
-	NoteDeleteDao noteDeleteDao = new NoteDeleteDaoImpl();
+public class NoteRestoreServiceImpl implements NoteRestoreService{
+	
+	NoteRestoreDao noteRestoreDao = new NoteRestoreDaoImpl();
 	
 	Connection conn = null;
-	
+
 	@Override
 	public List<Integer> getNoteNos(HttpServletRequest req) {
 
@@ -37,13 +37,11 @@ public class NoteDeleteServiceImpl implements NoteDeleteService{
 			
 		}
 		return result;
+		
 	}
-	
-	
-	
-	
+
 	@Override
-	public int deleteSendNote(List<Integer> note_nos, int user_no) { 
+	public int restoreReceivedNote(List<Integer> note_nos, int user_no) {
 
 		int result = 0;
 		int cnt = 0;
@@ -54,12 +52,12 @@ public class NoteDeleteServiceImpl implements NoteDeleteService{
 			
 			int note_no = note_nos.get(i);
 			System.out.println("notenosgetI: "+ note_nos.get(i));
-			result = noteDeleteDao.deleteSendNote(conn, note_no, user_no);
+			result = noteRestoreDao.restoreReceivedNote(conn, note_no, user_no);
 			
 			
 			if(result == 0) {
 				
-				System.out.println(i+"번쨰 노트 지울때 오류 발생");
+				System.out.println(i+"번쨰 노트 복구할 때 오류 발생");
 				break;
 				
 			}
@@ -69,7 +67,7 @@ public class NoteDeleteServiceImpl implements NoteDeleteService{
 		
 		if(result>0) {
 			JDBCTemplate.commit(conn);
-			System.out.println(cnt+"줄 인서트 완료");
+			System.out.println(cnt+"줄 업데이트 완료");
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
@@ -78,11 +76,8 @@ public class NoteDeleteServiceImpl implements NoteDeleteService{
 		return result;
 	}
 
-
-
-
 	@Override
-	public int deleteReceivedNote(List<Integer> note_nos, int user_no) {
+	public int restoreSendNote(List<Integer> note_nos, int user_no) { 
 
 		int result = 0;
 		int cnt = 0;
@@ -93,12 +88,12 @@ public class NoteDeleteServiceImpl implements NoteDeleteService{
 			
 			int note_no = note_nos.get(i);
 			System.out.println("notenosgetI: "+ note_nos.get(i));
-			result = noteDeleteDao.deleteReceivedNote(conn, note_no, user_no);
+			result = noteRestoreDao.restoreSendNote(conn, note_no, user_no);
 			
 			
 			if(result == 0) {
 				
-				System.out.println(i+"번쨰 노트 지울때 오류 발생");
+				System.out.println(i+"번쨰 노트 복구할 때 오류 발생");
 				break;
 				
 			}
@@ -108,7 +103,7 @@ public class NoteDeleteServiceImpl implements NoteDeleteService{
 		
 		if(result>0) {
 			JDBCTemplate.commit(conn);
-			System.out.println(cnt+"줄 인서트 완료");
+			System.out.println(cnt+"줄 업데이트 완료");
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
@@ -116,6 +111,5 @@ public class NoteDeleteServiceImpl implements NoteDeleteService{
 		
 		return result;
 	}
-
 
 }

@@ -1,4 +1,4 @@
-package controller.note;
+package controller.note.common;
 
 import java.io.IOException;
 import java.util.List;

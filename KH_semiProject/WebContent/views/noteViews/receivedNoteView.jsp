@@ -15,13 +15,13 @@
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="/views/noteViews/resource/noteView.js"></script>
+<script type="text/javascript" src="/views/noteViews/resource/receivedNoteView.js"></script>
 <link rel="stylesheet" href="/views/noteViews/resource/noteView.css"></link>
 
 </head>
 <body>
 
-<h1>쪽지 보기</h1>
+<h1>받은 쪽지 보기</h1>
 <hr>
 
 <% String sender_name =  list.getSender_name();%>
@@ -35,7 +35,7 @@
 <div class="view_content_wrap">
 
 	<div class="content_title">
-		<span class="note_no"><%= list.getNote_no() %></span>
+		<span class="note_no0"><%= list.getNote_no() %></span>
 		<h3><%= list.getNote_title() %></h3>
 	</div>
 	<div class="content_sub_title">
@@ -52,12 +52,14 @@
 		<div class="content_article"><%= note_article %></div>
 		
 	</div>
-	<div>
-		<button class="reply">답장</button>
-		<button class="delete">삭제</button>
+	<div class="buttons">
+		<span class="cursor reply">답장</span>
+		<span class="cursor delete">삭제</span>
+		<span class="cursor toReceivedNoteList">받은쪽지함으로</span>
+		<span class="cursor toSendNoteList">보낸쪽지함으로</span>
 	</div>
 	
-
+	<jsp:include page="/views/noteViews/buttons.jsp" />
 </div>
 
 </body>

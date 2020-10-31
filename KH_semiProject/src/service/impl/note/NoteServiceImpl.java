@@ -100,8 +100,6 @@ public class NoteServiceImpl implements NoteService{
 		
 		List<Integer> receiver = new ArrayList<>();
 		for(int i=0; i < cnt; i++) {
-			//String str = "receiver" + i;
-			//System.out.println(str);
 			
 			if(req.getParameter("receiver"+i)==null) {
 				break;
@@ -110,8 +108,6 @@ public class NoteServiceImpl implements NoteService{
 			receiver.add( Integer.parseInt( req.getParameter("receiver"+i) ));
 			
 		}
-		
-		//System.out.println(receiver);
 		
 		result.setReceiver(receiver);
 		
@@ -146,7 +142,7 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Override
-	public List<NoteList> getReceivedList(HttpServletRequest req, Paging paging) {
+	public List<NoteList> getReceivedList(HttpServletRequest req, Paging paging) {  
 
 		List<NoteList> result = null;
 		
@@ -204,7 +200,6 @@ public class NoteServiceImpl implements NoteService{
 		Connection conn = JDBCTemplate.getConnection();
 		int totalCount = noteDao.selectCntSend(conn);
 		
-		System.out.println( "TC:"+totalCount );
 		
 		int listCount = 15; //한페이지에 게시물이 최대 몇개를 쓸 수 있는지
 		

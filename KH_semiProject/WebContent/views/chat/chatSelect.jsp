@@ -27,7 +27,7 @@ th,td{
 <h3> 본인은 목록에서 <span style="color:red;">제외</span>되어 나타납니다.</h3>
 <hr>
 <h3> 사 내 주 소 록</h3>
-<form name="select" action="/chathome/start" method="post" 
+<form name="select" action="/chat/room" method="post" 
 	onsubmit="return check()">
 <table id="chatUserList" >
 	<tr>
@@ -54,7 +54,7 @@ th,td{
 	<% } %>
 </table>
 <br>
-<div id="buttonTaray">
+<div id="buttonTray">
 <input type="submit" id="ok">
 <button id="cancel" onclick="history.back()">취소</button>
 </div>
@@ -62,15 +62,21 @@ th,td{
 
 <script type="text/javascript">
 
+	//***대화상대 선택은 현재 한명으로 제한한다. ***
 	function check(){
+		//체크박스이 체크된 수를 카운트한다.
 		var checkCount = 
 			$("input:checkbox[name=selectUserNo]:checked").length;
-		console.log(checkCount);
+		//console.log(checkCount);
 		
+		//한명 선택되었을경우 진행
 		if(checkCount == 1){
+			//form 태그의 action 동작
 			return true;
 		} else {
-			alert('대화상대를 한명 선택하세요!');
+			//한명선택 외에 선태할경우 중단
+			alert('대화상대를 한 명 선택하세요!');
+			//form 태그의 action 동작 금지
 			return false;
 		}
 		

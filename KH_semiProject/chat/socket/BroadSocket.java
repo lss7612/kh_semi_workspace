@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
@@ -27,9 +28,16 @@ import service.impl.UserChatServiceImpl;
 @ServerEndpoint(value = "/broadsocket", configurator = HttpSessionConfigurator.class)
 public class BroadSocket {
 
+	//채팅에 관련된 유저정보를 담을 객체 생성
 	ChatUserInfo userinfo = new ChatUserInfo();
+	//service처리할 객체 생성
 	private UserChatService userChatService = new UserChatServiceImpl();
 	
+	public String getParam(HttpServletRequest req) {
+		String chatno = req.getParameter("chatting_no");
+		return chatno;
+	}
+		
 	//세션 객체와 웹소켓을 저장
 	private Map<Session, EndpointConfig> configs = Collections.synchronizedMap(new HashMap<>());
 	
@@ -120,8 +128,8 @@ public class BroadSocket {
 				return;
 			}
 			try {
-				session.getBasicRemote().sendText("<div class='row'>"+username +"님의 메시지 </div>"
-					+"<div class='row'>"+message+"</div>");
+				session.getBasicRemote().sendText("<div class='row'><strong>"+username +"</strong>님의 메시지 </div>"
+					+"<div class='row'>"+message+"</div><hr>");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

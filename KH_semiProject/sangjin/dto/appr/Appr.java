@@ -1,6 +1,7 @@
-package appr.dto;
+package dto.appr;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Appr {
 
@@ -11,23 +12,32 @@ public class Appr {
 	private int aprvl_state;
 	private Date create_date;
 	private Date final_date;
-	private int aprvl_type;
+	private String aprvl_type;
 	private String aprvl_title;
 	private String aprvl_article;
 	private int table_no;
 	private int send_user_no;
+	private Timestamp holiday_start;
+	private Timestamp holiday_end;
+	private String appr_holi_kind;
 	@Override
 	public String toString() {
 		return "Appr [apprl_no=" + apprl_no + ", user_no=" + user_no + ", mid_auth=" + mid_auth + ", final_auth="
 				+ final_auth + ", aprvl_state=" + aprvl_state + ", create_date=" + create_date + ", final_date="
 				+ final_date + ", aprvl_type=" + aprvl_type + ", aprvl_title=" + aprvl_title + ", aprvl_article="
-				+ aprvl_article + ", table_no=" + table_no + ", send_user_no=" + send_user_no + "]";
+				+ aprvl_article + ", table_no=" + table_no + ", send_user_no=" + holiday_start + ", holiday_start=" + send_user_no +", holiday_end=" + holiday_end +",appr_holi_kind"+appr_holi_kind+ "]";
 	}
 	public int getApprl_no() {
 		return apprl_no;
 	}
 	public void setApprl_no(int apprl_no) {
 		this.apprl_no = apprl_no;
+	}
+	public String getAppr_holi_kind() {
+		return appr_holi_kind;
+	}
+	public void setAppr_holi_kind(String appr_holi_kind) {
+		this.appr_holi_kind = appr_holi_kind;
 	}
 	public int getUser_no() {
 		return user_no;
@@ -65,10 +75,10 @@ public class Appr {
 	public void setFinal_date(Date final_date) {
 		this.final_date = final_date;
 	}
-	public int getAprvl_type() {
+	public String getAprvl_type() {
 		return aprvl_type;
 	}
-	public void setAprvl_type(int aprvl_type) {
+	public void setAprvl_type(String aprvl_type) {
 		this.aprvl_type = aprvl_type;
 	}
 	public String getAprvl_title() {
@@ -94,6 +104,18 @@ public class Appr {
 	}
 	public void setSend_user_no(int send_user_no) {
 		this.send_user_no = send_user_no;
+	}
+	public Timestamp getHoliday_start() {
+		return holiday_start;
+	}
+	public void setHoliday_start(Timestamp holiday_start) {
+		this.holiday_start = holiday_start;
+	}
+	public Timestamp getHoliday_end() {
+		return holiday_end;
+	}
+	public void setHoliday_end(Timestamp holiday_end) {
+		this.holiday_end = holiday_end;
 	}
 
 	

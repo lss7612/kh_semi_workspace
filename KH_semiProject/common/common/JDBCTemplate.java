@@ -12,7 +12,8 @@ public class JDBCTemplate {
 	
 	
 	//DB ?���? ?���?
-	private static final String URL = "jdbc:oracle:thin:@124.52.130.133:1521:xe";
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+
 	private static final String USERNAME = "scott";
 	private static final String PASSWORD = "tiger";
 	

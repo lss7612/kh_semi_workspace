@@ -1,14 +1,12 @@
 package dto;
 
-import java.util.Date;
-
 public class ChattingContent {
 
 	private int chatting_no;
 	private int msg_no;
 	private int user_no;
 	private String msg_content;
-	private Date revision_date;
+	private String revision_date;
 	private int user_ip;
 	
 	@Override
@@ -40,10 +38,10 @@ public class ChattingContent {
 	public void setMsg_content(String msg_content) {
 		this.msg_content = msg_content;
 	}
-	public Date getRevision_date() {
+	public String getRevision_date() {
 		return revision_date;
 	}
-	public void setRevision_date(Date revision_date) {
+	public void setRevision_date(String revision_date) {
 		this.revision_date = revision_date;
 	}
 	public int getUser_ip() {
@@ -52,6 +50,5 @@ public class ChattingContent {
 	public void setUser_ip(int user_ip) {
 		this.user_ip = user_ip;
 	}
-	
 	
 }

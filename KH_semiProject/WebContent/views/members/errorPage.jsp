@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>에러 발생!</title>
 </head>
 <body>
 
-<h1>로그인된것</h1>
+<h1 style="color:red">에러 처리 페이지</h1>
+<h3>에러 내용</h3>
+<%=exception %>
 
 </body>
 </html>

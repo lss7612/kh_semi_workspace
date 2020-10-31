@@ -24,6 +24,7 @@ public class RegisterController extends HttpServlet {
        
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
 			
 			System.out.println("login - doget");
 			req.getRequestDispatcher("/views/register/register.jsp")
@@ -34,6 +35,9 @@ public class RegisterController extends HttpServlet {
 		@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			System.out.println("login - dopost");
+			//전달데이터 한글 인코딩 설정(UTF-8)
+			req.setCharacterEncoding("UTF-8");
+			resp.setContentType("text/html; charset=utf-8");
 			
 			Register param = registerService.getParam(req);
 			
@@ -44,8 +48,8 @@ public class RegisterController extends HttpServlet {
 			
 			req.getRequestDispatcher("/views/register/registerS.jsp").forward(req, resp);
 			
-			req.setCharacterEncoding("UTF-8");
 			
+	
 			
 			
 			

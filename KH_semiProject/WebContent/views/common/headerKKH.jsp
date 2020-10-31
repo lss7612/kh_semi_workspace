@@ -30,6 +30,19 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  
+  
+  
+  <script type="text/javascript">
+	$(function() {
+		$("#btnLogout").click(function(){
+			location.href=
+				"<%=request.getContextPath()%>/ch02_servlet/logout.do";
+		});
+	});
+</script>
+  
+  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" style="margin: -60px 0px;">
 
@@ -196,7 +209,7 @@
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">Nina Mcintire</h3>
+                <h3 class="profile-username text-center"><%=session.getAttribute("message") %></h3>
 
                 <p class="text-muted text-center"><span>개발팀</span> 대리</p>
 
@@ -224,11 +237,11 @@
                     <b>한 마디</b> <a class="float-right Tbreak">개같노ㅇㅇㅇㅇㅇㅇ 사장나와 사장나와 사장나와</a>
                   </li>
                 </ul>
-				
+		
 			
 				 <a href="#" class="btn btn-primary btn-block"  data-toggle="modal" data-target="#modal-sm"><b>한 마디 수정</b></a>
 				 <a href="#" class="btn btn-primary btn-block"><b>회원정보수정</b></a>
-                <a href="로그인페이지" class="btn btn-secondary btn-block"><b>로그아웃</b></a>
+                <a href="/Login/login" class="btn btn-secondary btn-block" id="btnLogout"><b>로그아웃</b></a>
               </div>
               <!-- /.card-body -->
         
@@ -317,7 +330,6 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
-  
   
   
   

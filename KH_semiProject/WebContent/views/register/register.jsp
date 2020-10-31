@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page errorPage ="/error" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,18 +149,7 @@
         </div>
       </form>
 
-     <%--  <div class="social-auth-links text-center">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i>
-          Sign up using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i>
-          Sign up using Google+
-        </a>
-      </div>
-      --%>
+
 	<br>
       <a href="login.html" class="text-center">I already have a membership</a>
     </div>
@@ -214,40 +204,7 @@
             }).open();
         }
         
-        
-        
-        $(function(){
-            $("#user_id").keyup(function() {
-               var clientId = $('#user_id').val();
-               if(clientId==''||clientId.length<4){
-                  $("#id_check").css("display","none");
-               }
-               if(clientId.trim().length>3){
-                  $.ajax({
-                     url : "${pageContext.request.contextPath}/user/idCheck?cId=" + user_id,
-                     //cId=파라미터값으로 input에 name값이다.
-                     type : 'get',
-                     datatype : 'html',
-                     success : function(data) {
-                                 if (data == 1) {
-                                    // 1 : 아이디가 중복되는 문구
-                                    $("#id_check").text("사용중인 아이디입니다.");
-                                    $("#id_check").css({"color":"red","display":"block"});
-                                 } else {
-                                    if(data == 0){
-                                       // 0 : 아이디 길이 / 문자열 검사
-                                       $("#id_check").text("사용가능한 아이디입니다.");
-                                       $("#id_check").css({"color":"green","display":"block"});
-                                    } 
-                                 }
-                              }, error : function() {
-                                    console.log("실패");
-                              }
-                     });
-                  }
-               });
-            }); 
-        
+
         
       </script>
 

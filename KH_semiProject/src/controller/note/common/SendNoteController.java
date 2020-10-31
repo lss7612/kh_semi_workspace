@@ -1,4 +1,4 @@
-package controller.note;
+package controller.note.common;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.Paging;
 import dto.note.NoteList;
+import dto.note.NotePaging;
 import service.face.note.NoteService;
 import service.impl.note.NoteServiceImpl;
 
@@ -24,8 +26,11 @@ public class SendNoteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		NotePaging paging = noteService.getSendPaging(req);
+		req.setAttribute("paging", paging);
 		
-		List<NoteList> list = noteService.getSendList(req);
+		
+		List<NoteList> list = noteService.getSendList(req, paging);
 		req.setAttribute("list", list);
 		System.out.println(list);
 		

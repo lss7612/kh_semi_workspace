@@ -47,7 +47,7 @@ public class AddrViewServiceImpl implements AddrViewService{
 		Connection conn = JDBCTemplate.getConnection();
 		int totalCount = addrViewDao.selectCntAll(conn);
 		
-		int listCount = 15; //페이지당 볼 수 있는 최대 User 수
+		int listCount = 15; 
 		
 		result = new Paging(totalCount, curPage, listCount);
 		

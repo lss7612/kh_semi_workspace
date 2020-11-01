@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page errorPage ="/error" %>
+      <%@ page errorPage ="/views/common/errorpage.jsp" %>
+    
 
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,16 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    
+  
+<%        
+    response.setHeader("Pragma", "No-cache");
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, private");
+    response.setDateHeader("Expires", -1);
+%>
+  
+    
+
     
   <script type="text/javascript">
   
@@ -54,13 +65,20 @@
 	  f.submit();
 
 	  }
+
   
   </script>
+  
+     <script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
 
   
   
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+
 <div class="login-box">
   <div class="login-logo">
      <img src="/resources/images/biglogo.png" />
@@ -70,7 +88,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="/Login/login" method="post"  name="loginForm">
+      <form action="<%=request.getContextPath()%>/Login/login" method="post"  name="loginForm" >
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="아이디" id="user_id" name="user_id" autofocus onkeypress="if(event.keyCode == 13){ loginOk(); return false;}" >
           <div class="input-group-append">
@@ -97,7 +115,7 @@
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
               <label for="remember">
-                언젠가는 되겠지.......
+                아이디 저장하기
               </label>
             </div>
           </div>

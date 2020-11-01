@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ page errorPage ="/views/common/errorpage.jsp" %>
+     
+ 
+    <%        
+    response.setHeader("Pragma", "No-cache");
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, private");
+    response.setDateHeader("Expires", -1);
+    response.setHeader("Cache-Control","no-store");
+	%>
+	
+<%-- 회원만 접근가능한 페이지에는 세션 체크 페이지를 불러옵니다. --%>
+	<%@ include file="/views/login/loginCheck.jsp" %>
+	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,18 +47,22 @@
   
   
   
-  <script type="text/javascript">
+     <script type="text/javascript">
 	$(function() {
 		$("#btnLogout").click(function(){
-			location.href=
-				"<%=request.getContextPath()%>/ch02_servlet/logout.do";
+			location.href="<%=request.getContextPath()%>/Login/logout";
 		});
 	});
+	
+	
 </script>
+ 
   
   
 </head>
-<body class="hold-transition sidebar-mini layout-fixed" style="margin: -60px 0px;">
+<body class="hold-transition sidebar-mini layout-fixed" style="margin: -60px 0px; " onload="noBack();"
+    onpageshow="if (event.persisted) noBack();" onunload="">
+   
 
 <div class="wrapper" >
 
@@ -209,7 +227,7 @@
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center"><%=session.getAttribute("message") %></h3>
+                <h3 class="profile-username text-center"><%=session.getAttribute("message")%> </h3>
 
                 <p class="text-muted text-center"><span>개발팀</span> 대리</p>
 
@@ -241,7 +259,7 @@
 			
 				 <a href="#" class="btn btn-primary btn-block"  data-toggle="modal" data-target="#modal-sm"><b>한 마디 수정</b></a>
 				 <a href="#" class="btn btn-primary btn-block"><b>회원정보수정</b></a>
-                <a href="/Login/login" class="btn btn-secondary btn-block" id="btnLogout"><b>로그아웃</b></a>
+                <button type="button" class="btn btn-secondary btn-block" id="btnLogout"><b>로그아웃</b></button>
               </div>
               <!-- /.card-body -->
         

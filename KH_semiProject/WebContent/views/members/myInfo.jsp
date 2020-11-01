@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page errorPage ="/error" %>
+
 
 <jsp:include page="/views/common/headerKKH.jsp" />
+
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -147,18 +148,6 @@
         </div>
       </form>
 
-     <%--  <div class="social-auth-links text-center">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i>
-          Sign up using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i>
-          Sign up using Google+
-        </a>
-      </div>
-      --%>
 	<br>
       
     </div>

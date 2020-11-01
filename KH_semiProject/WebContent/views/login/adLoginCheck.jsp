@@ -17,7 +17,7 @@
 %>
 	<script>
 		alert("로그인한 사용자만 사용가능함미다");
-		location.href="/Login/login";
+		location.href="/Login/adLogin";
 	</script>
 <% 
 	}

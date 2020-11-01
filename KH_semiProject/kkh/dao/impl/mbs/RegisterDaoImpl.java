@@ -51,8 +51,27 @@ public class RegisterDaoImpl implements RegisterDao{
 
 		
 		String sql = "";
-		sql += "INSERT INTO tb_user(USER_NO,USER_NAME,USER_GRADE,USER_ADDR,USER_IDENTIFY,DEPT_NO,POSITION_NO, CELLPHONE_NO, EXTENTION_NO, USER_ID, USER_PW, USER_NOTICE, STATE_NO, REVISION_DATE , USER_IP,TABLE_NO,USER_ADDR2,USER_ADDR3)" ;
-		sql += " VALUES(tb_user_SEQ.NEXTVAL,?,1,?,?,1,1,?,1,?,?,?,1,sysdate,1,10,?,?)";
+		sql += "INSERT INTO tb_user("
+				+ "USER_NO"
+				+ ",USER_NAME"
+				+ ",USER_GRADE"
+				+ ",USER_ADDR"
+				+ ",USER_IDENTIFY"
+				+ ",DEPT_NO"
+				+ ",POSITION_NO"
+				+ ", CELLPHONE_NO"
+				+ ", EXTENTION_NO"
+				+ ", USER_ID"
+				+ ", USER_PW"
+				+ ", USER_NOTICE"
+				+ ", STATE_NO"
+				+ ", REVISION_DATE"
+				+ " , USER_IP"
+				+ ",TABLE_NO"
+				+ ",USER_ADDR2"
+				+ ",USER_ADDR3)" ;
+		
+		sql += " VALUES(tb_user_SEQ.NEXTVAL,?,3,?,?,1,1,?,1,?,?,?,1,sysdate,1,10,?,?)";
 		
 		int result = 0; //INSERT 결과 저장 변수
 		

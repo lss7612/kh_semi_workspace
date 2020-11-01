@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+      <%@ page errorPage ="/views/common/errorpage.jsp" %>
+    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +22,63 @@
   <link rel="stylesheet" href="/resources/dist/css/adminlte.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    
+  
+<%        
+    response.setHeader("Pragma", "No-cache");
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, private");
+    response.setDateHeader("Expires", -1);
+%>
+  
+    
+
+    
+  <script type="text/javascript">
+  
+  function loginOk() {
+
+	  var f = document.loginForm;
+
+
+	  if(!f.user_id.value) {
+
+	  alert("아이디를 입력해라");
+
+	  f.user_id.focus();
+
+	  return false;
+
+	  }
+
+
+	  if(!f.user_pw.value) {
+
+	  alert("비밀번호를 입력해라");
+
+	  f.user_pw.focus();
+
+	  return false;
+
+	  }
+
+	  f.submit();
+
+	  }
+
+  
+  </script>
+  
+     <script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
+
+  
+  
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+
 <div class="login-box">
   <div class="login-logo">
      <img src="/resources/images/biglogo.png" />
@@ -30,52 +88,37 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="../../index3.html" method="post">
+      <form action="<%=request.getContextPath()%>/Login/adLogin" method="post"  name="adLoginForm" >
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="아이디">
+          <input type="text" class="form-control" placeholder="아이디" id="user_id" name="user_id" autofocus onkeypress="if(event.keyCode == 13){ loginOk(); return false;}" >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-          <div style="margin:5px 0px;"> @일조.kr </div> 
+         
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="비밀번호">
+          <input type="password" class="form-control" placeholder="비밀번호"  id="user_pw" name="user_pw" onkeypress="if(event.keyCode == 13){ loginOk(); return false;}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
+        
+        <!-- 로그인 실패시 메세지 -->
+			  <!-- param.변수 => request.getParameter("변수") -->
+			  <span style="color: red;">${param.message}</span>
         <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
+       
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">로그인</button>
+            <button type="submit" class="btn btn-primary btn-block" />로그인</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
-
-  <%--    <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div>
-      <!-- /.social-auth-links -->
-      --%> 
 		
     </div>
     <!-- /.login-card-body -->
@@ -84,10 +127,10 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="/resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="/resources/dist/js/adminlte.min.js"></script>
 </body>
 </html>

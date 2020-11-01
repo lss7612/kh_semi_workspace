@@ -8,18 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LgoinCheck
+ * Servlet implementation class MemberInfoController
  */
-@WebServlet("/Lgoin/Check")
-public class LgoinCheck extends HttpServlet {
+@WebServlet("/myinfo")
+public class MyInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setHeader("Cache-Control","no-store");
+		req.getRequestDispatcher("/views/members/myInfo.jsp").forward(req, resp);
 		
-		System.out.println("로그인해라.");
-		
-		
+		System.out.println("myinfo호출");
 	}
 	
+
 }

@@ -10,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.face.mbs.LoginDao;
+import dao.face.mbs.AdLoginDao;
 
 /**
- * Servlet implementation class LoginControllers
+ * Servlet implementation class adLoginControllers
  */
-@WebServlet("/Login/login")
-public class LoginControllers extends HttpServlet {
+@WebServlet("/Login/adLogin")
+public class AdLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		req.getRequestDispatcher("/views/login/login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/login/adLogin.jsp").forward(req, resp);
 
 	}
 
@@ -36,14 +34,14 @@ public class LoginControllers extends HttpServlet {
 		// 전달해주는고
 		resp.setContentType("text/html; charset=utf-8");
 
-		LoginDao dao = new LoginDao();
+		AdLoginDao dao = new AdLoginDao();
 
 		// 사용자가 요청한 URL
-		String url = req.getRequestURL().toString();
+		String adUrl = req.getRequestURL().toString();
 
 		// getRequestURL StringBuffer 로 되어있어서 toString으로 변환해 주어야 한다.
 		// 스트링.indexOf("검색어") 검색어를 찾은 위치값, 없으면 -1 리턴
-		if (url.indexOf("/Login/login") != -1) {
+		if (adUrl.indexOf("/Login/adLogin") != -1) {
 
 			// 폼에서 입력한 값
 
@@ -54,7 +52,7 @@ public class LoginControllers extends HttpServlet {
 			System.out.println("유저아이디 : " + user_id + "," + "유저 패스 : " + user_pw);
 
 			int user_grade = dao.gradeCheck(user_id, user_pw);
-			String user_name = dao.loginCheck(user_id, user_pw, 2);
+			String user_name = dao.adLoginCheck(user_id, user_pw, 1);
 
 			System.out.println("유저이름 : " + user_name + "\n" + "유저등급 : " + Integer.toString(user_grade));
 
@@ -62,10 +60,10 @@ public class LoginControllers extends HttpServlet {
 			String message = new String();
 			String page = new String();
 
-//          
+//         
 			if (user_name != null) {
 				message = user_name + "(" + user_id + ")" + "님!";
-				page = "/myinfo";
+				page = "/views/adminTb/gradeMem.jsp";
 
 				// session 객체 인스턴스
 				HttpSession session = req.getSession();
@@ -76,7 +74,7 @@ public class LoginControllers extends HttpServlet {
 				message = "아이디 또는 비밀번호가 일치하지 않습니다.";
 
 				// 로그인 페이지로 돌아감
-				page = "/Login/login?message=" + URLEncoder.encode(message, "utf-8");
+				page = "/Login/adLogin?message=" + URLEncoder.encode(message, "utf-8");
 
 			}
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page errorPage ="/error" %>
+    <%@ page errorPage ="/views/common/errorpage.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +31,19 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  
+  
+   <script type="text/javascript">
+	$(function() {
+		$("#adBtnLogout").click(function(){
+			location.href="<%=request.getContextPath()%>/Login/adLogout";
+		});
+	});
+	
+	
+</script>
+  
+  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" style="margin: -60px 0px;">
 
@@ -187,8 +200,11 @@
            <!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
+              
+              <h3 class="profile-username text-center"><%=session.getAttribute("message")%></h3>
+              <h6 class="text-center">환영함미다ㅗ.ㅗ</h6>
                 
-                <a href="로그인페이지" class="btn btn-secondary btn-block"><b>로그아웃</b></a>
+                <button type="button" class="btn btn-secondary btn-block" id="adBtnLogout"><b>로그아웃</b></button>
               </div>
               <!-- /.card-body -->
         

@@ -85,7 +85,7 @@ $(document).ready(function () {
 function goSubmit() {
     window.opener.name = "parentPage"; // 부모창의 이름 설정
     document.myForm.target = "parentPage"; // 타켓을 부모창으로 설정
-    document.myForm.action = "/approval/approvalWrite";
+    document.myForm.action = "/approval/approvalWriteWork";
     document.myForm.submit();
     self.close();
 }

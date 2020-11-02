@@ -85,7 +85,7 @@ $(document).ready(function () {
 function goSubmit() {
     window.opener.name = "parentPage"; // 부모창의 이름 설정
     document.myForm.target = "parentPage"; // 타켓을 부모창으로 설정
-    document.myForm.action = "/approval/approvalWrite";
+    document.myForm.action = "/approvalMy/modHoly";
     document.myForm.submit();
     self.close();
 }
@@ -97,7 +97,7 @@ function goSubmit() {
 
 	</head>
 	<body>
-
+	<h1>휴가</h1>
 <!-- 	<h1 id="banner"><a href="http://bassistance.de/jquery-plugins/jquery-plugin-treeview/">jQuery Treeview Plugin</a> Demo</h1> -->
 	<div id="main">
 

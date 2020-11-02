@@ -1,6 +1,6 @@
 package common;
 
-public class Paging {
+public class Paging_app {
 
 	private int curPage;	//현재 페이지 번호
 	
@@ -16,14 +16,14 @@ public class Paging {
 	private int endNo;		//화면에 보이는 페이지의 끝 게시글 번호
 	
 	//총 게시글 수만 입력하는 생성자
-	public Paging(int totalCount) {
+	public Paging_app(int totalCount) {
 		this.setTotalCount(totalCount);
 		
 		this.makePaging();
 	}
 	
 	//총 게시글 수, 현재 페이지를 입력하는 생성자
-	public Paging(int totalCount, int curPage) {
+	public Paging_app(int totalCount, int curPage) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
 		
@@ -31,7 +31,7 @@ public class Paging {
 	}
 
 	//총 게시글 수, 현재 페이지, 보여질 게시글 수를 입력하는 생성자
-	public Paging(int totalCount, int curPage, int listCount) {
+	public Paging_app(int totalCount, int curPage, int listCount) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
 		this.setListCount(listCount);
@@ -40,7 +40,7 @@ public class Paging {
 	}
 	
 	//총 게시글 수, 현재 페이지, 보여질 게시글 수, 보여질 페이지 수를 입력하는 생성자
-	public Paging(int totalCount, int curPage, int listCount, int pageCount) {
+	public Paging_app(int totalCount, int curPage, int listCount, int pageCount) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
 		this.setListCount(listCount);

@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import dao.appr.FileDao;
+import dao.impl.appr.FileDaoImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -21,18 +23,15 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-
 import common.JDBCTemplate;
-import dao.appr.FileDao;
-import dao.impl.appr.FileDaoImpl;
 import dto.appr.Appr;
 import dto.appr.ApprFile;
-import service.appr.FileService;
+import service.appr.WorkService;
 
-public class FileServiceImpl implements FileService {
+public class WorkServiceImpl implements WorkService{
+
 	
 	private FileDao fileDao = new FileDaoImpl();
-
 	
 	@Override
 	public void fileupload(HttpServletRequest req, HttpServletResponse resp) {
@@ -134,58 +133,19 @@ public class FileServiceImpl implements FileService {
 			String key = item.getFieldName(); // 키값 추출
 
 			//-------------휴가계라고 강제지정해줌--------;
-			appr.setAprvl_type("휴가계");
+			appr.setAprvl_type("업무일지");
 
 			try {
-				if ("r".equals(key)) {
-					
-
-					appr.setAppr_holi_kind(item.getString("UTF-8"));
-//					appr.setHoliday_end();
-				}else if ("title".equals(key)) {// 전달파라미터의 name이 "title"일 때
+			
+				if ("title".equals(key)) {// 전달파라미터의 name이 "title"일 때
 					
 					appr.setAprvl_title(item.getString("UTF-8"));
 					System.out.println("title = "+ item.getString("UTF-8"));
-				} else if ("reason".equals(key)) {// 전달파라미터의 name이 "title"일 때
+				} else if ("content".equals(key)) {// 전달파라미터의 name이 "title"일 때
 					appr.setAprvl_article(item.getString("UTF-8"));
-					System.out.println("reason = "+ item.getString("UTF-8"));
+					System.out.println("content = "+ item.getString("UTF-8"));
 					
-				} else if ("startday".equals(key)) {
-					startDay=item.getString("UTF-8");
-					System.out.println("startday = "+ item.getString("UTF-8"));
-					
-				} else if("start_time".equals(key)) {
-					//디버깅
-					
-					//--
-					//--
-					startDay += " " + item.getString("UTF-8")+":00.0";
-					
-					
-					
-
-					java.sql.Timestamp t = java.sql.Timestamp.valueOf(startDay);
-					
-					System.out.println("start time = "+t);
-					appr.setHoliday_start(t);
-					
-				} else if ("endday".equals(key)) {
-					endDay = item.getString("UTF-8");
-				} else if("end_time".equals(key)) {
-					//디버깅
-//					System.out.println(item.getString("UTF-8"));
-					
-					//--
-					
-					endDay += " " + item.getString("UTF-8")+":00.0";
-					java.sql.Timestamp t = java.sql.Timestamp.valueOf(endDay);
-					
-//					System.out.println(endDay);
-					appr.setHoliday_end(t);
-					System.out.println("end_time = " + t);
-
-
-				} else if("firstApprovalNo".equals(key)) {
+				}  else if("firstApprovalNo".equals(key)) {
 					//-----중간결재자
 					System.out.println("firstApprovalNo = " + item.getString());
 					

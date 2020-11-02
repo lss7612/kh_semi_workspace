@@ -8,3 +8,5 @@ insert into tb_boardClass VALUES(60,'tb_note');
 insert into tb_boardClass VALUES(70,'tb_approval');
 insert into tb_boardClass VALUES(80,'tb_comment');
 insert into tb_boardClass VALUES(90,'tb_notapproval');
+
+select * from fileno,

@@ -272,8 +272,6 @@ th {
 
 
 	<div class="container">
-		<jsp:include page="/views/common/topMenu.jsp"></jsp:include>
-		<jsp:include page="/views/common/sideMenu.jsp"></jsp:include>
 
 		<main>
 
@@ -363,13 +361,13 @@ th {
 						</tr>
 						<tr>
 							<th>제목</th>
-							<td><input type="text" name="title" id="title"
+							<td><input type="text" name="title" id="title" value="<%=request.getParameter("title")%>"
 								style="width: 99%" /></td>
 						</tr>
 						<tr>
 							<th>사유</th>
-							<td><textarea rows="20" cols="100" name="reason"
-									id="content"></textarea></td>
+							<td><textarea rows="20" cols="100" name="reason" 
+									id="content"><%=request.getParameter("content")%></textarea></td>
 						</tr>
 					</table>
 
@@ -394,7 +392,7 @@ th {
 
 		</main>
 
-		<jsp:include page="/views/common/footer.jsp"></jsp:include>
+
 	</div>
 
 </body>

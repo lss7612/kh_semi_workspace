@@ -12,12 +12,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">회원게시판</h1>
+            <h1 class="m-0 text-dark">승인처리 게시판</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">회원게시판</li>
+              <li class="breadcrumb-item active">승인처리</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -84,42 +84,108 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-hover text-nowrap text-center">
                   <thead>
-                    <tr>
+                    <tr class="text-center" >
                       <th>회원번호</th>
                       <th>이름</th>
                       <th>아이디</th>
+                      <th>등급</th>
                       <th>부서</th>
                       <th>직급</th>
                       <th>상태</th>                      
-                       <th>활성화/비활성화</th>
+                      <th>활성화/비활성화</th>
                       <th><label class="mch"><input type="checkbox"/></label></th>
+                      <th>가입처리</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                  
+                    <tr class="text-center" style="vertical-align:middle;">
                       <td>183</td>
                       <td>John Doe</td>
-                      <td>dsfsdfsdf</td>
-                      <td><span class="tag tag-success">개발팀</span></td>
-                      <td>팀장</td>
-                      <td>휴가중</td>
-                      <td>활성화</td>
+                      <td><a href="/views/adminTb/adMemInfo.jsp">dsfsdfsdf</a></td>
+                      
+                       <td>
+       
+                     <div class="col-sm-10">
+                      <!-- select -->
+                      <div class="form-group float-right selright">
+                        <select class="form-control">
+                          <option>등급</option>
+                        </select>
+                      </div>
+                    </div>
+         
+                      
+                      </td>
+                      
+                      
+                      <td>
+       
+                     <div class="col-sm-10">
+                      <!-- select -->
+                      <div class="form-group float-right selright">
+                        <select class="form-control">
+                          <option>부서</option>
+                        </select>
+                      </div>
+                    </div>
+         
+                      
+                      </td>
+                      
+                      
+                      <td>
+                      
+                       <div class="col-sm-10">
+                      <!-- select -->
+                      <div class="form-group float-right selright">
+                        <select class="form-control">
+                          <option>직급</option>
+                        </select>
+                      </div>
+                    </div>
+         
+                      
+                      </td>
+                      <td>
+                      
+                       <div class="col-sm-10">
+                      <!-- select -->
+                      <div class="form-group float-right selright">
+                        <select class="form-control">
+                          <option>상태</option>
+                        </select>
+                      </div>
+                    </div>
+         
+                      
+                      </td>
+                      <td>
+				
+						 <div class="col-sm-10">
+                      <!-- select -->
+                      <div class="form-group float-right selright">
+                        <select class="form-control">
+                          <option>활성화유무</option>
+                        </select>
+                      </div>
+                    </div>
+         
+							
+
+						</td>
                       <td><label class="mch"><input type="checkbox"/></label></td>
+                      
+                      
+                      
+                      <td><button type="button" class="btn btn-primary col-10">승인</button></td>
                     </tr>
                     
-                    <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>dsfsdfsdf</td>
-                      <td><span class="tag tag-success">개발팀</span></td>
-                      <td>팀장</td>
-                      <td>휴가중</td>
-                      <td>활성화</td>
-                      <td><label class="mch"><input type="checkbox"/></label></td>
-                    </tr>
-                   
+          
+                    
+                    
                   </tbody>
                 </table>
               </div>
@@ -129,7 +195,7 @@
               <button type="button" class="btn btn-primary col-1">삭제</button>
              
               
-     
+     		<button type="button" class="btn  btn-primary col-1">승인</button>
             
            
               <button type="button" class="btn  btn-primary col-1">숨김</button>

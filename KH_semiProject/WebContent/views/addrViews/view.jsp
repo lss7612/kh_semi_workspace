@@ -11,6 +11,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <title>주소록</title>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
+        
         <script type="text/javascript">
           window.onload = function () {
             /* ajaxToServer(); */
@@ -123,7 +124,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   <th></th>
                   <th>사번</th>
                   <th><button name="userid" class="ASC">아이디</button></th>
-                  <th><button name="username" class="ASC">이름</button></th>
+                  <th><button name="username" class="content_title ASC">이름</button></th>
                   <th><button name="dept" class="ASC">부서</button></th>
                   <th><button name="position" class="ASC">직급</button></th>
                   <th>휴대전화</th>

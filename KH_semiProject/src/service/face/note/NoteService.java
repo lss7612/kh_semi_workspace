@@ -38,5 +38,9 @@ public interface NoteService {
 
 	public NoteList getNoteView(int note_no);
 
+	public List<Integer> getSelectedUserList(HttpServletRequest req);
+
+	public List<String> getSelectedUserNameList(HttpServletRequest req);
+
 
 }

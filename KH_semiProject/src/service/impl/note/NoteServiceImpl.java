@@ -77,6 +77,50 @@ public class NoteServiceImpl implements NoteService{
 		return result;
 	}
 
+	
+	@Override
+	public List<Integer> getSelectedUserList(HttpServletRequest req) {
+
+		List<Integer> result = new ArrayList<>();
+		
+		for(int i=0; i < 15; i++) {//페이징최대수 15까지 가능
+			
+			if(req.getParameter("receiver_no"+i)==null) {
+				continue;
+			}
+			
+			result.add( Integer.parseInt( req.getParameter("receiver_no"+i) ));
+			
+		}
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
+
+	@Override
+	public List<String> getSelectedUserNameList(HttpServletRequest req) {
+
+		List<String> result = new ArrayList<>();
+		
+		for(int i=0; i < 15; i++) {//페이징최대수 15까지 가능
+			
+			if(req.getParameter("receiver_name"+i)==null) {
+				continue;
+			}
+			
+			result.add(req.getParameter("receiver_name"+i));
+			
+		}
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
+	
+	
 	@Override
 	public NoteCreateData getNCDparams(HttpServletRequest req) {
 
@@ -99,10 +143,20 @@ public class NoteServiceImpl implements NoteService{
 		
 		
 		List<Integer> receiver = new ArrayList<>();
-		for(int i=0; i < cnt; i++) {
+		for(int i=-15; i < cnt; i++) {
 			
-			if(req.getParameter("receiver"+i)==null) {
-				break;
+			if(i<0) {
+			
+				if(req.getParameter("receiver"+i)==null) {
+					continue;
+				}
+				
+			} else {
+				
+				if(req.getParameter("receiver"+i)==null) {
+					break;
+				}
+				
 			}
 			
 			receiver.add( Integer.parseInt( req.getParameter("receiver"+i) ));
@@ -111,6 +165,7 @@ public class NoteServiceImpl implements NoteService{
 		
 		result.setReceiver(receiver);
 		
+		System.out.println(result);
 		return result;
 	
 	}
@@ -240,6 +295,9 @@ public class NoteServiceImpl implements NoteService{
 		return result;
 			
 	}
+
+
+	
 
 
 }

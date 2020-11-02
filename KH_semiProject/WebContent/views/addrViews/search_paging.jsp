@@ -1,9 +1,8 @@
-<%@page import="dto.note.NotePaging"%>
 <%@page import="common.Paging"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<% NotePaging paging = (NotePaging) request.getAttribute("paging"); %>
+<% Paging paging = (Paging) request.getAttribute("paging"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +10,6 @@
 <title>Insert title here</title>
 
 <style>
-
-
 ul.pagination {
 	list-style: none;
 	padding: 0;
@@ -25,7 +22,6 @@ ul.pagination li {
     text-align: center;
 }
 ul.pagination li a {
-	float:none;
 	text-decoration: none;
 	color: black;
 }
@@ -33,24 +29,23 @@ ul.pagination li.active a {
 	color: red;
 	font-weight: bold;
 }
-
 </style>
 
 </head>
 <body>
 
-<div class="text-center" style="left:450px">
+<div class="text-center">
 <ul class="pagination">
 
 	<!-- 첫 페이지로 가기 -->
 	<%	if( paging.getCurPage() != 1 ) { %>
-	<li><a href="/note/sent">&larr;</a></li>
+	<li><a href="/address/search">&larr;</a></li>
 	<%	} %>
 	
 	
 	<!-- 이전 페이지로 가기 -->
 	<%	if( paging.getCurPage() != 1 ) { %>
-	<li><a href="/note/sent?curPage=<%=paging.getCurPage()-1 %>">&lt;</a></li>
+	<li><a href="/address/search?curPage=<%=paging.getCurPage()-1 %>">&lt;</a></li>
 	<%	} %>
 	
 
@@ -59,11 +54,11 @@ ul.pagination li.active a {
 	<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
 	
 	<%		if( i == paging.getCurPage() ) { %>
-	<li class="active"><a href="/note/sent?curPage=<%=i %>"><%=i %></a></li>
+	<li class="active"><a href="/address/search?curPage=<%=i %>"><%=i %></a></li>
 	<%		} %>
 	
 	<%		if( i != paging.getCurPage() ) { %>
-	<li><a href="/note/sent?curPage=<%=i %>"><%=i %></a></li>
+	<li><a href="/address/search?curPage=<%=i %>"><%=i %></a></li>
 	<%		} %>
 	
 	<%	} %>	
@@ -72,14 +67,14 @@ ul.pagination li.active a {
 	
 	<!-- 다음 페이지로 가기 -->
 	<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-	<li><a href="/note/sent?curPage=<%=paging.getCurPage()+1 %>">&gt;</a></li>
+	<li><a href="/address/search?curPage=<%=paging.getCurPage()+1 %>">&gt;</a></li>
 	<%	} %>
 
 	
 	
 	<!-- 마지막 페이지로 가기 -->
 	<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-	<li><a href="/note/sent?curPage=<%=paging.getTotalPage() %>">&rarr;</a></li>
+	<li><a href="/address/search?curPage=<%=paging.getTotalPage() %>">&rarr;</a></li>
 	<%	} %>
 </ul>
 </div>

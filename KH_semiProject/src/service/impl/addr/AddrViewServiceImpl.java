@@ -55,6 +55,45 @@ public class AddrViewServiceImpl implements AddrViewService{
 		
 	}
 
+
+
+	@Override
+	public Paging getSearchPaging(HttpServletRequest req) {
+
+		Paging result = null;
+		
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if(param!=null && !"".equals(param)) {
+			curPage = Integer.parseInt(param);
+		}
+		Connection conn = JDBCTemplate.getConnection();
+		int totalCount = addrViewDao.selectSerchCntAll(conn, req);
+		
+		int listCount = 15; 
+		
+		result = new Paging(totalCount, curPage, listCount);
+		
+		return result;
+		
+	}
+	
+	
+
+
+	@Override
+	public List<AddrView> search(AddrParam addrParam,Paging paging) {
+
+		List<AddrView> result = null;
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		result = addrViewDao.search(conn, addrParam, paging);
+		
+		return result;
+	
+	}
+	
 	
 	
 }

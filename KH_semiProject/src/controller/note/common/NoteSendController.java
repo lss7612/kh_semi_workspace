@@ -26,6 +26,13 @@ public class NoteSendController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		List<Integer> selectedUserList = noteService.getSelectedUserList(req);
+		List<String> selectedUserNameList = noteService.getSelectedUserNameList(req);
+		
+		System.out.println(selectedUserList);
+		req.setAttribute("selectedUserList", selectedUserList);
+		req.setAttribute("selectedUserNameList", selectedUserNameList);
+		
 		List<NoteReceiverView> manUser = noteService.getManUser();
 		List<NoteReceiverView> accUser = noteService.getAccUser();
 		List<NoteReceiverView> hrUser = noteService.getHrUser();

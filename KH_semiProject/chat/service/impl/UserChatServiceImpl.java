@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import common.JDBCTemplate;
+import common.Paging;
 import dao.face.UserChatDao;
 import dao.impl.UserChatDaoImpl;
 import dto.Chat;
@@ -45,10 +48,10 @@ public class UserChatServiceImpl implements UserChatService{
 	}
 	
 	@Override
-	public List<Chat> userChatList(int user_no) {
+	public List<Chat> userChatList(List rlist, int user_no) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		return userChatDao.selectUserChatList(conn, user_no);
+		return userChatDao.selectUserChatList(conn, rlist, user_no);
 	}
 	
 	@Override
@@ -134,5 +137,40 @@ public class UserChatServiceImpl implements UserChatService{
 		return userChatDao.getMsgNum(conn, chatting_no);
 	}
 	
+	@Override
+	public List getUserChatRoom(int user_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		List rList = userChatDao.getUserChatRoomList(conn,user_no);
+		
+		return rList;
+	}
 
+	@Override
+	public Paging getPaging(HttpServletRequest req) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//전달 파라미터를 파싱
+		String param = req.getParameter("curPage");
+		int curPage =0;
+		if( param!=null && !"".equals(param)) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		//회원의 총 게시글수를 조회한다.
+		int totalCount = userChatDao.selectCntAll(conn);
+		
+		//Paging 객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+	
+	@Override
+	public List<ChatUserList> userList(int user_no, Paging paging) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		return userChatDao.getUserList(conn, user_no, paging);
+	}
 }

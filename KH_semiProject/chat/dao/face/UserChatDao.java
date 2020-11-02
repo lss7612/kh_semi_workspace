@@ -3,6 +3,7 @@ package dao.face;
 import java.sql.Connection;
 import java.util.List;
 
+import common.Paging;
 import dto.Chat;
 import dto.ChatUserInfo;
 import dto.ChatUserList;
@@ -40,7 +41,7 @@ public interface UserChatDao {
 	 * @param user_no - 조회할 회원 번호
 	 * @return 채팅 리스트
 	 */
-	public List<Chat> selectUserChatList(Connection conn, int user_no);
+	public List<Chat> selectUserChatList(Connection conn, List rlist, int user_no);
 
 	/**
 	 *  전달받은 회원 번호를 제외하고 목록을 가져온다.
@@ -106,6 +107,24 @@ public interface UserChatDao {
 	 * @return - 메시지 번호
 	 */
 	public int getMsgNum(Connection conn, int chatting_no);
+
+	/**
+	 * 회원번호로 속해있는 채팅방 번호를 조회한다.
+	 * @param conn - db연결 객체
+	 * @param user_no - 조회할 회원 번호
+	 * @return - 채팅방 번호 리스트
+	 */
+	public List getUserChatRoomList(Connection conn, int user_no);
+
+	/**
+	 * 회원의 전체 수를 계산한다.
+	 * @param conn - db연결객체
+	 * @return - 회원의 수
+	 */
+	public int selectCntAll(Connection conn);
+
+	
+	public List<ChatUserList> getUserList(Connection conn, int user_no, Paging paging);
 
 	
 

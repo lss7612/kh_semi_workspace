@@ -2,6 +2,9 @@ package service.face;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import common.Paging;
 import dto.Chat;
 import dto.ChatUserInfo;
 import dto.ChatUserList;
@@ -33,7 +36,7 @@ public interface UserChatService {
 	 * userno를 통해 유저의 대화를 List화 하기
 	 * @param user_no
 	 */
-	public List<Chat> userChatList(int user_no);
+	public List<Chat> userChatList(List rlist, int user_no);
 
 	/**
 	 * 채팅 상대를 선택할 목록을 가져온다.
@@ -81,6 +84,24 @@ public interface UserChatService {
 	 * @return - 메시지 번호
 	 */
 	public int getLeastMsgNum(int chatting_no);
+
+	/**
+	 * 회원번호가 속해있는 채팅방 번호를 갖고온다.
+	 * @param user_no - 조회할 회원 번호
+	 * @return - 방 리스트
+	 */
+	public List getUserChatRoom(int user_no);
+
+
+	/**
+	 * 회원 목록을 페이징 처리한다.
+	 * @param user_no : 접속한회원 번호
+	 * @return : 페이징
+	 */
+	public Paging getPaging(HttpServletRequest req);
+
+	
+	public List<ChatUserList> userList(int user_no, Paging paging);
 
 
 	

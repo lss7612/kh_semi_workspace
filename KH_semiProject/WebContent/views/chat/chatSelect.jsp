@@ -20,6 +20,9 @@ th,td{
 	border : 3px solid #ccc;
 }
 </style>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 <h1>대화 상대 선택하기</h1>
@@ -27,7 +30,7 @@ th,td{
 <h3> 본인은 목록에서 <span style="color:red;">제외</span>되어 나타납니다.</h3>
 <hr>
 <h3> 사 내 주 소 록</h3>
-<form name="select" action="/chat/room" method="post" 
+<form name="select" action="/chat/room" method="get" 
 	onsubmit="return check()">
 <table id="chatUserList" >
 	<tr>
@@ -54,9 +57,11 @@ th,td{
 	<% } %>
 </table>
 <br>
+<jsp:include page="./chatPaging.jsp" />
+<br><br><br>
 <div id="buttonTray">
-<input type="submit" id="ok">
-<button id="cancel" onclick="history.back()">취소</button>
+<input type="submit" id="ok" >
+<button id="cancel" onClick="location.href='/chathome'" type="button">취소</button>
 </div>
 </form>
 

@@ -20,24 +20,33 @@ public class Appr {
 	private Timestamp holiday_start;
 	private Timestamp holiday_end;
 	private String appr_holi_kind;
+	
+	//추가해줌내가 ..유저아이디값받아올려고
+	private String User_id;
+	
+	//ApprovalMyDetail용
+	private String mid_auth_name;
+	private String final_auth_name;
+	private String file_name;
+	private String file_origin_name;
+	private String file_path;
+	private String User_name;
 	@Override
 	public String toString() {
 		return "Appr [apprl_no=" + apprl_no + ", user_no=" + user_no + ", mid_auth=" + mid_auth + ", final_auth="
 				+ final_auth + ", aprvl_state=" + aprvl_state + ", create_date=" + create_date + ", final_date="
 				+ final_date + ", aprvl_type=" + aprvl_type + ", aprvl_title=" + aprvl_title + ", aprvl_article="
-				+ aprvl_article + ", table_no=" + table_no + ", send_user_no=" + holiday_start + ", holiday_start=" + send_user_no +", holiday_end=" + holiday_end +",appr_holi_kind"+appr_holi_kind+ "]";
+				+ aprvl_article + ", table_no=" + table_no + ", send_user_no=" + send_user_no + ", holiday_start="
+				+ holiday_start + ", holiday_end=" + holiday_end + ", appr_holi_kind=" + appr_holi_kind + ", User_id="
+				+ User_id + ", mid_auth_name=" + mid_auth_name + ", final_auth_name=" + final_auth_name + ", file_name="
+				+ file_name + ", file_origin_name=" + file_origin_name + ", file_path=" + file_path + ", User_name="
+				+ User_name + "]";
 	}
 	public int getApprl_no() {
 		return apprl_no;
 	}
 	public void setApprl_no(int apprl_no) {
 		this.apprl_no = apprl_no;
-	}
-	public String getAppr_holi_kind() {
-		return appr_holi_kind;
-	}
-	public void setAppr_holi_kind(String appr_holi_kind) {
-		this.appr_holi_kind = appr_holi_kind;
 	}
 	public int getUser_no() {
 		return user_no;
@@ -117,7 +126,60 @@ public class Appr {
 	public void setHoliday_end(Timestamp holiday_end) {
 		this.holiday_end = holiday_end;
 	}
+	public String getAppr_holi_kind() {
+		return appr_holi_kind;
+	}
+	public void setAppr_holi_kind(String appr_holi_kind) {
+		this.appr_holi_kind = appr_holi_kind;
+	}
+	public String getUser_id() {
+		return User_id;
+	}
+	public void setUser_id(String user_id) {
+		User_id = user_id;
+	}
+	public String getMid_auth_name() {
+		return mid_auth_name;
+	}
+	public void setMid_auth_name(String mid_auth_name) {
+		this.mid_auth_name = mid_auth_name;
+	}
+	public String getFinal_auth_name() {
+		return final_auth_name;
+	}
+	public void setFinal_auth_name(String final_auth_name) {
+		this.final_auth_name = final_auth_name;
+	}
+	public String getFile_name() {
+		return file_name;
+	}
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
+	}
+	public String getFile_origin_name() {
+		return file_origin_name;
+	}
+	public void setFile_origin_name(String file_origin_name) {
+		this.file_origin_name = file_origin_name;
+	}
+	public String getFile_path() {
+		return file_path;
+	}
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
+	}
+	public String getUser_name() {
+		return User_name;
+	}
+	public void setUser_name(String user_name) {
+		User_name = user_name;
+	}
 
+
+	
+
+
+	
 	
 	
 	

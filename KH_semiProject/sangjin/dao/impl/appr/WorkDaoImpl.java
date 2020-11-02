@@ -1,28 +1,28 @@
 package dao.impl.appr;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import common.JDBCTemplate;
-import dao.appr.FileDao;
+import dao.appr.WorkDao;
 import dto.appr.Appr;
 import dto.appr.ApprFile;
 
-public class FileDaoImpl implements FileDao {
+public class WorkDaoImpl implements WorkDao {
 
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
-
+	
+	
 	@Override
 	public int insertParam(Connection connection, Appr appr) {
 		String sql = "";
 		//APRVL_STATE -->결재계 (휴가계=1넣음)
 		sql += "INSERT INTO TB_APPROVAL(APRVL_NO,USER_NO,MID_AUTH,FINAL_AUTH,APRVL_STATE,CREATE_DATE,\r\n"
-				+ "FINAL_DATE,APRVL_TYPE,APRVL_TITLE,APRVL_ARTICLE,TABLE_NO,HOLIDAY_START,HOLIDAY_END,APPR_HOLI_KIND)";
-		sql += " VALUES(TB_APPROVAL_SEQ.nextval,(select user_no from tb_user where user_id=?),?,?,1,'20-10-28','20-10-30' ,?,?,?,70,SUBSTR(?, 1, 8),SUBSTR(?, 1, 8),?)";
+				+ "FINAL_DATE,APRVL_TYPE,APRVL_TITLE,APRVL_ARTICLE,TABLE_NO)";
+		sql += " VALUES(TB_APPROVAL_SEQ.nextval,(select user_no from tb_user where user_id=?),?,?,1,'20-10-28','20-10-30' ,?,?,?,70)";
 		System.out.println(sql);
 
 		/// 해야할거 ??넣기 ,aprvl_type... 현재시각~마감시각 받아서 넣기
@@ -38,10 +38,6 @@ public class FileDaoImpl implements FileDao {
 		    System.out.println(appr.getAprvl_type());
 		    System.out.println(appr.getAprvl_title());
 		    System.out.println(appr.getAprvl_article());
-		    System.out.println(appr.getAprvl_type());
-//		    System.out.println(start_day);
-//		    System.out.println(end_day);
-		    System.out.println(appr.getAppr_holi_kind());
 		    System.out.println("중간결재자 : "+appr.getMid_auth());
 		    System.out.println("파이널결재자 : "+appr.getFinal_auth());
 		    
@@ -59,9 +55,6 @@ public class FileDaoImpl implements FileDao {
 			ps.setString(4, appr.getAprvl_type());
 			ps.setString(5, appr.getAprvl_title());
 			ps.setString(6, appr.getAprvl_article());
-			ps.setTimestamp(7, appr.getHoliday_start());
-			ps.setTimestamp(8,  appr.getHoliday_end());
-			ps.setString(9, appr.getAppr_holi_kind());
 
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -73,6 +66,8 @@ public class FileDaoImpl implements FileDao {
 		return result;
 	}
 
+	
+	
 	@Override
 	public int insertFile(Connection connection, ApprFile uploadFile) {
 		String sql = "";
@@ -97,5 +92,4 @@ public class FileDaoImpl implements FileDao {
 		}
 		return result;
 	}
-
 }

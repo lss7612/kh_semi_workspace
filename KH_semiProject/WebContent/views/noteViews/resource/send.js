@@ -81,6 +81,9 @@
       }
     });
 
+    let cntTest = $('#receiver:last-child').val();
+    console.log(cntTest)
+    
     let cnt = 0;
     $('#add').click(function () {
       /*console.log('clicked');
@@ -91,10 +94,14 @@
     	  return
 	  }
       
-      for(var i=0; i < cnt; i++){
-    	  /*console.log('start')
+      for(var i=-15; i < cnt; i++){
+    	  console.log('start')
     	  console.log($('.view>option:selected').val())
-    	  console.log($('.receivers').eq(i).val())*/
+    	  console.log($('.receivers').eq(i).val())
+    	  if($('.receivers').eq(i).val()==null){
+    		  continue;
+    		  cnt++;
+    	  }
     	  if($('.view>option:selected').val()==$('.receivers').eq(i).val()){
     	  alert('이미 선택한 수신인입니다.')
     	  
@@ -108,8 +115,19 @@
 
       $('#receiver').append(
         '<input type ="text" readonly="readonly" width="30px;" name="receiver' 
-		  +cnt +'" class="receivers" value="' +$('.view > option:selected').val() +'">'
+		  +cnt +'" style="display:none;"class="receivers" value="' +
+		  $('.view > option:selected').val() +'">'
       );
+      
+      
+      console.log($('.view>option:selected').text())
+      var numSelect = document.getElementById("select");
+      
+      
+	  $('#receiver').append(
+    	'<span style="border:1px solid grey;">'+$('.view>option:selected').text() +'</span>'
+      )
+      
       cnt++;
     });
   });

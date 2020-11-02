@@ -18,6 +18,16 @@
 	List<NoteReceiverView> salesUser = (List<NoteReceiverView>) request.getAttribute("salesUser");
 %>
 
+<%
+	List<Integer> selectedUsers = (List<Integer>) request.getAttribute("selectedUserList");
+%>
+
+
+<%
+	List<Integer> selectedUsersName = (List<Integer>) request.getAttribute("selectedUserNameList");
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +54,12 @@
 				</tr>
 				<tr>
 					<td>받는사람</td>
-					<td id="receiver"></td>
+					<td id="receiver">
+					<% for(int i = -1; i > -selectedUsers.size()-1; i-- ){ %>
+					<input type ="text" style="" readonly="readonly" width="30px;" name="receiver<%=i %>" class="receivers" 
+					value="<%= selectedUsers.get(-(i+1))%>"/>
+					<% } %>
+					</td>
 					<td></td>
 				</tr>
 				<tr>
@@ -134,6 +149,7 @@
 		</table>
 	</form>
 	</div>
+	
 	<jsp:include page="/views/noteViews/buttons.jsp" />
 </body>
 </html>

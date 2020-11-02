@@ -12,142 +12,65 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
         
-        <script type="text/javascript">
-          window.onload = function () {
-            /* ajaxToServer(); */
+        <script type="text/javascript" src="/views/addrViews/resource/view.js"></script>
 
-            $("button[name='userid']").click(function () {
-              console.log('clicked');
-              $(this).toggleClass('ASC');
-              if ($(this).hasClass('ASC')) {
-                var isASC = 'ASC';
-                var arrayCondition = 'userid';
-                postArrayCondition(isASC, arrayCondition);
-              } else {
-                var isASC = 'DESC';
-                var arrayCondition = 'userid';
-                postArrayCondition(isASC, arrayCondition);
-              }
-            });
-            $("button[name='username']").click(function () {
-              console.log('clicked');
-              $(this).toggleClass('ASC');
-              if ($(this).hasClass('ASC')) {
-                var isASC = 'ASC';
-                var arrayCondition = 'username';
-                postArrayCondition(isASC, arrayCondition);
-              } else {
-                var isASC = 'DESC';
-                var arrayCondition = 'username';
-                postArrayCondition(isASC, arrayCondition);
-              }
-            });
-            $("button[name='dept']").click(function () {
-              console.log('clicked');
-              $(this).toggleClass('ASC');
-              if ($(this).hasClass('ASC')) {
-                var isASC = 'ASC';
-                var arrayCondition = 'dept';
-                postArrayCondition(isASC, arrayCondition);
-              } else {
-                var isASC = 'DESC';
-                var arrayCondition = 'dept';
-                postArrayCondition(isASC, arrayCondition);
-              }
-            });
-            $("button[name='position']").click(function () {
-              console.log('clicked');
-              $(this).toggleClass('ASC');
-              if ($(this).hasClass('ASC')) {
-                var isASC = 'ASC';
-                var arrayCondition = 'position';
-                postArrayCondition(isASC, arrayCondition);
-              } else {
-                var isASC = 'DESC';
-                var arrayCondition = 'position';
-                postArrayCondition(isASC, arrayCondition);
-              }
-            });
-          };
-
-          function postArrayCondition(isASC, arrayCondition) {
-            var params = 'arrayCondition=' + arrayCondition + '&isASC=' + isASC;
-            sendRequest('POST', '/address/view', params, getArrayCondition);
-          }
-          
-          function getArrayCondition() {
-            if (httpRequest.readyState == 4) {
-              if (httpRequest.status == 200) {
-                console.log('정상응답');
-                
-              } else {
-                console.log('AJAX요청/응답 에러');
-              }
-            }
-          }
-          
-
-        </script>
-
-        <style type="text/css">
-          table,
-          th,
-          td {
-            border: 1px solid #ccc;
-          }
-        </style>
+        <link rel="stylesheet" href="/views/addrViews/resource/view.css"></link>
       </head>
 
       <body>
         <h1>주소록</h1>
         <hr />
-        <content>
           <article>
             <div id="search">
               <form action="/address/search" method="GET">
-                <select>
-                  <option value="all" selected="selected">전체</option>
+                <select name="classification">
                   <option value="userid">아이디</option>
-                  <option value="username">이름</option>
+                  <option value="username" selected="selected">이름</option>
                   <option value="dept">부서</option>
                   <option value="position">직급</option>
                   <option value="cellphone">전화번호</option>
                 </select>
-                <input type="text" name="keyword"><button name:="search">검색</button>
+                <input type="text" name="keyword"><button name="search">검색</button>
               </form>
             </div>
             <hr>
               <div id="list">
+              <form id="sendNote" action="/note/send" method="GET">
             <table>
               <thead>
                 <tr>
                   <th></th>
-                  <th>사번</th>
-                  <th><button name="userid" class="ASC">아이디</button></th>
-                  <th><button name="username" class="content_title ASC">이름</button></th>
-                  <th><button name="dept" class="ASC">부서</button></th>
-                  <th><button name="position" class="ASC">직급</button></th>
+                  <th><span>사번</span></th>
+                  <th><span name="dept" class="ASC">부서</span></th>
+                  <th><span name="position" class="ASC">직급</span></th>
+                  <th><span name="username" class="content_title ASC">이름</span></th>
+                  <th><span name="userid" class="ASC">아이디</span></th>
                   <th>휴대전화</th>
                 </tr>
               </thead>
-                <% for (int i = 0; i < list.size(); i++) { %>
                 <tbody>
-                  <tr>
-                    <td><input type="checkbox" name="" id=""></td>
-                    <td><%=list.get(i).getUser_no()%></td>
-                    <td><%=list.get(i).getUser_id()%></td>
-                    <td><%=list.get(i).getUser_name() %></td>
-                    <td><%=list.get(i).getDept_name() %></td>
-                    <td><%=list.get(i).getPosition_name() %></td>
-                    <td><%=list.get(i).getCellphone_no() %></td>
+                <% for (int i = 0; i < list.size(); i++) { %>
+                  <tr class="">
+                    <td><input type="checkbox" name="receiver_no<%=i%>" value="<%=list.get(i).getUser_no()%>"></td>
+                    <td class="user_no"><%=list.get(i).getUser_no()%></td>
+                    <td class="dept_name"><%=list.get(i).getDept_name() %></td>
+                    <td class="position_name"><%=list.get(i).getPosition_name() %></td>
+                    <td class="user_name">
+                    	<span class="users"><%=list.get(i).getUser_name() %></span>
+                    </td>
+                    <td class="user_id"><%=list.get(i).getUser_id()%></td>
+                    <td class="cellphone_no"><%=list.get(i).getCellphone_no() %></td>
+                    <td><span class="chat">채팅하기</span></td>
                   </tr>
                   <% } %>
                 </tbody>
               </table>
+              </form>
             </div>
-           <jsp:include page="/views/addrViews/paging.jsp" />
+            <hr>
+       		<button class="sendNote">쪽지보내기</button>
           </article>
-        </content>
+           <jsp:include page="/views/addrViews/paging.jsp" />
       </body>
     </html> </AddrView
 ></AddrView>

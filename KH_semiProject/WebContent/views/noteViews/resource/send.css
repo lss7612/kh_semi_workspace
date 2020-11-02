@@ -45,4 +45,16 @@ form {
 	
 }
 
+#receiver > span{
+	margin: 0 5px;
+}
+
+#receiver > span:hover {
+	cursor:pointer;
+	position: relative;
+	color:pink;
+	border:1px solid pink;
+	bottom:3px;
+}
+
 

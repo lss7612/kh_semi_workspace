@@ -53,7 +53,7 @@
 		
 	</div>
 	<div class="buttons">
-		<span class="cursor reply">답장</span>
+		<span class="cursor reply" style="display:none">답장</span>
 		<span class="cursor restore">복구</span>
 		<span class="cursor toReceivedNoteList">받은쪽지함으로</span>
 		<span class="cursor toSendNoteList">보낸쪽지함으로</span>

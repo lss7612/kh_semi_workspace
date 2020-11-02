@@ -19,6 +19,8 @@ public class Test extends HttpServlet {
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 			System.out.println("get");
+			System.out.println("tets"+req.getParameter("selectUserNo"));
+			
 		}
 		
 		@Override

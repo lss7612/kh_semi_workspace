@@ -75,6 +75,7 @@
           </tbody>
         </table>
         </form>
+        <br><br>
       </div>
       <hr>
         <button class="deleteAll">선택삭제</button>

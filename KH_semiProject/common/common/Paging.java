@@ -2,27 +2,27 @@ package common;
 
 public class Paging {
 
-	private int curPage;	//ÇöÀç ÆäÀÌÁö ¹øÈ£
+	private int curPage;	//í˜„ì¬ í˜ì´ì§€ ë²ˆí˜¸
 	
-	private int totalCount;	//ÃÑ °Ô½Ã±Û ¼ö
-	private int listCount;	//ÇÑ ÆäÀÌÁö´ç Ãâ·ÂµÉ °Ô½Ã±Û ¼ö
-	private int totalPage;	//ÃÑ ÆäÀÌÁö ¼ö
+	private int totalCount;	//ì´ ê²Œì‹œê¸€ ìˆ˜
+	private int listCount;	//í•œ í˜ì´ì§€ë‹¹ ì¶œë ¥ë  ê²Œì‹œê¸€ ìˆ˜
+	private int totalPage;	//ì´ í˜ì´ì§€ ìˆ˜
 	
-	private int pageCount;	//ÇÑ È­¸é¿¡ º¸¿©Áú ÆäÀÌÁö³×ÀÌ¼Ç ¼ö
-	private int startPage;	//È­¸é¿¡ º¸ÀÌ´Â ½ÃÀÛ ÆäÀÌÁö ¹øÈ£
-	private int endPage;	//È­¸é¿¡ º¸ÀÌ´Â ³¡ ÆäÀÌÁö ¹øÈ£
+	private int pageCount;	//í•œ í™”ë©´ì— ë³´ì—¬ì§ˆ í˜ì´ì§€ë„¤ì´ì…˜ ìˆ˜
+	private int startPage;	//í™”ë©´ì— ë³´ì´ëŠ” ì‹œì‘ í˜ì´ì§€ ë²ˆí˜¸
+	private int endPage;	//í™”ë©´ì— ë³´ì´ëŠ” ë í˜ì´ì§€ ë²ˆí˜¸
 	
-	private int startNo;	//È­¸é¿¡ º¸ÀÌ´Â ÆäÀÌÁöÀÇ ½ÃÀÛ °Ô½Ã±Û ¹øÈ£
-	private int endNo;		//È­¸é¿¡ º¸ÀÌ´Â ÆäÀÌÁöÀÇ ³¡ °Ô½Ã±Û ¹øÈ£
+	private int startNo;	//í™”ë©´ì— ë³´ì´ëŠ” í˜ì´ì§€ì˜ ì‹œì‘ ê²Œì‹œê¸€ ë²ˆí˜¸
+	private int endNo;		//í™”ë©´ì— ë³´ì´ëŠ” í˜ì´ì§€ì˜ ë ê²Œì‹œê¸€ ë²ˆí˜¸
 	
-	//ÃÑ °Ô½Ã±Û ¼ö¸¸ ÀÔ·ÂÇÏ´Â »ı¼ºÀÚ
+	//ì´ ê²Œì‹œê¸€ ìˆ˜ë§Œ ì…ë ¥í•˜ëŠ” ìƒì„±ì
 	public Paging(int totalCount) {
 		this.setTotalCount(totalCount);
 		
 		this.makePaging();
 	}
 	
-	//ÃÑ °Ô½Ã±Û ¼ö, ÇöÀç ÆäÀÌÁö¸¦ ÀÔ·ÂÇÏ´Â »ı¼ºÀÚ
+	//ì´ ê²Œì‹œê¸€ ìˆ˜, í˜„ì¬ í˜ì´ì§€ë¥¼ ì…ë ¥í•˜ëŠ” ìƒì„±ì
 	public Paging(int totalCount, int curPage) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
@@ -30,7 +30,7 @@ public class Paging {
 		this.makePaging();
 	}
 
-	//ÃÑ °Ô½Ã±Û ¼ö, ÇöÀç ÆäÀÌÁö, º¸¿©Áú °Ô½Ã±Û ¼ö¸¦ ÀÔ·ÂÇÏ´Â »ı¼ºÀÚ
+	//ì´ ê²Œì‹œê¸€ ìˆ˜, í˜„ì¬ í˜ì´ì§€, ë³´ì—¬ì§ˆ ê²Œì‹œê¸€ ìˆ˜ë¥¼ ì…ë ¥í•˜ëŠ” ìƒì„±ì
 	public Paging(int totalCount, int curPage, int listCount) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
@@ -39,7 +39,7 @@ public class Paging {
 		this.makePaging();
 	}
 	
-	//ÃÑ °Ô½Ã±Û ¼ö, ÇöÀç ÆäÀÌÁö, º¸¿©Áú °Ô½Ã±Û ¼ö, º¸¿©Áú ÆäÀÌÁö ¼ö¸¦ ÀÔ·ÂÇÏ´Â »ı¼ºÀÚ
+	//ì´ ê²Œì‹œê¸€ ìˆ˜, í˜„ì¬ í˜ì´ì§€, ë³´ì—¬ì§ˆ ê²Œì‹œê¸€ ìˆ˜, ë³´ì—¬ì§ˆ í˜ì´ì§€ ìˆ˜ë¥¼ ì…ë ¥í•˜ëŠ” ìƒì„±ì
 	public Paging(int totalCount, int curPage, int listCount, int pageCount) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
@@ -49,33 +49,32 @@ public class Paging {
 		this.makePaging();
 	}
 	
-	//ÆäÀÌÂ¡ Á¤º¸ »ı¼º ¸Ş¼Òµå
+	//í˜ì´ì§• ì •ë³´ ìƒì„± ë©”ì†Œë“œ
 	private void makePaging() {
-		if(totalCount == 0)		return; //°Ô½Ã±ÛÀÌ ¾ø´Â °æ¿ì
+		if(totalCount == 0)		return; //ê²Œì‹œê¸€ì´ ì—†ëŠ” ê²½ìš°
 		
-		//±âº»°ª ¼³Á¤
-		if(curPage == 0)	setCurPage(1);	//Ã¹ ÆäÀÌÁö·Î ±âº»°ª ¼¼ÆÃ
-		if(pageCount == 0)	setPageCount(10);	//È­¸é¿¡ º¸¿©Áú ÆäÀÌÁö ¼ö ±âº»°ª ¼¼ÆÃ
-		if(listCount == 0)	setListCount(10);	//È­¸é¿¡ º¸¿©Áú °Ô½Ã±Û ¼ö ±âº»°ª ¼¼ÆÃ
+		//ê¸°ë³¸ê°’ ì„¤ì •
+		if(curPage == 0)	setCurPage(1);	//ì²« í˜ì´ì§€ë¡œ ê¸°ë³¸ê°’ ì„¸íŒ…
+		if(pageCount == 0)	setPageCount(10);	//í™”ë©´ì— ë³´ì—¬ì§ˆ í˜ì´ì§€ ìˆ˜ ê¸°ë³¸ê°’ ì„¸íŒ…
+		if(listCount == 0)	setListCount(10);	//í™”ë©´ì— ë³´ì—¬ì§ˆ ê²Œì‹œê¸€ ìˆ˜ ê¸°ë³¸ê°’ ì„¸íŒ…
 		
-		//ÃÑ ÆäÀÌÁö ¼ö °è»ê
-		totalPage = totalCount / listCount; // ÃÑ °Ô½Ã±Û¼ö / ÇÑÆäÀÌÁö´ç Ãâ·ÂµÉ °Ô½Ã±Û ¼ö
+		//ì´ í˜ì´ì§€ ìˆ˜ ê³„ì‚°
+		totalPage = totalCount / listCount;
 		if( totalCount % listCount > 0 )	totalPage++;
 
-		//ÇöÀç ÆäÀÌÁö°ª º¸Á¤
-		//ÇöÀç ÆäÀÌÁö(curPage)°¡ ÃÑ ÆäÀÌÁö(totalPage)º¸´Ù Å¬ ¶§ ÃÑÆäÀÌÁö·Î °íÁ¤ 
+		//í˜„ì¬ í˜ì´ì§€ê°’ ë³´ì •
+		//í˜„ì¬ í˜ì´ì§€(curPage)ê°€ ì´ í˜ì´ì§€(totalPage)ë³´ë‹¤ í´ ë•Œ ì´í˜ì´ì§€ë¡œ ê³ ì • 
 		if(totalPage < curPage)	curPage = totalPage;
 		
-		//È­¸é¿¡ º¸¿©Áú ÆäÀÌÁö³×ÀÌ¼Ç ½ÃÀÛ¹øÈ£¿Í ³¡¹øÈ£
-		startPage = ( (curPage-1)/pageCount ) * pageCount + 1; 
-		//È­¸é¿¡ º¸ÀÌ´Â½ÃÀÛÆäÀÌÁö ¹øÈ£ = ((ÇöÀçÆäÀÌÁö-1)/ÇÑ È­¸é¿¡ º¸¿©Áú ÆäÀÌÁö³×ÀÌ¼Ç ¼ö) * ÇÑÈ­¸é¿¡ º¸¿©Áú ÆäÀÌÁö³×ÀÌ¼Ç 
+		//í™”ë©´ì— ë³´ì—¬ì§ˆ í˜ì´ì§€ë„¤ì´ì…˜ ì‹œì‘ë²ˆí˜¸ì™€ ëë²ˆí˜¸
+		startPage = ( (curPage-1)/pageCount ) * pageCount + 1;
 		endPage = startPage + pageCount - 1;
 		
-		//³¡ÆäÀÌÁö ¹øÈ£ º¸Á¤
-		//³¡ÆäÀÌÁö(endPage)°¡ ÃÑ ÆäÀÌÁö(totalPage)º¸´Ù Å¬ ¶§ ÃÑ ÆäÀÌÁö·Î °íÁ¤
+		//ëí˜ì´ì§€ ë²ˆí˜¸ ë³´ì •
+		//ëí˜ì´ì§€(endPage)ê°€ ì´ í˜ì´ì§€(totalPage)ë³´ë‹¤ í´ ë•Œ ì´ í˜ì´ì§€ë¡œ ê³ ì •
 		if( endPage > totalPage ) endPage = totalPage;
 
-		//È­¸é¿¡ º¸¿©Áú °Ô½Ã±Û ½ÃÀÛ¹øÈ£¿Í ³¡¹øÈ£
+		//í™”ë©´ì— ë³´ì—¬ì§ˆ ê²Œì‹œê¸€ ì‹œì‘ë²ˆí˜¸ì™€ ëë²ˆí˜¸
 		startNo = (curPage-1) * listCount + 1;
 		endNo = curPage * listCount;
 
@@ -87,76 +86,59 @@ public class Paging {
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
 	}
-
-	public final int getCurPage() {
+	
+	public int getCurPage() {
 		return curPage;
 	}
-
-	public final void setCurPage(int curPage) {
+	public void setCurPage(int curPage) {
 		this.curPage = curPage;
 	}
-
-	public final int getTotalCount() {
+	public int getTotalCount() {
 		return totalCount;
 	}
-
-	public final void setTotalCount(int totalCount) {
+	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
-
-	public final int getListCount() {
+	public int getListCount() {
 		return listCount;
 	}
-
-	public final void setListCount(int listCount) {
+	public void setListCount(int listCount) {
 		this.listCount = listCount;
 	}
-
-	public final int getTotalPage() {
+	public int getTotalPage() {
 		return totalPage;
 	}
-
-	public final void setTotalPage(int totalPage) {
+	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-
-	public final int getPageCount() {
+	public int getPageCount() {
 		return pageCount;
 	}
-
-	public final void setPageCount(int pageCount) {
+	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
-
-	public final int getStartPage() {
+	public int getStartPage() {
 		return startPage;
 	}
-
-	public final void setStartPage(int startPage) {
+	public void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
-
-	public final int getEndPage() {
+	public int getEndPage() {
 		return endPage;
 	}
-
-	public final void setEndPage(int endPage) {
+	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
-
-	public final int getStartNo() {
+	public int getStartNo() {
 		return startNo;
 	}
-
-	public final void setStartNo(int startNo) {
+	public void setStartNo(int startNo) {
 		this.startNo = startNo;
 	}
-
-	public final int getEndNo() {
+	public int getEndNo() {
 		return endNo;
 	}
-
-	public final void setEndNo(int endNo) {
+	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
 	

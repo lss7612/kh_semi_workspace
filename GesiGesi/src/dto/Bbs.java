@@ -16,6 +16,15 @@ public class Bbs {
 	private int user_no;
 	private int readcount;
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Bbs [table_no=" + table_no + ", article_no=" + article_no + ", article_content=" + article_content
+				+ ", article_pw=" + article_pw + ", article_title=" + article_title + ", revision_date=" + revision_date
+				+ ", attfile_no=" + attfile_no + ", isdelete=" + isdelete + ", user_ip=" + user_ip + ", user_no="
+				+ user_no + ", readcount=" + readcount + "]";
+	}
 	public int getTable_no() {
 		return table_no;
 	}

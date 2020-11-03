@@ -43,7 +43,8 @@
 		}
 		
 		Bbs bbs = new BbsDAO().getBbs(article_no);
-		if (!user_id.equals(bbs.getUser_id())) {
+// 		if (!user_id.equals(bbs.getUser_id())) {
+		if (true) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('권한이 없습니다.')");
@@ -60,8 +61,9 @@
 				script.println("</script>");
 			} else {
 				BbsDAO BbsDAO = new BbsDAO();
-				int result = BbsDAO.update(bbsID, request.getParameter("bbsTitle"),
-						request.getParameter("bbsContent"));
+				int result = 1;
+// 				int result = BbsDAO.update(bbsID, request.getParameter("bbsTitle"),
+// 						request.getParameter("bbsContent"));
 				if (result == -1) {
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

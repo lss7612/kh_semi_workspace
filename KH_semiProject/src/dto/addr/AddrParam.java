@@ -2,11 +2,11 @@ package dto.addr;
 
 public class AddrParam {
 
-	//arrayConditionÀº userid, username, dept, position 4°¡Áö°¡ µé¾î°¥ ¼ö ÀÖ´Ù.
+	//arrayConditionï¿½ï¿½ userid, username, dept, position 4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¥ ï¿½ï¿½ ï¿½Ö´ï¿½.
 	private String arrayCondition = "username";
 	private String search = "";
 	//serachCondition = userid, username, dept, position
-	private String searchCondition = "All";
+	private String searchCondition;
 	private boolean isASC = true;
 	
 	

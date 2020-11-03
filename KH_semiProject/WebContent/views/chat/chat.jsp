@@ -1,9 +1,11 @@
+<%@page import="socket.BroadSocket2"%>
 <%@page import="dto.ChatUserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page errorPage ="./errorPage.jsp" %>
     <% ChatUserInfo user = (ChatUserInfo) session.getAttribute("userinfo"); %>
-    <% ChatUserInfo opponentUser = (ChatUserInfo) request.getAttribute("opponentInfo"); %>
+    <% ChatUserInfo opponentUser = (ChatUserInfo) request.getAttribute("user1_info"); %>
+    <% int chatting_no = (int)request.getAttribute("chatting_no"); %>
     <% String userIp = (String) session.getAttribute("userIp"); %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +14,19 @@
 <title><%=opponentUser.getUser_name() %>님과 대화</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style type="text/css">
-@import url(../css/custom.css)
+
+</style>
+<style type="text/css">
+#chatContent{
+	height : 300x;
+	width : 1000px;
+	border : 1px solid;
+	font-size : 14px;
+	border-radius : 4px;
+	padding : 8px;
+	resize : none;
+}
+
 </style>
 </head>
 <body>
@@ -23,7 +37,7 @@
 			<div class="portlet portlet-default">
 				<div class="portlet-heading">
 					<div class="portlet-title">
-						<h4><i class="fa fa-circle text-green"></i>실시간 채팅창</h4>
+						<h4><i class="fa fa-circle text-green"></i><%=opponentUser.getUser_name() %>님과 대화</h4>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -34,11 +48,13 @@
 					<div class="portlet-footer">
 						<div class="row" style="height:90px;">
 							<div class="form-group col-xs-10">
-								<textarea id="chatContent" style="height : 80px;"  class="form-control" onKeyDown="pressEnter()" placeholder="메시지를 입력하세요." maxlength="100"></textarea>
+								<textarea id="chatContent" style="height : 80px;"  class="form-control" 
+									onKeyDown="pressEnter()" maxlength="100"></textarea>
 							</div>
 							<div class="form-group col-xs-2">
 								<!--<button type="button" class="btn btn-default pull-right" onclick="submitFunction();" onclick="sendMessage()">전송</button> -->
-								<button type="button" class="btn btn-default pull-right" onclick="sendMessage()">전송</button>
+								<button type="button" class="btn btn-default pull-right" 
+								onclick="sendMessage()">전송</button>
 								<input id="disconnBtn" value="나가기" type="button" />
 								<div class="clear-fix"></div>
 							</div>
@@ -71,25 +87,22 @@
     // WebSocket 오브젝트 생성 (자동으로 접속 시작한다. - onopen 함수 호출)
     webSocket = new WebSocket("ws://localhost:8088/broadsocket");
     
-    // 콘솔 텍스트 에리어 오브젝트
-    var messageTextArea = document.getElementById("chatlist");
-    
     // WebSocket 서버와 접속이 되면 호출되는 함수
     webSocket.onopen = function(message) {
 	    // 콘솔 텍스트에 메시지를 출력한다.
-	    $('#chatlist').append('<div class="row">'+ 
-				"<%=opponentUser.getUser_name() %>님과 대화가 시작되었습니다.\n" +
-				'</div>');
-<%-- 		messageTextArea.value += "<%=opponentUser.getUser_name() %>님과 대화가 시작되었습니다.\n"; --%>
+	    $('#chatlist').append('<div class="row">'+ '<strong>'
+	    		+"<%=opponentUser.getUser_name() %>"+'</strong>'
+	    		+"님과 대화가 시작되었습니다.\n" +
+				'</div>' +'<hr>');
    	};
    
     // WebSocket 서버와 접속이 끊기면 호출되는 함수
     webSocket.onclose = function(message) {
 		// 콘솔 텍스트에 메시지를 출력한다.
-		$('#chatlist').append('<div class="row">'+ 
-				"<%=opponentUser.getUser_name() %>님과 대화가 종료되었습니다." 
-				+'</div>');
-<%-- 		messageTextArea.value += "<%=opponentUser.getUser_name() %>님과 대화가 종료되었습니다.\n"; --%>
+		$('#chatlist').append('<div class="row">'+ '<strong>'
+				+"<%=opponentUser.getUser_name() %>"+'</strong>'
+				+"님과 대화가 종료되었습니다." 
+				+'</div>'+'<hr>');
    	};
    
     // WebSocket 서버와 통신 중에 에러가 발생하면 요청되는 함수
@@ -108,10 +121,20 @@
 	  
 
     //입력창에서 Enter를 누르면 호출되는 함수
+    //	enter : 전송
+    //	shift + enter : 줄바꿈
     function pressEnter(){
     	if(event.keyCode == 13){
-    		sendMessage();
+    		if( !event.shiftkey){
+	    		if( $('#chatContent').val !=""){
+	    		sendMessage();
+	  			//$('#chatContent').vla("");
+	  			//$('#chatContent').blur();
+	  			$('#chatContent').empty();
+	    		}
+    		}
     	}
+      	//document.getElementByID("chatList").value="";
     }
     
     // Send 버튼을 누르면 호출되는 함수
@@ -122,24 +145,36 @@
 		var userDeptName = " <%=user.getDept_name()%> /";
 		var userPositionName= " <%=user.getPosition_name() %>";
 		var userNo = "<%=user.getUser_no() %>";
-      	// 송신 메시지를 작성하는 텍스트 박스 오브젝트를 취득
+      	// 송신 메시지를 저장한다.
       	var message = $('#chatContent').val();
-		//var message = document.getElementById("textMessage");
+		
+      	//입력되 내용이 없으면 함수 중단
+		if ( message == ""){
+			return false;
+		}
 		
 		console.log(message);
+		
       	// 콘솔 텍스트에 메시지를 출력한다.
-      	$('#chatlist').append("<div class='row userinfo'>" 
-			+ userName + userDeptName + userPositionName + "</div>"); 
+      	$('#chatlist').append("<div class='row userinfo'><strong>" 
+			+ userName + userDeptName + userPositionName + "</strong></div>"); 
 		$('#chatlist').append("<div class='row message'>"
-			+ message + "</div>"+"<hr>");
+			+ message + "</div><hr>");
 		// messageTextArea.value += userName + userDeptName + userPositionName +"\n" 
 			//+ message.value + "\n";
       
-      // WebSocket 서버에 메시지를 전송(형식 「{{유저명}}메시지」)
-      webSocket.send("{{"+ userNo + userName + userDeptName + userPositionName +"}}"+ message);
-	<%--webSocket.send("{{" + '<%=user.getUser_name()%> / <%=user.getDept_name()%> / <%=user.getPosition_name()%>\n' + "}}" + message.value); --%>
-      // 송신 메시지를 작성한 텍스트 박스를 초기화한다.
-		$('#chatContent').val('');
+		// WebSocket 서버에 메시지를 전송(형식 「{{유저명}}메시지」)
+		webSocket.send("{{"+ userNo + userName + userDeptName + userPositionName +"}}"+ message);
+
+		//메시지를 작성전송 하고 텍스트 박스를 초기화한다.
+		$('#chatContent').val("");
+		if( $('#chatContent').val()=="\n"){
+			console.log("개행문자가 들어가있습니다.");
+		}
+		console.log($('#chatContent').val());
+		$('#chtContent').blur();
+      	//포커스 설정
+      	//document.getElementById("chatContent").focus();
 		$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
     }
     

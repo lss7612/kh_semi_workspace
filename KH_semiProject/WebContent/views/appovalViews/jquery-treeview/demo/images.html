@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<title>jQuery treeview</title>
+
+	<link rel="stylesheet" href="/views/appovalViews/jquery-treeview/jquery.treeview.css" />
+<!--     <link rel="stylesheet" href="/views/appovalViews/jquery-treeview/red-treeview.css" /> -->
+	<link rel="stylesheet" href="/views/appovalViews/jquery-treeview/demo/screen.css" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	<script src="/views/appovalViews/jquery-treeview/demo/jquery.cookie.js"></script>
+	<script src="/views/appovalViews/jquery-treeview/jquery.treeview.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#browser").treeview();
+		});
+	</script>
+
+	</head>
+	<body>
+
+<!-- 	<h1 id="banner"><a href="http://bassistance.de/jquery-plugins/jquery-plugin-treeview/">jQuery Treeview Plugin</a> Demo</h1> -->
+	<div id="main">
+
+	<h4>결재권자 추가</h4>
+	<ul id="browser" class="filetree">
+		<li class="closed"><img src="/views/appovalViews/jquery-treeview/images/folder.gif" /> 경영지원팀
+			<ul>
+				<li> <img src="/views/appovalViews/jquery-treeview/images/file.gif" />전차장</li>
+			</ul>
+		</li>
+		<li class="closed"><img src="/views/appovalViews/jquery-treeview/images/folder.gif" />개발팀
+			<ul>
+				<li><img src="/views/appovalViews/jquery-treeview/images/file.gif" />개발팀 이사</li>
+				<li class="closed"><img src="/views/appovalViews/jquery-treeview/images/folder.gif" />개발1팀
+					<ul id="folder21">
+						<li><img src="/views/appovalViews/jquery-treeview/images/file.gif" /> 윤과장</li>
+						<li><img src="/views/appovalViews/jquery-treeview/images/file.gif" />정대리</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li class="closed"><img src="/views/appovalViews/jquery-treeview/images/folder.gif" />세미프로젝트팀
+			<ul>
+				<li><img src="/views/appovalViews/jquery-treeview/images/file.gif" />구경화</li>
+				<li><img src="/views/appovalViews/jquery-treeview/images/file.gif" />김광수</li>
+				<li><img src="/views/appovalViews/jquery-treeview/images/file.gif" />김상진</li>
+				<li><img src="/views/appovalViews/jquery-treeview/images/file.gif" />남아현</li>
+				<li><img src="/views/appovalViews/jquery-treeview/images/file.gif" />박병주</li>
+				<li><img src="/views/appovalViews/jquery-treeview/images/file.gif" />이상성</li>
+				
+			</ul>
+		</li>
+		
+	</ul>
+
+</div>
+
+</body></html>

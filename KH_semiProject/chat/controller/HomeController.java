@@ -33,7 +33,7 @@ public class HomeController extends HttpServlet {
 		//채팅 유저 정보 객체 생성
 		ChatUserInfo user = null;
 		
-		//유저 정보 가져오기
+		//유저 정보 가져오기(전달받은 id를 이용하여)
 		user = userChatService.infoById(req.getParameter("userid"));
 		
 		//세션에 유저 정보 저장
@@ -46,9 +46,11 @@ public class HomeController extends HttpServlet {
 		//응답 전달
 		req.setAttribute("user", user);
 		req.setAttribute("userIp", userIp);
-		req.getRequestDispatcher("/WEB-INF/views/chat/home.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/chat/home.jsp").forward(req, resp);
+		
 	}
 	
+	//클라이언트 ip가져오기
 	public static String getRemoteAddr(HttpServletRequest request) {
         String ip = null;
         ip = request.getHeader("X-Forwarded-For");

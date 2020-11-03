@@ -1,20 +1,38 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="dto.note.NoteList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <% List<NoteList> list = (List<NoteList>) request.getAttribute("list"); %>
+<% List<String> sdl = new ArrayList<>(); %>
+
+<%for(int i = 0; i < list.size(); i ++){ %>
+<% String send_date = list.get(i).getSend_date(); %>
+<% sdl.add(i, send_date); %>
+<%} %>
+    
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>받은쪽지함</title>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
+    <script type="text/javascript" src="/views/noteViews/resource/receivedList.js"></script>
+    
+    <link rel="stylesheet" href="/views/noteViews/resource/sendList,receivedList.css"></link>
+    
   </head>
   <body>
     <h1>받은 쪽지함</h1>
     <hr />
 
     <article>
-      <div id="search">
-        <form action="" method="POST">
+      <div class ="wrapper" id="search">
+        <form id="search" action="/test" method="GET">
           <select>
             <option value="all" selected="selected">전체</option>
             <option value="title">제목</option>
@@ -26,34 +44,37 @@
         </form>
       </div>
       <hr>
-        <div id="list">
+        <div class ="wrapper" id="list">
+      <form id="deleteAll" action="/note/receivednotedelete" method="GET">
       <table>
         <thead>
           <tr>
             <th></th>
-            <th>쪽지번호</th>
+            <th>no</th>
             <th>제목</th>
             <th>보낸사람</th>
             <th>보낸시간</th>
           </tr>
         </thead>
-          <% for (int i = 0; i < list.size(); i++) { %>
           <tbody>
+          <% for (int i = 0; i < list.size(); i++) { %>
             <tr>
-              <td><input type="checkbox" name="" id=""></td>
-              <td><%=list.get(i).getNote_no() %></td>
-              <td><%=list.get(i).getNote_title() %></td>
-              <td><%=list.get(i).getSender_name()%></td>
-              <td><%=list.get(i).getSend_date() %></td>
+              <td class="checkbox"><input type="checkbox" name="note_no<%=i%>" value="<%=list.get(i).getNote_no()%>" id=""></td>
+              <td class="note_no"><%=list.get(i).getNote_no() %></td>
+              <td class="title"><span class ="content_title"><%=list.get(i).getNote_title() %></span></td>
+              <td class="receiver_name"><span><%=list.get(i).getSender_name()%></span></td>
+              <td class="send_date"><%=sdl.get(i)%></td>
             </tr>
             <% } %>
           </tbody>
           
         </table>
-        <hr>
-        <button>선택삭제</button>
+        </form>
       </div>
+      <hr>
+        <button class="deleteAll">선택삭제</button>
     </article>
-
+	<jsp:include page="/views/noteViews/received_paging.jsp" />
+	<jsp:include page="/views/noteViews/buttons.jsp" />
   </body>
 </html>

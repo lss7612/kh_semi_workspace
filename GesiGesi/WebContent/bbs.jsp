@@ -75,10 +75,8 @@
 
 	<div class="container">
 		<div class="row">
-			<!-- 홀수와 짝수로 색상이 변경됨 -->
 			<table class="table table-striped"
 				style="text-align: center; border: 1px solid #dddddd">
-				<!-- thead : 테이블의 제목부분 각각의 속성들을 알려주는 역할. -->
 				<thead>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">번호</th>
@@ -95,11 +93,12 @@
 					%>
 					<tr>
 						<td><%=list.get(i).getArticle_no()%></td>
-						<td><a href="view.jsp?bbsID=<%=list.get(i).getArticle_no()%>">
+						<td><a href="/board?ano=<%=list.get(i).getArticle_no()%>">
 						<%=list.get(i).getArticle_title()%></a></td>
 						<td><%=list.get(i).getUser_no()%></td>
 						<td><%=list.get(i).getRevision_date() %></td>
 						</tr>
+						
 					<%
 						}
 					%>

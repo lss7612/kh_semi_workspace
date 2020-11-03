@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
-<title>Rodin login</title>
+<title>WorkJob</title>
 </head>
 <body>
 	<%
@@ -21,7 +21,7 @@
 			<button type="button" class="navbar-toggle collapsed"
 				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
 				aria-expanded="false">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				<span class="icon-bar"></span> <span class="icon-bar"><c/span> <span
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="main.jsp">WorkJob</a>
@@ -66,7 +66,6 @@
 				<!-- 홀수와 짝수로 색상이 변경됨 -->
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd">
-					<!-- thead : 테이블의 제목부분 각각의 속성들을 알려주는 역할을 합니다. -->
 					<thead>
 						<tr>
 							<th colspan="2"
@@ -77,11 +76,11 @@
 					<tbody>
 						<tr>
 							<td><input type="text" class="form-control"
-								placeholder="글 제목" name="bbsTitle" maxlength="50"></td>
+								placeholder="글 제목" name="article_title" maxlength="50"></td>
 						</tr>
 						<tr>
 							<td><textarea class="form-control" placeholder="글 내용"
-									name="bbsContent" maxlength="2048" style="height: 350px;"></textarea></td>
+									name="article_content" maxlength="2048" style="height: 350px;"></textarea></td>
 						</tr>
 					</tbody>
 				</table>

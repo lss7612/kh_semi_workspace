@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ page errorPage ="/error" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +38,7 @@
     	<h3>관리자 승인을 기다려주세요.</h3>
     	<h4>가입 당일 ~ 1일 소요 됩니다.</h4>
     	<br>
-    	 <button type="button" class="btn btn-block btn-primary"  onclick="location.href='#로그인페이지'">로그인 화면으로 이동</button>
+    	 <button type="button" class="btn btn-block btn-primary"  onclick="location.href='/Login/login'">로그인 화면으로 이동</button>
     	
     	
     	

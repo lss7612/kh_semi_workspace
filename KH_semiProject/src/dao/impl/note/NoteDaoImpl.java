@@ -441,9 +441,10 @@ public class NoteDaoImpl implements NoteDao {
 		sql += " 	ON S.note_no = N.note_no";
 		sql += " 	WHERE s.user_no = ?";  //이부분을 세션의 유저넘버값을 받아와야한다.
 		sql += " 	AND isDelete = ?"; //) t1";
-		sql += "	 ORDER BY send_date DESC) t1";
+		sql += "	 ) t1";
 		sql += " INNER JOIN tb_user u";
 		sql += "     ON t1.receiver_no = u.user_no";
+		sql += "	ORDER BY send_date DESC";
 		sql += " ) t2 WHERE t2.rnum BETWEEN ? AND ?";
 		
 			try {

@@ -1,8 +1,10 @@
-<%@page import="dto.ChatUserInfo"%>
+<%@page import="dto.common.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page errorPage ="./errorPage.jsp" %>
-<% ChatUserInfo user = (ChatUserInfo)request.getAttribute("user"); %>
+<%
+	UserInfo user = (UserInfo)request.getAttribute("user");
+%>
 <!DOCTYPE html>
 <html>
 <head>

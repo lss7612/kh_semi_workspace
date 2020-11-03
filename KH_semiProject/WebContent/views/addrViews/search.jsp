@@ -5,19 +5,16 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% List<AddrView>
   list = (List<AddrView
     >) request.getAttribute("list"); %>
-    <html>
-      <head>
-        <meta charset="UTF-8" />
+ <jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
         <title>주소록</title>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
         <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
         
         <script type="text/javascript" src="/views/addrViews/resource/view.js"></script>
 
         <link rel="stylesheet" href="/views/addrViews/resource/search.css"></link>
-      </head>
-
-      <body>
+  
+<div class="content-wrapper">
         <h1>주소록</h1>
         <hr />
           <article>
@@ -30,7 +27,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   <option value="position">직급</option>
                   <option value="cellphone">전화번호</option>
                 </select>
-                <input type="text" name="keyword"><button name="search">검색</button>
+                <input type="text" name="keyword"><button>검색</button>
               </form>
             </div>
             <hr>
@@ -74,6 +71,5 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
        		<button class="sendNote">쪽지보내기</button>
           </article>
            <jsp:include page="/views/addrViews/search_paging.jsp" />
-      </body>
-    </html> </AddrView
-></AddrView>
+   </div>
+   <jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

@@ -2,6 +2,23 @@ table > thead > tr > th, table > tbody > tr > td {
 	line-height:24px;
 }
 
+
+
+.classification {
+	
+	width: 100px;
+	padding: .5em .3em;
+	border: 1px solid #999;
+	font-family: inherit;
+	background: url('/resources/images/selectbarimg.jpg') no-repeat 95% 50%;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	cursor:pointer;
+	
+}
+
 thead tr th span {
 	cursor: pointer;
 }

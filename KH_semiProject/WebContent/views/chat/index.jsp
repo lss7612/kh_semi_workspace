@@ -11,14 +11,14 @@
 <h1>로그인</h1>
 <hr>
 
-<form action="/home" method="doget">
+<form action="/homec" method="get">
 <table>
 	<tr>
 		<td>아이디</td>
 		<td><input type="text" id="userid" name="userid"></td>
 	</tr>
 	<tr>
-		<td>비밀번호</td>
+		<td>비밀번호</td>                                                                                                                                                          
 		<td><input type="text" id="userpw" name="userpw"></td>
 	</tr>
 	<tr>

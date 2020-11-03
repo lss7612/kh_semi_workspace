@@ -5,32 +5,31 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% List<AddrView>
   list = (List<AddrView
     >) request.getAttribute("list"); %>
-    <html>
-      <head>
-        <meta charset="UTF-8" />
+    <jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
+
         <title>주소록</title>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
         <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
-        
         <script type="text/javascript" src="/views/addrViews/resource/view.js"></script>
+        <script type="text/javascript" src="/views/noteViews/resource/selectAll.js"></script>
 
         <link rel="stylesheet" href="/views/addrViews/resource/view.css"></link>
-      </head>
+ 
 
-      <body>
+<div class="content-wrapper">
         <h1>주소록</h1>
         <hr />
           <article>
             <div id="search">
               <form action="/address/search" method="GET">
-                <select name="classification">
+                <input type="text" class="keyword"name="keyword"><button class="search">검색</button>
+                <select class="classification" name="classification">
                   <option value="userid">아이디</option>
                   <option value="username" selected="selected">이름</option>
                   <option value="dept">부서</option>
                   <option value="position">직급</option>
                   <option value="cellphone">전화번호</option>
                 </select>
-                <input type="text" name="keyword"><button name="search">검색</button>
               </form>
             </div>
             <hr>
@@ -39,7 +38,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <table>
               <thead>
                 <tr>
-                  <th></th>
+                  <th><input type="checkbox" class="selectAllCheckbox"/></th>
                   <th><span>사번</span></th>
                   <th><span name="dept" class="ASC">부서</span></th>
                   <th><span name="position" class="ASC">직급</span></th>
@@ -71,6 +70,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
        		<button class="sendNote">쪽지보내기</button>
           </article>
            <jsp:include page="/views/addrViews/paging.jsp" />
-      </body>
-    </html> </AddrView
-></AddrView>
+  </div>
+
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

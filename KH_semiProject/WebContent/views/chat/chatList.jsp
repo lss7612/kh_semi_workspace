@@ -1,49 +1,72 @@
 <%@page import="java.util.List"%>
-<%@page import="dto.Chat"%>
-<%@page import="dto.ChatUserInfo"%>
+<%@page import="dto.chat.Chat"%>
+<%@page import="dto.common.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page errorPage ="./errorPage.jsp" %>
-    <% ChatUserInfo userinfo = (ChatUserInfo)session.getAttribute("userinfo"); %>
-    <% List<Chat> chatList = (List<Chat>)request.getAttribute("chatList"); %>
+    <%
+    	UserInfo userinfo = (UserInfo)session.getAttribute("userinfo");
+    %>
+    <% List<Chat> chatList = (List<Chat>) request.getAttribute("chatList"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>채팅 목록</title>
 <style type="text/css">
-#chatListTable{
-	border : 1px solid #ccc;
+.chatlist{
+    border: solid steelblue;
+    overflow-y: auto; 
+    width:400px; 
+    height: 600px;
 }
-th,td{
-	border : 3px solid #ccc;
+.chatlist::-webkit-scrollbar{
+  display:none;
+}
+.chatrow{
+    height : 45px;
+    width : 394px;
+    border: 3px solid #ccc;
+}
+
+.msgname{
+    height :50px;
+    width: 300px;
+    display: inline;
+}
+.msgtime{
+    display : inline;
+    text-align : right;
+    display: inline;
+    font-size: small;
+}
+.msgcontent{
+  text-align : right;
+}
+
+.bg1{
+    background-color: turquoise;
+}
+.bg2{
+    background-color: white;
 }
 </style>
+
 </head>
 <body>
 <h1><%=userinfo.getUser_name() %>님의 대화 목록</h1>
 <h3>IP 주소 : <%=session.getAttribute("userIp")%></h3>
 <hr>
 <h3> 채팅 목록</h3>
-<table id="chatListTable">
-	<tr>
-		<th>방 번호</th>
-		<th>대화상대</th>
-		<th>내용</th>
-		<th>시간 </th>
-	</tr>
+<div class="chatlist" ">
 <% for(Chat c : chatList){ %>
-	<tr>
-		<% if ( userinfo.getUser_name().equals( c.getUser_name() )) { %>
-		<% continue; }  else {%>
-		<td><%=c.getChatting_no() %></td>
-		<td><%=c.getUser_name() %></td>
-		<td><%=c.getRevision_date() %></td>
-		<td><%=c.getRevision_date() %></td>
-		<% } %>
-	</tr>
+		<div class="chatrow" onclick="location.href='/chat/room?selectUserNo=<%=c.getUser_no() %>'">
+			<div class="msgname" ><%=c.getUser_name() %></div>
+			<div class="msgtime"><%=c.getRevision_date() %></div>
+			<div class="msgcontent"><%=c.getMsg_content() %></div>
+		</div>
 <% } %>
-</table>
-		
+</div>
+
 </body>
 </html>

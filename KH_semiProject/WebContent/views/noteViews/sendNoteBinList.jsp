@@ -12,25 +12,19 @@
 <% sdl.add(i, send_date); %>
 <%} %>
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
+<jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
 <script type="text/javascript" src="/views/noteViews/resource/sendNoteBin.js"></script>
+<script type="text/javascript" src="/views/noteViews/resource/selectAll.js"></script>
     
 <link rel="stylesheet" href="/views/noteViews/resource/sendList,receivedList.css"></link>
-
-</head>
-<body>
+	<div class="content-wrapper">
     <h1>보낸 쪽지 휴지통</h1>
     <hr />
 
     <article>
-      <div class ="wrapper" id="search">
+      <div class ="wrapper" id="search" style="display:none;">
         <form id="search" action="/test" method="GET">
           <select>
             <option value="all" selected="selected">전체</option>
@@ -48,7 +42,7 @@
       <table>
         <thead>
           <tr>
-            <th></th>
+            <th><input type="checkbox" class="selectAllCheckbox"></th>
             <th>no</th>
             <th>제목</th>
             <th>받는사람</th>
@@ -79,6 +73,5 @@
     </article>
 	<jsp:include page="/views/noteViews/sendNoteBinList_paging.jsp" />
 	<jsp:include page="/views/noteViews/buttons.jsp" />
-
-</body>
-</html>
+	</div>
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

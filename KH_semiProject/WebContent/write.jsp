@@ -1,100 +1,68 @@
+<%@page import="dto.SessionDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width" , initial-scale="1">
-<link rel="stylesheet" href="css/bootstrap.css">
-<title>Rodin login</title>
-</head>
-<body>
-	<%
-		String user_id = null;
-		if (session.getAttribute("user_id") != null) {
-			user_id = (String) session.getAttribute("user_id");
+<% SessionDTO user_info = (SessionDTO) session.getAttribute("userinfo");  %>
+<% String user_id = (String)request.getAttribute("userid"); %>
+
+<jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
+<script type="text/javascript">
+window.onload = function() {
+	writeForm.onsubmit = function() {
+//  		alert("form submit")
+		
+		var article_title_value = document.getElementsByName("article_title")[0];
+		var article_content_value = document.getElementsByName("article_content")[0];
+
+		if( article_title_value == '' || article_title_value == null ) {
+			alert("입력이 안 된 사항이 있습니다.")
+			return false;
 		}
+		if( article_content_value == '' || article_content_value == null ) {
+			alert("입력이 안 된 사항이 있습니다.")
+			return false;
+		}
+		
+	}
+}
+</script>
+
+
+	<%
+// 		String user_id = null;
+// 		if (session.getAttribute("user_id") != null) {
+// 			user_id = (String) session.getAttribute("user_id");
+// 		}
 	%>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-				aria-expanded="false">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="main.jsp">WorkJob</a>
-		</div>
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="main.jsp">메인</a></li>
-				<li class="active"><a href="bbs.jsp">게시판</a></li>
-			</ul>
-			
-				<%
-				//로그인이 되어 있지 않다면 
-				if (user_id == null) {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					role="button" aria-haspopup="true" data-toggle="dropdown"
-					aria-expanded="false">접속하기<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="login.jsp">로그인</a></li>
-						<li><a href="join.jsp">회원가입</a></li>
-					</ul></li>
-			</ul>
-			<%
-				} else {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					role="button" aria-haspopup="true" data-toggle="dropdown"
-					aria-expanded="false">회원관리<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="logoutAction.jsp">로그아웃</a></li>
-					</ul></li>
-			</ul>
-			<% } %>
-		</div>
-	</nav>
-	<div class="container">
+	
+	
+<div class="content-wrapper">
 		<div class="row">
-			<form method="post" action="writeAction.jsp">
-				<!-- 홀수와 짝수로 색상이 변경됨 -->
+			<form id="writeForm" method="post" action="/nowrite"  style="width:100%; ">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd">
-					<!-- thead : 테이블의 제목부분 각각의 속성들을 알려주는 역할을 합니다. -->
 					<thead>
 						<tr>
-							<th colspan="2"
-								style="background-color: #eeeeee; text-align: center;">게시판
-								글쓰기 양식</th>
+							<th colspan="2" style="background-color: #eeeeee; text-align: center;">공지사항</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><input type="text" class="form-control"
-								placeholder="글 제목" name="bbsTitle" maxlength="50"></td>
+								placeholder="글 제목" name="article_title" maxlength="50"></td>
 						</tr>
 						<tr>
 							<td><textarea class="form-control" placeholder="글 내용"
-									name="bbsContent" maxlength="2048" style="height: 350px;"></textarea></td>
+									name="article_content" maxlength="2048" style="height: 500px;"></textarea></td>
 						</tr>
+<!-- 						<tr> -->
+<!-- 							<td><input type="file" name="upfile" /></td>  -->
+<!-- 						</tr> -->
 					</tbody>
 				</table>
 				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
 			</form>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-1.11.3.js"
-		integrity="sha256-IGWuzKD7mwVnNY01LtXxq3L84Tm/RJtNCYBfXZw3Je0="
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-		crossorigin="anonymous"></script>
-</body>
-</html>
+	
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

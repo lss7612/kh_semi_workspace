@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -35,9 +36,23 @@ public class ChatListController extends HttpServlet {
 		int user_no = user.getUser_no();
 		System.out.println(user_no);
 		
-		//회원번호를 통해 진행중인 채팅 목록 가져오기
-		List<Chat> chatList = userChatService.userChatList(user_no);		
+		//세션의 userinfO에서 회원 이름 가져오기
+		String user_name = user.getUser_name();
+		System.out.println(user_name);
+		
+		//회원이 속한 채팅방 번호 가져오기
+		List rlist = new ArrayList();
+		rlist = userChatService.getUserChatRoom(user_no);
+		
+		System.out.println(user_name+"가 속한 채팅반 번호");
+		for(int i=0;i < rlist.size(); i++) {
+			System.out.print(rlist.get(i)+" / ");
+		}
+		
+		//회원번호,회원 이름을 통해 진행중인 채팅 목록과 마지막대화내용, 시간 가져오기
+		List<Chat> chatList = userChatService.userChatList(rlist, user_no);		
 	
+		
 		req.setAttribute("chatList", chatList);
 		req.getRequestDispatcher("/views/chat/chatList.jsp").forward(req, resp);
 		

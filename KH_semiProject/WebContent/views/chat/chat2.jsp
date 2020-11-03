@@ -59,6 +59,7 @@
 		} // 엔터키를 입력했을 경우 끝
 	}//pressEnter 함수 끝
   
+	
 	//Send 버튼을 누르면 호출되는 함수
 	//#chatContent에 작성된 내용을 DB로 보내 저장한다.
 	function sendMessage() {
@@ -98,15 +99,16 @@
 	
 	
 	//db에서 메세지 로드해오기.
-	var msg_no = 0;
+	var msg_no = <%=clist.size() %>;
 	function msgload( ){
 		var roomNo = "<%=chatting_no %>";
 		var userNo = "<%=user.getUser_no() %>";
 		var userNo2 = "<%=opponentUser.getUser_no() %>";
-		
+		console.log(msg_no);
 		$.ajax({
 			type:"POST"
 			, url : "/chat/msgload"
+			, async : false
 			, data : {
 				chatting_no : roomNo
 				, user0_no : userNo
@@ -122,13 +124,15 @@
 				//console.log (clist[1][0].value);
 				//console.log (clist[1][1].value);
 				//console.log (clist[1][2].value);
-				$('#chatList').empty();
-				for (var i = 0; i<data.last; i++){
-					console.log("반복문 안에 들어왔나요?");
-					$('#chatList').append(clist[i][0].value);
-					$('#chatList').append(clist[i][1].value);
-					$('#chatList').append(clist[i][2].value);
-					//msg_no = data.last;
+				//$('#chatList').empty();
+				if( msg_no < data.last){
+					for (msg_no; msg_no<data.last; msg_no++){
+						console.log("반복문 안에 들어왔나요?");
+						$('#chatList').append(clist[msg_no][0].value);
+						$('#chatList').append(clist[msg_no][1].value);
+						$('#chatList').append(clist[msg_no][2].value);
+					}
+					msg_no = data.last;
 				}
 				$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
 				msg_no = data.last;

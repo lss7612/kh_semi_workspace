@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>form 태크</h1>
+<hr>
+
+<!-- 메소드 get은 URL정보 다 보여줌  -->
+<form action=" "method="get"">
+
+<!--ID 속성 : HTML문서 내 태그에 고유한 이름을 붙이는 속성  -->
+
+<!-- name 속성 : form태그를 이용하여 서버로 전달된 데이터의 변수명으로 사용 -->
+<label>아이디 <input type="text" name ="userid" id="uid"
+size="15"placeholder="아이디를 입력하세요"/></label><br><br>
+
+
+<label for="upw">패스워드</label>
+<input type="password" name="userpw" id="upw"size="10"placeholder="비빌번호 입력"/><br><br>
+
+<hr>
+
+<label for="chk1">체크1</label>
+<input type="checkbox" id="chk1" name="chk" value="A"/>
+|
+<label for="chk2">체크2</label>
+<input type="checkbox" id="chk2" name="chk" value="B"/>
+|
+<label for="chk3">체크3</label>
+<input type="checkbox" id="chk3" name="chk" checked ="checkde" />
+<br><br>
+
+
+<!--checkbox를 선택(check)하지 않고 전송되면 전달 파라미터 아예 생성하지 않음  -->
+<!--같은 name의 checkbox가 여러개 있어도 각각의 항목을 변수=값으로 전달함  -->
+<!-- value가 적용되어 있지 않은 checkbox는 "on"값을 전달함-->
+<!-- value값이 적용되어있으면 value에 입력된 값을 전달함 --> 
+
+<hr>
+
+
+<!-- radio는 checkbox와 비슷한 동작을 한다  -->
+<!-- 선택된 항목이 없으면 전달 파라미터가 만들어지지 않음 -->
+<!-- 선택된 항목의 값이 vlaue로 전달된다 -->
+<!-- vlaue가 설정되지 않으면 "on"이 전달되기 때문에 value를 반드시 작성하는 것이 좋다 -->
+
+<!--name이 같은 radio끼리는 Radio Group(라디오그룹)이된다  -->
+<!-- 같은 라이도 그룹에서는 한개의 radio만 선택할 수 있다(다중 선택 불가 -->
+
+<label><input type="radio" name="gender"value="m"/> 남 </label>
+<label><input type="radio" name="gender"value="f"/> 여 </label>
+<label><input type="radio" name="gender"value="0"checked="checked"/> 기타 </label> <br><br>
+
+<hr>
+
+
+<input type="button"value="확인"onclick="alert('알림!확인되었습니다.');"/><br><br>
+
+<!-- <input type="submit"/>으로 생성된다 -->
+<button>버튼 태그</button><br><br>
+
+<!--submit이 아닌 일반 button으로 생성하기  -->
+<button type="button">일반 버튼 태그</button>
+
+<hr>
+
+<!-- 파일 선택창  -->
+<input type="file" name="f"><br><br>
+
+<!-- 다중 파일 선택창 -->
+<input type="file" name="f_multi"multiple="multiple"><br><br>
+
+<hr>
+
+<!-- submit : <form>에 작성된 내용을 action에 설정된 URL로 전송 (제출 )-->
+<!--  RESET : <form>에 작성된 내용을 초기화 한단(기본값으로 설정or내용을 지움-->
+
+<input type="submit"value="전송"/>
+<input type="reset"value="초기화"/>
+
+
+<hr>
+<!-- HTML 5부터 추가된 type  -->
+
+<!-- 숫자만 입력 -->
+<!--min부터 step씩 증가되는 값으로 max까지만 처리할 수 있도록 설정  -->
+<!--min,max,step 속성에 해당되지 않는 값은 Sumbit(제출)되지 않는다  -->
+
+number 
+<input type="number" name="n"
+		min="1"max="100"step="2"value="51"/><br><br>
+ 
+<hr>
+<!-- 범위값, 슬라이드바를 이용한 범위값 선택  -->
+
+RANGE
+<input type="range" name="r"
+		min="1"max="5000"step="100" value="500"/><br><br>
+
+
+<hr>
+
+<!-- 이메일 주소 유효성검사 -->
+<!-- 텍스트@텍스트" 형태로 작성된 데이터인지 검증 -->
+Email
+<input type="email"name="e"/><br><br>
+
+<hr>
+
+<!-- URL 형식 유효성 검사 -->
+<!--"프로토콜://도메인" 형태로 작성된 데이터인지 검증  -->
+URL
+<input type="URL" name="u"/><br><br>
+
+<hr>
+
+<!--컬러 피커(Picker> 색상 고르기-->
+COLOR
+<input type="color" name="c"/><br><br>
+
+
+<hr>
+
+
+<!--날짜 피커(date Picker> 색상 고르기-->
+<!-- 선택된 날짜는 yyyy-mm-dd 형식으로 전송된다 -->
+
+DATE
+<input type="date" name="d"value="2011-02-05"/><br><br>
+
+<hr>
+
+
+<!--타임 피커(time Picker> 색상 고르기-->
+<!-- 선택된 시간은 hh24:mi 형식으로 전송된다 -->
+
+Time
+<input type="Time" name="d"value="18:44"/><br><br>
+
+<hr>
+
+<!--datalist태그는 단독으로 사용하면 화면에 나타나지 않는다  -->
+<!-- input태그와 연결해서 사용한다 -->
+
+<!-- ipput태그에 list 속성으로 dayalist 태그 id소성 값을 지정한다 -->
+
+<datalist id="fruits">
+	<option value="apple">사과</option>
+	<option value="banana">바나나</option>
+	<option value="cherry">체리</option>
+</datalist>
+
+<label For="fr">과일</label>
+<input list="fruits" name="f" id="fr"/>
+
+<hr>
+
+
+</form>
+
+<hr>
+
+
+
+
+
+
+</body>
+</html>

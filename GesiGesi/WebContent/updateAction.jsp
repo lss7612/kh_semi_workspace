@@ -42,7 +42,7 @@
 			script.println("</script>");
 		}
 		
-		Bbs bbs = new BbsDAO().getBbs(article_no);
+		Bbs bbs = new BbsDAO().selectByNo(bbs);
 		if (!user_id.equals(bbs.getUser_id())) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");

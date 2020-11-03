@@ -4,6 +4,7 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="dto.Bbs" %>
 <%@ page import="bbs.BbsDAO" %>
+<% Bbs result = (Bbs) request.getAttribute("result"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,18 +20,19 @@
 			user_id = (String) session.getAttribute("user_id");
 		}
 		
-		int article_no = 0;
-		if(request.getParameter("article_no") != null){
-			article_no = Integer.parseInt(request.getParameter("article_no"));
-		}
-		if(article_no == 0) {
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('유효하지 않은 글임')");
-			script.println("location.href = 'bbs.jsp'");
-			script.println("</script>");
-		}
-		Bbs bbs = new BbsDAO().getBbs(article_no);
+// 		int article_no = 0;
+// 		if(request.getParameter("article_no") != null){
+// 			article_no = Integer.parseInt(request.getParameter("article_no"));
+// 		}
+		
+// 		if(article_no == 0) {
+// 			PrintWriter script = response.getWriter();
+// 			script.println("<script>");
+// 			script.println("alert('유효하지 않은 글임')");
+// 			script.println("location.href = 'bbs.jsp'");
+// 			script.println("</script>");
+// 		}
+// 		Bbs bbs = new BbsDAO().getBbs(article_no);
 	%>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
@@ -89,32 +91,33 @@
 				<tbody>
 					<tr>
 						<td style="width: 20%;">글 제목</td>
-						<td colspan="2"><%= bbs.getArticle_title() %>
+						<td colspan="2"><%= result.getArticle_title() %>
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td colspan="2"><%=bbs.getUser_no() %></td>
+						<td colspan="2"><%=result.getUser_no() %></td>
 					</tr>
 					<tr>
 						<td>작성일자</td>
-						<td><%=bbs.getRevision_date() %></td>
+						<td><%=result.getRevision_date() %></td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td colspan="2" style="min-height: 200px; text-align: left;">
-							<!-- 글 내용에서 특수 문자를 보여주기 위한 추가 코딩 --> 
-							<%= bbs.getArticle_content().replaceAll(" "," ").replaceAll("<", "<").replaceAll(">", ">").replaceAll("\n","<br>") %></td>
+							<%= result.getArticle_content().replaceAll(" "," ").replaceAll("<", "<").replaceAll(">", ">").replaceAll("\n","<br>") %></td>
 					</tr>
 				</tbody>
 			</table>
 			<a href="bbs.jsp" class="btn btn-primary">목록</a>
-<%-- 			<% --%>
+<%--  			<%  --%>
 // 				//글작성자 본인일시 수정 삭제 가능
 // 				if (user_no != null && user_no.equals(bbs.getUser_no())) {
-<%-- 			%> --%>
-			<a href="update.jsp?bbsID=<%= article_no %>" class="btn btn-primary">수정</a>
-			<a onclick="return confirm('삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%= article_no %>" class="btn btn-primary">삭제</a>
-<%-- 			<% } %> --%>
+<%--  			%>  --%>
+   			<a class="btn btn-primary" href="update.jsp">수정</a>   
+<%--    			href="update.jsp?bbsID=<%= article_no %>" --%>
+   			<a onclick="return confirm('삭제하시겠습니까?')" href="delete.jsp" class="btn btn-primary">삭제</a>   
+<%--    			href="deleteAction.jsp?bbsID=<%= article_no %>" --%>
+<%--  			<% } %>  --%>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-1.11.3.js"

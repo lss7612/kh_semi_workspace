@@ -5,13 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
 
+import common.JDBCTemplate;
+import dao.BoardDao;
 import dto.Bbs;
 
-public class BbsDAO {
+public class BbsDAO implements BoardDao {
 	
+	private static BbsDAO bbsDao = new BbsDAO();
 	private Connection conn;
 	private ResultSet rs;
 	
@@ -66,20 +67,24 @@ public class BbsDAO {
 	}
 	
 	
-	public int write(String article_title, int user_no, String article_content) {
+	public int write(int user_no, String article_title, String article_content) {
 		String sql = "";
 		sql += "insert into tb_board(table_no, article_no, user_no, article_title, article_content, revision_date, isDelete)";
-		sql += " values('1', article_no_sq, ?, ?, ?, ?, ?)";
+		sql += " values(21, ?, ?, ?, ?, ?, ?)";
 		
-//		String to = Integer.toString(user_no);
+//		Integer.toString(user_no);
 		
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, user_no);
-			ps.setString(2, article_title);
-			ps.setString(3, article_content);
-			ps.setString(4, getDate());
-			ps.setInt(5, 1);
+			ps.setInt(1, getNext());
+			ps.setInt(2, user_no);
+			ps.setString(3, article_title);
+			ps.setString(4, article_content);
+			ps.setString(5, getDate());
+			ps.setInt(6, 1);
+			
+			return ps.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,7 +100,7 @@ public class BbsDAO {
 		
 		sql += "select * from";
 		sql += " (select article_no, article_title, User_no, revision_date, article_content, Isdelete from tb_board";
-	    sql += " WHERE article_no <? and isDelete=1 ORDER BY article_no DESC) WHERE ROWNUM<=10";
+	    sql += " WHERE article_no <? and isDelete = 1 ORDER BY article_no DESC) WHERE ROWNUM<=10";
 		
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
 		
@@ -144,54 +149,168 @@ public class BbsDAO {
 	
 	
 	//글 내용 가져오기
-	public Bbs getBbs(int article_no) {
+//	public Bbs getBbs(int article_no) {
+//		String sql = "";
+//		sql += "select article_no, article_title, User_no, revision_date, article_content, Isdelete from tb_board";
+//		sql += " where article_no = ?";
+//		
+//		Connection conn = null;
+//		PreparedStatement ps = null;
+//		ResultSet rs = null;
+//		Bbs bbs = null;
+//		
+//		try {
+//			conn = JDBCTemplate.getConnection();
+//			ps = conn.prepareStatement(sql);
+////			ps.setInt(1, Integer.parseInt(article_no));
+//			ps.setInt(1, article_no);
+////			System.out.println("에러있나요?");
+//			rs = ps.executeQuery();
+//			
+//			if(rs.next()) {
+//				bbs = new Bbs();
+//				bbs.setArticle_no(rs.getInt("article_no"));;
+//				bbs.setArticle_title(rs.getString("article_title"));
+//				bbs.setUser_no(rs.getInt("user_no"));
+//				bbs.setRevision_date(rs.getTimestamp("revision_date"));
+//				bbs.setArticle_content(rs.getString("article_content"));
+//				bbs.setIsdelete(rs.getInt("isdelete"));
+//				
+//			}
+//			
+////			System.out.println("문제있나요?");
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(conn);
+//		}
+//		return bbs;
+////		return null;
+//	}
+	
+	
+	@Override
+	public Bbs selectByNo(Connection conn, Bbs bbs) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+//		System.out.println("BbsDAO selectByNo - " + bbs);
 		String sql = "";
 		sql += "select article_no, article_title, User_no, revision_date, article_content, Isdelete from tb_board";
 		sql += " where article_no = ?";
 		
+		Bbs res = null;
+		
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, article_no);
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bbs.getArticle_no());
 //			System.out.println("에러있나요?");
 			rs = ps.executeQuery();
 			
-			if(rs.next()) {
-				Bbs bbs = new Bbs();
-				bbs.setArticle_no(rs.getInt(1));;
-				bbs.setArticle_title(rs.getString(2));
-				bbs.setUser_no(rs.getInt(3));
-				bbs.setRevision_date(rs.getTimestamp(4));
-				bbs.setArticle_content(rs.getString(5));
-				bbs.setIsdelete(rs.getInt(6));
-				return bbs;
+			while(rs.next()) {
+				res = new Bbs();
+				res.setArticle_no(rs.getInt("article_no"));;
+				res.setArticle_title(rs.getString("article_title"));
+				res.setUser_no(rs.getInt("user_no"));
+				res.setRevision_date(rs.getTimestamp("revision_date"));
+				res.setArticle_content(rs.getString("article_content"));
+				res.setIsdelete(rs.getInt("isdelete"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
-		return null;
+		return res;
+	}
+	
+	
+//	int user_id, String article_title, String article_content
+	//수정 
+//	public int updatebbs(Bbs bbs) {
+//		int rowCount = 0;
+//		Connection conn = null;
+//		PreparedStatement ps = null;
+//		String sql = "";
+//		sql += "update tb_board set article_title = ?, article_content = ? where article_no = ?";
+//		try {
+//			conn = JDBCTemplate.getConnection();
+//			ps = conn.prepareStatement(sql);
+//			ps.setString(1, bbs.getArticle_title());
+//			ps.setString(2, bbs.getArticle_content());
+//			ps.setInt(3, bbs.getArticle_no());
+//			rowCount = ps.executeUpdate();
+//
+//		} catch (Exception e) {
+//				e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(ps);
+//			JDBCTemplate.close(conn);
+//		}
+//		
+//		return rowCount;
+//
+//	}
+	
+	
+	//삭제
+//	public int deleteBoard(int article_no) {
+//		String sql = "";
+//		sql += "update tb_board set isDelete = 0";
+//		sql += " where article_no = ?";
+//		
+//		try {
+//			PreparedStatement ps = conn.prepareStatement(sql);
+//			ps.setInt(1, article_no);
+//			return ps.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} 
+//		
+//		return -1;
+//	}
+	
+	public int update(Connection conn, Bbs bbs) {
+		PreparedStatement ps = null;
+		String sql = "";
+		sql += "update tb_board set article_title = ?, article_content = ? where article_no = ?";
+		int result = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, bbs.getArticle_title());
+			ps.setString(2, bbs.getArticle_content());
+			ps.setInt(3, bbs.getArticle_no());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		return result;
 	}
 	
 	
 	
-//	//수정 
-//	public int update(int user_id, String article_title, String article_content) {
-//		String sql = "";
-//		sql += "update tb_board set article_title = ?, article_content = ? where article_no = ?";
-//		try {
-//			PreparedStatement ps = conn.prepareStatement(sql);
-//			ps.setString(1, article_title);
-//			ps.setString(2, article_content);
-//			ps.setInt(3, article_no);
-//			return ps.executeUpdate();
-//
-//		} catch (Exception e) {
-//				e.printStackTrace();
-//		}
-//		
-//		return -1; // 데이터베이스 오류
-//	}
 	
+	public static BbsDAO getInstance() {
+		return bbsDao;
+	}
+	
+	
+	
+
+
+@Override
+public void updatebbs(Connection conn, Bbs updatebbs) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
 	
 
 }

@@ -1,12 +1,4 @@
-/.metadata/
-
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
+/build/
 
 .classpath
 .project

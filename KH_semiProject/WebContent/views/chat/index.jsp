@@ -11,7 +11,7 @@
 <h1>로그인</h1>
 <hr>
 
-<form action="/home" method="doget">
+<form action="/homec" method="get">
 <table>
 	<tr>
 		<td>아이디</td>

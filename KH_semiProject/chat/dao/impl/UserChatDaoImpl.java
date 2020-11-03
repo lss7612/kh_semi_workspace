@@ -21,7 +21,7 @@ public class UserChatDaoImpl implements UserChatDao{
 
 	int table_no = 30;
 	@Override
-	public ChatUserInfo bringInfo(Connection conn, String parameter) {
+	public ChatUserInfo bringInfo(Connection conn, String parameter, String userIp) {
 		
 		String sql ="";
 		
@@ -42,6 +42,7 @@ public class UserChatDaoImpl implements UserChatDao{
 				user = new ChatUserInfo();
 				
 				user.setUser_no(rs.getInt("user_no"));
+				user.setUser_id( parameter);
 				user.setUser_name(rs.getString("user_name"));
 				user.setUser_grade( rs.getInt("user_grade"));
 				user.setGrade_name(rs.getString("grade_name"));
@@ -51,6 +52,7 @@ public class UserChatDaoImpl implements UserChatDao{
 				user.setPosition_name( rs.getString("position_name"));
 				user.setState_no( rs.getInt("state_no"));
 				user.setState_name( rs.getString("state_name"));
+				user.setUser_ip( userIp );
 				
 			}
 			

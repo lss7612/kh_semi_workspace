@@ -1,4 +1,3 @@
-<%@page import="socket.BroadSocket2"%>
 <%@page import="dto.ChatUserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

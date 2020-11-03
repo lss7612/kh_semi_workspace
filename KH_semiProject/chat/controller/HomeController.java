@@ -13,7 +13,8 @@ import dto.ChatUserInfo;
 import service.face.UserChatService;
 import service.impl.UserChatServiceImpl;
 
-@WebServlet("/home")
+
+@WebServlet("/homec")
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +23,7 @@ public class HomeController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/home doget 접속");
-
+		
 		//세션 정보 가져오기
 		HttpSession session = req.getSession();
 		
@@ -34,12 +35,11 @@ public class HomeController extends HttpServlet {
 		ChatUserInfo user = null;
 		
 		//유저 정보 가져오기(전달받은 id를 이용하여)
-		user = userChatService.infoById(req.getParameter("userid"));
-		
+		user = userChatService.infoById(req.getParameter("userid"), userIp);
+		 
 		//세션에 유저 정보 저장
 		session.setAttribute("userinfo", user);
 		session.setAttribute("userIp", userIp);
-		
 		//저장된 세션정보 확인
 		System.out.println("session info : "+session.getAttribute("userinfo"));
 		

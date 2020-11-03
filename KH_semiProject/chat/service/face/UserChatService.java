@@ -16,7 +16,7 @@ public interface UserChatService {
 	 * @param parameter - userId
 	 * @return - ChatUserInfo형태의 회원 값
 	 */
-	public ChatUserInfo  infoById(String parameter);
+	public ChatUserInfo  infoById(String parameter, String userIp);
 
 	/**
 	 * 회원번호를 전달받아 회원 정보를 저장한다.

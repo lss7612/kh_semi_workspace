@@ -19,10 +19,10 @@ public class UserChatServiceImpl implements UserChatService{
 
 	private UserChatDao userChatDao = new UserChatDaoImpl();
 	@Override
-	public ChatUserInfo infoById(String parameter) {
+	public ChatUserInfo infoById(String parameter, String userIp) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		return userChatDao.bringInfo(conn, parameter);
+		return userChatDao.bringInfo(conn, parameter, userIp);
 	}
 	
 	@Override

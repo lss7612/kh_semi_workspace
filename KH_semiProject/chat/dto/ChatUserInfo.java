@@ -3,6 +3,7 @@ package dto;
 public class ChatUserInfo {
 
 	private int user_no;
+	private String user_id;
 	private String user_name;
 	private int user_grade;
 	private int dept_no;
@@ -15,16 +16,22 @@ public class ChatUserInfo {
 	private String user_ip;
 	@Override
 	public String toString() {
-		return "ChatUserInfo [user_no=" + user_no + ", user_name=" + user_name + ", user_grade=" + user_grade
-				+ ", dept_no=" + dept_no + ", position_no=" + position_no + ", state_no=" + state_no + ", grade_name="
-				+ grade_name + ", dept_name=" + dept_name + ", position_name=" + position_name + ", state_name="
-				+ state_name + ", user_ip=" + user_ip + "]";
+		return "ChatUserInfo [user_no=" + user_no + ", user_id=" + user_id + ", user_name=" + user_name + ", user_grade="
+				+ user_grade + ", dept_no=" + dept_no + ", position_no=" + position_no + ", state_no=" + state_no
+				+ ", grade_name=" + grade_name + ", dept_name=" + dept_name + ", position_name=" + position_name
+				+ ", state_name=" + state_name + ", user_ip=" + user_ip + "]";
 	}
 	public int getUser_no() {
 		return user_no;
 	}
 	public void setUser_no(int user_no) {
 		this.user_no = user_no;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public String getUser_name() {
 		return user_name;
@@ -85,5 +92,6 @@ public class ChatUserInfo {
 	}
 	public void setUser_ip(String user_ip) {
 		this.user_ip = user_ip;
-	}
+	}	
+	
 }

@@ -16,7 +16,7 @@ public interface UserChatDao {
 	 * @param parameter - userID
 	 * @return ChatUserInfo형태의 반환값
 	 */
-	public ChatUserInfo bringInfo(Connection conn, String parameter);
+	public ChatUserInfo bringInfo(Connection conn, String parameter, String userIp);
 
 	/**
 	 * DB에서 회원번호를 통해 정보를 갖고온다.

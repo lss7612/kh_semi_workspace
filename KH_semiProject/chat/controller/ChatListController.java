@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -52,6 +54,14 @@ public class ChatListController extends HttpServlet {
 		//회원번호,회원 이름을 통해 진행중인 채팅 목록과 마지막대화내용, 시간 가져오기
 		List<Chat> chatList = userChatService.userChatList(rlist, user_no);		
 	
+		Comparator<Chat> comp = new Comparator<Chat>() {
+			@Override
+			public int compare(Chat o1, Chat o2) {
+				return -1 * o1.getRevision_date().compareTo(o2.getRevision_date());
+			}
+		};
+		
+		chatList.sort(comp);
 		
 		req.setAttribute("chatList", chatList);
 		req.getRequestDispatcher("/views/chat/chatList.jsp").forward(req, resp);

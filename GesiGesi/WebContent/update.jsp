@@ -3,6 +3,7 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="dto.Bbs" %>
 <%@ page import="bbs.BbsDAO" %>
+<% Bbs result = (Bbs) request.getAttribute("result"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,14 +37,6 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 글 입니다.')");
-			script.println("location.href = 'bbs.jsp'");
-			script.println("</script>");
-		}
-		Bbs bbs = new BbsDAO().getBbs(article_no);
-		if (!user_id.equals(bbs.getUser_id())) {
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('권한이 없습니다.')");
 			script.println("location.href = 'bbs.jsp'");
 			script.println("</script>");
 		}
@@ -91,16 +84,15 @@
 						<tr>
 							<td><input type="text" class="form-control"
 								placeholder="글 제목" name="article_title" maxlength="50"
-								value="<%=bbs.getArticle_title()%>"></td>
+								value="<%=result.getArticle_title()%>"></td>
 						</tr>
 						<tr>
 							<td><textarea class="form-control" placeholder="글 내용"
-									name="article_content" maxlength="2048" style="height: 350px;"><%=bbs.getArticle_content()%></textarea></td>
+									name="article_content" maxlength="2048" style="height: 350px;"><%=result.getArticle_content()%></textarea></td>
 						</tr>
 					</tbody>
 				</table>
-				<button type="submit" class="btn btn-primary pull-right">글
-					수정</button>
+				<button type="submit" class="btn btn-primary pull-right">수정</button>
 			</form>
 		</div>
 	</div>

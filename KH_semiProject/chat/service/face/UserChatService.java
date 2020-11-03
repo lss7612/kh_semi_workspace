@@ -2,6 +2,9 @@ package service.face;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import common.Paging;
 import dto.Chat;
 import dto.ChatUserInfo;
 import dto.ChatUserList;
@@ -33,7 +36,7 @@ public interface UserChatService {
 	 * userno를 통해 유저의 대화를 List화 하기
 	 * @param user_no
 	 */
-	public List<Chat> userChatList(int user_no);
+	public List<Chat> userChatList(List rlist, int user_no);
 
 	/**
 	 * 채팅 상대를 선택할 목록을 가져온다.
@@ -58,6 +61,47 @@ public interface UserChatService {
 	 */
 	public int searchRoom(int user0_no, int user1_no);
 
+	/**
+	 * 두 회원간의 대화를 가져온다.
+	 * @param user0_no - 회원1 
+	 * @param user1_no - 회원2
+	 * @param chatting_no - 방번호
+	 * @return 대화 리스트
+	 */
+	public List<Chat> getChatList(int user0_no, int user1_no, int chatting_no);
+
+	/**
+	 * 전달받은 메세지를 채팅창에 입력한다.
+	 * @param chatting_no - 방번호
+	 * @param user0_no - 메세지 보낸 유저번호
+	 * @param chatContent - 내용
+	 */
+	public void insertMsg(int chatting_no, int user0_no, String chatContent, String user_ip);
+
+	/**
+	 * 채팅방의 최신 메시지 번호를 가져온다.
+	 * @param chatting_no - 방번호
+	 * @return - 메시지 번호
+	 */
+	public int getLeastMsgNum(int chatting_no);
+
+	/**
+	 * 회원번호가 속해있는 채팅방 번호를 갖고온다.
+	 * @param user_no - 조회할 회원 번호
+	 * @return - 방 리스트
+	 */
+	public List getUserChatRoom(int user_no);
+
+
+	/**
+	 * 회원 목록을 페이징 처리한다.
+	 * @param user_no : 접속한회원 번호
+	 * @return : 페이징
+	 */
+	public Paging getPaging(HttpServletRequest req);
+
+	
+	public List<ChatUserList> userList(int user_no, Paging paging);
 
 
 	

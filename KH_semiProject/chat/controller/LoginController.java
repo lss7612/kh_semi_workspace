@@ -14,14 +14,14 @@ public class LoginController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("login doget 성공");
+		System.out.println("login doget ");
 		
 		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("login dopost 성공");
+		System.out.println("login dopost ");
 		
 	}
 }

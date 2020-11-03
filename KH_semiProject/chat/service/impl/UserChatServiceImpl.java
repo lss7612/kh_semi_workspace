@@ -1,9 +1,13 @@
 package service.impl;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import common.JDBCTemplate;
+import common.Paging;
 import dao.face.UserChatDao;
 import dao.impl.UserChatDaoImpl;
 import dto.Chat;
@@ -44,10 +48,10 @@ public class UserChatServiceImpl implements UserChatService{
 	}
 	
 	@Override
-	public List<Chat> userChatList(int user_no) {
+	public List<Chat> userChatList(List rlist, int user_no) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		return userChatDao.selectUserChatList(conn, user_no);
+		return userChatDao.selectUserChatList(conn, rlist, user_no);
 	}
 	
 	@Override
@@ -61,20 +65,24 @@ public class UserChatServiceImpl implements UserChatService{
 	public int createRoom(int user0_no, int user1_no, int count) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		//1. 채팅방을 개설하여 방번호를 받는다.
-		int chatting_no = 0;
-		chatting_no = userChatDao.selectRoom(conn);
-		
+		//1.채팅방을 생성한다.
 		int result = 0;
 		result = userChatDao.makeRoom(conn, count);
-		//2. 생성된 방 번호를 확인하여 방에 인원 삽입
+		int chatting_no = 0;
+		
 		if (result >0 ) {
-			int roomNo = userChatDao.selectRoom(conn);
-			userChatDao.joinRoom(conn, user0_no, roomNo);
-			userChatDao.joinRoom(conn, user1_no, roomNo);
+			//2. 생성한 채팅방 번호를 구한다.
+			chatting_no = userChatDao.getNextRoomNo(conn);
+			System.out.println("방번호 시퀀스 현재 값 :"+chatting_no);
+			
+			//2. 생성된 방 번호를 확인하여 방에 인원 삽입
+			//tb_chattinguser에 방에 참가한 유저번호를 삽입한다.
+			userChatDao.joinRoom(conn, user0_no, chatting_no);
+			userChatDao.joinRoom(conn, user1_no, chatting_no);
 			
 			JDBCTemplate.commit(conn);
 		} else {
+			System.out.println("채팅방 생성 실패");
 			JDBCTemplate.rollback(conn);
 		}
 		
@@ -95,5 +103,74 @@ public class UserChatServiceImpl implements UserChatService{
 		}
 		//방이 없으면 0을 반환
 		return 0;
+	}
+	
+	@Override
+	public List<Chat> getChatList(int user0_no, int user1_no, int chatting_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		List<Chat> chatList = new ArrayList<>();
+		chatList = userChatDao.getUserChatList(conn, chatting_no);
+		return chatList;
+	}
+	
+	@Override
+	public void insertMsg(int chatting_no, int user0_no, String chatContent, String user_ip) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = 0;
+		result = userChatDao.insertMsg(conn, chatting_no, user0_no, chatContent, user_ip);
+		
+		if(result != 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	}
+	
+	@Override
+	public int getLeastMsgNum(int chatting_no) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		
+		return userChatDao.getMsgNum(conn, chatting_no);
+	}
+	
+	@Override
+	public List getUserChatRoom(int user_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		List rList = userChatDao.getUserChatRoomList(conn,user_no);
+		
+		return rList;
+	}
+
+	@Override
+	public Paging getPaging(HttpServletRequest req) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//전달 파라미터를 파싱
+		String param = req.getParameter("curPage");
+		int curPage =0;
+		if( param!=null && !"".equals(param)) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		//회원의 총 게시글수를 조회한다.
+		int totalCount = userChatDao.selectCntAll(conn);
+		
+		//Paging 객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+	
+	@Override
+	public List<ChatUserList> userList(int user_no, Paging paging) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		return userChatDao.getUserList(conn, user_no, paging);
 	}
 }

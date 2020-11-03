@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="bbs.BbsDAO"%>
 <%@ page import="java.io.PrintWriter"%>
 <%
@@ -12,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>WorkJob</title>
 </head>
 <body>
 	<%
@@ -35,11 +34,11 @@
 				script.println("</script>");
 			} else {
 				BbsDAO bbsDAO = new BbsDAO();
-				int result = bbsDAO.write(bbs.getArticle_title(), bbs.getUser_no(), bbs.getArticle_content());
+				int result = bbsDAO.write(bbs.getUser_no(), bbs.getArticle_title(), bbs.getArticle_content());
 				if (result == -1) {
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
-					script.println("<alert('글쓰기에 실패했습니다.')");
+					script.println("alert('글쓰기에 실패했습니다.')");
 					script.println("history.back()");
 					script.println("</script>");
 				} else {

@@ -1,4 +1,15 @@
-/build/
+/.metadata/
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+
 .classpath
 .project
-.settings/ 
+.settings/
+.loadpath
+.recommenders

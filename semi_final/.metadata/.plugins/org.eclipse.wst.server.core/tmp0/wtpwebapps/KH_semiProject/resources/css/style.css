@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+/*******************************회원정보************************************************/
+
+.Tbreak{
+	width:100px; 
+	white-space:normal;
+	word-break:keep-all; 
+	font-size:12px;
+}
+
+
+.card-body.p-0 .table thead > tr > th:last-of-type, .card-body.p-0 .table thead > tr > td:last-of-type, 
+.card-body.p-0 .table tbody > tr > th:last-of-type, .card-body.p-0 .table tbody > tr > td:last-of-type{
+	
+	text-align:center;
+
+	
+}
+
+.mch{
+	
+	width:50px;
+	vertical-align:middle;
+	
+}
+
+.mch input{
+		width:20px;
+	height:20px;
+	vertical-align:middle;
+}
+
+.btfloat button{
+	margin:10px 10px;
+	float:right;
+}
+
+.btfloat button:first-child{
+	margin-right:20px;
+}
+
+.selright{
+	
+	display:inline-block;
+}
+

@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+  <%@ page import="dto.mbs.MembersTb" %>
+<%
+MembersTb dto = (MembersTb)request.getAttribute("dto");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+  function Update() {
+    document.form01.action = "<%=request.getContextPath()%>/membersTb";
+    document.form01.submit();
+  }
+	
+  function Delete() {
+    document.form01.action = "<%=request.getContextPath()%>/membersTb";
+    document.form01.submit();
+  }
+</script>
+
+<form action="" name="form01" method="post">
+  <table border="1">
+    <tr>
+      <td>아이디</td>
+      <td><%=dto.getUser_id()%></td>
+    </tr>
+   <tr>
+      <td colspan="2" align="center">
+        <input type="hidden" name="userid" value="<%=dto.getUser_id()%>">
+        <button type="button" id="btnUpdate" onClick="Update();">수정</button>
+        <button type="button" id="btnDelete" onClick="Delete();">삭제</button>
+      </td>
+    </tr>
+  </table>
+</form>
+ 
+</body>
+</html>

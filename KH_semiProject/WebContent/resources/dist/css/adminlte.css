@@ -19613,9 +19613,10 @@ html.maximized-card {
   background: #d2d6de;
   border: 1px solid #d2d6de;
   color: #444;
-  margin: 5px 0 0 50px;
+/*   margin: 5px 0 0 50px; */
   padding: 5px 10px;
-  position: relative;
+/*   position: relative; */
+  margin-top:50px;
 }
 
 .direct-chat-text::after, .direct-chat-text::before {

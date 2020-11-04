@@ -33,9 +33,39 @@
 %>
 <meta charset="UTF-8">
 <title><%=opponentUser.getUser_name() %>님과 대화</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src ="/resources/js/httpRequest.js"></script>
+<!--헤더-->
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/resources/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="/resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/resources/dist/css/adminlte.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="/resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="/resources/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="/resources/plugins/summernote/summernote-bs4.css">
+  
+  <link rel="stylesheet" href="/resources/css/style.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
 <style type="text/css">
+html{
+  margin : 0px 0px;
+}
+
 #chatContent{
 	height : 200x;
 	width : 400px;
@@ -47,8 +77,8 @@
 }
 
 #chatList{
-  height : 280px;
-  width : 420px;
+  height : 270px;
+  width : 450px;
   overflow-y: auto; 
 }
 
@@ -148,9 +178,11 @@
 				if( msg_no < data.last){
 					for (msg_no; msg_no<data.last; msg_no++){
 						console.log("반복문 안에 들어왔나요?");
+						console.log(clist);
 						$('#chatList').append(clist[msg_no][0].value);
 						$('#chatList').append(clist[msg_no][1].value);
 						$('#chatList').append(clist[msg_no][2].value);
+						$('#chatList').append(clist[msg_no][3].value);
 						$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
 					}
 					msg_no = data.last;
@@ -166,51 +198,86 @@
 	}//msgload 함수 끝
 		
 	function autoLoad(){
-		setInterval(msgload, 2000);
+		setInterval(msgload, 10000);
 	}
 	
 </script>
 </head>
+
+
+
 <body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" id="fuck">
+    <!-- DIRECT CHAT -->
+    <div class="card direct-chat direct-chat-warning">
+      <div class="card-header">
+        <h3 class="card-title">
+        	<input type="button" id="goChatHome" value="홈으로" />
+			<%=opponentUser.getUser_name() %>님과 대화</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- 채팅창 안에 -->
+      <div id="topChat" class="card-body">
+        <!-- Conversations are loaded here -->
+        <div id="chatList" class="direct-chat-messages">
+          <!-- Message. Default to the left -->
+<!--           <div id="fromMsg" class="direct-chat-msg"> -->
+<!--             <div id="fromMsgInfo" class="direct-chat-infos clearfix"> -->
+<!--               <span id="fromMsgInfoName" class="direct-chat-name float-left">김과장</span> -->
+<!--               <span id="fromMsgInfoTime" class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span> -->
+<!--             </div> -->
+<!--             /.direct-chat-infos -->
+<!--             <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"> -->
+<!--             /.direct-chat-img -->
+<!--             <div id = "fromMsgContent" class="direct-chat-text"> -->
+<!--              		딴짓말고 일 좀 하게 //받는 사람 채팅메시지 -->
+<!--             </div> -->
+<!--             /.direct-chat-text -->
+<!--           </div> -->
+<!--           /.direct-chat-msg -->
 
-<div class ="container bootstrap snippet">
-	<div class="row">
-		<div class="col-xs-12">
-			<div class="portlet portlet-default">
-				<div class="portlet-heading">
-					<div class="portlet-title">
-						<h4>
-						<input id="goChatList" value="목록으로" type="button" />
-						<i class="fa fa-circle text-green"></i><%=opponentUser.getUser_name() %>님과 대화</h4>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div id="chat" class="panel-collaps collapse in">
-					<!-- 콘솔 메시지의 역할을 하는 div태그.(수신 메시지도 표시한다.) -->
-					<div id="chatList" class="portlet-body chat-widget" >
-					</div>
-					<div class="portlet-footer">
-						<div class="row" style="height:90px;">
-							<div class="form-group col-xs-10">
-								<input type="text" id="chatContent" class="form-control" 
-									onKeyDown="pressEnter()"  />
-							</div>
-							<div class="form-group col-xs-2">
-								<!--<button type="button" class="btn btn-default pull-right" onclick="submitFunction();" onclick="sendMessage()">전송</button> -->
-								<button type="button" class="btn btn-default pull-right" onclick="sendMessage()">전송</button>
+<!--           Message to the right -->
+<!--           <div id="toMsg" class="direct-chat-msg right"> -->
+<!--             <div id="toMsgInfo" class="direct-chat-infos clearfix"> -->
+<!--               <span id="toMsgInfoName" class="direct-chat-name float-right">김사원</span> -->
+<!--               <span id="toMsgInfoTime" class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span> -->
+<!--             </div> -->
+<!--             /.direct-chat-infos -->
+<!--             <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"> -->
+<!--             /.direct-chat-img -->
+<!--             <div id="toMsgInfoName" class="direct-chat-text"> -->
+<!--               		시른데??? //보내는 사람 채팅메시지 -->
+<!--             </div> -->
+<!--             /.direct-chat-text -->
+<!--           </div> -->
+          <!-- /.direct-chat-msg -->
+        </div>
+        <!--/.direct-chat-messages-->
 
-								<div class="clear-fix"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	
-	</div>
+        <!-- /.direct-chat-pane -->
+      </div><!-- //채팅창 안에  -->
+      <!-- /.card-body -->
+      <div class="card-footer">
+        <form action="#" method="post">
+          <div class="input-group">
+           
+            <input id="chatContent" type="text" name="message" onKeyDown="pressEnter()" placeholder="메시지를 입력하세요" class="form-control">
+            <span class="input-group-append">
+              <button type="button" class="btn btn-warning" onclick="submitFunction();" onclick="sendMessage()" >보내기</button>
+            </span>
+          </div>
+        </form>
+      </div>
+      <!-- /.card-footer-->
+    </div>
+    <!--/.direct-chat -->
 </div>
+<!-- /.content-wrapper -->
 
 <script type="text/javascript">  
 	autoLoad();
+	
 	// 대화생성시되면 호출되는 문구
 	//	- 첫 대화면 대화 시작 
 	// ###님과 대화가 시작되었습니다.
@@ -219,35 +286,45 @@
 	//첫 대화여부는 데이터베이스에서 채팅방에 대화가 있는지 확인한다.
 	// servlet에서 객체로 전달을 받아온다.
 	<% if( clist.size() == 0 ) { %>
-		console.log("true");
-		//	//대화 시작 안내 문구.
-		$('#chatList').append('<div class="row">'+ '<strong>'
-			+"<%=opponentUser.getUser_name() %>"+'</strong>'
-			+"님과 대화가 시작되었습니다."+'</div>' +'<hr>');
-		
-	<% } else { %>
-		//첫대화가 아니면 대화 객체의 리스트를 #chatlist에 자식요소로 추가한다.
-		//리스트 반복실행실시.
-		//	리스트에서 작성자 번호랑 나랑 일치하면 내가 작성한것으로 표시
-		//		불일치하면 상대방이 작성한것으로 표시
-		<% for(SendMsgClient s : clist) { %>
-			$('#chatList').append( "<%=s.getWinfo() %>" );
-			$('#chatList').append( "<%=s.getChatTime() %>" );
-			$('#chatList').append( "<%=s.getMsgContent() %>" );
-		<% } %>
+	console.log("true");
+	//	//대화 시작 안내 문구.
+	$('#chatList').append('<div class="row">'+ '<strong>'
+		+"<%=opponentUser.getUser_name() %>"+'</strong>'
+		+"님과 대화가 시작되었습니다."+'</div>' +'<hr>');
+	
+<% } else { %>
+	//첫대화가 아니면 대화 객체의 리스트를 #chatlist에 자식요소로 추가한다.
+	//리스트 반복실행실시.
+	//	리스트에서 작성자 번호랑 나랑 일치하면 내가 작성한것으로 표시
+	//		불일치하면 상대방이 작성한것으로 표시
+	<% for(SendMsgClient s : clist) { 
+		if(s.getUser_no() == user.getUser_no() ) { %>
+		console.log("내가 보냄")
+		$('#chatList').append( "<%=s.getWinfo() %>" );
+		$('#chatList').append( "<%=s.getChatTime()%>" );
+		$('#chatList').append( "<%=s.getProfile_img() %>" );
+		$('#chatList').append( "<%=s.getMsgContent()%>");
+	<%	} else { %>				
+		console.log("상대가 보냄")
+ 		$('#chatList').append( "<%=s.getWinfo() %>" );
+		$('#chatList').append( "<%=s.getChatTime() %>" );
+		$('#chatlist').append( "<%=s.getProfile_img() %>" );
+		$('#chatList').append( "<%=s.getMsgContent() %>" );
+	<%	} %>
 	<% } %>
-
-
+	<% } %>
 	  
-	// 대화방을 나가면 나타나는 문구 설정
-	// Disconnect 버튼을 누르면 호출되는 함수
-	goChatList.onclick = function disconnect() {
-		location.href="/chathome";
-	 }
+	// 채팅 홈으로 이동하는 버튼
+	$('#goChatHome').on('click',function(){
+		location.href='/chathome';
+	})
 	
 	//스크롤바를 하단으로 고정하여 최근대화가 보이게 한다.
 	$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
 </script>
- 
+
+
+
+
 </body>
 </html>

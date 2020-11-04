@@ -205,40 +205,40 @@ public class UserChatDaoImpl implements UserChatDao{
 								if(hour >12 ) {
 									//오늘 오후 : 13시부터 시에서 12를 빼준다
 									hour -=12;
-									chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+									chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 								} 
-								chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+								chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 						} else {
 							//오늘 오전 
 							timeType="오전";
-							chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+							chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 						}
 					} else if( yearMonth.equals(time2.substring(0,7)) 
 							|| Integer.parseInt(rs.getString("revision_date")) - day == 1 ) {
 							//어제의 오전, 오후 경우
-							timeType="어제";
+							dateType="어제";
 							if( hour >=12 ){
 								if(hour >12 ) {
 									//어제 오후 : 13시부터 시에서 12를 빼준다
 									hour -=12;
-									chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+									chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 								} 
-								chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+								chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 						} else {
 							//오늘 오전 
 							timeType="오전";
-							chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+							chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 						}
 					} else {
 						if( hour >= 12) {
 							if(hour >12) {
 								hour -=12;
-								chat.setRevision_date(date+" "+timeType+" "+hour+" : "+min);
+								chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
 							}
-							chat.setRevision_date(date+" "+timeType+" "+hour+" : "+min);
+							chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
 						}
 						dateType = "오전";
-						chat.setRevision_date(date+" "+timeType+" "+hour+" : "+min);
+						chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
 					}
 					
 					result.add(chat);
@@ -306,40 +306,40 @@ public class UserChatDaoImpl implements UserChatDao{
 							if(hour >12 ) {
 								//오늘 오후 : 13시부터 시에서 12를 빼준다
 								hour -=12;
-								chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+								chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 							} 
-							chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+							chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 					} else {
 						//오늘 오전 
 						timeType="오전";
-						chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+						chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 					}
 				} else if( yearMonth.equals(time2.substring(0,7)) 
 						|| Integer.parseInt(rs.getString("revision_date")) - day == 1 ) {
 						//어제의 오전, 오후 경우
-						timeType="어제";
+						dateType="어제";
 						if( hour >=12 ){
 							if(hour >12 ) {
 								//어제 오후 : 13시부터 시에서 12를 빼준다
 								hour -=12;
-								chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+								chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 							} 
-							chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+							chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 					} else {
 						//오늘 오전 
 						timeType="오전";
-						chat.setRevision_date( dateType+" "+timeType+" "+hour+" : "+min);
+						chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
 					}
 				} else {
 					if( hour >= 12) {
 						if(hour >12) {
 							hour -=12;
-							chat.setRevision_date(date+" "+timeType+" "+hour+" : "+min);
+							chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
 						}
-						chat.setRevision_date(date+" "+timeType+" "+hour+" : "+min);
+						chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
 					}
 					dateType = "오전";
-					chat.setRevision_date(date+" "+timeType+" "+hour+" : "+min);
+					chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
 				}
 				
 				list.add(chat);

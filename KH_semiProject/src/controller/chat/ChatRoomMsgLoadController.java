@@ -71,29 +71,66 @@ public class ChatRoomMsgLoadController extends HttpServlet {
 		List<SendMsgClient> clist = new ArrayList<>();
 		for(int i=0; i<list.size(); i++) {
 			if( user0_info.getUser_no() == list.get(i).getUser_no()) {
-				String chatT = "<div class='row'><strong>"+user0_info.getUser_name()+" / "+user0_info.getDept_name() 
-					+" / "+user0_info.getPosition_name() +"</strong></div>";
-				String sendTime = list.get(i).getRevision_date();
-				String chatC = "<div class='row'>"+list.get(i).getMsg_content()+"</div><hr>";
+				String chatT = "<div id='toMsg' class='direct-chat-msg right'><div id='toMsgInfo' class='direct-chat-infos clearfix'><span id='toMsgInfoName' class='direct-chat-name float-right'>"
+						+user0_info.getUser_name()+" / "+user0_info.getDept_name() +" / "+user0_info.getPosition_name() +"</span>";
+				String sendTime = "<span id='toMsgInfoTime' class='direct-chat-timestamp float-left'>"+list.get(i).getRevision_date()
+						+"</span></div>";
+				String profile_img = "<img class='direct-chat-img' src='/resources/images/minions.png' alt='message user image'>";
+				String chatC = "<div id='toMsgInfoName' class='direct-chat-text'>"+list.get(i).getMsg_content()+"</div>/div>";
+				int user_no = list.get(i).getUser_no();
 				SendMsgClient smc = new SendMsgClient();
 				smc.setWinfo(chatT);
 				smc.setChatTime(sendTime);
+				smc.setProfile_img(profile_img);
 				smc.setMsgContent(chatC);
+				smc.setUser_no(user_no);
 				clist.add(smc);
 			} else {
-				String chatT = "<div class='row'><strong>"+user1_info.getUser_name()+" / "+user1_info.getDept_name() 
-					+" / "+user1_info.getPosition_name() +"</strong> 님의 메시지 </div>";
-				String sendTime = list.get(i).getRevision_date();
-				String chatC = "<div class='row'>"+list.get(i).getMsg_content()+"</div><hr>";
+				String chatT = "<div id='fromMsg' class='direct-chat-msg'><div id='fromMsgInfo' class='direct-chat-infos clearfix'><span id='fromMsgInfoName' class='direct-chat-name float-left'>"
+						+user1_info.getUser_name()+" / "+user1_info.getDept_name() +" / "+user1_info.getPosition_name() +"</span>";
+				String sendTime = "<span id='fromMsgInfoTime' class='direct-chat-timestamp float-right'>"+list.get(i).getRevision_date()+"</span></div>"
+				+"</span></div>";
+				String profile_img = "<img class='direct-chat-img' src='/resources/images/minions.png' alt='message user image'>";
+				String chatC = "<div id = 'fromMsgContent' class='direct-chat-text'>"+list.get(i).getMsg_content()+"</div>/div>";
+				int user_no = list.get(i).getUser_no();
 				SendMsgClient smc = new SendMsgClient();
 				smc.setWinfo(chatT);
 				smc.setChatTime(sendTime);
+				smc.setProfile_img(profile_img);
 				smc.setMsgContent(chatC);
+				smc.setUser_no(user_no);
 				clist.add(smc);
 			}
 		}
 		return clist;
 	}
+//	public List<SendMsgClient> sendChatMsgList(List<Chat> list, UserInfo user0_info, UserInfo user1_info) {
+//		List<SendMsgClient> clist = new ArrayList<>();
+//		for(int i=0; i<list.size(); i++) {
+//			if( user0_info.getUser_no() == list.get(i).getUser_no()) {
+//				String chatT = "<div class='row'><strong>"+user0_info.getUser_name()+" / "+user0_info.getDept_name() 
+//					+" / "+user0_info.getPosition_name() +"</strong></div>";
+//				String sendTime = list.get(i).getRevision_date();
+//				String chatC = "<div class='row'>"+list.get(i).getMsg_content()+"</div><hr>";
+//				SendMsgClient smc = new SendMsgClient();
+//				smc.setWinfo(chatT);
+//				smc.setChatTime(sendTime);
+//				smc.setMsgContent(chatC);
+//				clist.add(smc);
+//			} else {
+//				String chatT = "<div class='row'><strong>"+user1_info.getUser_name()+" / "+user1_info.getDept_name() 
+//					+" / "+user1_info.getPosition_name() +"</strong> 님의 메시지 </div>";
+//				String sendTime = list.get(i).getRevision_date();
+//				String chatC = "<div class='row'>"+list.get(i).getMsg_content()+"</div><hr>";
+//				SendMsgClient smc = new SendMsgClient();
+//				smc.setWinfo(chatT);
+//				smc.setChatTime(sendTime);
+//				smc.setMsgContent(chatC);
+//				clist.add(smc);
+//			}
+//		}
+//		return clist;
+//	}
 	
 	//변환된 메시지를 JSON으로 변환
 	public String getString(List<SendMsgClient> clist, int msg_no) {
@@ -105,6 +142,7 @@ public class ChatRoomMsgLoadController extends HttpServlet {
 		for(int i=0; i<clist.size();i++) {
 			result.append("[{\"value\" : \""+clist.get(i).getWinfo()+"\"},");
 			result.append("{\"value\" : \""+clist.get(i).getChatTime()+"\"},");
+			result.append("{\"value\" : \""+clist.get(i).getProfile_img()+"\"},");
 			result.append("{\"value\" : \""+clist.get(i).getMsgContent()+"\"}]");
 			if(i !=clist.size()-1) {
 				result.append(",");

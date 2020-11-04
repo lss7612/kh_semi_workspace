@@ -28,6 +28,7 @@ ul.pagination li.active a {
 <div class="text-center">
 <ul class="pagination">
 
+
 	<!-- 첫 페이지로 가기 -->
 	<%	if( paging.getCurPage() != 1 ) { %>
 	<li><a href="/approval/approvalmy">&larr;</a></li>

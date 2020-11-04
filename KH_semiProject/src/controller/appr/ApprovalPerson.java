@@ -30,8 +30,8 @@ public class ApprovalPerson extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("doget okokok");
 		HttpSession session = req.getSession();
-		String login_id = (String)session.getAttribute("loginid");
-		System.out.println(login_id);
+		String user_id = (String)session.getAttribute("user_id");
+		System.out.println(user_id);
 		
 		ApprovalPersonDao approvalPerson = new ApprovalPersonDaoImpl();
 		

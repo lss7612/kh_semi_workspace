@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="dto.appr.ApprMy"%>
+<%@page import="java.util.List"%>
+<% 	List<ApprMy> list = (List<ApprMy>) request.getAttribute("list");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,15 +12,14 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style type="text/css">
-table { 
- 	margin: 0 auto; 
- 	border-collapse: separate; 
-   	border-spacing: 20px 10px; 
-  	width:100%;	 
-  	
-	border-top:2px solid; 
- 	border-color:#ccc; 
- } 
+table {
+	border-top: 2px solid;
+	border-color: #ccc;
+	margin: 0 auto;
+	width: 80%;
+}
+ 
+ 
 
 tr{
 	border:2px 2px 2px 2px;
@@ -38,20 +40,17 @@ th:nth-child(4){
 	height:50px;
 }
 </style>
-</head>
-<body>
 
-	<div class="container">
-		<jsp:include page="/views/common/topMenu.jsp"></jsp:include>
+<jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
+	<div class="content-wrapper">
 
-		<jsp:include page="/views/common/sideMenu.jsp"></jsp:include>
 		<main>
-		<h3 style="text-align:center;">결재 목록</h3>
+		<h3 style="text-align:center;">내 결재 목록</h3>
 		<form action="#">
 		<div class =dobutton>
-		<button id="dobutton">전체문서  3</button><button id="dobutton">대기문서  1</button><button id="dobutton">완료문서  2</button>
+		<button id="dobutton">전체문서  3</button><button id="dobutton">대기문서  1</button><button id="dobutton">완결문서  2</button>
 		</div>
-		<table>
+		<table style="padding:50px 50px;">
 			<tr style="border : 2px;" >
 				<th>이름</th>
 				<th>부서</th>
@@ -59,44 +58,43 @@ th:nth-child(4){
 				<th>결재 제목</th>
 				<th>결재계</th>
 				<th>상신일</th>
+				<th>1차결재자</th>
+				<th>2차결재자</th>
 				<th>결재상태</th>
 				<th>결재</th>
-				<th>갯수</th>
+	
 			</tr>
+		
+					<!-- 결재 목록 -->
+				<%
+					for (int i = 0; i < list.size(); i++) {
+				%>
+				
 			<tr>
-				<td>김xx</td>
-				<td>개발팀</td>
-				<td>사원</td>
-				<td><a style="color:red;"href="http://www.naver.com"> 휴가결재 상신드립니다</a></td>
-				<td>휴가계</td>
-				<td>20201026</td>
-				<td>미승인</td>
-				<td><button>승인</button><button>반려</button></td>
-				<td>1개</td>
-			
-			<!-- 목록 뜨는 부분 -->
+				<td><%=list.get(i).getUser_name() %></td>
+				<td><%=list.get(i).getDept_name() %></td>
+				<td><%=list.get(i).getPosition_name() %></td>
+				<td><a href='#' onclick="window.open('/approval/doDetail?a=<%=list.get(i).getAprvl_no()%>&b=<%=list.get(i).getAprvl_type() %>','_blank','width=800,height=800'); return false;" id=<%=i%> name=<%=list.get(i).getAprvl_no() %>><%=list.get(i).getAprvl_title() %></a></td>
+				<td><%=list.get(i).getAprvl_type() %></td>
+				<td><%=list.get(i).getCreate_date() %></td>
+				<td><%=list.get(i).getMid_auth_name() %></td>
+				<td><%=list.get(i).getFinal_auth_name() %></td>
+				<td><%=list.get(i).getState_name() %></td>
+				<td><button type="button" onclick="location.href='/approval/update?state=yes&now=<%=list.get(i).getState_name()%>&mid=<%=list.get(i).getMid_auth() %>&final=<%=list.get(i).getFinal_auth() %>&num=<%=list.get(i).getAprvl_no() %>'">승인</button>
+				<button type="button" onclick="location.href='/approval/update?state=no&now=<%=list.get(i).getState_name()%>&num=<%=list.get(i).getAprvl_no() %>'">반려</button></td>
 			</tr>
-			<tr>
-				<td>김xx</td>
-				<td>개발팀</td>
-				<td>사원</td>
-				<td><a style="color:red;"href="http://www.naver.com"> 휴가결재 상신드립니다</a></td>
-				<td>휴가계</td>
-				<td>20201026</td>
-				<td>미승인</td>
-				<td><button>승인</button><button>반려</button></td>
-				<td>1개</td>
 			
-			<!-- 목록 뜨는 부분 -->
-			</tr>
+			<% }%>
+			
 		</table>		
 		
 		
 		</form>
+		
+			<div style="text-align : center;padding:50px 50px; width:400px;  margin: 0 auto;">
+			<jsp:include page="/views/common/paging_appdo.jsp" />
+			</div>
 		</main>
 
-		<jsp:include page="/views/common/footer.jsp"></jsp:include>
 	</div>
-
-</body>
-</html>
+		<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

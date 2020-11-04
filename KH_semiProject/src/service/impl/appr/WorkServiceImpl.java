@@ -99,10 +99,10 @@ public class WorkServiceImpl implements WorkService{
 
 		//----------세션객체받아오기------------------
 		HttpSession session = req.getSession();
-		String login_id = (String) session.getAttribute("loginid");
-		System.out.println("현재 "+ login_id + "로 접속중이십니다.");
+		String user_id = (String) session.getAttribute("user_id");
+		System.out.println("현재 "+ user_id + "로 접속중이십니다.");
 		//User_id라는 컬럼은 없는데 값받아오려고 추가해줌
-		appr.setUser_id(login_id);
+		appr.setUser_id(user_id);
 		String startDay="";
 		String endDay="";
 		while (iter.hasNext()) {

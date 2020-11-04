@@ -53,10 +53,12 @@
 		<tr>
 		
 			<th>Ã·ºÎÆÄÀÏ<a class="btn" href="/upload/<%=list.get(0).getFile_name() %>" download><%=list.get(0).getFile_origin_name() %> </a></th>
-			<td>¶ì¿ë</td>
+			
 		</tr>
 	</table>
-	<button>´Ý±â</button>
+	<input type="button" value="Ã¢´Ý±â" onClick="window.close()">
+
+
 
 </form>
 </body>

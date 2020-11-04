@@ -102,7 +102,10 @@ position:absolute;
 }
 
 table {
+	border-top: 2px solid;
+	border-color: #ccc;
 	margin: 0 auto;
+	width: 80%;
 }
 
 th {
@@ -262,22 +265,18 @@ th {
 
 <jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
 
-	<div class="content-wrapper">
+	<div class="content-wrapper" style="border-top: 2px solid;	border-color: #ccc;	width: 70%; ">
 <%-- 		<jsp:include page="/views/common/topMenu.jsp"></jsp:include> --%>
 <%-- 		<jsp:include page="/views/common/sideMenu.jsp"></jsp:include> --%>
 
-		<main>
+		<main >
 
 			<h3>연차 휴가계</h3>
 			<form action="/approval/approvalWrite" method="post" id="approveform"
 				name="approval_form" enctype="multipart/form-data">
 
 
-				<select id="dimension" onchange="location.href=this.value">
-					<option value="" selected disabled hidden>결재계 선택</option>
-					<option value="/approval/approvalWrite">휴가계</option>
-					<option value="/approval/approvalWriteWork">업무일지</option>
-				</select>
+
 				
 				<div id="can">
                <div id="canvas1"  class="canvas"
@@ -323,14 +322,23 @@ th {
 
 
 
-
+				<div>
+								<select style="text-align:center;" id="dimension" onchange="location.href=this.value">
+					<option value=" selected disabled hidden">결재계 선택</option>
+					<option value="/approval/approvalWrite">휴가계</option>
+					<option value="/approval/approvalWriteWork">업무일지</option>
+				</select>
+				</div>
 
 
 				<p></p>
 
 				<div>
 
+	
+
 					<table>
+
 						<tr>
 							<th>휴가종류</th>
 							<td><label for="one"> <input type="radio" name="r"
@@ -355,11 +363,11 @@ th {
 						<tr>
 							<th>제목</th>
 							<td><input type="text" name="title" id="title"
-								style="width: 99%" /></td>
+								style="width: 680px" /></td>
 						</tr>
 						<tr>
 							<th>사유</th>
-							<td><textarea rows="20" cols="100" name="reason"
+							<td><textarea rows="20" cols="100" name="reason" style="width: 680px; margin:3px 0px"
 									id="content"></textarea></td>
 						</tr>
 					</table>

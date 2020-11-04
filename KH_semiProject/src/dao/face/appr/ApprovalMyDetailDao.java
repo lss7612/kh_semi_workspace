@@ -19,4 +19,6 @@ public interface ApprovalMyDetailDao {
 	 */
 	List<Appr> selectByApprvlno(HttpServletRequest req, HttpServletResponse resp, Appr appr);
 
+	
+
 }

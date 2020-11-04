@@ -4,7 +4,6 @@
 <%@page import="dto.note.NoteList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 
 <% List<NoteList> list = (List<NoteList>) request.getAttribute("list"); %>
 <% List<String> sdl = new ArrayList<>(); %>
@@ -14,25 +13,24 @@
 <% sdl.add(i, send_date); %>
 <%} %>
     
-<html>
-  <head>
-    <meta charset="UTF-8" />
+<jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
     <title>받은쪽지함</title>
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
     <script type="text/javascript" src="/views/noteViews/resource/receivedList.js"></script>
+    <script type="text/javascript" src="/views/noteViews/resource/selectAll.js"></script>
     
     <link rel="stylesheet" href="/views/noteViews/resource/sendList,receivedList.css"></link>
     
-  </head>
-  <body>
+<div class="content-wrapper">
+ 
     <h1>받은 쪽지함</h1>
     <hr />
 
     <article>
-      <div class ="wrapper" id="search">
-        <form id="search" action="/test" method="GET">
+      <div class ="" id="search">
+        <form id="search" action="/test" method="GET" style="display:none">
           <select>
             <option value="all" selected="selected">전체</option>
             <option value="title">제목</option>
@@ -49,7 +47,7 @@
       <table>
         <thead>
           <tr>
-            <th></th>
+            <th><input type="checkbox" class="selectAllCheckbox"></th>
             <th>no</th>
             <th>제목</th>
             <th>보낸사람</th>
@@ -76,5 +74,6 @@
     </article>
 	<jsp:include page="/views/noteViews/received_paging.jsp" />
 	<jsp:include page="/views/noteViews/buttons.jsp" />
-  </body>
-</html>
+	
+	</div>
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

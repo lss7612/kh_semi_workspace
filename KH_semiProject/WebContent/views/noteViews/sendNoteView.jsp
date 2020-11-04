@@ -8,18 +8,16 @@
     
     
 <% NoteList list = (NoteList)request.getAttribute("noteList"); %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="/views/noteViews/resource/sendNoteView.js"></script>
 <link rel="stylesheet" href="/views/noteViews/resource/noteView.css"></link>
 
-</head>
-<body>
+<jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
+<div class="content-wrapper">
+
 
 <h1>보낸 쪽지 보기</h1>
 <hr>
@@ -62,5 +60,6 @@
 
 </div>
 <jsp:include page="/views/noteViews/buttons.jsp" />
-</body>
-</html>
+
+</div>
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

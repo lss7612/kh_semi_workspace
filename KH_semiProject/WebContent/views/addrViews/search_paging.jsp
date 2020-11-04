@@ -39,13 +39,13 @@ ul.pagination li.active a {
 
 	<!-- 첫 페이지로 가기 -->
 	<%	if( paging.getCurPage() != 1 ) { %>
-	<li><a href="/address/search">&larr;</a></li>
+	<li><a href="/address/search?classification=<%=request.getParameter("classification")%>&keyword=<%=request.getParameter("keyword")%>">&larr;</a></li>
 	<%	} %>
 	
 	
 	<!-- 이전 페이지로 가기 -->
 	<%	if( paging.getCurPage() != 1 ) { %>
-	<li><a href="/address/search?curPage=<%=paging.getCurPage()-1 %>">&lt;</a></li>
+	<li><a href="/address/search?curPage=<%=paging.getCurPage()-1 %>&classification=<%=request.getParameter("classification")%>&keyword=<%=request.getParameter("keyword")%>">&lt;</a></li>
 	<%	} %>
 	
 
@@ -54,11 +54,11 @@ ul.pagination li.active a {
 	<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
 	
 	<%		if( i == paging.getCurPage() ) { %>
-	<li class="active"><a href="/address/search?curPage=<%=i %>"><%=i %></a></li>
+	<li class="active"><a href="/address/search?curPage=<%=i %>&classification=<%=request.getParameter("classification")%>&keyword=<%=request.getParameter("keyword")%>"><%=i %></a></li>
 	<%		} %>
 	
 	<%		if( i != paging.getCurPage() ) { %>
-	<li><a href="/address/search?curPage=<%=i %>"><%=i %></a></li>
+	<li><a href="/address/search?curPage=<%=i %>&classification=<%=request.getParameter("classification")%>&keyword=<%=request.getParameter("keyword")%>"><%=i %></a></li>
 	<%		} %>
 	
 	<%	} %>	

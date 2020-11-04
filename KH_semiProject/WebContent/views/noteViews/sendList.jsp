@@ -14,27 +14,23 @@
     <% String send_date = list.get(i).getSend_date(); %>
     <% sdl.add(i, send_date); %>
     <%} %>
-	
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>q</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<jsp:include page="/views/common/headerKKH.jsp"></jsp:include>	
+
+
 <script type="text/javascript" src="/resources/js/httpRequest.js"></script>
 <script type="text/javascript" src="/views/noteViews/resource/sendList.js"></script>
+<script type="text/javascript" src="/views/noteViews/resource/selectAll.js"></script>
 
 <link rel="stylesheet" href="/views/noteViews/resource/sendList,receivedList.css"></link>
    
-</head>
-<body>
-<body>
+
+<div class="content-wrapper">
     <h1>보낸 쪽지함</h1>
     <hr />
 
     <article>
-      <div class ="wrapper" id="search">
-        <form action="/note/send" method="POST">
+      <div class ="" id="search">
+        <form action="/note/send" method="POST" style="display:none">
           <select>
             <option value="all" selected="selected">전체</option>
             <option value="title">제목</option>
@@ -51,7 +47,7 @@
       <table>
         <thead>
           <tr>
-            <th></th>
+            <th><input type="checkbox" class="selectAllCheckbox"></th>
             <th>no</th>
             <th>제목</th>
             <th>받는사람</th>
@@ -78,11 +74,14 @@
         <br><br>
       </div>
       <hr>
+      <div>
+	<jsp:include page="/views/noteViews/send_paging.jsp" />
+	</div>
         <button class="deleteAll">선택삭제</button>
     </article>
-    
-	<jsp:include page="/views/noteViews/send_paging.jsp" />
+        
 	<jsp:include page="/views/noteViews/buttons.jsp" />
-  </body>
-</body>
-</html>
+	
+	</div>
+	
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

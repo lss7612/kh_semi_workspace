@@ -1,17 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<%@page import="dto.appr.ApprMy"%>
+
+<%@page import="java.util.List"%>
+<%
+	List<ApprMy> list = (List<ApprMy>) request.getAttribute("list");
+%>
+<%  
+String holi = "/approvalMy/modHoly";
+String work = "/approvalMy/mod";
+%>
+<jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
+
 <style>
 table {
-	border-top:2px solid;
-	border-color:#ccc;
+	border-top: 2px solid;
+	border-color: #ccc;
 	margin: 0 auto;
 	width: 80%;
 }
@@ -26,20 +31,30 @@ table {
 	height: 50px;
 }
 
-#bot :first-child{
-
-	margin-left:10%
+#bot :first-child {
+	margin-left: 10%
 }
-
-
 </style>
-</head>
-<body>
+<script type="text/javascript">
 
-	<div class="container">
-		<jsp:include page="/views/common/topMenu.jsp"></jsp:include>
 
-		<jsp:include page="/views/common/sideMenu.jsp"></jsp:include>
+
+
+
+$(document).ready(function() {
+    $("#approveform").submit(function() {
+	
+    })
+
+})
+</script>
+
+
+	
+<div class="content-wrapper">
+		
+
+<%-- 		<jsp:include page="/views/common/sideMenu.jsp"></jsp:include> --%>
 		<main>
 
 			<h3 style="text-align: center;">기안함</h3>
@@ -48,13 +63,13 @@ table {
 				<button id="dobutton">승인 문서 3</button>
 				<button id="dobutton">반려 문서 1</button>
 			</div>
-			
-	
+
+
 			<table>
 				<tr>
-					<th><label>전체선택<input type="checkbox" name="color"
-							value="blue">
-					</label></th>
+<!-- 					<th><label>전체선택<input type="checkbox" name="color" -->
+<!-- 							value="blue"> -->
+<!-- 					</label></th> -->
 					<th>이름</th>
 					<th>부서</th>
 					<th>직급</th>
@@ -65,31 +80,51 @@ table {
 					<th>결재 일시</th>
 					<th>버튼</th>
 				</tr>
+				
+				
+				<!-- 결재 목록 -->
+				<%
+					for (int i = 0; i < list.size(); i++) {
+				%>
+				
 				<tr>
-					<td><input type="checkbox" name="color" value="blue"></td>
-					<td>본인</td>
-					<td>개발팀</td>
-					<td>대리</td>
-					<td><a style="color: red;" href="http://www.naver.com">
-							기안문서 상신드립니다</a></td>
-					<td>휴가계</td>
-					<td>20201026</td>
-					<td>미승인</td>
-					<td>20201028</td>
-					<td><button>수정</button></td>
+				
+<!-- 					<td><input type="checkbox" name="color" value="blue"></td> -->
+					<td><%=list.get(i).getUser_name() %></td>
+					<td><%=list.get(i).getDept_name() %></td>
+					<td><%=list.get(i).getPosition_name() %></td>
+					<td><a href='#' onclick="window.open('/approval/myDetail?a=<%=list.get(i).getAprvl_no()%>&b=<%=list.get(i).getAprvl_type() %>','_blank','width=800,height=800'); return false;" id=<%=i%> name=<%=list.get(i).getAprvl_no() %>><%=list.get(i).getAprvl_title() %></a></td>
+					<td><%=list.get(i).getAprvl_type() %></td>
+					<td><%=list.get(i).getCreate_date() %></td>
+					<td><%=list.get(i).getState_name() %></td>
+					<td><%=list.get(i).getFinal_date() %></td>
+					<% String result=work; 
+					System.out.println("휴가계맞니??"+list.get(i).getAprvl_type());
+					String kk= list.get(i).getAprvl_type();
+					if(kk.equals("휴가계"))%><%{  %>
+					<%  result=holi; 
+					System.out.println(result);
+					%>
+					<% }%>
 
-					<!-- 목록 뜨는 부분 -->
+					<td>
+					<a href=# name="modify" onclick="window.open('<%=result%>?num=<%=list.get(i).getAprvl_no()%>&type=<%=list.get(i).getAprvl_type()%>&title=<%=list.get(i).getAprvl_title() %>&content=<%=list.get(i).getAprvl_article()%>&','_blank','width=800,height=800'); return false;" >수정</a></td>				
 				</tr>
+				<%}	%>
 			</table>
-			<div id="bot"> 
-			<button>기안하기</button>
-			<button>삭제</button>
+			<div id="bot">
+				<button>기안하기</button>
+				<button>삭제</button>
 			</div>
-
+			<div>
+			<jsp:include page="/views/common/paging.jsp" />
+			</div>
 		</main>
+	
 
-		<jsp:include page="/views/common/footer.jsp"></jsp:include>
 	</div>
 
-</body>
-</html>
+
+
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>
+

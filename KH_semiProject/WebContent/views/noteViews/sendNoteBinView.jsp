@@ -18,9 +18,9 @@
 <script type="text/javascript" src="/views/noteViews/resource/sendNoteBinView.js"></script>
 <link rel="stylesheet" href="/views/noteViews/resource/noteView.css"></link>
 
-</head>
-<body>
+<jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
 
+<div class="content-wrapper">
 <h1>삭제된 보낸 쪽지 보기</h1>
 <hr>
 
@@ -62,5 +62,7 @@
 
 </div>
 <jsp:include page="/views/noteViews/buttons.jsp" />
-</body>
-</html>
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>
+</div>
+
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

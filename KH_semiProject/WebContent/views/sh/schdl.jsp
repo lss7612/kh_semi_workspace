@@ -33,15 +33,27 @@ td:hover {
 
 <h1>Schdl 리스트</h1>
 <hr>
-<table>
 
+<table>
+<tr>
+	<th>스케줄번호</th>
+	<th>스케줄 타입</th>
+	<th>작성자</th>
+	<th>스케줄이름</th>
+	<th>스케줄내용</th>
+	<th>스케줄시작</th>
+	<th>스케줄종료</th>
+	<th>작성시간</th>
+	<th>테이블번호</th>
+</tr>
 <% for(int i=0; i<SchdlList.size(); i++) { %> <!--자바 코드  -->
 
 <tr>
+
 	<td><%=SchdlList.get(i).getSchdl_no() %></td> 
 	
 	<td>
-		<a href="/sh/shdetail?eno=<%=SchdlList.get(i).getSchdl_no() %>">
+		<a href="/sh/shdetail=<%=SchdlList.get(i).getSchdl_no() %>">
 		<%=SchdlList.get(i).getSchdl_type() %>
 		</a>
 	</td>

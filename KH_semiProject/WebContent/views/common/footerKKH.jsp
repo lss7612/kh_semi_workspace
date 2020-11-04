@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ page errorPage ="/error" %>
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+  	
+  	<a href="#"> 개인정보 처리방침</a>
+  
+    <strong>Copyright &copy; 2020 <a href="http://adminlte.io">Workjo</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.5
+      <b>Version</b> 0.0.1
     </div>
   </footer>
 

@@ -1,15 +1,21 @@
-<%@page import="service.face.UserChatService"%>
-<%@page import="service.impl.UserChatServiceImpl"%>
-<%@page import="dto.Chat"%>
-<%@page import="dto.SendMsgClient"%>
+<%@page import="service.face.chat.UserChatService"%>
+<%@page import="service.impl.chat.UserChatServiceImpl"%>
+<%@page import="dto.chat.Chat"%>
+<%@page import="dto.chat.SendMsgClient"%>
 <%@page import="java.util.List"%>
-<%@page import="dto.ChatUserInfo"%>
+<%@page import="dto.common.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page errorPage ="./errorPage.jsp" %>
-    <% ChatUserInfo userinfo = (ChatUserInfo) session.getAttribute("userinfo"); %>
-    <% int chatting_no = (int) request.getAttribute("chatting_no"); %>
-    <% ChatUserInfo user1_info = (ChatUserInfo) request.getAttribute("user1_info");  %>
+    <%
+    	UserInfo userinfo = (UserInfo) session.getAttribute("userinfo");
+    %>
+    <%
+    	int chatting_no = (int) request.getAttribute("chatting_no");
+    %>
+    <%
+    	UserInfo user1_info = (UserInfo) request.getAttribute("user1_info");
+    %>
     
 <!DOCTYPE html>
 <html>

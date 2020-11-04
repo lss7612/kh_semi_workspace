@@ -1,9 +1,14 @@
-<%@page import="dto.ChatUserInfo"%>
+<%@page import="dto.chat.Chat"%>
+<%@page import="java.util.List"%>
+<%@page import="dto.common.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page errorPage ="./errorPage.jsp" %>
-    <% ChatUserInfo user = (ChatUserInfo) session.getAttribute("userinfo"); %>
+    <%
+    	UserInfo userinfo = (UserInfo) session.getAttribute("userinfo");
+    %>
     <% String userIp = (String) session.getAttribute("userIp"); %>
+    <% List<Chat> chatList = (List<Chat>) request.getAttribute("chatList"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,36 +30,72 @@ button{
 	height : 30px;
 	width : 100px;
 }
-div{
-	padding : 5px;
+
+.chatlist{
+    border: solid steelblue;
+    overflow-y: auto; 
+    width:400px; 
+    height: 300px;
+}
+.chatlist::-webkit-scrollbar{
+  width : 5px;
+}
+.chatlist::-webkit-scrollbar-thumb{
+  border-radius : 10px;
+  background-color : #ccc;
+}
+.chatlist::-webkit-scrollbar-track{
+  display:none;
+}
+
+.chatrow{
+    height : 45px;
+    width : 394px;
+    border: 3px solid #ccc;
+}
+
+.chatrow:hover{
+  background-color : #ccc;
+}
+.msgname{
+    height :50px;
+    width: 300px;
+    display: inline;
+}
+.msgtime{
+    display : inline;
+    text-align : right;
+    display: inline;
+    font-size: small;
+}
+.msgcontent{
+  text-align : right;
+}
+
+.bg1{
+    background-color: turquoise;
+}
+.bg2{
+    background-color: white;
 }
 </style>
 </head>
 <body>
-<h1>채팅</h1>
-<h3><%=user.getUser_name() %>님의 대화</h3>
-<h4>접속 ip : <%=userIp %></h4>
+<h1><%=userinfo.getUser_name() %>님의 대화 목록</h1>
 <hr>
 <div id=list>
-	<div>
-<!-- 		JSP페이지 연결안되서 일단 페이지 이동으로 사용 -->
-<!-- 		<button id="StartChatBtn" onclick="showPopup();">채팅시작하기</button> -->
-		<input type="button" id="chatStart" value="채팅시작하기"/>
-		<script type="text/javascript">
-		//JSP페이지 연결안되서 일단 중단
-// 		function showPopup(){
-			
-// 			var url ="localhost:8089/chathome/start";
-// 			var name ="chat";
-// 			window.open(url,name,"width=400, height=300, left=100, top=50")
-// 		};
-		</script>
-	</div>
-	<div>
-		<a href="/chathome/list">
-			<button id="ListChatBtn">채팅목록</button>
-		</a>
-	</div>
+<div>
+<input type="button" id="chatStart" value="채팅시작하기"/>
+</div>
+<div class="chatlist" >
+<% for(Chat c : chatList){ %>
+		<div class="chatrow" onclick="location.href='/chat/room?selectUserNo=<%=c.getUser_no() %>'">
+			<div class="msgname" ><%=c.getUser_name() %></div>
+			<div class="msgtime"><%=c.getRevision_date() %></div>
+			<div class="msgcontent"><%=c.getMsg_content() %></div>
+		</div>
+<% } %>
+</div>
 </div>
 
 </body>

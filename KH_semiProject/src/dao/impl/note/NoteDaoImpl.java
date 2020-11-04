@@ -10,9 +10,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import common.JDBCTemplate;
+import common.Paging;
 import dao.face.note.NoteDao;
+import dto.addr.AddrView;
 import dto.note.NoteCreateData;
 import dto.note.NoteList;
+import dto.note.NotePaging;
 import dto.note.NoteReceiverView;
 
 public class NoteDaoImpl implements NoteDao {
@@ -30,12 +33,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 1";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
+			ps.setInt(1, 1);
 			rs= ps.executeQuery();
 			while(rs.next()) {
 				NoteReceiverView e = new NoteReceiverView();
@@ -71,12 +74,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 2";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
+			ps.setInt(1, 2);
 			rs= ps.executeQuery();
 			while(rs.next()) {
 				NoteReceiverView e = new NoteReceiverView();
@@ -112,12 +115,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 3";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
+			ps.setInt(1, 3);
 			rs= ps.executeQuery();
 			while(rs.next()) {
 				NoteReceiverView e = new NoteReceiverView();
@@ -153,11 +156,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 4";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 4);
 			
 			rs= ps.executeQuery();
 			while(rs.next()) {
@@ -194,11 +198,12 @@ public class NoteDaoImpl implements NoteDao {
 		sql += "SELECT * FROM tb_user u";
 		sql += " LEFT OUTER JOIN tb_dept d";
 		sql += " ON u.dept_no = d.dept_no";
-		sql += " WHERE u.dept_no = 5";
+		sql += " WHERE u.dept_no = ?";
 		sql += " ORDER BY user_no";
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 5);
 			
 			rs= ps.executeQuery();
 			while(rs.next()) {
@@ -243,6 +248,9 @@ public class NoteDaoImpl implements NoteDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		
@@ -261,11 +269,12 @@ public class NoteDaoImpl implements NoteDao {
 			
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, 1); //sessionø°º≠ userNo πﬁæ∆øÕæﬂ«‘
+			ps.setInt(1, 1); //ÏÑ∏ÏÖòÏóêÏÑú Ïú†Ï†ÄÍ∞íÏùÑ Î∞õÏïÑÏÑú Ï≤òÎ¶¨Ìï¥ÏïºÌï®
 			ps.setString(2, params.getNote_title());
 			ps.setString(3, params.getNote_article());
 			ps.setInt(4, 60);
-			ps.setString(5, params.getUser_ip()); //serviceImpl¿« params settingø°º≠ userIp πﬁ¥¬ ∞… ¥ŸΩ√ «ÿæﬂ«‘
+			ps.setString(5, params.getUser_ip()); 
+			//ÏÑúÎπÑÏä§ÏûÑÌîåÏóêÏÑú ÏïÑÏù¥ÌîºÎ•º Î∞õÏïÑÏÑú Ïó¨Í∏∞ÏóêÏÑú Ï≤òÎ¶¨ÌïòÎäîÍ±∞ (ÏÑúÎπÑÏä§ÏûÑÌîåÏóêÏÑú ÏïÑÏù¥ÌîºÎ•º ÏÑ∏ÏÖòÏóêÏÑú Ï≤òÎ¶¨ÌïòÎäîÍ≤ÉÏù¥Î©¥ Ï£ºÏÑù ÏßÄÏõåÎèÑ Îê®)
 			ps.setInt(6, params.getNote_no());
 			
 			result = ps.executeUpdate();
@@ -345,30 +354,41 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	@Override
-	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req) {
+	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req, Paging paging) {  
 		
 		
 		
 		List<NoteList> result = new ArrayList<NoteList>();
 		
 		String sql = "";
-		sql += "SELECT receiver_no, receiver_name, j2.isDelete, j2.note_no, j2.note_title, j2.send_date, j3.sender_no, j3.sender_name FROM";
-		sql += " (SELECT receiver_no, receiver_name, isDelete, j1.note_no, n.note_title,n.send_date FROM(";
+		sql += "SELECT * FROM (SELECT rownum rnum, j4.* FROM(";
+		sql += " SELECT receiver_no, receiver_name, j2.isDelete, j2.note_no, j2.note_title, j2.send_date, j3.sender_no, j3.sender_name FROM";
+		sql += " (SELECT receiver_no, receiver_name, isDelete, j1.note_no, n.note_title,TO_char(n.send_date,'YY/MM/DD HH24:MI:SS') send_date FROM(";
 		sql += " SELECT r.user_no receiver_no, u.user_name receiver_name, isDelete, note_no FROM tb_receivednote r";
 		sql += " INNER JOIN tb_user u";
 		sql += " ON r.user_no = u.user_no";
-		sql += " WHERE r.user_no = 12";
-		sql += " AND isDelete = 0) j1"; //¿Ã∫Œ∫–ø° ººº«¿« ∑Œ±◊¿Œ«— user_no∏¶ ≥÷æÓæﬂ«‘ (req¥¬ ººº«¿ª æÚ±‚ ¿ß«ÿ ∞°¡Æø»)
+		sql += " WHERE r.user_no = ?"; //Ïù¥Î∂ÄÎ∂ÑÏùÑ ÏÑ∏ÏÖòÏùò Ïú†Ï†ÄÎÑòÎ≤ÑÍ∞íÏùÑ Î∞õÏïÑÏôÄÏïºÌïúÎã§.
+		sql += " AND isDelete = ?) j1"; 
 		sql += " INNER JOIN tb_note n";
-		sql += " ON j1.note_no = n.note_no)j2";
+		sql += " ON j1.note_no = n.note_no";//)j2";
+		sql += " ORDER BY send_date DESC) j2";
 		sql += " INNER JOIN ";
 		sql += " (SELECT s.note_no, s.user_no sender_no, u.user_name sender_name FROM tb_sendnote s";
 		sql += " INNER JOIN tb_user u";
 		sql += " ON s.user_no = u.user_no) j3";
 		sql += " ON j2.note_no= j3.note_no";
-		sql += " ORDER BY send_date DESC";
+		sql += ") j4)";
+		sql += " WHERE rnum BETWEEN ? and ?";
+		
+		
 		try {
 			ps=conn.prepareStatement(sql);
+			
+			ps.setInt(1, 12);
+			ps.setInt(2, 0);
+			ps.setInt(3, paging.getStartNo());
+			ps.setInt(4, paging.getEndNo());
+			
 			rs=ps.executeQuery();
 			
 			while(rs.next()) {
@@ -380,7 +400,7 @@ public class NoteDaoImpl implements NoteDao {
 				e.setNote_title(rs.getString("note_title"));
 				e.setReceiver_name(rs.getString("receiver_name"));
 				e.setReceiver_no(rs.getInt("receiver_no"));
-				e.setSend_date(rs.getDate("send_date"));
+				e.setSend_date(rs.getString("send_date"));
 				e.setSender_name(rs.getString("sender_name"));
 				e.setSender_no(rs.getInt("sender_no"));
 				
@@ -400,17 +420,132 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	@Override
-	public List<NoteList> getSendList(Connection conn, HttpServletRequest req) {
+	public List<NoteList> getSendList(Connection conn, HttpServletRequest req, NotePaging paging) {
 
 		List<NoteList> result = new ArrayList<NoteList>();
 		
 		String sql = "";
-		sql += "SELECT j2.note_no, j2.sender_no,j2.sender_name,j2.note_title,j2.send_date,j2.isDelete,j3.receiver_no, j3.receiver_name FROM";
+		  
+		sql += "SELECT * FROM ";
+		sql += " (SELECT rownum rnum, t1.*, u.user_name receiver FROM";
+		sql += " (SELECT";
+		sql += "    S.note_no ";
+		sql += "    , S.user_no sender_no";
+		sql += "    , TO_CHAR (N.send_date,'YY/MM/DD HH24:MI:SS') send_date ";
+		sql += "    , ( SELECT min(user_no) FROM tb_receivedNote R WHERE S.note_no = R.note_no ) receiver_no";
+		sql += "    , ( SELECT count(R.note_no) FROM tb_receivedNote R WHERE S.note_no = R.note_no ) cnt";
+		sql += "	, S.isdelete";
+		sql += "	, N.note_title";
+		sql += " FROM tb_sendnote S";
+		sql += " INNER JOIN tb_note N";
+		sql += " 	ON S.note_no = N.note_no";
+		sql += " 	WHERE s.user_no = ?";  //Ïù¥Î∂ÄÎ∂ÑÏùÑ ÏÑ∏ÏÖòÏùò Ïú†Ï†ÄÎÑòÎ≤ÑÍ∞íÏùÑ Î∞õÏïÑÏôÄÏïºÌïúÎã§.
+		sql += " 	AND isDelete = ?"; //) t1";
+		sql += "	 ) t1";
+		sql += " INNER JOIN tb_user u";
+		sql += "     ON t1.receiver_no = u.user_no";
+		sql += "	ORDER BY send_date DESC";
+		sql += " ) t2 WHERE t2.rnum BETWEEN ? AND ?";
+		
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, 1);
+				ps.setInt(2, 0);
+				ps.setInt(3, paging.getStartNo());
+				ps.setInt(4, paging.getEndNo());
+				rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					NoteList e = new NoteList();
+					
+					e.setCntReceiver(rs.getInt("cnt"));
+					e.setIsDelete(rs.getInt("isDelete"));
+					e.setNote_no(rs.getInt("note_no"));
+					e.setNote_title(rs.getString("note_title"));
+					e.setReceiver_name(rs.getString("receiver"));
+					e.setSend_date(rs.getString("send_date"));
+					
+					result.add(e);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rs);
+				JDBCTemplate.close(ps);
+			}
+			
+				
+				
+				
+			
+		return result;
+	
+	}
+
+	@Override
+	public int selectCntReceived(Connection conn) {
+
+		int totalCnt= 0;
+		
+		String sql = "";
+		sql += "SELECT count(*) FROM (";
+		sql += " SELECT receiver_no, receiver_name, j2.isDelete, j2.note_no, j2.note_title, j2.send_date, j3.sender_no, j3.sender_name FROM";
+		sql += " (SELECT receiver_no, receiver_name, isDelete, j1.note_no, n.note_title,n.send_date FROM(";
+		sql += " SELECT r.user_no receiver_no, u.user_name receiver_name, isDelete, note_no FROM tb_receivednote r";
+		sql += " INNER JOIN tb_user u";
+		sql += " ON r.user_no = u.user_no";
+		sql += " WHERE r.user_no = ?"; //Ïù¥Î∂ÄÎ∂ÑÏùÑ ÏÑ∏ÏÖòÏùò Ïú†Ï†ÄÎÑòÎ≤ÑÍ∞íÏùÑ Î∞õÏïÑÏôÄÏïºÌïúÎã§.
+		sql += " AND isDelete = ?) j1"; 
+		sql += " INNER JOIN tb_note n";
+		sql += " ON j1.note_no = n.note_no)j2";
+		sql += " INNER JOIN ";
+		sql += " (SELECT s.note_no, s.user_no sender_no, u.user_name sender_name FROM tb_sendnote s";
+		sql += " INNER JOIN tb_user u";
+		sql += " ON s.user_no = u.user_no) j3";
+		sql += " ON j2.note_no= j3.note_no";
+		sql += " ORDER BY send_date DESC";
+		sql += " )";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 12);
+			ps.setInt(2, 0);
+			rs= ps.executeQuery();
+			while(rs.next()) {
+				totalCnt=rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return totalCnt;
+	}
+
+
+	
+
+	@Override
+	public int selectCntSend(Connection conn) {
+
+		int totalCnt= 0;
+
+		int totalAllCnt = 0;
+		
+		String sql = "";
+		sql += "SELECT count(*) FROM (";
+		sql += " SELECT j2.note_no, j2.sender_no,j2.sender_name,j2.note_title,j2.send_date,j2.isDelete,j3.receiver_no, j3.receiver_name FROM";
 		sql += " (SELECT j1.note_no, j1.sender_no, j1.sender_name,n.note_title,n.send_date,j1.isDelete FROM";
 		sql += " (SELECT  s.note_no, s.user_no sender_no, u.user_name sender_name,s.isDelete FROM tb_sendnote s";
 		sql += " INNER JOIN tb_user u";
 		sql += " ON s.user_no = u.user_no";
-		sql += " WHERE s.user_no = 18)j1"; //¿Ã∫Œ∫–ø° ººº«¿« ∑Œ±◊¿Œ«— user_no∏¶ ≥÷æÓæﬂ«‘ (req¥¬ ººº«¿ª æÚ±‚ ¿ß«ÿ ∞°¡Æø»)
+		sql += " WHERE s.user_no = ?"; //Ïù¥Î∂ÄÎ∂ÑÏùÑ ÏÑ∏ÏÖòÏùò Ïú†Ï†ÄÎÑòÎ≤ÑÍ∞íÏùÑ Î∞õÏïÑÏôÄÏïºÌïúÎã§.
+		sql += " AND s.isdelete=?)j1";
 		sql += " INNER JOIN tb_note n";
 		sql += " ON j1.note_no = n.note_no) j2";
 		sql += " INNER JOIN";
@@ -418,38 +553,210 @@ public class NoteDaoImpl implements NoteDao {
 		sql += " INNER JOIN tb_user u";
 		sql += " ON r.user_no = u.user_no) j3";
 		sql += " ON j2.note_no = j3.note_no";
-		sql += " ORDER BY send_date DESC";
+		sql += " ORDER BY send_date, note_no DESC";
+		sql += " )";
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 1);
+			ps.setInt(2, 0);
+			rs= ps.executeQuery();
+			while(rs.next()) {
+				totalAllCnt=rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		if (totalAllCnt==0) { return totalAllCnt; }
+		
+		sql = "";
+		sql += "SELECT j2.note_no, j2.sender_no,j2.sender_name,j2.note_title,j2.send_date,j2.isDelete,j3.receiver_no, j3.receiver_name FROM";
+		sql += " (SELECT j1.note_no, j1.sender_no, j1.sender_name,n.note_title,n.send_date,j1.isDelete FROM";
+		sql += " (SELECT  s.note_no, s.user_no sender_no, u.user_name sender_name,s.isDelete FROM tb_sendnote s";
+		sql += " INNER JOIN tb_user u";
+		sql += " ON s.user_no = u.user_no";
+		sql += " WHERE s.user_no = ?)j1"; //Ïù¥Î∂ÄÎ∂ÑÏùÑ ÏÑ∏ÏÖòÏùò Ïú†Ï†ÄÎÑòÎ≤ÑÍ∞íÏùÑ Î∞õÏïÑÏôÄÏïºÌïúÎã§.
+		sql += " INNER JOIN tb_note n";
+		sql += " ON j1.note_no = n.note_no) j2";
+		sql += " INNER JOIN";
+		sql += " (SELECT r.note_no, r.user_no receiver_no, u.user_name receiver_name FROM tb_receivedNote r";
+		sql += " INNER JOIN tb_user u";
+		sql += " ON r.user_no = u.user_no) j3";
+		sql += " ON j2.note_no = j3.note_no";
+		sql += " ORDER BY send_date, note_no DESC";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 1);
+			rs = ps.executeQuery();
+				
+			int n1 = 0;
+			int n2 = 0;
+			
+			totalCnt = totalAllCnt;
+			while(rs.next()) {
+				
+				
+				for(int i=0;i<totalAllCnt;i++) {
+						n1 = rs.getInt("note_no");
+					if(rs.next()) {
+						n2 = rs.getInt("note_no");
+					} else {
+						n2 = 0;
+					}
+					//System.out.println("n1: "+n1+", n2 "+n2);
+					
+					if(n1==n2) totalCnt--;
+				}
+				
+				break;
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		//System.out.println(totalCnt);
+		
+		return totalCnt;
+	}
+
+	
+	
+	@Override
+	public int deleteReceivedNote(Connection conn,int user_no, int note_no) {
+
+		int result = 0;
+		
+		String sql = "";
+		sql += "UPDATE tb_receivednote SET isdelete = ?";
+		sql += " WHERE user_no= ?";
+		sql += " AND note_no = ?;";
+	
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 1);
+			ps.setInt(2, user_no);
+			ps.setInt(3, note_no);
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public NoteList getNoteView(Connection conn, int note_no) {
+		
+		NoteList result = new NoteList();
+		
+		String sql = "";
+		sql += " SELECT ";
+		sql += " u.user_name sender_name";
+		sql += " ,u.dept_no";
+		sql += " ,(SELECT dept_name FROM tb_dept d WHERE u.dept_no = d.dept_no) dept_name";
+		sql += " ,(SELECT position_name FROM tb_position p WHERE u.position_no = p.position_no) position_name";
+		sql += " , t1.*";
+		sql += " FROM";
+		sql += " (SELECT note_no, user_no sender_no, note_title, note_article, TO_CHAR(send_date,'YY/MM/DD HH24:MI:SS') send_date FROM tb_note";
+		sql += " WHERE note_no = ?) t1"; 
+		sql += " INNER JOIN tb_user u";
+		sql += " ON t1.sender_no = u.user_no";
+		
+		try {
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, note_no);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				
-				NoteList e =  new NoteList();
+				result.setNote_article(rs.getString("note_article"));
+				result.setNote_title(rs.getString("note_title"));
+				result.setNote_no(rs.getInt("note_no"));
+				result.setSender_name(rs.getString("sender_name"));
+				result.setSend_date(rs.getString("send_date"));
+				result.setSenderDept_name(rs.getString("dept_name"));
+				result.setPosition(rs.getString("position_name"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return result;
+		
+	}
+
+	@Override
+	public List<AddrView> getReceivers(Connection conn, int note_no) {
+
+		List<AddrView> result = new ArrayList<AddrView>();
+		
+		
+		String sql = "";
+		
+		sql +="SELECT j1.*, d.dept_name";
+		sql +=" ,(SELECT p.position_name FROM tb_position p WHERE j1.position_no = p.position_no) position_name";
+		sql +=" FROM";
+		sql +=" (SELECT r.note_no, u.user_name,u.position_no, u.user_no receiver, u.dept_no FROM tb_user u";
+		sql +=" INNER JOIN tb_receivedNote r";
+		sql +=" ON u.user_no =r.user_no";
+		sql +=" WHERE r.note_no = ?";
+		sql +=" ORDER BY note_no) j1";
+		sql +=" INNER JOIN tb_dept d";
+		sql +=" ON d.dept_no = j1.dept_no";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, note_no);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
 				
-				e.setIsDelete(rs.getInt("isDelete"));
-				e.setNote_no(rs.getInt("note_no"));
-				e.setNote_title(rs.getString("note_title"));
-				e.setReceiver_name(rs.getString("receiver_name"));
-				e.setReceiver_no(rs.getInt("receiver_no"));
-				e.setSend_date(rs.getDate("send_date"));
-				e.setSender_name(rs.getString("sender_name"));
-				e.setSender_no(rs.getInt("sender_no"));
+				AddrView e = new AddrView();
+				
+				e.setDept_name(rs.getString("dept_name"));
+				e.setUser_no(rs.getInt("receiver"));
+				e.setUser_name(rs.getString("user_name"));
+				e.setPosition_name(rs.getString("position_name"));
+				
 				
 				result.add(e);
 				
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		
 		
 		return result;
-	
+		
 	}
 
+	
 	
 
 }

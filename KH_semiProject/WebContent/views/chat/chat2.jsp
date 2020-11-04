@@ -1,14 +1,18 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="dto.SendMsgClient"%>
+<%@page import="dto.chat.SendMsgClient"%>
 <%@page import="java.util.List"%>
-<%@page import="dto.Chat"%>
-<%@page import="dto.ChatUserInfo"%>
+<%@page import="dto.chat.Chat"%>
+<%@page import="dto.common.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- 에러페이지 -->
     <%@ page errorPage ="./errorPage.jsp" %>
-    <% ChatUserInfo user = (ChatUserInfo) session.getAttribute("userinfo"); %>
-    <% ChatUserInfo opponentUser = (ChatUserInfo) request.getAttribute("user1_info"); %>
+    <%
+    	UserInfo user = (UserInfo) session.getAttribute("userinfo");
+    %>
+    <%
+    	UserInfo opponentUser = (UserInfo) request.getAttribute("user1_info");
+    %>
     <% int chatting_no = (int)request.getAttribute("chatting_no"); %>
     <% String userIp = (String) session.getAttribute("userIp"); %>
     <% List<SendMsgClient> clist = new ArrayList<>(); %>
@@ -33,8 +37,8 @@
 <script type="text/javascript" src ="/resources/js/httpRequest.js"></script>
 <style type="text/css">
 #chatContent{
-	height : 300x;
-	width : 1000px;
+	height : 200x;
+	width : 400px;
 	border : 1px solid;
 	font-size : 14px;
 	border-radius : 4px;
@@ -42,6 +46,22 @@
 	resize : none;
 }
 
+#chatList{
+  height : 280px;
+  width : 420px;
+  overflow-y: auto; 
+}
+
+#chatList::-webkit-scrollbar{
+  width : 5px;
+}
+#chatList::-webkit-scrollbar-thumb{
+  border-radius : 10px;
+  background-color : #ccc;
+}
+#chatList::-webkit-scrollbar-track{
+  display:none;
+}
 </style>
 <script type="text/javascript">
 	//입력창에서 Enter를 누르면 호출되는 함수
@@ -131,10 +151,10 @@
 						$('#chatList').append(clist[msg_no][0].value);
 						$('#chatList').append(clist[msg_no][1].value);
 						$('#chatList').append(clist[msg_no][2].value);
+						$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
 					}
 					msg_no = data.last;
 				}
-				$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
 				msg_no = data.last;
 			}
 			, error : function(){
@@ -159,24 +179,26 @@
 			<div class="portlet portlet-default">
 				<div class="portlet-heading">
 					<div class="portlet-title">
-						<h4><i class="fa fa-circle text-green"></i><%=opponentUser.getUser_name() %>님과 대화</h4>
+						<h4>
+						<input id="goChatList" value="목록으로" type="button" />
+						<i class="fa fa-circle text-green"></i><%=opponentUser.getUser_name() %>님과 대화</h4>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div id="chat" class="panel-collaps collapse in">
 					<!-- 콘솔 메시지의 역할을 하는 div태그.(수신 메시지도 표시한다.) -->
-					<div id="chatList" class="portlet-body chat-widget" style="overflow-y: auto; width:auto; height: 600px;">
+					<div id="chatList" class="portlet-body chat-widget" >
 					</div>
 					<div class="portlet-footer">
 						<div class="row" style="height:90px;">
 							<div class="form-group col-xs-10">
-								<input type="text" id="chatContent" style="height : 80px;"  class="form-control" 
-									onKeyDown="pressEnter()" maxlength="100" />
+								<input type="text" id="chatContent" class="form-control" 
+									onKeyDown="pressEnter()"  />
 							</div>
 							<div class="form-group col-xs-2">
 								<!--<button type="button" class="btn btn-default pull-right" onclick="submitFunction();" onclick="sendMessage()">전송</button> -->
 								<button type="button" class="btn btn-default pull-right" onclick="sendMessage()">전송</button>
-								<input id="disconnBtn" value="나가기" type="button" />
+
 								<div class="clear-fix"></div>
 							</div>
 						</div>
@@ -219,10 +241,8 @@
 	  
 	// 대화방을 나가면 나타나는 문구 설정
 	// Disconnect 버튼을 누르면 호출되는 함수
-	disconnBtn.onclick = function disconnect() {
-		$('#chatlist').append('<div class="row">'+ '<strong>'
-			+"<%=opponentUser.getUser_name() %>"+'</strong>'
-			+"님과 대화가 종료되었습니다." +'</div><hr>');
+	goChatList.onclick = function disconnect() {
+		location.href="/chathome";
 	 }
 	
 	//스크롤바를 하단으로 고정하여 최근대화가 보이게 한다.

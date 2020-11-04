@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import common.Paging;
+import dto.addr.AddrView;
 import dto.note.NoteCreateData;
 import dto.note.NoteList;
+import dto.note.NotePaging;
 import dto.note.NoteReceiverView;
 
 public interface NoteDao {
@@ -29,8 +32,20 @@ public interface NoteDao {
 
 	public int getNextval(Connection conn);
 
-	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req);
+	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req, Paging paging);
 
-	public List<NoteList> getSendList(Connection conn, HttpServletRequest req);
+	public List<NoteList> getSendList(Connection conn, HttpServletRequest req,NotePaging paging);
+
+	public int selectCntReceived(Connection conn);
+
+	public int selectCntSend(Connection conn);
+
+	public int deleteReceivedNote(Connection conn, int user_no, int note_no);
+
+	public NoteList getNoteView(Connection conn, int note_no);
+
+	public List<AddrView> getReceivers(Connection conn, int note_no);
+
+
 
 }

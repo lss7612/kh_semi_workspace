@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dto.common.UserInfo;
 import service.face.note.NoteDeleteService;
 import service.impl.note.NoteDeleteServiceImpl;
 
@@ -27,7 +29,10 @@ public class SendNoteDeleteController extends HttpServlet {
 		
 		List<Integer> note_nos = noteDeleteService.getNoteNos(req);
 		
-		int user_no = 1;//이부분 세션에서 받아와야함
+		HttpSession session = req.getSession();
+		UserInfo user = (UserInfo)session.getAttribute("userinfo");
+		int user_no = user.getUser_no();
+		System.out.println(user_no);
 		
 		int result = noteDeleteService.deleteSendNote(note_nos, user_no);
 		

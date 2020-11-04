@@ -2,22 +2,11 @@ table > thead > tr > th, table > tbody > tr > td {
 	line-height:24px;
 }
 
-
-
-.classification {
-	
-	width: 100px;
-	padding: .5em .3em;
-	border: 1px solid #999;
-	font-family: inherit;
-	background: url('/resources/images/selectbarimg.jpg') no-repeat 95% 50%;
-	border-radius: 0px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	cursor:pointer;
-	
+th{
+	text-align:center;
 }
+
+
 
 thead tr th span {
 	cursor: pointer;
@@ -25,18 +14,19 @@ thead tr th span {
 
 .users{
     
+    border-radius: 5px;
    	cursor:pointer;
-   	padding: 0 20px;
+   	padding: 0 40px;
    	
 }
-.users:hover, .chat:hover{
-	color:pink;
+.users:hover, .chat:hover,.sendNote:hover{
+	background:#9499b7;
+	color:#f8fdff;
 }
 
 article {
 	
-	width:900px;
-	height:500px;
+	height:600px;
 	
 }
 
@@ -58,14 +48,14 @@ article {
 
 #list table tbody tr .dept_name {
 	
-	width: 80px;
+	width: 100px;
 	text-align:center;
 	
 }
 
 #list table tbody tr .position_name {
 	
-	width: 80px;
+	width: 100px;
 	text-align:center;
 	
 }
@@ -73,38 +63,52 @@ article {
 
 #list table tbody tr .user_name{
 	
-	width:150px;
-	padding:0 10px;
+	width:160px;
+	padding:;
 	
 } 
 
-.chat {
+#list table tbody tr .checkbox{
+	
+	width:80px;
+	
+}
+
+
+.chat, .sendNote{
 	cursor:pointer;
 	border : 1px solid grey;
 	border-radius: 5px;
 	padding : 1px 3px;
+	background:#c5cae9;
 }
 
 #list table tbody tr .user_no{
 	
 	text-align:center;
-	width:80px;
+	width:100px;
 	
 }
 
 #list table tbody tr .user_id {
 	
 	text-align:center;
-	width: 160px;
+	width: 200px;
 	
 }
 
 #list table tbody tr .cellphone_no {
 	
 	text-align:center;
-	width: 160px;
-	
+	width: 200px;
+
 } 
+
+#list table tbody tr .tdchat {
+	
+	width: 100px;
+	
+}
 
 .send_date {
 	
@@ -112,3 +116,11 @@ article {
 	
 }
 
+table{
+	margin:0 auto;
+}
+
+#search {
+	margin: 0 250px;
+	float: left;
+}

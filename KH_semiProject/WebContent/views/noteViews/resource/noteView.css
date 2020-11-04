@@ -3,8 +3,8 @@
 
 .view_content_wrap{
 
-	width: 900px;
-
+	width: 1000px;
+	margin: 0 auto;
 }
 
 .content_title{
@@ -52,7 +52,7 @@
 
 	padding : 15px 0px;
 	margin : 10px;
-	white-space:pre;
+	white-space:pre-line;
 	height : 350px;
 	overflow : outo;
 
@@ -74,7 +74,7 @@
 
 } 
 
-.buttons > span {
+.buttons > span, .button >span {
 	border : 1px solid black;
 	padding : 1px 3px;
 	
@@ -91,4 +91,6 @@
 	bottom:3px;
 }
 
-
+.buttons {
+	text-align:center;
+}

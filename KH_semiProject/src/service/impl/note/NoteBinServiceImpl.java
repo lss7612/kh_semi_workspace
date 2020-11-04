@@ -19,7 +19,7 @@ public class NoteBinServiceImpl implements NoteBinService{
 	Connection conn = null;
 
 	@Override
-	public NotePaging getSendPaging(HttpServletRequest req) {
+	public NotePaging getSendPaging(HttpServletRequest req,int user_no) {
 		
 		NotePaging result = null;
 		
@@ -29,7 +29,7 @@ public class NoteBinServiceImpl implements NoteBinService{
 			curPage = Integer.parseInt(param);
 		}
 		Connection conn = JDBCTemplate.getConnection();
-		int totalCount = noteBinDao.selectCntSend(conn);
+		int totalCount = noteBinDao.selectCntSend(conn, user_no);
 		
 		
 		int listCount = 15; //한페이지에 게시물이 최대 몇개를 쓸 수 있는지
@@ -40,13 +40,13 @@ public class NoteBinServiceImpl implements NoteBinService{
 	}
 
 	@Override
-	public List<NoteList> getSendList(HttpServletRequest req, NotePaging paging) {
+	public List<NoteList> getSendList(int user_no, NotePaging paging) {
 
 		List<NoteList> result = null;
 		
 		
 		conn=JDBCTemplate.getConnection();
-		result = noteBinDao.getSendBinList(conn, req, paging);
+		result = noteBinDao.getSendBinList(conn, user_no, paging);
 		
 		
 		return result;
@@ -54,7 +54,7 @@ public class NoteBinServiceImpl implements NoteBinService{
 	}
 
 	@Override
-	public Paging getReceivedPaging(HttpServletRequest req) {  
+	public Paging getReceivedPaging(HttpServletRequest req, int user_no) {  
 		
 		Paging result = null;
 		
@@ -64,7 +64,7 @@ public class NoteBinServiceImpl implements NoteBinService{
 			curPage = Integer.parseInt(param);
 		}
 		Connection conn = JDBCTemplate.getConnection();
-		int totalCount = noteBinDao.selectCntReceived(conn);
+		int totalCount = noteBinDao.selectCntReceived(conn, user_no);
 		
 		int listCount = 15; //한페이지에 게시물이 최대 몇개를 쓸 수 있는지
 		
@@ -74,12 +74,12 @@ public class NoteBinServiceImpl implements NoteBinService{
 	}
 
 	@Override
-	public List<NoteList> getReceivedList(HttpServletRequest req, Paging paging) {  
+	public List<NoteList> getReceivedList(int user_no, Paging paging) {  
 
 		List<NoteList> result = null;
 		
 		conn=JDBCTemplate.getConnection();
-		result = noteBinDao.getReceivedList(conn, req, paging);
+		result = noteBinDao.getReceivedList(conn, user_no, paging);
 		
 		return result;
 	

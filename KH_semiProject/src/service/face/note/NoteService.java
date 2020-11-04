@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import common.Paging;
+import dto.common.UserInfo;
 import dto.note.NoteCreateData;
 import dto.note.NoteList;
 import dto.note.NotePaging;
@@ -22,17 +23,17 @@ public interface NoteService {
 
 	public List<NoteReceiverView> getSalesUser();
 	
-	public NoteCreateData getNCDparams(HttpServletRequest req);
+	public NoteCreateData getNCDparams(HttpServletRequest req, UserInfo user);
 	
 	public int insertNote(NoteCreateData params);
 	
-	public List<NoteList> getReceivedList(HttpServletRequest req, Paging paging);
+	public List<NoteList> getReceivedList(int user_no, Paging paging);
 	
-	public List<NoteList> getSendList(HttpServletRequest req, NotePaging paging);
+	public List<NoteList> getSendList(int user_no, NotePaging paging);
 	
-	public Paging getReceivedPaging(HttpServletRequest req);
+	public Paging getReceivedPaging(HttpServletRequest req, int user_no);
 
-	public NotePaging getSendPaging(HttpServletRequest req);
+	public NotePaging getSendPaging(HttpServletRequest req, int user_no);
 
 	public int deleteReceivedNote(HttpServletRequest req, int user_no, int note_no);
 

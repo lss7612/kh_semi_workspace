@@ -28,20 +28,17 @@
 %>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<title>Insert title here</title>
 
+<jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="/views/noteViews/resource/send.js"></script>
 
 <link rel="stylesheet" href="/views/noteViews/resource/send.css"></link>
-</head>
-<body>
-	<h1>쪽지 보내기</h1>
+<div class="content-wrapper">
+<main>
+<br>
+	<h1 style="text-align:center;">쪽지 보내기</h1>
 	<hr />
 
 	<div class="whole_wrapper">
@@ -149,7 +146,7 @@
 		</table>
 	</form>
 	</div>
-	
 	<jsp:include page="/views/noteViews/buttons.jsp" />
-</body>
-</html>
+	</main>
+	</div>
+<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>

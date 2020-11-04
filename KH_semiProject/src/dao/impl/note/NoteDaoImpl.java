@@ -269,7 +269,7 @@ public class NoteDaoImpl implements NoteDao {
 			
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, 1); //세션에서 유저값을 받아서 처리해야함
+			ps.setInt(1, params.getSender()); //세션에서 유저값을 받아서 처리해야함
 			ps.setString(2, params.getNote_title());
 			ps.setString(3, params.getNote_article());
 			ps.setInt(4, 60);
@@ -300,7 +300,7 @@ public class NoteDaoImpl implements NoteDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, 1);
+			ps.setInt(1, params.getSender());
 			ps.setInt(2, params.getNote_no());
 			ps.setInt(3, params.getIsDelete());
 			
@@ -354,7 +354,7 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	@Override
-	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req, Paging paging) {  
+	public List<NoteList> getReceivedList(Connection conn, int user_no, Paging paging) {  
 		
 		
 		
@@ -384,7 +384,7 @@ public class NoteDaoImpl implements NoteDao {
 		try {
 			ps=conn.prepareStatement(sql);
 			
-			ps.setInt(1, 12);
+			ps.setInt(1, user_no);
 			ps.setInt(2, 0);
 			ps.setInt(3, paging.getStartNo());
 			ps.setInt(4, paging.getEndNo());
@@ -420,7 +420,7 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	@Override
-	public List<NoteList> getSendList(Connection conn, HttpServletRequest req, NotePaging paging) {
+	public List<NoteList> getSendList(Connection conn, int user_no, NotePaging paging) {
 
 		List<NoteList> result = new ArrayList<NoteList>();
 		
@@ -449,7 +449,7 @@ public class NoteDaoImpl implements NoteDao {
 		
 			try {
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1, 1);
+				ps.setInt(1, user_no);
 				ps.setInt(2, 0);
 				ps.setInt(3, paging.getStartNo());
 				ps.setInt(4, paging.getEndNo());
@@ -484,7 +484,7 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	@Override
-	public int selectCntReceived(Connection conn) {
+	public int selectCntReceived(Connection conn, int user_no) {
 
 		int totalCnt= 0;
 		
@@ -509,7 +509,7 @@ public class NoteDaoImpl implements NoteDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, 12);
+			ps.setInt(1, user_no);
 			ps.setInt(2, 0);
 			rs= ps.executeQuery();
 			while(rs.next()) {
@@ -531,7 +531,7 @@ public class NoteDaoImpl implements NoteDao {
 	
 
 	@Override
-	public int selectCntSend(Connection conn) {
+	public int selectCntSend(Connection conn, int user_no) {
 
 		int totalCnt= 0;
 
@@ -558,7 +558,7 @@ public class NoteDaoImpl implements NoteDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, 1);
+			ps.setInt(1, user_no);
 			ps.setInt(2, 0);
 			rs= ps.executeQuery();
 			while(rs.next()) {

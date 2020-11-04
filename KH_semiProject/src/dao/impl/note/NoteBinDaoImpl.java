@@ -21,7 +21,7 @@ public class NoteBinDaoImpl implements NoteBinDao{
 	ResultSet rs = null;
 	
 	@Override
-	public int selectCntSend(Connection conn) {
+	public int selectCntSend(Connection conn, int user_no) {
 
 		int totalCnt= 0;
 
@@ -48,7 +48,7 @@ public class NoteBinDaoImpl implements NoteBinDao{
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, 1);
+			ps.setInt(1, user_no);
 			ps.setInt(2, 1);
 			rs= ps.executeQuery();
 			while(rs.next()) {
@@ -122,7 +122,7 @@ public class NoteBinDaoImpl implements NoteBinDao{
 	}
 
 	@Override
-	public List<NoteList> getSendBinList(Connection conn, HttpServletRequest req, NotePaging paging) {
+	public List<NoteList> getSendBinList(Connection conn, int user_no, NotePaging paging) {
 
 		List<NoteList> result = new ArrayList<NoteList>();
 		
@@ -150,7 +150,7 @@ public class NoteBinDaoImpl implements NoteBinDao{
 		
 			try {
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1, 1);
+				ps.setInt(1, user_no);
 				ps.setInt(2, 1);
 				ps.setInt(3, paging.getStartNo());
 				ps.setInt(4, paging.getEndNo());
@@ -185,7 +185,7 @@ public class NoteBinDaoImpl implements NoteBinDao{
 	}
 
 	@Override
-	public int selectCntReceived(Connection conn) {
+	public int selectCntReceived(Connection conn, int user_no) {
 
 		int totalCnt= 0;
 		
@@ -210,7 +210,7 @@ public class NoteBinDaoImpl implements NoteBinDao{
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, 12);
+			ps.setInt(1, user_no);
 			ps.setInt(2, 1);
 			rs= ps.executeQuery();
 			while(rs.next()) {
@@ -229,7 +229,7 @@ public class NoteBinDaoImpl implements NoteBinDao{
 	}
 
 	@Override
-	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req, Paging paging) {  
+	public List<NoteList> getReceivedList(Connection conn, int user_no, Paging paging) {  
 		
 		
 		
@@ -242,7 +242,7 @@ public class NoteBinDaoImpl implements NoteBinDao{
 		sql += " SELECT r.user_no receiver_no, u.user_name receiver_name, isDelete, note_no FROM tb_receivednote r";
 		sql += " INNER JOIN tb_user u";
 		sql += " ON r.user_no = u.user_no";
-		sql += " WHERE r.user_no = 12"; //이부분을 세션의 유저넘버값을 받아와야한다.
+		sql += " WHERE r.user_no = ?"; //이부분을 세션의 유저넘버값을 받아와야한다.
 		sql += " AND isDelete = ?) j1"; 
 		sql += " INNER JOIN tb_note n";
 		sql += " ON j1.note_no = n.note_no)j2";
@@ -259,9 +259,10 @@ public class NoteBinDaoImpl implements NoteBinDao{
 		try {
 			ps=conn.prepareStatement(sql);
 			
-			ps.setInt(1, 1);
-			ps.setInt(2, paging.getStartNo());
-			ps.setInt(3, paging.getEndNo());
+			ps.setInt(1, user_no);
+			ps.setInt(2, 1);
+			ps.setInt(3, paging.getStartNo());
+			ps.setInt(4, paging.getEndNo());
 			
 			rs=ps.executeQuery();
 			

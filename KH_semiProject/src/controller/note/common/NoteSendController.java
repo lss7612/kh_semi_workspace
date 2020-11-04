@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dto.common.UserInfo;
 import dto.note.NoteCreateData;
 import dto.note.NoteReceiverView;
 import service.face.note.NoteService;
@@ -57,7 +59,11 @@ public class NoteSendController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
-		NoteCreateData params = noteService.getNCDparams(req);	
+		HttpSession session = req.getSession();
+		UserInfo user = (UserInfo)session.getAttribute("userinfo");
+		System.out.println(user);
+		
+		NoteCreateData params = noteService.getNCDparams(req, user);	
 		System.out.println(params);
 		
 		//

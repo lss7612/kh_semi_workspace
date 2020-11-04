@@ -15,8 +15,8 @@
 <link rel="stylesheet" href="/views/noteViews/resource/noteView.css"></link>
 
 <div class="content-wrapper">
-
-<h1>삭제된 받은 쪽지 보기</h1>
+<br>
+<h1 style="text-align:center;">삭제된 받은 쪽지 보기</h1>
 <hr>
 
 <% String sender_name =  list.getSender_name();%>
@@ -47,7 +47,7 @@
 		<div class="content_article"><%= note_article %></div>
 		
 	</div>
-	<div class="buttons">
+	<div class="button">
 		<span class="cursor reply" style="display:none">답장</span>
 		<span class="cursor restore">복구</span>
 		<span class="cursor toReceivedNoteList">받은쪽지함으로</span>

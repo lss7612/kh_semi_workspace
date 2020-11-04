@@ -10,12 +10,12 @@ import dto.note.NotePaging;
 
 public interface NoteBinService {
 
-	public NotePaging getSendPaging(HttpServletRequest req);
+	public NotePaging getSendPaging(HttpServletRequest req, int user_no);
 
-	public List<NoteList> getSendList(HttpServletRequest req, NotePaging paging);
+	public List<NoteList> getSendList(int user_no, NotePaging paging);
 
-	public Paging getReceivedPaging(HttpServletRequest req);
+	public Paging getReceivedPaging(HttpServletRequest req, int user_no);
 
-	public List<NoteList> getReceivedList(HttpServletRequest req, Paging paging);
+	public List<NoteList> getReceivedList(int user_no, Paging paging);
 
 }

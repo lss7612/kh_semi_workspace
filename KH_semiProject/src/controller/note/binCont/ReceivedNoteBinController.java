@@ -1,4 +1,4 @@
-package controller.note.common;
+package controller.note.binCont;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.Paging;
 import dto.common.UserInfo;
 import dto.note.NoteList;
-import common.Paging;
-import service.face.note.NoteService;
-import service.impl.note.NoteServiceImpl;
+import service.face.note.NoteBinService;
+import service.impl.note.NoteBinServiceImpl;
 
 /**
- * Servlet implementation class NoteVIewController
+ * Servlet implementation class ReceivedNoteBinController
  */
-@WebServlet("/note/received")
-public class ReceivedNoteController extends HttpServlet {
+@WebServlet("/note/receivednotebin")
+public class ReceivedNoteBinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	NoteService noteService = new NoteServiceImpl();
+	
+	NoteBinService noteBinService = new NoteBinServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { 
@@ -33,15 +33,15 @@ public class ReceivedNoteController extends HttpServlet {
 		int user_no = user.getUser_no();
 		System.out.println(user_no);
 		
-		Paging paging = noteService.getReceivedPaging(req, user_no);
+		Paging paging = noteBinService.getReceivedPaging(req, user_no);
 		req.setAttribute("paging", paging);
 		
-		List<NoteList> list = noteService.getReceivedList(user_no, paging);
+		List<NoteList> list = noteBinService.getReceivedList(user_no, paging);
 		req.setAttribute("list", list);
 		
 		System.out.println(list);
 		
-		req.getRequestDispatcher("/views/noteViews/receivedList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/noteViews/receivedNoteBinList.jsp").forward(req, resp);
 	
 	}
 	

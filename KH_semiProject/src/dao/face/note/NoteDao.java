@@ -32,13 +32,13 @@ public interface NoteDao {
 
 	public int getNextval(Connection conn);
 
-	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req, Paging paging);
+	public List<NoteList> getReceivedList(Connection conn, int user_no, Paging paging);
 
-	public List<NoteList> getSendList(Connection conn, HttpServletRequest req,NotePaging paging);
+	public List<NoteList> getSendList(Connection conn, int user_no,NotePaging paging);
 
-	public int selectCntReceived(Connection conn);
+	public int selectCntReceived(Connection conn, int user_no);
 
-	public int selectCntSend(Connection conn);
+	public int selectCntSend(Connection conn, int user_no);
 
 	public int deleteReceivedNote(Connection conn, int user_no, int note_no);
 

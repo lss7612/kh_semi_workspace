@@ -11,12 +11,12 @@ import dto.note.NotePaging;
 
 public interface NoteBinDao {
 
-	public int selectCntSend(Connection conn);
+	public int selectCntSend(Connection conn, int user_no);
 
-	public List<NoteList> getSendBinList(Connection conn, HttpServletRequest req, NotePaging paging);
+	public List<NoteList> getSendBinList(Connection conn, int user_no, NotePaging paging);
 
-	public int selectCntReceived(Connection conn);
+	public int selectCntReceived(Connection conn, int user_no);
 
-	public List<NoteList> getReceivedList(Connection conn, HttpServletRequest req, Paging paging);
+	public List<NoteList> getReceivedList(Connection conn, int user_no, Paging paging);
 
 }

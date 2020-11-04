@@ -10,7 +10,7 @@ public class JDBCTemplate {
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	
 	
-	private static final String URL = "jdbc:oracle:thin:@192.168.10.106:1521:xe";
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USERNAME = "scott";
 	private static final String PASSWORD = "tiger";
 	

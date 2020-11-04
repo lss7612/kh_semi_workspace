@@ -2,6 +2,9 @@ table > thead > tr > th, table > tbody > tr > td {
 	line-height:24px;
 }
 
+th{
+	text-align:center;
+}
 
 thead tr th span {
 	cursor: pointer;
@@ -13,14 +16,14 @@ thead tr th span {
    	padding: 0 20px;
    	
 }
-.users:hover, .chat:hover{
-	color:pink;
+.users:hover, .chat:hover,.sendNote:hover{
+	background:#9499b7;
+	color:#f8fdff;
 }
 
 article {
 	
-	width:900px;
-	height:500px;
+	height:600px;
 	
 }
 
@@ -62,12 +65,14 @@ article {
 	
 } 
 
-.chat {
+.chat, .sendNote{
 	cursor:pointer;
 	border : 1px solid grey;
 	border-radius: 5px;
 	padding : 1px 3px;
+	background:#c5cae9;
 }
+
 
 #list table tbody tr .user_no{
 	
@@ -96,3 +101,11 @@ article {
 	
 }
 
+table{
+	margin:0 auto;
+}
+
+#search {
+	margin: 0 250px;
+	float: left;
+}

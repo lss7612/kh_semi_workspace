@@ -18,6 +18,7 @@ import dto.note.NotePaging;
 import dto.note.NoteReceiverView;
 import service.face.note.NoteService;
 import dto.addr.AddrView;
+import dto.common.UserInfo;
 
 public class NoteServiceImpl implements NoteService{
 
@@ -122,7 +123,7 @@ public class NoteServiceImpl implements NoteService{
 	
 	
 	@Override
-	public NoteCreateData getNCDparams(HttpServletRequest req) {
+	public NoteCreateData getNCDparams(HttpServletRequest req, UserInfo user) {
 
 		NoteCreateData result = new NoteCreateData();
 		conn =JDBCTemplate.getConnection();
@@ -134,9 +135,9 @@ public class NoteServiceImpl implements NoteService{
 		result.setIsDelete(0);
 		result.setNote_article(req.getParameter("article"));
 		result.setNote_title(req.getParameter("title"));
-		result.setSender(1);
+		result.setSender(user.getUser_no());
 		result.setTable_no(60);
-		result.setUser_ip("1234.1234.1234.1234"); //세션에서 아이피를 받아야함
+		result.setUser_ip(user.getUser_ip()); //세션에서 아이피를 받아야함
 		
 		
 		int cnt = addrViewDao.selectCntAll(conn);
@@ -197,25 +198,25 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Override
-	public List<NoteList> getReceivedList(HttpServletRequest req, Paging paging) {  
+	public List<NoteList> getReceivedList(int user_no, Paging paging) {  
 
 		List<NoteList> result = null;
 		
 		conn=JDBCTemplate.getConnection();
-		result = noteDao.getReceivedList(conn, req, paging);
+		result = noteDao.getReceivedList(conn, user_no, paging);
 		
 		return result;
 	
 	}
 
 	@Override
-	public List<NoteList> getSendList(HttpServletRequest req, NotePaging paging) {
+	public List<NoteList> getSendList(int user_no, NotePaging paging) {
 
 		List<NoteList> result = null;
 		
 		
 		conn=JDBCTemplate.getConnection();
-		result = noteDao.getSendList(conn, req, paging);
+		result = noteDao.getSendList(conn, user_no, paging);
 		
 		
 		return result;
@@ -223,7 +224,7 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Override
-	public Paging getReceivedPaging(HttpServletRequest req) {
+	public Paging getReceivedPaging(HttpServletRequest req, int user_no) {
 		
 		Paging result = null;
 		
@@ -233,7 +234,7 @@ public class NoteServiceImpl implements NoteService{
 			curPage = Integer.parseInt(param);
 		}
 		Connection conn = JDBCTemplate.getConnection();
-		int totalCount = noteDao.selectCntReceived(conn);
+		int totalCount = noteDao.selectCntReceived(conn, user_no);
 		
 		int listCount = 15; //한페이지에 게시물이 최대 몇개를 쓸 수 있는지
 		
@@ -243,7 +244,7 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Override
-	public NotePaging getSendPaging(HttpServletRequest req) {
+	public NotePaging getSendPaging(HttpServletRequest req, int user_no) {
 		
 		NotePaging result = null;
 		
@@ -253,7 +254,7 @@ public class NoteServiceImpl implements NoteService{
 			curPage = Integer.parseInt(param);
 		}
 		Connection conn = JDBCTemplate.getConnection();
-		int totalCount = noteDao.selectCntSend(conn);
+		int totalCount = noteDao.selectCntSend(conn, user_no);
 		
 		
 		int listCount = 15; //한페이지에 게시물이 최대 몇개를 쓸 수 있는지

@@ -1,4 +1,4 @@
-package controller.note.common;
+package controller.note.binCont;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import common.Paging;
 import dto.common.UserInfo;
 import dto.note.NoteList;
 import dto.note.NotePaging;
-import service.face.note.NoteService;
-import service.impl.note.NoteServiceImpl;
+import service.face.note.NoteBinService;
+import service.impl.note.NoteBinServiceImpl;
 
 /**
- * Servlet implementation class SendNoteController
+ * Servlet implementation class SendNoteBin
  */
-@WebServlet("/note/sent")
-public class SendNoteController extends HttpServlet {
+@WebServlet("/note/sendnotebin")
+public class SendNoteBinController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	
-	NoteService noteService = new NoteServiceImpl();
+	NoteBinService noteBinService = new NoteBinServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,17 +32,16 @@ public class SendNoteController extends HttpServlet {
 		UserInfo user = (UserInfo)session.getAttribute("userinfo");
 		int user_no = user.getUser_no();
 		System.out.println(user_no);
-		
-		
-		NotePaging paging = noteService.getSendPaging(req, user_no);
+
+		NotePaging paging = noteBinService.getSendPaging(req, user_no);
 		req.setAttribute("paging", paging);
 		
 		
-		List<NoteList> list = noteService.getSendList(user_no, paging);
+		List<NoteList> list = noteBinService.getSendList(user_no, paging);
 		req.setAttribute("list", list);
 		System.out.println(list);
 		
-		req.getRequestDispatcher("/views/noteViews/sendList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/noteViews/sendNoteBinList.jsp").forward(req, resp);
 	
 	}
 	

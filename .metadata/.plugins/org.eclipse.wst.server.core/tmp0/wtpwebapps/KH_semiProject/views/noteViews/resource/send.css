@@ -1,6 +1,5 @@
 .whole_wrapper, form {
 	
-	width:900px;
 	
 }
 
@@ -10,7 +9,7 @@ textarea, #title {
 	width: 700px;
 }
 textarea {
-	height: 350px;
+	height: 500px;
 }
 
 span {
@@ -57,4 +56,31 @@ form {
 	bottom:3px;
 }
 
+main {
+}
+table{
+	margin:0 auto;
+}
 
+.buttons > span {
+	cursor:pointer;
+	border : 1px solid grey;
+	border-radius: 5px;
+	padding : 1px 3px;
+	background:#c5cae9;
+}
+
+.buttons > span:hover {
+	background:#9499b7;
+}
+.buttons > span:hover > a {
+	color:#f8fdff;
+}
+
+a{
+	color:black;
+}
+
+.buttons {
+	text-align:center;
+}

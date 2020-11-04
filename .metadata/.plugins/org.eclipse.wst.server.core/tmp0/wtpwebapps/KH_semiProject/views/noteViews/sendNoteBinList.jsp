@@ -20,7 +20,8 @@
     
 <link rel="stylesheet" href="/views/noteViews/resource/sendList,receivedList.css"></link>
 	<div class="content-wrapper">
-    <h1>보낸 쪽지 휴지통</h1>
+	<br>
+    <h1 style="text-align:center;">보낸 쪽지 휴지통</h1>
     <hr />
 
     <article>
@@ -33,13 +34,13 @@
             <option value="sender">보낸사람</option>
             <option value="receiver">받는사람</option>
           </select>
-          <input type="text" name="keyword"><button name:="search">검색</button>
+          <input type="text" name="keyword"><button name="search">검색</button>
         </form>
       </div>
       <hr>
         <div class ="wrapper" id="list">
       <form id="restoreAll" action="/note/sendnoterestore" method="GET">
-      <table>
+      <table class="table-hover table-striped">
         <thead>
           <tr>
             <th><input type="checkbox" class="selectAllCheckbox"></th>
@@ -52,7 +53,7 @@
           <tbody>
           <% for (int i = 0; i < list.size(); i++) { %>
             <tr>
-              <td class="checkbox"><input type="checkbox" name="note_no<%=i%>" value="<%=list.get(i).getNote_no()%>" id=""></td>
+              <td class="checkbox" style="text-align:center;"><input type="checkbox" name="note_no<%=i%>" value="<%=list.get(i).getNote_no()%>" id=""></td>
               <td class="note_no"><%=list.get(i).getNote_no() %></td>
               <td class="title"><span class ="content_title"><%=list.get(i).getNote_title() %></span></td>
               <td class="receiver_name"><span><%=list.get(i).getReceiver_name()%>
@@ -63,13 +64,20 @@
               <td class="send_date"><%=sdl.get(i)%></td>
             </tr>
             <% } %>
+            <tr>
+	            <td><span class="selectAction restoreAll">선택복구</span></td>
+	            <td></td>
+	            <td></td>
+	            <td></td>
+	            <td></td>
+            </tr>
           </tbody>
           
         </table>
         </form>
       </div>
       <hr>
-        <button class="restoreAll">선택복구</button>
+        
     </article>
 	<jsp:include page="/views/noteViews/sendNoteBinList_paging.jsp" />
 	<jsp:include page="/views/noteViews/buttons.jsp" />

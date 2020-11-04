@@ -64,8 +64,8 @@ window.onload = function () {
   $('.chat').click(function () {
     if (!confirm('채팅을 시작하시겠습니까?')) return;
     var user_no = $(this).parent().prev().prev().prev().prev().prev().prev().eq(0).html();
-
-    location.href = '/chat/room?selectUserNo=' + user_no;
+    window.open('/chat/room?selectUserNo='+user_no,'chat','width=450, height=450')
+    //location.href = '/chat/room?selectUserNo=' + user_no;
   });
 };
 

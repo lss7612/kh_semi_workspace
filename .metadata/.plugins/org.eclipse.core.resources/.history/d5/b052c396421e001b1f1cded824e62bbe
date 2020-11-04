@@ -1,0 +1,62 @@
+.whole_wrapper, form {
+	
+	width:900px;
+	
+}
+
+
+textarea, #title {
+	resize: none;
+	width: 700px;
+}
+textarea {
+	height: 350px;
+}
+
+span {
+}
+
+#receiver>input {
+	width: 23px;
+}
+
+label, button, #add {
+	cursor: pointer;
+	
+}
+#add{
+	border : 1px solid grey;
+	border-radius: 5px;
+	padding : 1px 3px;
+}
+#add:hover{
+	
+	position: relative;
+	color:pink;
+	border:1px solid pink;
+	bottom:3px;
+	
+}
+
+form {
+	
+	padding: 5px 10px;
+	margin: 5px 10px;
+	
+}
+
+#receiver > span{
+	margin: 0 5px;
+}
+
+#receiver > span:hover {
+	cursor:pointer;
+	position: relative;
+	color:pink;
+	border:1px solid pink;
+	bottom:3px;
+}
+
+main {
+	left: 30px;
+}

@@ -1,0 +1,96 @@
+
+
+
+.view_content_wrap{
+
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.content_title{
+
+	margin : 5px 0px;
+
+}
+
+.content_sub_title{
+
+	margin : 3px 0px;
+
+}
+
+.content_sub_title > div {
+	margin : 10px 0;
+}
+
+.content_sub_title > div > span,  {
+	font-size:0.8em;
+}
+
+.content_title>span {
+	font-size:0.8em;
+	float:left;
+	margin: 0 10px 0 0; 
+	position:relative;
+	top:5px;
+}
+
+.content_sub_title_1 > .user_ip {
+
+	font-size: 0.5em;
+	color: grey;	
+	margin: 0 3px 0 0;
+
+}
+
+.content_sub_title2{
+	line-height:27px;
+}
+
+
+.content_article {
+
+	padding : 15px 0px;
+	margin : 10px;
+	white-space:pre-line;
+	height : 350px;
+	overflow : outo;
+
+}
+
+.user_name > span { 
+
+	border : 1px solid black;
+	padding : 1px 3px;
+
+}
+
+
+
+.receiver ~ span {
+
+	border : 1px solid black;
+	padding : 1px 3px;
+
+} 
+
+.buttons > span, button >span {
+	border : 1px solid black;
+	padding : 1px 3px;
+	
+}
+
+.cursor {
+	cursor:pointer;
+}
+
+.cursor:hover{
+	position: relative;
+	color:pink;
+	border:1px solid pink;
+	bottom:3px;
+}
+
+.buttons {
+	text-align:center;
+}

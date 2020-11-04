@@ -1,0 +1,71 @@
+.content_title{
+    
+    position: relative;
+    left: 30px;
+   	cursor:pointer;
+   	padding: 0 20px;
+   	
+   	
+   	
+}
+.content_title:hover{
+	color:pink;
+}
+
+article {
+	
+	height:500px;
+	
+}
+
+#list {
+	height:500px;
+}
+
+#list > table {
+	
+	margin:auto;
+	
+}
+
+
+#list table tbody th{
+	background: white;
+}
+
+#list table tbody tr .title{
+	
+	width:600px;
+	
+} 
+
+#list table tbody tr .note_no{
+	
+	text-align:center;
+	width:60px;
+	
+}
+
+#list table tbody tr .receiver_name {
+	
+	text-align:center;
+	width: 150px;
+	
+}
+
+#list table tbody tr .send_date {
+	
+	text-align:center;
+	width: 150px;
+	
+} 
+
+.send_date {
+	
+	font-size:0.7em;
+	
+}
+
+table{
+	margin:0 auto;
+}

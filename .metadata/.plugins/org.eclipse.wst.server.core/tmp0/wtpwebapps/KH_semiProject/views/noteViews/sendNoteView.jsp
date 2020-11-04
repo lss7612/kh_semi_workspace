@@ -18,8 +18,8 @@
 <jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
 <div class="content-wrapper">
 
-
-<h1>보낸 쪽지 보기</h1>
+<br>
+<h1 style="text-align:center;">보낸 쪽지 보기</h1>
 <hr>
 
 <% String sender_name =  list.getSender_name();%>
@@ -50,7 +50,7 @@
 		<div class="content_article"><%= note_article %></div>
 		
 	</div>
-	<div class="buttons">
+	<div class="button">
 		<span class="cursor reply" style="display:none">답장</span>
 		<span class="cursor delete">삭제</span>
 		<span class="cursor toReceivedNoteList">받은쪽지함으로</span>

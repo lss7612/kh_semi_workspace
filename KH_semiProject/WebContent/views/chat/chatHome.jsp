@@ -34,7 +34,7 @@ button{
 .chatlist{
     border: solid steelblue;
     overflow-y: auto; 
-    width:440px; 
+    width:435px; 
     height: 300px;
 }
 .chatlist::-webkit-scrollbar{
@@ -50,7 +50,7 @@ button{
 
 .chatrow{
     height : 45px;
-    width : 430px;
+    width : 425px;
     border: 3px solid #ccc;
 }
 

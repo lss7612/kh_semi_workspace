@@ -183,9 +183,9 @@ public class ChatRoomController extends HttpServlet {
 			System.out.println("기존에 회원간 대화 내용이 존재합니다.");
 			System.out.println("두 회원의 최근 채팅방 번호는 : "+chatting_no+"입니다.");
 			System.out.println("두 회원의 기존 대화");
-			for(SendMsgClient s : clist) {
-				System.out.println(s);
-			}
+//			for(SendMsgClient s : clist) {
+//				System.out.println(s);
+//			}
 			// 기존 대화방 정보로 대화 진행.
 			req.setAttribute("clist", clist);
 			req.setAttribute("chatting_no", chatting_no);

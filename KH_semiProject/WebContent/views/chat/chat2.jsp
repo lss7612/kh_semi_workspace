@@ -92,6 +92,12 @@ html{
 #chatList::-webkit-scrollbar-track{
   display:none;
 }
+
+
+
+
+
+
 </style>
 <script type="text/javascript">
 	//입력창에서 Enter를 누르면 호출되는 함수
@@ -228,7 +234,7 @@ html{
 <!--               <span id="fromMsgInfoTime" class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span> -->
 <!--             </div> -->
 <!--             /.direct-chat-infos -->
-<!--             <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"> -->
+<!--             <img class="direct-chat-img-lh" src="dist/img/user1-128x128.jpg" alt="message user image"> -->
 <!--             /.direct-chat-img -->
 <!--             <div id = "fromMsgContent" class="direct-chat-text"> -->
 <!--              		딴짓말고 일 좀 하게 //받는 사람 채팅메시지 -->
@@ -244,7 +250,7 @@ html{
 <!--               <span id="toMsgInfoTime" class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span> -->
 <!--             </div> -->
 <!--             /.direct-chat-infos -->
-<!--             <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"> -->
+<!--             <img class="direct-chat-img-rh" src="dist/img/user3-128x128.jpg" alt="message user image"> -->
 <!--             /.direct-chat-img -->
 <!--             <div id="toMsgInfoName" class="direct-chat-text"> -->
 <!--               		시른데??? //보내는 사람 채팅메시지 -->
@@ -308,7 +314,7 @@ html{
 		console.log("상대가 보냄")
  		$('#chatList').append( "<%=s.getWinfo() %>" );
 		$('#chatList').append( "<%=s.getChatTime() %>" );
-		$('#chatlist').append( "<%=s.getProfile_img() %>" );
+		$('#chatList').append( "<%=s.getProfile_img() %>" );
 		$('#chatList').append( "<%=s.getMsgContent() %>" );
 	<%	} %>
 	<% } %>

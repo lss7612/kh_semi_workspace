@@ -1,0 +1,196 @@
+@charset "UTF-8";
+/* test */
+.container{
+  display: grid;
+  grid-template-rows: 1fr 15fr 1fr;
+  grid-template-columns: 2fr 5fr 3fr;
+  grid-template-areas: 
+    "header header header"
+    "nav main main"
+    "footer footer footer";
+/*   grid-gap: .75em; */
+}
+
+/* appr : 결재 서브메뉴 id*/
+/* mes : 쪽지 서브메뉴 id*/
+
+/* 20201026 수정*/
+#appr{
+	display:none;
+}
+#mes{
+	display:none;
+}
+
+
+.submenu >div> ul{
+	list-style-type:none;
+}
+
+
+.submenu >div> ul> li > a:hover{
+	color: #000;
+	border: 1px solid black;
+	background :#fff;
+}
+
+
+.absolute{
+	position: absolute;
+}
+.relative{
+	position: relative;
+}
+
+
+.navi{
+
+	list-style-type:none;
+
+
+	padding: 0;
+	margin: 0;
+
+}
+
+.navi>li{
+    float:left;
+   line-height: 40px;
+
+   background: #fff;
+
+   border-right : 1px solid #fff;
+
+   position:relative;
+}
+
+.navi > li > a{
+
+	color: #000;
+
+	text-decoration: none;
+
+	font-size : 20px;
+	font-weight : bold; 
+	font-family: "돋움"; 
+
+	padding: 10px 15px;
+
+	margin: 0 3px;
+
+
+	transition: color 1s;
+	
+}
+
+
+
+
+.navi > li > a:hover{
+
+	color:red;
+
+}
+
+.navi > li > ul{
+
+	position:absolute;
+
+	list-style-type:none;
+	
+
+	padding : 0;
+	margin : 0;
+	
+
+	width:160px;
+	
+
+	left:5px;
+
+}
+
+.navi > li > ul > li{
+
+	background: #000;
+
+	padding-left:0px;
+
+	line-height: 0;
+	height: 0;
+	font-size:0;
+}
+
+.navi > li:hover > ul > li{
+	line-height : 40px;
+	height: 40px;
+	font-size: 20px;
+	
+
+	transition: all 0.01s;
+
+}
+
+
+
+.navi > li > ul > li > a{
+	background: #999;
+	
+	color : #333;
+	
+	text-decoration:none;
+
+	display:block;
+	
+
+
+}
+
+/* a링크 파란색이랑 밑줄 없애버림.. */
+a:link {text-decoration: none; color: skyblue;}
+a:visited {text-decoration: none; color: skyblue;}
+
+
+.navi > li > ul > li > a:hover{
+
+	color: #c00;
+	
+	background: #fff;
+
+/* 	transition: all 3s; */
+}
+
+
+/* #content{ */
+/* 	height: 400px; */
+/* 	background:#CCC; */
+/* } */
+/* #foot{ */
+/* 	text-align: center; */
+/* 	background: skyblue */
+/* } */
+
+header{
+    grid-area: header;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
+nav{
+	border-right : 1px solid #ccc;
+    grid-area: nav;
+
+}
+main{
+    grid-area: main;
+
+
+}
+/* aside{ */
+/*     grid-area: aside; */
+/*     background-color: orange; */
+/* } */
+footer{
+	border-top : 1px solid #ccc;
+    grid-area: footer;
+
+}

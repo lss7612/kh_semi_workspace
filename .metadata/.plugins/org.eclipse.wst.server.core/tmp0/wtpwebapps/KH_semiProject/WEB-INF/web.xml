@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>KH_semiProject</display-name>
+  <welcome-file-list>
+
+    <welcome-file>/views/login/login.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <filter>
+  	<filter-name>KoreanEncodingFilter</filter-name>
+  	<filter-class>common.EncodingFilter</filter-class>
+  	
+  	<init-param>
+  		<param-name>enc</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  	
+  </filter>
+  
+  
+  <filter-mapping>
+  	<filter-name>KoreanEncodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
+</web-app>

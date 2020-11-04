@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import common.JDBCTemplate;
 import dao.face.appr.ApprovalDoUpdateDao;
@@ -18,9 +20,18 @@ public class ApprovalDoUpdateDaoImpl implements ApprovalDoUpdateDao{
 	
 	@Override
 	public int UpdateParam(Connection conn, ApprMy apprmy) {
+		
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar time = Calendar.getInstance();
+		String format_time1 = format1.format(time.getTime());
+		
+		
+		
+		
+		
 		String sql="";
-		sql+="update tb_approval set aprvl_state=? "
-				+ "where aprvl_no=?";
+		sql+=" update tb_approval set aprvl_state=? ,final_date="+"'" + format_time1 + "'" +" where aprvl_no=?";
 		
 		int result = 0;
 		

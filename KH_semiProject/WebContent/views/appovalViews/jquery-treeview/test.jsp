@@ -1,3 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -166,6 +175,51 @@ th {
 	$(document).ready(function() {
 	    $("#approveform").submit(function() {
 	    	
+	    	console.log($("#one").val())
+	    	console.log("start 값 : " + $("#start").val())
+		//타이틀 빈값 체크
+	    	console.log($("#title").val());
+	    	var value = ""
+	    	var day="0000-00-00"
+	    	var time="00:00"
+	    	
+	    	
+	    	
+	        	if($("#start").val()==0 ){
+		    		alert("날짜를 선택하세요")
+
+		    		
+		    		return false
+		    	}
+		    	
+		    	if($("#end").val()==0){
+		    		alert("날짜를 선택하세요")
+		    		
+		    		return false
+		    	}
+
+		    
+			    	if( !$("input:radio[id='one']").is(":checked")){
+			    	
+			    	
+				    	if(time==$("#start_time").val()){
+				    		alert("시간을 선택하세요")
+			
+				 
+				    		
+				    		return false
+				    	}
+				    	if(time==$("#end_time").val()){
+				    		alert("시간을 선택하세요")
+			
+// 				    		$("#end_time").val("")
+				    		
+				    		return false
+				    	}
+			    
+			    	}
+		    	
+		    	
 	    	if(value==$("#title").val()){
 	    		alert("제목을 입력하세요")
 
@@ -180,15 +234,25 @@ th {
 	    		
 	    		return false
 	    	}
+
+			 var fileCheck = document.getElementById("upfile").value;
+		    console.log(fileCheck);
+		    
+		    if(!fileCheck){
+		        alert("파일을 첨부해 주세요");
+		        return false;
+		    }
 	    	
+		    alert("전송완료!!")
+		    
 	    })
+	
+	  
+	    
 	})
 	
 
-</script>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-2.2.4.min.js">
-	
+
 </script>
 
 
@@ -209,9 +273,8 @@ th {
 
 
 <jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
-     <form action="/approval/approvalWriteWork" method="post" id="approveform"
-				name="approval_form" enctype="multipart/form-data">
-	  <!-- Content Wrapper. Contains page content -->
+
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -252,28 +315,36 @@ th {
               <div class="card-body p-0">
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
-                    <a href="/approval/approvalWrite" class="nav-link">
-                      <i class="fas fa-inbox"></i> 결재작성
-                     	
+                    <a href="#" class="nav-link">
+                      <i class="fas fa-inbox"></i> Inbox
+                      <span class="badge bg-primary float-right">12</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/approval/approvalmy" class="nav-link">
-                      <i class="fas fa-inbox"></i> 기안함
+                    <a href="#" class="nav-link">
+                      <i class="far fa-envelope"></i> Sent
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/approval/DoApproval" class="nav-link">
-                      <i class="fas fa-inbox"></i> 결재함
+                    <a href="#" class="nav-link">
+                      <i class="far fa-file-alt"></i> Drafts
                     </a>
                   </li>
-                
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="fas fa-filter"></i> Junk
+                      <span class="badge bg-warning float-right">65</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-trash-alt"></i> Trash
+                    </a>
+                  </li>
                 </ul>
               </div>
               <!-- /.card-body -->
             </div>
-            
-                  
             <!-- /.card -->
             
             <!-- //사이드에 넣을 카테고리지만 좌측 카테고리에 안넣고 이거써도 될거같은뎅???-->
@@ -284,62 +355,37 @@ th {
             <div class="card card-primary card-outline">
              <!-- 헤더에 내용 -->
               <div class="card-header">
-                <h3 class="card-title">업무 일지</h3>
+                <h3 class="card-title">전자결재 쓰기</h3>
               </div>
-              
-              
               
               <!-- /.card-header -->
               <div class="card-body">
-              
-              <div id="can" class="form-group">
-               <div id="canvas1"  class="canvas"
-                  style="border: 1px solid #000;"></div>
-                  <span class="xicon1 "></span>
-                  <span class="xicon2 "></span>
-            
-               <div id="canvas2"  class="canvas"
-                  style="border: 1px solid #000;"><span id="1st"><%if(firstApproval!=null){ %> <%=firstApproval%><%}%></span></div>
-                   <span class="xicon3 "></span>
-                  <span class="xicon4 "></span>
-                  
-                  
-               <div id="canvas3" class="canvas"
-                  style="border: 1px solid #000;"><span id="2nd"><%if(secondApproval!=null){ %> <%=secondApproval%><%}%></span></div>
-                 <span class="xicon5 "></span>
-                  <span class="xicon6 "></span>
-                          <button id="c3" type="button" value="button" onclick="send();">
-                 결재권자 추가</button>
-
-            </div>
-              
-              
-               <div class="form-group">
-
-               <span>결재계 선택 : </span>
-              <select id="dimension" onchange="location.href=this.value">
-					<option value="" selected disabled hidden>결재계 선택</option>
-					<option value="/approval/approvalWrite">휴가계</option>
-					<option value="/approval/approvalWriteWork">업무일지</option>
-				</select>
-               </div>
-                
                
-           
-                
-                 <!-- 입력칸1 -->
+               <!-- 입력칸1 -->
                 <div class="form-group">
-                제목
-                <input class="form-control" type="text" name="title" id="title"/>
+                  <input class="form-control" placeholder="To:">
                 </div>
                 
+                <!-- 입력칸2 -->
+                <div class="form-group">
+                  <input class="form-control" placeholder="Subject:">
+                </div>
                 
                  <!-- 내용칸 -->
                 <div class="form-group">
-                
-                사유
-                    <textarea  class="form-control" id="content"
-									name="content" placeholder="내용 입력란" style="height: 300px">내용을 입력해주세요</textarea>
+                    <textarea id="compose-textarea" class="form-control" style="height: 300px">
+                      <h1><u>대 제목</u></h1>
+                      <h4>소제목</h4>
+                      <p>텍스트 입력</p>
+                      <ul>
+                        <li>List item one</li>
+                        <li>List item two</li>
+                        <li>List item three</li>
+                        <li>List item four</li>
+                      </ul>
+                      <p>Thank you,</p>
+                      <p>John Doe</p>
+                    </textarea>
                 </div>
                 <!--// 내용칸 -->
                 
@@ -348,26 +394,18 @@ th {
                 <div class="form-group">
                   <div class="btn btn-default btn-file">
                     <i class="fas fa-paperclip"></i> 파일첨부
-                    <input type="file" name="upfile" id="upfile">
+                    <input type="file" name="attachment">
                   </div>
                   <p class="help-block">Max. 32MB</p>
                 </div>
                 
-                <input type='hidden' name='firstApprovalNo' value='<%=firstApprovalNo %>' />
-				<input type='hidden' name='secondApprovalNo' value='<%=secondApprovalNo %>' />
-                <input type="hidden" name="form_name" value="">
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
                 <div class="float-right">
-                
-<!--                   <input type='submit' value='전송' class="btn btn-primary"> -->
-                  <button type='submit' value='전송' class="btn btn-primary" class="btn btn-primary">
-                   
-                  <i class="far fa-envelope"></i> 보내기</button>
+                  
+                  <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> 보내기</button>
                 </div>
-                
-              
                 <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
               </div>
               <!-- /.card-footer -->
@@ -382,5 +420,5 @@ th {
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-	</form>
-	<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>
+</body>
+</html>

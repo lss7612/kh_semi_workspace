@@ -303,22 +303,38 @@ html{
 	//리스트 반복실행실시.
 	//	리스트에서 작성자 번호랑 나랑 일치하면 내가 작성한것으로 표시
 	//		불일치하면 상대방이 작성한것으로 표시
-	<% for(SendMsgClient s : clist) { 
-		if(s.getUser_no() == user.getUser_no() ) { %>
-		console.log("내가 보냄")
-		$('#chatList').append( "<%=s.getWinfo() %>" );
-		$('#chatList').append( "<%=s.getChatTime()%>" );
-		$('#chatList').append( "<%=s.getProfile_img() %>" );
-		$('#chatList').append( "<%=s.getMsgContent()%>");
-	<%	} else { %>				
-		console.log("상대가 보냄")
- 		$('#chatList').append( "<%=s.getWinfo() %>" );
-		$('#chatList').append( "<%=s.getChatTime() %>" );
-		$('#chatList').append( "<%=s.getProfile_img() %>" );
-		$('#chatList').append( "<%=s.getMsgContent() %>" );
+	<%	for( int i=0; i <clist.size(); i++){ 
+				if(clist.get(i).getUser_no() == user.getUser_no() ) { %>
+					console.log("내가 보냄");
+					$('#chatList').append( "<%=clist.get(i).getWinfo() %>" );
+					$('#toMsgInfo'+<%=i%>).append( "<%=clist.get(i).getChatTime()%>" );
+					$('#toMsg'+<%=i%>).append( "<%=clist.get(i).getProfile_img() %>" );
+					$('#toMsg'+<%=i%>).append( "<%=clist.get(i).getMsgContent()%>");
+	<%		} else { %>
+					$('#chatList').append( "<%=clist.get(i).getWinfo() %>" );
+					$('#'+'fromMsgInfo'+<%=i%>).append( "<%=clist.get(i).getChatTime()%>" );
+					$('#fromMsg'+<%=i%>).append( "<%=clist.get(i).getProfile_img() %>" );
+					$('#fromMsg'+<%=i%>).append( "<%=clist.get(i).getMsgContent()%>");
 	<%	} %>
 	<% } %>
 	<% } %>
+	
+	
+<%-- 	<% for(SendMsgClient s : clist) {  --%>
+<%-- 		if(s.getUser_no() == user.getUser_no() ) { %> --%>
+// 		console.log("내가 보냄")
+<%-- 		$('#chatList').append( "<%=s.getWinfo() %>" ); --%>
+<%-- 		$('#chatList').append( "<%=s.getChatTime()%>" ); --%>
+<%-- 		$('#chatList').append( "<%=s.getProfile_img() %>" ); --%>
+<%-- 		$('#chatList').append( "<%=s.getMsgContent()%>"); --%>
+<%-- 	<%	} else { %>				 --%>
+// 		console.log("상대가 보냄")
+<%--  		$('#chatList').append( "<%=s.getWinfo() %>" ); --%>
+<%-- 		$('#chatList').append( "<%=s.getChatTime() %>" ); --%>
+<%-- 		$('#chatList').append( "<%=s.getProfile_img() %>" ); --%>
+<%-- 		$('#chatList').append( "<%=s.getMsgContent() %>" ); --%>
+<%-- 	<%	} %> --%>
+<%-- 	<% } %> --%>
 	  
 	// 채팅 홈으로 이동하는 버튼
 	$('#goChatHome').on('click',function(){

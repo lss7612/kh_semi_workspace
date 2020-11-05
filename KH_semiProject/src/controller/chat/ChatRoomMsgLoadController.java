@@ -77,7 +77,8 @@ public class ChatRoomMsgLoadController extends HttpServlet {
 						+user0_info.getUser_name()+" / "+user0_info.getDept_name() +" / "+user0_info.getPosition_name() +"</span>";
 				String sendTime = "<span id='toMsgInfoTime' class='direct-chat-timestamp float-left'>"+list.get(i).getRevision_date()+"</span></div>";
 				String profile_img = "<img class='direct-chat-img' src='/resources/images/minions.png' alt='message user image'>";
-				String chatC = "<div id='toMsgContent' class='direct-chat-text' style='margin:50px 0 0 10px; position:static;'>"+list.get(i).getMsg_content()+"</div></div>";
+//				String chatC = "<div id='toMsgContent' class='direct-chat-text' style='margin:50px 0 0 10px; position:static;'>"+list.get(i).getMsg_content()+"</div></div>";
+				String chatC = "<div id='toMsgContent' class='direct-chat-text' >"+list.get(i).getMsg_content()+"</div></div>";
 				int user_no = list.get(i).getUser_no();
 				
 				SendMsgClient smc = new SendMsgClient();

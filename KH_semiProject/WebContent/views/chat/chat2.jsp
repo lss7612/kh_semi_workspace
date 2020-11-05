@@ -214,7 +214,7 @@ html{
 
 <body>
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" id="fuck">
+<div class="content-wrapper" id="chatWrapper">
     <!-- DIRECT CHAT -->
     <div class="card direct-chat direct-chat-warning">
       <div class="card-header">

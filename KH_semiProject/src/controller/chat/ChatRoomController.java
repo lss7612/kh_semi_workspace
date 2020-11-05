@@ -198,30 +198,30 @@ public class ChatRoomController extends HttpServlet {
 		List<SendMsgClient> clist = new ArrayList<>();
 		for(int i=0; i<list.size(); i++) {
 			if( user0_info.getUser_no() == list.get(i).getUser_no()) {
-				String chatT = "<div id='toMsg' class='direct-chat-msg right'><div id='toMsgInfo' class='direct-chat-infos clearfix'><span id='toMsgInfoName' class='direct-chat-name float-right'>"
+				String chatName = "<div id='toMsg' class='direct-chat-msg right'><div id='toMsgInfo' class='direct-chat-infos clearfix'><span id='toMsgInfoName' class='direct-chat-name float-right'>"
 						+user0_info.getUser_name()+" / "+user0_info.getDept_name() +" / "+user0_info.getPosition_name() +"</span>";
-				String sendTime = "<span id='toMsgInfoTime' class='direct-chat-timestamp float-left'>"+list.get(i).getRevision_date()
-						+"</span></div>";
+				String sendTime = "<span id='toMsgInfoTime' class='direct-chat-timestamp float-left'>"+list.get(i).getRevision_date()+"</span></div>";
 				String profile_img = "<img class='direct-chat-img' src='/resources/images/minions.png' alt='message user image'>";
 				String chatC = "<div id='toMsgContent' class='direct-chat-text' style='margin:50px 0 0 10px; position:static;'>"+list.get(i).getMsg_content()+"</div></div>";
 				int user_no = list.get(i).getUser_no();
+				
 				SendMsgClient smc = new SendMsgClient();
-				smc.setWinfo(chatT);
+				smc.setWinfo(chatName);
 				smc.setChatTime(sendTime);
 				smc.setProfile_img(profile_img);
 				smc.setMsgContent(chatC);
 				smc.setUser_no(user_no);
 				clist.add(smc);
 			} else {
-				String chatT = "<div id='fromMsg' class='direct-chat-msg'><div id='fromMsgInfo' class='direct-chat-infos clearfix'><span id='fromMsgInfoName' class='direct-chat-name float-left'>"
+				String chatName = "<div id='fromMsg' class='direct-chat-msg'><div id='fromMsgInfo' class='direct-chat-infos clearfix'><span id='fromMsgInfoName' class='direct-chat-name float-left'>"
 						+user1_info.getUser_name()+" / "+user1_info.getDept_name() +" / "+user1_info.getPosition_name() +"</span>";
-				String sendTime = "<span id='fromMsgInfoTime' class='direct-chat-timestamp float-right'>"+list.get(i).getRevision_date()+"</span></div>"
-				+"</span></div>";
+				String sendTime = "<span id='fromMsgInfoTime' class='direct-chat-timestamp float-right'>"+list.get(i).getRevision_date()+"</span></div>";
 				String profile_img = "<img class='direct-chat-img' src='/resources/images/minions.png' alt='message user image'>";
 				String chatC = "<div id = 'fromMsgContent' class='direct-chat-text'>"+list.get(i).getMsg_content()+"</div></div>";
 				int user_no = list.get(i).getUser_no();
+				
 				SendMsgClient smc = new SendMsgClient();
-				smc.setWinfo(chatT);
+				smc.setWinfo(chatName);
 				smc.setChatTime(sendTime);
 				smc.setProfile_img(profile_img);
 				smc.setMsgContent(chatC);

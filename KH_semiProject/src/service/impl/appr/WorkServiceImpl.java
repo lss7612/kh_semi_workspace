@@ -99,6 +99,7 @@ public class WorkServiceImpl implements WorkService{
 
 		//----------세션객체받아오기------------------
 		HttpSession session = req.getSession();
+
 		String user_id = (String) session.getAttribute("user_id");
 		System.out.println("현재 "+ user_id + "로 접속중이십니다.");
 		//User_id라는 컬럼은 없는데 값받아오려고 추가해줌

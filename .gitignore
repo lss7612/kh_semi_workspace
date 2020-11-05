@@ -9,7 +9,6 @@ tmp/
 *~.nib
 
 .classpath
-.project
 .settings/
 .loadpath
 .recommenders

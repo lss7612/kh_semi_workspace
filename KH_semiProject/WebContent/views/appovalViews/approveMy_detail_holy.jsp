@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+
 <%@page import="dto.appr.Appr"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.File" %>
 <%	List<Appr> list = (List<Appr>) request.getAttribute("list"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,59 +16,56 @@
 <form action="/approval/myDetail" method="post">
 
 
-	<h3>╗є╝╝╞ф└╠┴Ў</h3>
+	<h3>я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜</h3>
 	<table>
-		<tr><th>░с└ч░ш : </th>
+		<tr><th>я┐╜я┐╜я┐╜я┐╜я┐╜ : </th>
 			<td><input type="text" name=aprvl_type id="aprvl_type" readonly="readonly" value="<%=list.get(0).getAprvl_type() %>"/></td>
 			
 		</tr>
-		<tr><th>╚▐░б ┴╛╖∙ : </th>
+		<tr><th>я┐╜▐░я┐╜ я┐╜я┐╜я┐╜я┐╜ : </th>
 			<td><input type="text" name=aprvl_type id="aprvl_type" readonly="readonly" value="<%=list.get(0).getAppr_holi_kind() %>"/></td>
+
 		
 		</tr>
 		
 		<tr>
-			<th>░с└ч ╗є╜┼└╧</th>
+			<th>я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜</th>
 			<td><input type="text" name="create_date" id="create_date"  readonly="readonly" value="<%=list.get(0).getCreate_date() %>"/></td>
-			<th>░с└ч└╧
+			<th>я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
 			<td><input type="text" name="final_date" id="final_date" readonly="readonly" value="<%=list.get(0).getFinal_date() %>"/></td>
 		</tr>
 		<tr>
-			<th>░с└ч╣°╚г</th>
+			<th>я┐╜я┐╜я┐╜я┐╜я┐╜╚г</th>
 			<td><input type="number" name="aprvl_no" id="aprvl_no"
 								readonly="readonly" value="<%=list.get(0).getApprl_no() %>"/>
 			</td>
 		</tr>
 		<tr>
-			<th>╗є╜┼└┌</th>
+			<th>я┐╜я┐╜я┐╜я┐╜я┐╜</th>
 			<td><input type="text" name="user" id="user" readonly="readonly" value="<%=list.get(0).getUser_name() %>"/>
-			<th>1┬ў░с└ч└┌</th>
+			<th>1я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜</th>
 			<td><input type="text" name="mid_auth" id="mid_auth" readonly="readonly" value="<%=list.get(0).getMid_auth_name() %>" />
-			<th>2┬ў░с└ч└┌</th>
+			<th>2я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜</th>
 			<td><input type="text" name="final_auth" id="final_auth" readonly="readonly" value="<%=list.get(0).getFinal_auth_name() %>" />
 		</tr>
 		<tr>
-			<th>╜├└█│п┬е</th><td><input type="text" name="final_auth" id="final_auth" readonly="readonly" value="<%=list.get(0).getHoliday_start() %>"/></td>
-			<th>│б│п┬е</th><td><input type="text" name="final_auth" id="final_auth" readonly="readonly" value="<%=list.get(0).getHoliday_end() %>"/></td>
-			
+			<th>я┐╜я┐╜я┐╜█│я┐╜┬е</th><td><input type="text" name="final_auth" id="final_auth" readonly="readonly" value="<%=list.get(0).getHoliday_start() %>"/></td>
+			<th>я┐╜я┐╜я┐╜я┐╜┬е</th><td><input type="text" name="final_auth" id="final_auth" readonly="readonly" value="<%=list.get(0).getHoliday_end() %>"/></td>
 		</tr>
 		<tr>
-			<th>┴ж╕ё</th>
+			<th>я┐╜я┐╜я┐╜я┐╜</th>
 			<td><input type="text" name="aprvl_title" id="aprvl_title" readonly="readonly" value="<%=list.get(0).getAprvl_title() %>"/></td>
 		</tr>
 		<tr>
-			<th>│╗┐ы</th>
+			<th>я┐╜я┐╜я┐╜я┐╜</th>
 			<td><textarea style="border-collapse: collapse;" rows="20" cols="50" name="aprvl_article" id="aprvl_article" readonly="readonly"  ><%=list.get(0).getAprvl_article() %></textarea></td>
 		</tr>
 		<tr>
-			<th>├╖║╬╞─└╧<a class="btn" href="/upload/<%=list.get(0).getFile_name() %>" download><%=list.get(0).getFile_origin_name() %> </a></th>
+			<th>├╖я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜<a class="btn" href="/upload/<%=list.get(0).getFile_name() %>" download><%=list.get(0).getFile_origin_name() %> </a></th>
 		
 		</tr>
 	</table>
-	<input type="button" value="├в┤▌▒т" onClick="window.close()">
-
-
-
+	<input type="button" value="├вя┐╜▌▒я┐╜" onClick="window.close()">
 </form>
 </body>
 </html>

@@ -13,13 +13,23 @@ import javax.servlet.http.HttpSession;
 import common.Paging;
 import dto.chat.ChatUserList;
 import dto.common.UserInfo;
+
+import dto.addr.AddrParam;
+import dto.addr.AddrView;
 import dto.chat.Chat;
+import service.face.addr.AddrViewService;
 import service.face.chat.UserChatService;
+import service.impl.addr.AddrViewServiceImpl;
+
 import service.impl.chat.UserChatServiceImpl;
 
 @WebServlet("/chathome/start")
 public class ChatStartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	
+	private AddrViewService addrViewService = new AddrViewServiceImpl();
+
 
 	private UserChatService userChatService = new UserChatServiceImpl();
 	@Override
@@ -32,17 +42,34 @@ public class ChatStartController extends HttpServlet {
 		UserInfo userinfo = (UserInfo)session.getAttribute("userinfo");
 		int user_no = userinfo.getUser_no();
 		
-		//페이징 정보 생성하기
-		Paging paging = userChatService.getPaging(req);
-		//Page처리 결과 전달
+
+		Paging paging = addrViewService.getPaging(req); 
 		req.setAttribute("paging", paging);
 		
-		//회원 목록 가져오기
-		List<ChatUserList> userList = userChatService.userList(user_no, paging);
+		System.out.println(req.getParameter("arrayCondition"));
+		System.out.println(req.getParameter("isASC"));
 		
+		AddrParam addrParam = new AddrParam();
+		if(req.getParameter("arrayCondition") !=null && req.getParameter("isASC")!=null){
+			addrParam.setArrayCondition(req.getParameter("arrayCondition"));
+			if(req.getParameter("isASC").equals("ASC")) {
+				addrParam.setASC(true);
+			} else {
+				addrParam.setASC(false);
+				
+			}
+		}
 		
-		req.setAttribute("userList", userList);
-		req.getRequestDispatcher("/views/chat/chatSelect.jsp").forward(req, resp);
+		List<AddrView> list = addrViewService.viewUserAddr(addrParam, paging);
+		
+		if(req.getParameter("arrayCondition") ==null || req.getParameter("isASC")==null){
+			req.setAttribute("list", list);
+			req.getRequestDispatcher("/views/chat/chatSelect.jsp").forward(req, resp);
+		} else if(req.getParameter("arrayCondition") !=null || req.getParameter("isASC")!=null){
+			req.setAttribute("list", list);
+			req.getRequestDispatcher("/views/chat/chatSelect_ok.jsp");
+		}
+
 		
 	}
 	

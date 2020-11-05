@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
+
 	pageEncoding="UTF-8"%>
 <%@page import="dto.appr.Appr"%>
 <%@page import="java.util.List"%>
@@ -44,8 +45,6 @@
 	rel="stylesheet">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>

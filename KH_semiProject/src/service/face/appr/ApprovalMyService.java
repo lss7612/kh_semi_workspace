@@ -25,10 +25,10 @@ public interface ApprovalMyService {
 
 
 	List<ApprMy> getList(HttpServletRequest req, HttpServletResponse resp, Paging_app paging);
-	
-	
+
 	List<ApprMy> getApprovalCount(HttpServletRequest req, HttpServletResponse resp, Paging_app paging);
 
 
 	Paging_app getApprovePaging(HttpServletRequest req);
+
 }

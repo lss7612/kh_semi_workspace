@@ -32,6 +32,7 @@ public class ApprovalPerson extends HttpServlet {
 		HttpSession session = req.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		System.out.println(user_id);
+
 		
 		ApprovalPersonDao approvalPerson = new ApprovalPersonDaoImpl();
 		

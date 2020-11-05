@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import common.Paging_app;
 import dto.appr.ApprMy;
 import service.face.appr.ApprovalDoService;
-import service.face.appr.ApprovalMyService;
 import service.impl.appr.ApprovalDoServiceImpl;
-import service.impl.appr.ApprovalMyServiceImpl;
+
+
 
 
 @WebServlet("/approval/DoApproval")
@@ -36,4 +36,5 @@ public class DoApproval extends HttpServlet {
 	    	   
 	    	   req.getRequestDispatcher("/views/appovalViews/approveDo.jsp").forward(req, resp);
 		}
+
 }

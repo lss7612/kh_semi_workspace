@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
 
 <script
@@ -14,6 +13,7 @@
 h3 {
 	text-align: center;
 }
+
 
    #can{
       position:relative;
@@ -152,7 +152,6 @@ th {
 		context3.lineTo(0, 70);
 		context3.stroke();
 	}
-	
 
 	var popupX = (window.screen.width / 2);
 
@@ -191,7 +190,6 @@ th {
 	
 </script>
 
-
 	<%
 	
 	String firstApproval=request.getParameter("firstApproval");
@@ -205,6 +203,7 @@ th {
 	System.out.println(firstApprovalNo);
 	System.out.println(secondApprovalNo);
 	%>
+
 
 
 
@@ -243,6 +242,7 @@ th {
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">결재 목록함</h3>
+
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -384,3 +384,4 @@ th {
   <!-- /.content-wrapper -->
 	</form>
 	<jsp:include page="/views/common/footerKKH.jsp"></jsp:include>
+

@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import common.JDBCTemplate;
@@ -171,6 +173,11 @@ public class UserChatDaoImpl implements UserChatDao{
 				ps.setInt(2,  user_no);
 				
 				rs = ps.executeQuery();
+				
+				Date time = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String time2 = sdf.format(time);
+				
 				while(rs.next()) {
 					Chat chat = new Chat();
 					
@@ -178,7 +185,62 @@ public class UserChatDaoImpl implements UserChatDao{
 					chat.setUser_no( rs.getInt("user_no"));
 					chat.setUser_name(rs.getString("user_name"));
 					chat.setMsg_content( rs.getString("msg_content"));
-					chat.setRevision_date( rs.getString("revision_date"));
+					//chat.setRevision_date( rs.getString("revision_date"));
+					
+					//메시지에 나타날 시간상태 설정하기
+					//	시스템날짜와 저장된 날짜가 같으면 오늘
+					//	시스템 날짜보다 1이 작으면 어제
+					//	차이가 1보다 크면 날짜로 표현한다.
+					//	24시간중 12시가 넘으면 오후로 나타낸다.
+					String timeType="오후";
+					String dateType="오늘";
+					String date = rs.getString("revision_date").substring(0,10);
+					String yearMonth = rs.getString("revision_date").substring(0,7);
+					int day = Integer.parseInt(rs.getString("revision_date").substring(8,10));
+					int hour = Integer.parseInt(rs.getString("revision_date").substring(11,13) );
+					int min = Integer.parseInt( rs.getString("revision_date").substring(14,16) );
+					if( date.equals(time2.substring(0,10)) ) {
+						//오늘의 오전, 오후 설정하기
+						if( hour >=12 ){
+								if(hour >12 ) {
+									//오늘 오후 : 13시부터 시에서 12를 빼준다
+									hour -=12;
+									chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+								} 
+								chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+						} else {
+							//오늘 오전 
+							timeType="오전";
+							chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+						}
+					} else if( yearMonth.equals(time2.substring(0,7)) 
+							|| Integer.parseInt(rs.getString("revision_date")) - day == 1 ) {
+							//어제의 오전, 오후 경우
+							dateType="어제";
+							if( hour >=12 ){
+								if(hour >12 ) {
+									//어제 오후 : 13시부터 시에서 12를 빼준다
+									hour -=12;
+									chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+								} 
+								chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+						} else {
+							//오늘 오전 
+							timeType="오전";
+							chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+						}
+					} else {
+						if( hour >= 12) {
+							if(hour >12) {
+								hour -=12;
+								chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
+							}
+							chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
+						}
+						dateType = "오전";
+						chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
+					}
+					
 					result.add(chat);
 				}
 				
@@ -208,6 +270,9 @@ public class UserChatDaoImpl implements UserChatDao{
 		sql += " order by msg_no asc";
 		
 		List<Chat> list = new ArrayList<>();
+		Date time = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String time2 = sdf.format(time);
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, chatting_no);
@@ -220,8 +285,62 @@ public class UserChatDaoImpl implements UserChatDao{
 				chat.setMsg_no( rs.getInt("msg_no"));
 				chat.setUser_no( rs.getInt("user_no"));
 				chat.setMsg_content( rs.getString("msg_content"));
-				chat.setRevision_date( rs.getString("revision_date"));
+				//chat.setRevision_date( rs.getString("revision_date"));
 				chat.setUser_ip( rs.getString("user_ip"));
+				
+				//메시지에 나타날 시간상태 설정하기
+				//	시스템날짜와 저장된 날짜가 같으면 오늘
+				//	시스템 날짜보다 1이 작으면 어제
+				//	차이가 1보다 크면 날짜로 표현한다.
+				//	24시간중 12시가 넘으면 오후로 나타낸다.
+				String timeType="오후";
+				String dateType="오늘";
+				String date = rs.getString("revision_date").substring(0,10);
+				String yearMonth = rs.getString("revision_date").substring(0,7);
+				int day = Integer.parseInt(rs.getString("revision_date").substring(8,10));
+				int hour = Integer.parseInt(rs.getString("revision_date").substring(11,13) );
+				int min = Integer.parseInt( rs.getString("revision_date").substring(14,16) );
+				if( date.equals(time2.substring(0,10)) ) {
+					//오늘의 오전, 오후 설정하기
+					if( hour >=12 ){
+							if(hour >12 ) {
+								//오늘 오후 : 13시부터 시에서 12를 빼준다
+								hour -=12;
+								chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+							} 
+							chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+					} else {
+						//오늘 오전 
+						timeType="오전";
+						chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+					}
+				} else if( yearMonth.equals(time2.substring(0,7)) 
+						|| Integer.parseInt(rs.getString("revision_date")) - day == 1 ) {
+						//어제의 오전, 오후 경우
+						dateType="어제";
+						if( hour >=12 ){
+							if(hour >12 ) {
+								//어제 오후 : 13시부터 시에서 12를 빼준다
+								hour -=12;
+								chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+							} 
+							chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+					} else {
+						//오늘 오전 
+						timeType="오전";
+						chat.setRevision_date( dateType+" "+timeType+" "+hour+":"+min);
+					}
+				} else {
+					if( hour >= 12) {
+						if(hour >12) {
+							hour -=12;
+							chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
+						}
+						chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
+					}
+					dateType = "오전";
+					chat.setRevision_date(date+" "+timeType+" "+hour+":"+min);
+				}
 				
 				list.add(chat);
 			}

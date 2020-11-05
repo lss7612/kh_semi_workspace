@@ -1,3 +1,4 @@
+
 package controller.mbs;
 
 import java.io.IOException;
@@ -15,11 +16,18 @@ public class MyInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		resp.setHeader("Cache-Control","no-store");
 		req.getRequestDispatcher("/views/members/myInfo.jsp").forward(req, resp);
+
+
+
 		
 		System.out.println("myinfo호출");
 	}
 	
+
+
+
 
 }

@@ -18,7 +18,6 @@ public interface ApprovalMyDao {
 	List<ApprMy> selectList(Connection connection, ApprMy apprMy, Paging_app paging);
 
 	int selectCntAllapprove(Connection connection, ApprMy apprMy);
-
+	
 	List<ApprMy> selectApproveList(Connection connection, ApprMy apprMy, Paging_app paging);
-
 }

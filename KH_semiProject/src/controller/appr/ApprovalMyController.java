@@ -31,10 +31,7 @@ public class ApprovalMyController extends HttpServlet {
     	   List<ApprMy> list = approvalMyService.getList(req,resp,paging);
     	   System.out.println("list : "+list);
     	   req.setAttribute("list", list);
-    	   //승인 문서 조회
-    
-    	   //반려 문서 조회
-    
+
     	   req.getRequestDispatcher("/views/appovalViews/approvemy.jsp").forward(req, resp);
     	   
     	   

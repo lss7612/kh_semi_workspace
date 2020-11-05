@@ -17,10 +17,12 @@ public class ApprMy {
 	private String state_name;
 	private String user_id;
 	private String aprvl_article;
+
 	private String final_auth_name;
 	private String mid_auth_name;
 	private int mid_auth;
 	private int final_auth;
+
 	@Override
 	public String toString() {
 		return "ApprMy [aprvl_no=" + aprvl_no + ", user_no=" + user_no + ", user_name=" + user_name + ", dept_name="
@@ -31,7 +33,7 @@ public class ApprMy {
 				+ ", mid_auth=" + mid_auth + ", final_auth=" + final_auth + ", getClass()=" + getClass()
 				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	public int getAprvl_no() {
+		public int getAprvl_no() {
 		return aprvl_no;
 	}
 	public void setAprvl_no(int aprvl_no) {
@@ -97,6 +99,7 @@ public class ApprMy {
 	public void setState_name(String state_name) {
 		this.state_name = state_name;
 	}
+
 	public String getUser_id() {
 		return user_id;
 	}
@@ -133,7 +136,7 @@ public class ApprMy {
 	public void setFinal_auth(int final_auth) {
 		this.final_auth = final_auth;
 	}
-	
+
 	
 	
 }

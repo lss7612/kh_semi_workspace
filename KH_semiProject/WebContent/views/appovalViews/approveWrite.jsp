@@ -102,6 +102,7 @@ position:absolute;
 }
 
 table {
+
 	border-top: 2px solid;
 	border-color: #ccc;
 	margin: 0 auto;
@@ -264,6 +265,7 @@ th {
 
 
 <jsp:include page="/views/common/headerKKH.jsp"></jsp:include>
+
      <form action="/approval/approvalWrite" method="post" id="approveform"
 				name="approval_form" enctype="multipart/form-data">
 	  <!-- Content Wrapper. Contains page content -->
@@ -298,7 +300,6 @@ th {
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">결재 목록함</h3>
-
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                   </button>
@@ -308,8 +309,7 @@ th {
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
                     <a href="/approval/approvalWrite" class="nav-link">
-                      <i class="fas fa-inbox"></i> 결재작성
-                     	
+                      <i class="fas fa-inbox"></i> 결재작성                     	
                     </a>
                   </li>
                   <li class="nav-item">
@@ -365,12 +365,9 @@ th {
                   <span class="xicon6 "></span>
                           <button id="c3" type="button" value="button" onclick="send();">
                  결재권자 추가</button>
-
-            </div>
-              
+            </div>            
               
                <div class="form-group">
-
                <span>결재계 선택 : </span>
               <select id="dimension" onchange="location.href=this.value">
 					<option value="" selected disabled hidden>결재계 선택</option>
@@ -387,12 +384,10 @@ th {
 									value="조퇴" id="two" />조퇴
 							</label> <label for="three"> <input type="radio" name="r"
 									value="반차" id="three" />반차
-							</label>
+							</label>            
                
                
-               
-               </div>
-               
+               </div>          
                
                
                

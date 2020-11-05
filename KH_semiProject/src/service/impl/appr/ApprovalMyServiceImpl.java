@@ -52,8 +52,7 @@ public class ApprovalMyServiceImpl implements ApprovalMyService{
 		//계산된 Paging 객체 반환
 		return paging;
 	}
-	
-	
+
 	@Override
 	public Paging_app getApprovePaging(HttpServletRequest req) {
 		ApprMy apprMy = new ApprMy();
@@ -93,6 +92,7 @@ public class ApprovalMyServiceImpl implements ApprovalMyService{
 		
 	}
 
+
 	@Override
 	public List<ApprMy> getApprovalCount(HttpServletRequest req, HttpServletResponse resp, Paging_app paging) {
 		ApprMy apprMy = new ApprMy();
@@ -103,6 +103,4 @@ public class ApprovalMyServiceImpl implements ApprovalMyService{
 		apprMy.setAprvl_state(Integer.parseInt(str));
 		return approvalDao.selectApproveList(JDBCTemplate.getConnection(),apprMy,paging);
 	}
-
-
 }

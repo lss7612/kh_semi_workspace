@@ -183,9 +183,11 @@ public class ChatRoomController extends HttpServlet {
 			System.out.println("기존에 회원간 대화 내용이 존재합니다.");
 			System.out.println("두 회원의 최근 채팅방 번호는 : "+chatting_no+"입니다.");
 			System.out.println("두 회원의 기존 대화");
+
 			for(SendMsgClient s : clist) {
 				System.out.println(s);
 			}
+
 			// 기존 대화방 정보로 대화 진행.
 			req.setAttribute("clist", clist);
 			req.setAttribute("chatting_no", chatting_no);
@@ -198,27 +200,72 @@ public class ChatRoomController extends HttpServlet {
 		List<SendMsgClient> clist = new ArrayList<>();
 		for(int i=0; i<list.size(); i++) {
 			if( user0_info.getUser_no() == list.get(i).getUser_no()) {
-				String chatT = "<div class='row'><strong>"+user0_info.getUser_name()+" / "+user0_info.getDept_name() 
-					+" / "+user0_info.getPosition_name() +"</strong></div>";
-				String sendTime = list.get(i).getRevision_date();
-				String chatC = "<div class='row'>"+list.get(i).getMsg_content()+"</div><hr>";
+
+				String chatName = "<div id='toMsg"+i+"' class='direct-chat-msg right'><div id='toMsgInfo"+i+"' class='direct-chat-infos clearfix'><span id='toMsgInfoName' class='direct-chat-name float-right'>"
+						+user0_info.getUser_name()+" / "+user0_info.getDept_name() +" / "+user0_info.getPosition_name() +"</span>";
+				String sendTime = "<span id='toMsgInfoTime' class='direct-chat-timestamp float-left'>"+list.get(i).getRevision_date()+"</span></div>";
+				String profile_img = "<img class='direct-chat-img' src='/resources/images/minions.png' alt='message user image'>";
+//				String chatC = "<div id='toMsgContent' class='direct-chat-text' style='margin:50px 0 0 10px; position:static;'>"+list.get(i).getMsg_content()+"</div></div>";
+				String chatC = "<div id='toMsgContent' class='direct-chat-text' >"+list.get(i).getMsg_content()+"</div></div>";
+				int user_no = list.get(i).getUser_no();
+				
 				SendMsgClient smc = new SendMsgClient();
-				smc.setWinfo(chatT);
+				smc.setWinfo(chatName);
 				smc.setChatTime(sendTime);
+				smc.setProfile_img(profile_img);
 				smc.setMsgContent(chatC);
+				smc.setUser_no(user_no);
 				clist.add(smc);
 			} else {
-				String chatT = "<div class='row'><strong>"+user1_info.getUser_name()+" / "+user1_info.getDept_name() 
-					+" / "+user1_info.getPosition_name() +"</strong> 님의 메시지 </div>";
-				String sendTime = list.get(i).getRevision_date();
-				String chatC = "<div class='row'>"+list.get(i).getMsg_content()+"</div><hr>";
+				String chatName = "<div id='fromMsg"+i+"' class='direct-chat-msg'><div id='fromMsgInfo"+i+"' class='direct-chat-infos clearfix'><span id='fromMsgInfoName' class='direct-chat-name float-left'>"
+						+user1_info.getUser_name()+" / "+user1_info.getDept_name() +" / "+user1_info.getPosition_name() +"</span>";
+				String sendTime = "<span id='fromMsgInfoTime' class='direct-chat-timestamp float-right'>"+list.get(i).getRevision_date()+"</span></div>";
+				String profile_img = "<img class='direct-chat-img' src='/resources/images/minions.png' alt='message user image'>";
+				String chatC = "<div id = 'fromMsgContent' class='direct-chat-text'>"+list.get(i).getMsg_content()+"</div></div>";
+				int user_no = list.get(i).getUser_no();
+				
 				SendMsgClient smc = new SendMsgClient();
-				smc.setWinfo(chatT);
+				smc.setWinfo(chatName);
 				smc.setChatTime(sendTime);
+				smc.setProfile_img(profile_img);
 				smc.setMsgContent(chatC);
+				smc.setUser_no(user_no);
 				clist.add(smc);
 			}
 		}
 		return clist;
 	}
+
+//	public List<SendMsgClient> sendChatMsgList(List<Chat> list, UserInfo user0_info, UserInfo user1_info) {
+//		List<SendMsgClient> clist = new ArrayList<>();
+//		for(int i=0; i<list.size(); i++) {
+//			if( user0_info.getUser_no() == list.get(i).getUser_no()) {
+//				String chatT = "<div class='row'><strong>"+user0_info.getUser_name()+" / "+user0_info.getDept_name() 
+//					+" / "+user0_info.getPosition_name() +"</strong></div>";
+//				String sendTime = list.get(i).getRevision_date();
+//				String chatC = "<div class='row'>"+list.get(i).getMsg_content()+"</div><hr>";
+//				int user_no = list.get(i).getUser_no();
+//				SendMsgClient smc = new SendMsgClient();
+//				smc.setWinfo(chatT);
+//				smc.setChatTime(sendTime);
+//				smc.setMsgContent(chatC);
+//				smc.setUser_no(user_no);
+//				clist.add(smc);
+//			} else {
+//				String chatT = "<div class='row'><strong>"+user1_info.getUser_name()+" / "+user1_info.getDept_name() 
+//					+" / "+user1_info.getPosition_name() +"</strong> 님의 메시지 </div>";
+//				String sendTime = list.get(i).getRevision_date();
+//				String chatC = "<div class='row'>"+list.get(i).getMsg_content()+"</div><hr>";
+//				int user_no = list.get(i).getUser_no();
+//				SendMsgClient smc = new SendMsgClient();
+//				smc.setWinfo(chatT);
+//				smc.setChatTime(sendTime);
+//				smc.setMsgContent(chatC);
+//				smc.setUser_no(user_no);
+//				clist.add(smc);
+//			}
+//		}
+//		return clist;
+//	}
+
 }

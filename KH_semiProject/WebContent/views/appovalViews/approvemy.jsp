@@ -6,8 +6,6 @@
 <%@page import="java.util.List"%>
 <%
 	List<ApprMy> list = (List<ApprMy>) request.getAttribute("list");
-
-
 %>
 <%  
 String holi = "/approvalMy/modHoly";
@@ -38,10 +36,6 @@ table {
 }
 </style>
 <script type="text/javascript">
-
-
-
-
 
 $(document).ready(function() {
     $("#approveform").submit(function() {
@@ -94,8 +88,7 @@ $(document).ready(function() {
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
                     <a href="/approval/approvalWrite" class="nav-link">
-                      <i class="fas fa-inbox"></i> 결재작성
-                     	
+                      <i class="fas fa-inbox"></i> 결재작성                     	
                     </a>
                   </li>
                   <li class="nav-item">
@@ -200,9 +193,9 @@ $(document).ready(function() {
 			<jsp:include page="/views/common/paging_appmy.jsp" />
 			</div>
 		</main>
+	
 
-            </div>
-              
+            </div>             
        
                
            

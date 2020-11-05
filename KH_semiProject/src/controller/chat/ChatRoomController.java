@@ -183,9 +183,11 @@ public class ChatRoomController extends HttpServlet {
 			System.out.println("기존에 회원간 대화 내용이 존재합니다.");
 			System.out.println("두 회원의 최근 채팅방 번호는 : "+chatting_no+"입니다.");
 			System.out.println("두 회원의 기존 대화");
-//			for(SendMsgClient s : clist) {
-//				System.out.println(s);
-//			}
+
+			for(SendMsgClient s : clist) {
+				System.out.println(s);
+			}
+
 			// 기존 대화방 정보로 대화 진행.
 			req.setAttribute("clist", clist);
 			req.setAttribute("chatting_no", chatting_no);
@@ -198,6 +200,7 @@ public class ChatRoomController extends HttpServlet {
 		List<SendMsgClient> clist = new ArrayList<>();
 		for(int i=0; i<list.size(); i++) {
 			if( user0_info.getUser_no() == list.get(i).getUser_no()) {
+
 				String chatName = "<div id='toMsg"+i+"' class='direct-chat-msg right'><div id='toMsgInfo"+i+"' class='direct-chat-infos clearfix'><span id='toMsgInfoName' class='direct-chat-name float-right'>"
 						+user0_info.getUser_name()+" / "+user0_info.getDept_name() +" / "+user0_info.getPosition_name() +"</span>";
 				String sendTime = "<span id='toMsgInfoTime' class='direct-chat-timestamp float-left'>"+list.get(i).getRevision_date()+"</span></div>";
@@ -232,6 +235,7 @@ public class ChatRoomController extends HttpServlet {
 		}
 		return clist;
 	}
+
 //	public List<SendMsgClient> sendChatMsgList(List<Chat> list, UserInfo user0_info, UserInfo user1_info) {
 //		List<SendMsgClient> clist = new ArrayList<>();
 //		for(int i=0; i<list.size(); i++) {
@@ -263,4 +267,5 @@ public class ChatRoomController extends HttpServlet {
 //		}
 //		return clist;
 //	}
+
 }

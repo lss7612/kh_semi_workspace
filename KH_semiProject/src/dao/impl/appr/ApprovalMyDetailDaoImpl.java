@@ -25,7 +25,8 @@ public class ApprovalMyDetailDaoImpl implements ApprovalMyDetailDao{
 		
 		String sql="";
 		
-		sql+=" select a.mid_auth,a.final_auth,a.aprvl_no,a.user_no , a.holiday_start,a.holiday_end, a.aprvl_type,a.create_date,a.final_date, c.user_name,f.user_name as mid_auth_name ,g.user_name as fianl_auth_name ,a.aprvl_title,a.aprvl_article,d.dept_name, e.position_name,b.origin_name,b.file_addr,b.stored_name \r\n" + 
+
+		sql+=" select a.mid_auth,a.appr_holi_kind,a.final_auth,a.aprvl_no,a.user_no , a.holiday_start,a.holiday_end, a.aprvl_type,a.create_date,a.final_date, c.user_name,f.user_name as mid_auth_name ,g.user_name as fianl_auth_name ,a.aprvl_title,a.aprvl_article,d.dept_name, e.position_name,b.origin_name,b.file_addr,b.stored_name \r\n" + 
 				"from tb_approval a, tb_approvalattdfile b ,tb_user c ,tb_dept d,tb_position e, tb_user f, tb_user g where a.user_no=c.user_no and a.aprvl_no=b.aprvl_no\r\n" + 
 				" and  d.dept_no=c.dept_no and e.position_no=c.position_no and a.mid_auth = f.user_no and a.final_auth=g.user_no(+)  and a.aprvl_no=? ";
 		
@@ -58,7 +59,8 @@ public class ApprovalMyDetailDaoImpl implements ApprovalMyDetailDao{
 				appr2.setFile_name(rs.getString("stored_name"));
 				appr2.setFile_origin_name(rs.getString("origin_name"));
 				appr2.setFile_path(rs.getString("file_addr"));
-				
+				appr2.setAppr_holi_kind(rs.getString("appr_holi_kind"));
+
 				list.add(appr2);
 				
 			}
@@ -79,4 +81,5 @@ public class ApprovalMyDetailDaoImpl implements ApprovalMyDetailDao{
 		
 		
 	}
+
 }

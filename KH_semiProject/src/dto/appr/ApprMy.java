@@ -17,36 +17,23 @@ public class ApprMy {
 	private String state_name;
 	private String user_id;
 	private String aprvl_article;
+
+	private String final_auth_name;
+	private String mid_auth_name;
+	private int mid_auth;
+	private int final_auth;
+
 	@Override
 	public String toString() {
 		return "ApprMy [aprvl_no=" + aprvl_no + ", user_no=" + user_no + ", user_name=" + user_name + ", dept_name="
 				+ dept_name + ", position_name=" + position_name + ", aprvl_title=" + aprvl_title + ", aprvl_type="
 				+ aprvl_type + ", create_date=" + create_date + ", aprvl_state=" + aprvl_state + ", final_date="
-				+ final_date + ", state_name=" + state_name +",user_id="+user_id+"aprvl_article="+aprvl_article+ "]";
+				+ final_date + ", state_name=" + state_name + ", user_id=" + user_id + ", aprvl_article="
+				+ aprvl_article + ", final_auth_name=" + final_auth_name + ", mid_auth_name=" + mid_auth_name
+				+ ", mid_auth=" + mid_auth + ", final_auth=" + final_auth + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
-	public String getAprvl_article() {
-		return aprvl_article;
-	}
-
-
-	public void setAprvl_article(String aprvl_article) {
-		this.aprvl_article = aprvl_article;
-	}
-
-
-	public String getUser_id() {
-		return user_id;
-	}
-
-
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-
-
-	public int getAprvl_no() {
+		public int getAprvl_no() {
 		return aprvl_no;
 	}
 	public void setAprvl_no(int aprvl_no) {
@@ -112,8 +99,44 @@ public class ApprMy {
 	public void setState_name(String state_name) {
 		this.state_name = state_name;
 	}
-	
-	
+
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getAprvl_article() {
+		return aprvl_article;
+	}
+	public void setAprvl_article(String aprvl_article) {
+		this.aprvl_article = aprvl_article;
+	}
+	public String getFinal_auth_name() {
+		return final_auth_name;
+	}
+	public void setFinal_auth_name(String final_auth_name) {
+		this.final_auth_name = final_auth_name;
+	}
+	public String getMid_auth_name() {
+		return mid_auth_name;
+	}
+	public void setMid_auth_name(String mid_auth_name) {
+		this.mid_auth_name = mid_auth_name;
+	}
+	public int getMid_auth() {
+		return mid_auth;
+	}
+	public void setMid_auth(int mid_auth) {
+		this.mid_auth = mid_auth;
+	}
+	public int getFinal_auth() {
+		return final_auth;
+	}
+	public void setFinal_auth(int final_auth) {
+		this.final_auth = final_auth;
+	}
+
 	
 	
 }

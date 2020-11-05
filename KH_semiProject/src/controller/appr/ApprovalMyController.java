@@ -31,8 +31,7 @@ public class ApprovalMyController extends HttpServlet {
     	   List<ApprMy> list = approvalMyService.getList(req,resp,paging);
     	   System.out.println("list : "+list);
     	   req.setAttribute("list", list);
-    	   
-    	   
+
     	   req.getRequestDispatcher("/views/appovalViews/approvemy.jsp").forward(req, resp);
     	   
     	   

@@ -8,5 +8,13 @@
 </head>
 <body>
 
+<h1 style="color : red;">로그인실패</h1>
+<hr>
+
+
+<h3>ID와 PASSWORD를 다시 확인하세요</h3>
+
+<a href="/Login">메인화면</a>
+
 </body>
 </html>

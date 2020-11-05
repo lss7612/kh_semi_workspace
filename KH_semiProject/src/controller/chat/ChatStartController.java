@@ -13,19 +13,23 @@ import javax.servlet.http.HttpSession;
 import common.Paging;
 import dto.chat.ChatUserList;
 import dto.common.UserInfo;
+
 import dto.addr.AddrParam;
 import dto.addr.AddrView;
 import dto.chat.Chat;
 import service.face.addr.AddrViewService;
 import service.face.chat.UserChatService;
 import service.impl.addr.AddrViewServiceImpl;
+
 import service.impl.chat.UserChatServiceImpl;
 
 @WebServlet("/chathome/start")
 public class ChatStartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	
 	private AddrViewService addrViewService = new AddrViewServiceImpl();
+
 
 	private UserChatService userChatService = new UserChatServiceImpl();
 	@Override
@@ -38,6 +42,7 @@ public class ChatStartController extends HttpServlet {
 		UserInfo userinfo = (UserInfo)session.getAttribute("userinfo");
 		int user_no = userinfo.getUser_no();
 		
+
 		Paging paging = addrViewService.getPaging(req); 
 		req.setAttribute("paging", paging);
 		
@@ -64,7 +69,7 @@ public class ChatStartController extends HttpServlet {
 			req.setAttribute("list", list);
 			req.getRequestDispatcher("/views/chat/chatSelect_ok.jsp");
 		}
-		
+
 		
 	}
 	

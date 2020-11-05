@@ -277,9 +277,10 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           
-         
-        
-          <li class="nav-item has-treeview">
+          <%	if( "sh".equals( request.getRequestURI().split("/")[2] ) ) {
+        	  System.out.println("컨텍스트:"+request.getRequestURI().split("/")[2]);
+        	  %>
+				<li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -312,11 +313,43 @@
                   <p>Validation</p>
                 </a>
               </li>
+              
+              
+		<%	} else if( "appovalViews".equals( request.getRequestURI().split("/")[2] ) ) { 
+			  System.out.println("컨텍스트:"+request.getRequestURI().split("/")[2]);%>
+                
+         
+        
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                전자결재 서브메뉴
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/approval/approvalWrite" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>결재작성</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/approval/approvalmy" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>기안함</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/approval/DoApproval" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>결재함</p>
+                </a>
+              </li>              
+              <%	} %>
             </ul>
           </li>
-          
-          
-          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

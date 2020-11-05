@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+
+<%@page import="dto.appr.Appr"%>
+<%@page import="java.util.List"%>
+<%@page import="java.io.File" %>
+<%	List<Appr> list = (List<Appr>) request.getAttribute("list"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,53 +16,56 @@
 <form action="/approval/myDetail" method="post">
 
 
-	<h3>»ó¼¼ÆäÀÌÁö</h3>
+	<h3>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</h3>
 	<table>
-		<tr><th>°áÀç°è : </th>
-			<td><input type="text" name=aprvl_type id="aprvl_type" readonly="readonly" /></td>
+		<tr><th>ï¿½ï¿½ï¿½ï¿½ï¿½ : </th>
+			<td><input type="text" name=aprvl_type id="aprvl_type" readonly="readonly" value="<%=list.get(0).getAprvl_type() %>"/></td>
+			
+		</tr>
+		<tr><th>ï¿½Þ°ï¿½ ï¿½ï¿½ï¿½ï¿½ : </th>
+			<td><input type="text" name=aprvl_type id="aprvl_type" readonly="readonly" value="<%=list.get(0).getAppr_holi_kind() %>"/></td>
+
 		
 		</tr>
 		
 		<tr>
-			<th>°áÀç »ó½ÅÀÏ</th>
-			<td><input type="text" name="create_date" id="create_date" readonly="readonly" /></td>
-			<th>°áÀçÀÏ
-			<td><input type="text" name="final_date" id="final_date" readonly="readonly" /></td>
+			<th>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½</th>
+			<td><input type="text" name="create_date" id="create_date"  readonly="readonly" value="<%=list.get(0).getCreate_date() %>"/></td>
+			<th>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			<td><input type="text" name="final_date" id="final_date" readonly="readonly" value="<%=list.get(0).getFinal_date() %>"/></td>
 		</tr>
 		<tr>
-			<th>°áÀç¹øÈ£</th>
+			<th>ï¿½ï¿½ï¿½ï¿½ï¿½È£</th>
 			<td><input type="number" name="aprvl_no" id="aprvl_no"
-								readonly="readonly" />
+								readonly="readonly" value="<%=list.get(0).getApprl_no() %>"/>
 			</td>
 		</tr>
 		<tr>
-			<th>»ó½ÅÀÚ</th>
-			<td><input type="text" name="user" id="user" readonly="readonly" />
-			<th>1Â÷°áÀçÀÚ</th>
-			<td><input type="text" name="mid_auth" id="mid_auth" readonly="readonly" />
-			<th>2Â÷°áÀçÀÚ</th>
-			<td><input type="text" name="final_auth" id="final_auth" readonly="readonly" />
+			<th>ï¿½ï¿½ï¿½ï¿½ï¿½</th>
+			<td><input type="text" name="user" id="user" readonly="readonly" value="<%=list.get(0).getUser_name() %>"/>
+			<th>1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</th>
+			<td><input type="text" name="mid_auth" id="mid_auth" readonly="readonly" value="<%=list.get(0).getMid_auth_name() %>" />
+			<th>2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</th>
+			<td><input type="text" name="final_auth" id="final_auth" readonly="readonly" value="<%=list.get(0).getFinal_auth_name() %>" />
 		</tr>
 		<tr>
-			<th>½ÃÀÛ³¯Â¥</th><td>¸ð¸§</td>
-			<th>³¡³¯Â¥</th><td>¸ô¶ó</td>
-			
+			<th>ï¿½ï¿½ï¿½Û³ï¿½Â¥</th><td><input type="text" name="final_auth" id="final_auth" readonly="readonly" value="<%=list.get(0).getHoliday_start() %>"/></td>
+			<th>ï¿½ï¿½ï¿½ï¿½Â¥</th><td><input type="text" name="final_auth" id="final_auth" readonly="readonly" value="<%=list.get(0).getHoliday_end() %>"/></td>
 		</tr>
 		<tr>
-			<th>Á¦¸ñ</th>
-			<td><input type="text" name="aprvl_title" id="aprvl_title" readonly="readonly" /></td>
+			<th>ï¿½ï¿½ï¿½ï¿½</th>
+			<td><input type="text" name="aprvl_title" id="aprvl_title" readonly="readonly" value="<%=list.get(0).getAprvl_title() %>"/></td>
 		</tr>
 		<tr>
-			<th>³»¿ë</th>
-			<td><textarea style="border-collapse: collapse;" rows="20" cols="50" name="aprvl_article" id="aprvl_article" readonly="readonly" ></textarea></td>
+			<th>ï¿½ï¿½ï¿½ï¿½</th>
+			<td><textarea style="border-collapse: collapse;" rows="20" cols="50" name="aprvl_article" id="aprvl_article" readonly="readonly"  ><%=list.get(0).getAprvl_article() %></textarea></td>
 		</tr>
 		<tr>
-			<th>Ã·ºÎÆÄÀÏ</th>
-			<td>¶ì¿ë</td>
+			<th>Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<a class="btn" href="/upload/<%=list.get(0).getFile_name() %>" download><%=list.get(0).getFile_origin_name() %> </a></th>
+		
 		</tr>
 	</table>
-	<button>´Ý±â</button>
-
+	<input type="button" value="Ã¢ï¿½Ý±ï¿½" onClick="window.close()">
 </form>
 </body>
 </html>

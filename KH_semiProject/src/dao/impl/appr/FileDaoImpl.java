@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+
 import common.JDBCTemplate;
 import dao.face.appr.FileDao;
 import dto.appr.Appr;
@@ -18,11 +22,18 @@ public class FileDaoImpl implements FileDao {
 
 	@Override
 	public int insertParam(Connection connection, Appr appr) {
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar time = Calendar.getInstance();
+		String format_time1 = format1.format(time.getTime());
+		time.getTime();
+	
 		String sql = "";
 		//APRVL_STATE -->결재계 (휴가계=1넣음)
 		sql += "INSERT INTO TB_APPROVAL(APRVL_NO,USER_NO,MID_AUTH,FINAL_AUTH,APRVL_STATE,CREATE_DATE,\r\n"
 				+ "FINAL_DATE,APRVL_TYPE,APRVL_TITLE,APRVL_ARTICLE,TABLE_NO,HOLIDAY_START,HOLIDAY_END,APPR_HOLI_KIND)";
-		sql += " VALUES(TB_APPROVAL_SEQ.nextval,(select user_no from tb_user where user_id=?),?,?,1,'20-10-28','20-10-30' ,?,?,?,70,SUBSTR(?, 1, 8),SUBSTR(?, 1, 8),?)";
+		sql += " VALUES(TB_APPROVAL_SEQ.nextval,(select user_no from tb_user where user_id=?),?,?,1,"+"'"+format_time1+"'"+","+"'20-01-01'" + ",?,?,?,70,SUBSTR(?, 1, 8),SUBSTR(?, 1, 8),?)";
+
 		System.out.println(sql);
 
 		/// 해야할거 ??넣기 ,aprvl_type... 현재시각~마감시각 받아서 넣기
@@ -31,6 +42,8 @@ public class FileDaoImpl implements FileDao {
 
 		try {
 			
+			System.out.println(format_time1);
+
 		    
 //		    Date start_day = new java.sql.Date(appr.getHoliday_start().getTime());
 //		    Date end_day = new java.sql.Date(appr.getHoliday_end().getTime());
